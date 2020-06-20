@@ -1,5 +1,5 @@
-import Head from 'next/head'
-
+import Head from 'next/head';
+print('hi');
 export default function Home() {
   return (
     <div className="container">
@@ -205,5 +205,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
