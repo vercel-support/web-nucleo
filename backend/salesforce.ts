@@ -8,7 +8,7 @@ export class Salesforce {
   async init(
     user: string = process.env.SALESFORCE_USER,
     password: string = process.env.SALESFORCE_PASSWORD
-  ) {
+  ): Promise<void> {
     await this.conn.login(user, password);
   }
 
