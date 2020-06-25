@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import Head from 'next/head';
+import { GetStaticProps } from 'next';
 import {
   Form,
   Select,
@@ -10,12 +11,13 @@ import {
   Button,
 } from 'antd';
 
+import { salesforceClient } from '../backend/salesforce';
 import useRequest from '../libs/useRequest';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-export const Home = (): JSX.Element => {
+export const Home = ({ testStaticProp }): JSX.Element => {
   const { data, error } = useRequest<string>({
     url: '/api/hello',
   });
@@ -37,6 +39,7 @@ export const Home = (): JSX.Element => {
             <h1 className="title">
               Hello <span>{data}</span>, welcome to{' '}
               <a href="https://nextjs.org">Next.js!</a>
+              <p>{testStaticProp}</p>
             </h1>
 
             <p className="description">
@@ -224,6 +227,26 @@ export const Home = (): JSX.Element => {
       `}</style>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  await salesforceClient.init();
+
+  const flats = await salesforceClient.fetchAllObjectInstances();
+  let flats_with_pictures = flats.filter((x) => x['Fotos__c'] != null);
+  flats_with_pictures = flats_with_pictures.map((x) => {
+    return {
+      name: x['Name'],
+      images: x['Fotos__c'],
+    };
+  });
+
+  console.log(flats_with_pictures);
+  return {
+    props: {
+      testStaticProp: 'hi',
+    },
+  };
 };
 
 export default Home;
