@@ -23,6 +23,7 @@
     ]
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.10.3",
     "@zeit/next-less": "^1.0.1",
     "antd": "^4.3.5",
     "axios": "^0.19.2",
