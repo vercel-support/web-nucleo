@@ -1,6 +1,8 @@
 import { Connection } from 'jsforce';
+import { memoize } from '../../common/helpers';
+import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
 
-import { IStringToAnyDictionary } from '../common/model/stringToAnyDictionary.model';
+import Flat from './flat';
 
 export class Salesforce {
   private conn = new Connection();
@@ -12,17 +14,19 @@ export class Salesforce {
     await this.conn.login(user, password);
   }
 
+  async getFlats() {
+    const records = await this.fetchAllObjectInstances(
+      Flat.objectName,
+      Flat.fields
+    );
+    const flats = records.map((record) => new Flat(record));
+    return flats;
+  }
+
+  @memoize
   async fetchAllObjectInstances(
-    objectName = 'Inmueble__c',
-    fields: string[] = [
-      'Name',
-      'Direccion__c',
-      'Fotos__c',
-      'Descripcion__c',
-      'Estado_Inmueble__c',
-      'Ano_costruccion__c',
-      'Ano_reforma__c',
-    ]
+    objectName: string,
+    fields: string[]
   ): Promise<IStringToAnyDictionary[]> {
     const results = await this.conn.query(
       `SELECT ${fields.join(', ')} FROM ${objectName}`
