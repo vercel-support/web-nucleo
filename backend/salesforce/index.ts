@@ -11,8 +11,6 @@ export class Salesforce {
     user: string = process.env.SALESFORCE_USER,
     password: string = process.env.SALESFORCE_PASSWORD
   ): Promise<void> {
-    console.log(user);
-    console.log(password);
     await this.conn.login(user, password);
   }
 
