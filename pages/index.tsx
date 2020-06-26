@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { WithTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import {
@@ -11,13 +12,22 @@ import {
   Button,
 } from 'antd';
 
+import nextI18Next from '../i18n';
 import { salesforceClient } from '../backend/salesforce';
 import useRequest from '../libs/useRequest';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-export const Home = ({ testStaticProp }): JSX.Element => {
+const { withTranslation } = nextI18Next;
+
+interface StaticProps {
+  testStaticProp: string;
+}
+
+type Props = StaticProps & WithTranslation;
+
+export const Home = ({ testStaticProp, t }: Props): JSX.Element => {
   const { data, error } = useRequest<string>({
     url: '/api/hello',
   });
@@ -25,7 +35,7 @@ export const Home = ({ testStaticProp }): JSX.Element => {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>{t('title')}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -229,7 +239,7 @@ export const Home = ({ testStaticProp }): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   await salesforceClient.init();
 
   const flats = await salesforceClient.fetchAllObjectInstances();
@@ -249,4 +259,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default Home;
+export default withTranslation('common')(Home);
