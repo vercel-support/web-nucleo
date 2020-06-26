@@ -22,7 +22,8 @@
   "exclude": [
     "node_modules",
     ".next",
-    "out"
+    "out",
+    "dist"
   ],
   "include": [
     "next-env.d.ts",

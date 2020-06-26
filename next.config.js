@@ -13,6 +13,12 @@ module.exports = withLess({
     javascriptEnabled: true,
     modifyVars: themeVariables, // make your antd custom effective
   },
+  publicRuntimeConfig: {
+    localeSubpaths:
+      typeof process.env.LOCALE_SUBPATHS === 'string'
+        ? process.env.LOCALE_SUBPATHS
+        : 'none',
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       const antStyles = /antd\/.*?\/style.*?/;
