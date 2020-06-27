@@ -2,35 +2,25 @@ import { Fragment } from 'react';
 import { WithTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
-import {
-  Form,
-  Select,
-  InputNumber,
-  DatePicker,
-  Switch,
-  Slider,
-  Button,
-} from 'antd';
 
 import nextI18Next from '../i18n';
 import { salesforceClient } from '../backend/salesforce';
+import Flat from '../backend/salesforce/flat';
 import useRequest from '../libs/useRequest';
-
-const FormItem = Form.Item;
-const Option = Select.Option;
 
 const { withTranslation } = nextI18Next;
 
 interface StaticProps {
-  testStaticProp: string;
+  flats: string;
 }
 
 type Props = StaticProps & WithTranslation;
 
-export const Home = ({ testStaticProp, t }: Props): JSX.Element => {
+export const Home = ({ flats, t }: Props): JSX.Element => {
   const { data, error } = useRequest<string>({
     url: '/api/hello',
   });
+  const flats_list = Flat.deserialize_results(flats);
 
   return (
     <div className="container">
@@ -49,86 +39,16 @@ export const Home = ({ testStaticProp, t }: Props): JSX.Element => {
             <h1 className="title">
               Hello <span>{data}</span>, welcome to{' '}
               <a href="https://nextjs.org">Next.js!</a>
-              <p>{testStaticProp}</p>
             </h1>
 
             <p className="description">
               Get started by editing <code>pages/index.tsx</code>
             </p>
-
-            <div style={{ width: '100%' }}>
-              <Form layout="horizontal">
-                <FormItem
-                  label="Input Number"
-                  labelCol={{ span: 8 }}
-                  wrapperCol={{ span: 8 }}
-                >
-                  <InputNumber
-                    size="large"
-                    min={1}
-                    max={10}
-                    style={{ width: 100 }}
-                    defaultValue={3}
-                    name="inputNumber"
-                  />
-                  <a href="#">Link</a>
-                </FormItem>
-
-                <FormItem
-                  label="Switch"
-                  labelCol={{ span: 8 }}
-                  wrapperCol={{ span: 8 }}
-                >
-                  <Switch defaultChecked />
-                </FormItem>
-
-                <FormItem
-                  label="Slider"
-                  labelCol={{ span: 8 }}
-                  wrapperCol={{ span: 8 }}
-                >
-                  <Slider defaultValue={70} />
-                </FormItem>
-
-                <FormItem
-                  label="Select"
-                  labelCol={{ span: 8 }}
-                  wrapperCol={{ span: 8 }}
-                >
-                  <Select
-                    size="large"
-                    defaultValue="lucy"
-                    style={{ width: 192 }}
-                  >
-                    <Option value="jack">jack</Option>
-                    <Option value="lucy">lucy</Option>
-                    <Option value="disabled" disabled>
-                      disabled
-                    </Option>
-                    <Option value="yiminghe">yiminghe</Option>
-                  </Select>
-                </FormItem>
-
-                <FormItem
-                  label="DatePicker"
-                  labelCol={{ span: 8 }}
-                  wrapperCol={{ span: 8 }}
-                >
-                  <DatePicker name="startDate" />
-                </FormItem>
-                <FormItem
-                  style={{ marginTop: 48 }}
-                  wrapperCol={{ span: 8, offset: 8 }}
-                >
-                  <Button size="large" type="primary" htmlType="submit">
-                    OK
-                  </Button>
-                  <Button size="large" style={{ marginLeft: 8 }}>
-                    Cancel
-                  </Button>
-                </FormItem>
-              </Form>
-            </div>
+            <ul>
+              {flats_list.map((flat) => {
+                return <li key={flat.name}>{flat.name}</li>;
+              })}
+            </ul>
           </Fragment>
         )}
       </main>
@@ -242,19 +162,11 @@ export const Home = ({ testStaticProp, t }: Props): JSX.Element => {
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   await salesforceClient.init();
 
-  const flats = await salesforceClient.fetchAllObjectInstances();
-  let flats_with_pictures = flats.filter((x) => x['Fotos__c'] != null);
-  flats_with_pictures = flats_with_pictures.map((x) => {
-    return {
-      name: x['Name'],
-      images: x['Fotos__c'],
-    };
-  });
+  const flats = await salesforceClient.getFlats();
 
-  console.log(flats_with_pictures);
   return {
     props: {
-      testStaticProp: 'hi',
+      flats: Flat.serialize_results(flats),
     },
   };
 };
