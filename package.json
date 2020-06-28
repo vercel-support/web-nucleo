@@ -20,7 +20,7 @@
     "*.@(ts|tsx)": [
       "yarn format",
       "yarn lint",
-      "yarn run type-check"
+      "yarn type-check"
     ]
   },
   "dependencies": {
