@@ -3,8 +3,9 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next';
 
 import nextI18Next from '../i18n';
-import { salesforceClient } from '../backend/salesforce';
 import Flat from '../backend/salesforce/flat';
+
+import { salesforceClient } from '../backend/salesforce';
 
 const { withTranslation } = nextI18Next;
 
@@ -14,7 +15,7 @@ interface StaticProps {
 
 type Props = StaticProps & WithTranslation;
 
-export const Home = ({ flats, t }: Props): JSX.Element => {
+export const Home = ({ flats, t }): JSX.Element => {
   const flats_list = Flat.deserialize_results(flats);
 
   return (
@@ -46,7 +47,7 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   await salesforceClient.init();
 
-  const flats = await salesforceClient.getFlats();
+  const flats = await Flat.getFlats();
 
   return {
     props: {

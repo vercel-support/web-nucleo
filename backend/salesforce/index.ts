@@ -2,7 +2,7 @@ import { Connection } from 'jsforce';
 import { memoize } from '../../common/helpers';
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
 
-import Flat from './flat';
+import axios from 'axios';
 
 export class Salesforce {
   private conn = new Connection();
@@ -14,13 +14,27 @@ export class Salesforce {
     await this.conn.login(user, password);
   }
 
-  async getFlats() {
-    const records = await this.fetchAllObjectInstances(
-      Flat.objectName,
-      Flat.fields
-    );
-    const flats = records.map((record) => new Flat(record));
-    return flats;
+  @memoize
+  async fetchBase64ImageSource(
+    url: string,
+    objectName: string,
+    fieldName: string
+  ): Promise<string> {
+    const searchParams = new URL(url).searchParams;
+    const objectId = searchParams.get('eid');
+    const fieldId = searchParams.get('refid');
+
+    const res = await axios({
+      method: 'GET',
+      url: `${this.conn._baseUrl()}/sobjects/${objectName}/${objectId}/richTextImageFields/${fieldName}/${fieldId}`,
+      headers: {
+        Authorization: `Bearer ${this.conn.accessToken}`,
+      },
+      responseType: 'arraybuffer',
+    });
+
+    const base64 = new Buffer(res.data, 'binary').toString('base64');
+    return `data:image/*;base64,${base64}`;
   }
 
   @memoize
