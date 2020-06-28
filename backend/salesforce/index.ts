@@ -6,12 +6,14 @@ import axios from 'axios';
 
 export class Salesforce {
   private conn = new Connection();
-
+  private initialized = false;
   async init(
     user: string = process.env.SALESFORCE_USER,
     password: string = process.env.SALESFORCE_PASSWORD
-  ): Promise<void> {
+  ): Promise<Salesforce> {
     await this.conn.login(user, password);
+    this.initialized = true;
+    return this;
   }
 
   @memoize
@@ -20,6 +22,10 @@ export class Salesforce {
     objectName: string,
     fieldName: string
   ): Promise<string> {
+    if (this.initialized == false) {
+      throw Error('Initialize the salesforce client before using it.');
+    }
+
     const searchParams = new URL(url).searchParams;
     const objectId = searchParams.get('eid');
     const fieldId = searchParams.get('refid');
@@ -42,6 +48,10 @@ export class Salesforce {
     objectName: string,
     fields: string[]
   ): Promise<IStringToAnyDictionary[]> {
+    if (this.initialized == false) {
+      throw Error('Initialize the salesforce client before using it.');
+    }
+
     const results = await this.conn.query(
       `SELECT ${fields.join(', ')} FROM ${objectName}`
     );
@@ -50,4 +60,13 @@ export class Salesforce {
   }
 }
 
-export const salesforceClient = new Salesforce();
+let salesforceClient: Salesforce;
+export const getSalesforceClient = async (): Promise<Salesforce> => {
+  if (salesforceClient != undefined) {
+    return salesforceClient;
+  }
+
+  const sf = new Salesforce();
+  salesforceClient = await sf.init();
+  return salesforceClient;
+};

@@ -5,8 +5,6 @@ import { GetStaticProps } from 'next';
 import nextI18Next from '../i18n';
 import Flat from '../backend/salesforce/flat';
 
-import { salesforceClient } from '../backend/salesforce';
-
 const { withTranslation } = nextI18Next;
 
 interface StaticProps {
@@ -45,8 +43,6 @@ export const Home = ({ flats, t }): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  await salesforceClient.init();
-
   const flats = await Flat.getFlats();
 
   return {
