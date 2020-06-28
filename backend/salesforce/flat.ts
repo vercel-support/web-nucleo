@@ -14,18 +14,18 @@ export default class Flat {
 
   public name: string;
   public address?: string;
-  public picture_urls?: string[];
+  public pictureUrls?: string[];
   public description?: string;
-  public year_construction?: string;
-  public year_reform?: string;
+  public yearConstruction?: string;
+  public yearReform?: string;
 
-  static async preprocess_pictures(pictures_html: string): Promise<string[]> {
+  static async preprocessPictures(picturesHtml: string): Promise<string[]> {
     const sfClient = await getSalesforceClient();
 
-    if (pictures_html == null) {
+    if (picturesHtml == null) {
       return [];
     }
-    const elements = parse(pictures_html);
+    const elements = parse(picturesHtml);
     const urls = elements
       .querySelectorAll('img')
       .map((img) => img.attributes.src);
@@ -46,31 +46,31 @@ export default class Flat {
     return Object.assign(flat, obj);
   }
 
-  static deserialize_results(json: string): Flat[] {
+  static deserializeResults(json: string): Flat[] {
     const objs = JSON.parse(json);
     return objs.map((obj) => {
       return Flat.fromDict(obj);
     });
   }
 
-  static serialize_results(flats: Flat[]): string {
+  static serializeResults(flats: Flat[]): string {
     return JSON.stringify(flats);
   }
 
   static async fromRecord(record: IStringToAnyDictionary): Promise<Flat> {
     const name = record['Name'];
     const address = record['Direccion__c'];
-    const picture_urls = await Flat.preprocess_pictures(record['Fotos__c']);
+    const pictureUrls = await Flat.preprocessPictures(record['Fotos__c']);
     const description = record['Descripcion__c'];
-    const year_construction = record['Ano_costruccion__c'];
-    const year_reform = record['Ano_reforma__c'];
+    const yearConstruction = record['Ano_costruccion__c'];
+    const yearReform = record['Ano_reforma__c'];
     return Flat.fromDict({
       name,
       address,
-      picture_urls,
+      pictureUrls,
       description,
-      year_construction,
-      year_reform,
+      yearConstruction,
+      yearReform,
     });
   }
 

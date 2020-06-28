@@ -7,14 +7,14 @@ export const memoize = (
   const originalMethod = descriptor.value;
 
   descriptor.value = function (...args) {
-    const serialized_args = JSON.stringify(args);
-    if (serialized_args in cache) {
-      return cache[serialized_args];
+    const serializedArgs = JSON.stringify(args);
+    if (serializedArgs in cache) {
+      return cache[serializedArgs];
     }
 
     const res = originalMethod.apply(this, args);
 
-    cache[serialized_args] = res;
+    cache[serializedArgs] = res;
     return res;
   };
   return descriptor;

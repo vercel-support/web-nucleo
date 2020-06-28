@@ -13,8 +13,8 @@ interface StaticProps {
 
 type Props = StaticProps & WithTranslation;
 
-export const Home = ({ flats, t }): JSX.Element => {
-  const flats_list = Flat.deserialize_results(flats);
+export const Home = ({ flats, t }: Props): JSX.Element => {
+  const flatsList = Flat.deserializeResults(flats);
 
   return (
     <div className="container">
@@ -26,11 +26,11 @@ export const Home = ({ flats, t }): JSX.Element => {
       <main>
         <h1 className="title">Web Núcleo</h1>
         <ul>
-          {flats_list.map((flat) => {
+          {flatsList.map((flat) => {
             return (
               <li key={flat.name}>
                 {flat.name}
-                {flat.picture_urls.map((url) => {
+                {flat.pictureUrls.map((url) => {
                   return <img key={url} src={url}></img>;
                 })}
               </li>
@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
   return {
     props: {
-      flats: Flat.serialize_results(flats),
+      flats: Flat.serializeResults(flats),
     },
   };
 };
