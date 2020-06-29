@@ -14,12 +14,11 @@ interface StaticProps {
 
 type Props = StaticProps & WithTranslation;
 
-
 const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
-`
+`;
 
 export const Home = ({ flats, t }: Props): JSX.Element => {
   const flatsList = Flat.deserializeResults(flats);

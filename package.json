@@ -13,8 +13,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn format",
-      "pre-push": "yarn format && yarn lint && yarn type-check"
+      "pre-push": "yarn lint && yarn type-check"
     }
   },
   "dependencies": {
