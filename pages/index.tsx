@@ -1,10 +1,13 @@
+import { Fragment } from 'react';
 import { WithTranslation } from 'next-i18next';
-import Head from 'next/head';
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
 import styled from 'styled-components';
-
 import nextI18Next from '../i18n';
+
 import Flat from '../backend/salesforce/flat';
+import { FlatsDisplay, BlogShowcase, Hero } from '../components/home';
+import { Header, Footer } from '../components/shared';
 
 const { withTranslation } = nextI18Next;
 
@@ -14,38 +17,36 @@ interface StaticProps {
 
 type Props = StaticProps & WithTranslation;
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
+const Layout = styled.div`
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 0;
+`;
+
+const Content = styled.main`
+  flex: auto;
 `;
 
 export const Home = ({ flats, t }: Props): JSX.Element => {
-  const flatsList = Flat.deserializeResults(flats);
+  const deserializedFlats = Flat.deserializeResults(flats);
 
   return (
-    <div>
+    <Layout>
       <Head>
         <title>{t('title')}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
 
-      <main>
-        <Title>Web Núcleo</Title>
-        <ul>
-          {flatsList.map((flat) => {
-            return (
-              <li key={flat.name}>
-                {flat.name}
-                {flat.pictureUrls.map((url) => {
-                  return <img key={url} src={url}></img>;
-                })}
-              </li>
-            );
-          })}
-        </ul>
-      </main>
-    </div>
+      <Content>
+        <Hero />
+        <FlatsDisplay flats={deserializedFlats} />
+        <BlogShowcase />
+      </Content>
+      <Footer />
+    </Layout>
   );
 };
 
