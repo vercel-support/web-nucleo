@@ -9,6 +9,13 @@
       }
     ],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "babel-plugin-styled-components"
+    [
+      "styled-components",
+      {
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
+      }
+    ]
   ]
 }
