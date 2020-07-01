@@ -25,21 +25,32 @@ const Header = ({ className }: Props) => {
     <header className={className}>
       <Logo src="/images/LogoHorWeb.svg" />
       <MenuButtons>
-        <Button size="middle" type="text" css={`
-            color: #A61D24;
-        `}>
+        <Button
+          size="middle"
+          type="text"
+          css={`
+            color: #a61d24;
+          `}
+        >
           Búsqueda
         </Button>
-        <Button size="middle" type="text" css={`
-            color: #A61D24;
-        `}>
+        <Button
+          size="middle"
+          type="text"
+          css={`
+            color: #a61d24;
+          `}
+        >
           Quiénes somos
         </Button>
-        <Button size="middle" css={`
-            background: #A61D24;
+        <Button
+          size="middle"
+          css={`
+            background: #a61d24;
             border-radius: 2px;
             color: white;
-        `}>
+          `}
+        >
           Propietarios
         </Button>
       </MenuButtons>

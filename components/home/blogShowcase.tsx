@@ -1,4 +1,4 @@
-const BlogShowcase = () => {
-    return <div>BlogShowcase</div>
+const BlogShowcase = (): JSX.Element => {
+  return <div>BlogShowcase</div>;
 };
 export default BlogShowcase;

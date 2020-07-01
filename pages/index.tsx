@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { WithTranslation } from 'next-i18next';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';

@@ -74,7 +74,7 @@ export default class Flat {
     });
   }
 
-  static async getFlats() {
+  static async getFlats(): Promise<Flat[]> {
     const sfClient = await getSalesforceClient();
 
     const records = await sfClient.fetchAllObjectInstances(
