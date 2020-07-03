@@ -34,8 +34,13 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
   return (
     <Layout>
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{t('title')}</title>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          href="https://fonts.googleapis.com/css?family=Heebo"
+          rel="stylesheet"
+        />
       </Head>
       <Header />
 

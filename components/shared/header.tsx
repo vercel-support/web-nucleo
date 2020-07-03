@@ -5,16 +5,12 @@ type Props = {
   className: string;
 };
 
-const Logo = styled.img`
-  color: white;
-`;
-
 const MenuButtons = styled.div`
   display: flex;
   justify-content: space-between;
 
-  font-family: Circular Std;
-  font-style: normal;
+  font-family: ${props => props.theme.font.family};
+  font-style: ${props => props.theme.font.style};
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
@@ -23,35 +19,16 @@ const MenuButtons = styled.div`
 const Header = ({ className }: Props) => {
   return (
     <header className={className}>
-      <Logo src="/images/LogoHorWeb.svg" />
+      <img src="/images/LogoHeaderWeb.svg" />
       <MenuButtons>
         <Button
           size="middle"
           type="text"
           css={`
-            color: #a61d24;
+            color: ${props => props.theme.colors.secondary};
           `}
         >
-          Búsqueda
-        </Button>
-        <Button
-          size="middle"
-          type="text"
-          css={`
-            color: #a61d24;
-          `}
-        >
-          Quiénes somos
-        </Button>
-        <Button
-          size="middle"
-          css={`
-            background: #a61d24;
-            border-radius: 2px;
-            color: white;
-          `}
-        >
-          Propietarios
+          Esp
         </Button>
       </MenuButtons>
     </header>
