@@ -31,6 +31,7 @@ export default styled(Header)`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 100;
 
   width: 100%;
   height: 80px;

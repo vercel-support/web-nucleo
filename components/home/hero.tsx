@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { WithTranslation } from 'next-i18next';
 import nextI18Next from '../../i18n';
+import { Button, Modal } from 'antd';
+import { useState } from 'react';
 
 const { withTranslation } = nextI18Next;
 
@@ -11,6 +13,7 @@ const Background = styled.div`
   background-position: center center;
   height: 55vh;
 
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -54,9 +57,46 @@ const Subtitle = styled.h1`
   max-width: 60%;
 `;
 
+const ActionButtons = styled.div`
+  position: absolute;
+  margin: auto auto;
+  bottom: -36px;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+`;
+
+const ActionButton = styled(Button)<{ side: string }>`
+  width: 275px;
+  height: 72px;
+
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 20px;
+
+  color: white;
+  background-color: ${(props) =>
+    props.side == 'right'
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary};
+  border-color: ${(props) =>
+    props.side == 'right'
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary};
+
+  border-top-left-radius: ${(props) => (props.side == 'left' ? '40px' : 0)};
+  border-top-right-radius: ${(props) => (props.side == 'left' ? 0 : '40px')};
+  border-bottom-right-radius: ${(props) => (props.side == 'left' ? 0 : '40px')};
+  border-bottom-left-radius: ${(props) => (props.side == 'left' ? '40px' : 0)};
+`;
+
 type Props = WithTranslation;
 
 const Hero = ({ t }: Props): JSX.Element => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <Background>
       <Title>
@@ -69,6 +109,38 @@ const Hero = ({ t }: Props): JSX.Element => {
         <Divider />
         <Subtitle>{t('hero-subtitle')}</Subtitle>
       </Title>
+      <ActionButtons>
+        <ActionButton
+          side="left"
+          onClick={() => {
+            setModalVisible(true);
+          }}
+        >
+          Comprar
+        </ActionButton>
+        <ActionButton
+          side="right"
+          onClick={() => {
+            setModalVisible(true);
+          }}
+        >
+          Vender
+        </ActionButton>
+        <Modal
+          title="Basic Modal"
+          visible={modalVisible}
+          onOk={() => {
+            setModalVisible(false);
+          }}
+          onCancel={() => {
+            setModalVisible(false);
+          }}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
+      </ActionButtons>
     </Background>
   );
 };

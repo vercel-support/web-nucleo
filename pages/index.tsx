@@ -22,6 +22,9 @@ const Layout = styled.div`
   flex-direction: column;
   box-sizing: border-box;
   min-height: 0;
+
+  font-family: ${(props) => props.theme.font.family};
+  font-style: ${(props) => props.theme.font.style};
 `;
 
 const Content = styled.main`
