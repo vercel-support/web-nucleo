@@ -31,7 +31,9 @@ const Title = styled.div`
 const TitleParagraph = styled.p<{ themeColor: string }>`
   font-weight: bold;
   font-size: 8vh;
-  line-height: 4px;
+  line-height: 8vh;
+  margin-top: 0;
+  margin-bottom: 0;
   letter-spacing: 0em;
   color: ${(props) => props.theme.colors[props.themeColor]};
 `;
@@ -39,7 +41,7 @@ const TitleParagraph = styled.p<{ themeColor: string }>`
 const Divider = styled.hr`
   width: 86px;
   margin-top: 24px;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
   margin-left: 0;
   margin-right: 0;
   border: 1px solid ${(props) => props.theme.colors.primary};
@@ -58,10 +60,10 @@ const Hero = ({ t }: Props): JSX.Element => {
   return (
     <Background>
       <Title>
-        <TitleParagraph themeColor="primary">
+        <TitleParagraph themeColor="secondary">
           {t('hero-title-1')}
         </TitleParagraph>
-        <TitleParagraph themeColor="secondary">
+        <TitleParagraph themeColor="primary">
           {t('hero-title-2')}
         </TitleParagraph>
         <Divider />

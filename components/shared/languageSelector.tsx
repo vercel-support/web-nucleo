@@ -1,6 +1,7 @@
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { WithTranslation } from 'next-i18next';
+import styled from 'styled-components';
 import nextI18Next from '../../i18n';
 
 const { withTranslation } = nextI18Next;
@@ -26,12 +27,22 @@ const menu = (t, i18n) => (
   </Menu>
 );
 
-const LanguageSelector = ({ t, i18n }: WithTranslation) => {
+type Props = { themeColor?: string } & WithTranslation;
+
+const ColorLink = styled.a<{ themeColor: string }>`
+  color: ${(props) => props.theme.colors[props.themeColor]};
+`;
+
+const LanguageSelector = ({ t, i18n, themeColor = 'primary' }: Props) => {
   return (
     <Dropdown overlay={menu(t, i18n)} trigger={['click']}>
-      <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-        Idioma <DownOutlined />
-      </a>
+      <ColorLink
+        themeColor={themeColor}
+        className="ant-dropdown-link"
+        onClick={(e) => e.preventDefault()}
+      >
+        {t('idioma')} <DownOutlined />
+      </ColorLink>
     </Dropdown>
   );
 };
