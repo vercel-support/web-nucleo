@@ -21,7 +21,7 @@ const Header = ({ className }: Props) => {
     <header className={className}>
       <img src="/images/LogoHeaderWeb.svg" />
       <MenuButtons>
-        <LanguageSelector themeColor='secondary' />
+        <LanguageSelector themeColor="secondary" />
       </MenuButtons>
     </header>
   );
