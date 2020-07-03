@@ -50,7 +50,7 @@ const Subtitle = styled.h1`
   font-size: 24px;
   line-height: 30px;
   max-width: 60%;
-`
+`;
 
 type Props = WithTranslation;
 
@@ -65,9 +65,7 @@ const Hero = ({ t }: Props): JSX.Element => {
           {t('hero-title-2')}
         </TitleParagraph>
         <Divider />
-        <Subtitle>
-          {t('hero-subtitle')}
-        </Subtitle>
+        <Subtitle>{t('hero-subtitle')}</Subtitle>
       </Title>
     </Background>
   );

@@ -9,8 +9,8 @@ const MenuButtons = styled.div`
   display: flex;
   justify-content: space-between;
 
-  font-family: ${props => props.theme.font.family};
-  font-style: ${props => props.theme.font.style};
+  font-family: ${(props) => props.theme.font.family};
+  font-style: ${(props) => props.theme.font.style};
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
@@ -25,7 +25,7 @@ const Header = ({ className }: Props) => {
           size="middle"
           type="text"
           css={`
-            color: ${props => props.theme.colors.secondary};
+            color: ${(props) => props.theme.colors.secondary};
           `}
         >
           Esp
