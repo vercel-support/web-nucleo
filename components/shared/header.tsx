@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from 'antd';
+import LanguageSelector from './languageSelector';
 
 type Props = {
   className?: string;
@@ -21,15 +21,7 @@ const Header = ({ className }: Props) => {
     <header className={className}>
       <img src="/images/LogoHeaderWeb.svg" />
       <MenuButtons>
-        <Button
-          size="middle"
-          type="text"
-          css={`
-            color: ${(props) => props.theme.colors.secondary};
-          `}
-        >
-          Esp
-        </Button>
+        <LanguageSelector />
       </MenuButtons>
     </header>
   );

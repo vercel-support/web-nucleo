@@ -32,7 +32,7 @@ const TitleParagraph = styled.p<{ themeColor: string }>`
   font-weight: bold;
   font-size: 8vh;
   line-height: 4px;
-  letter-spacing: -0.05em;
+  letter-spacing: 0em;
   color: ${(props) => props.theme.colors[props.themeColor]};
 `;
 
