@@ -28,7 +28,7 @@ const Title = styled.div`
   line-height: 22px;
 `;
 
-const TitleParagraph = styled.p`
+const TitleParagraph = styled.p<{ themeColor: string }>`
   font-weight: bold;
   font-size: 8vh;
   line-height: 4px;

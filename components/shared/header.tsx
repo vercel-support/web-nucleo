@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 
 type Props = {
-  className: string;
+  className?: string;
 };
 
 const MenuButtons = styled.div`
