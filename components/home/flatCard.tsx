@@ -3,6 +3,7 @@ import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel, Tag } from 'antd';
 import i18Next from '../../i18n';
 import { WithTranslation } from 'next-i18next';
+import { useRef, useEffect } from 'react';
 
 const { withTranslation } = i18Next;
 
@@ -10,16 +11,17 @@ type Props = {
   flat: Flat;
   className?: string;
   theme: DefaultTheme;
+  imageHeight: string;
 } & WithTranslation;
 
-const FlatImage = styled.img<{ url: string }>`
+const FlatImage = styled.img<{ url: string; imageHeight: string }>`
   background-image: url(${(props) => props.url});
   background-color: red;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 
-  height: 140px;
+  height: ${(props) => props.imageHeight};
   width: 100%;
 `;
 
@@ -56,12 +58,46 @@ const StyledTag = styled(Tag)`
   float: right;
 `;
 
-const FlatCard = ({ flat, className, theme, t }: Props): JSX.Element => {
+const FlatCard = ({
+  flat,
+  className,
+  theme,
+  t,
+  imageHeight,
+}: Props): JSX.Element => {
+  const carousel = useRef(null);
+
+  let timeout = null;
+
+  function laggedNext() {
+    timeout = setTimeout(() => {
+      carousel.current.next();
+    }, 500);
+  }
+
+  function clearNext() {
+    if (timeout !== null) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  }
+
+  useEffect(() => {
+    return function cleanup() {
+      clearNext();
+    };
+  });
+
   return (
-    <div className={className}>
-      <Carousel dots={false} draggable={true}>
+    <div
+      className={className}
+      onMouseEnter={laggedNext}
+      onMouseLeave={clearNext}
+      onMouseDown={clearNext}
+    >
+      <Carousel ref={carousel} dots={false} draggable={true}>
         {flat.pictureUrls.map((url) => (
-          <FlatImage key={url} url={url} />
+          <FlatImage imageHeight={imageHeight} key={url} url={url} />
         ))}
       </Carousel>
       <FlatInfo>

@@ -7,6 +7,7 @@ import { useRef } from 'react';
 import { PlayCircleFilled } from '@ant-design/icons';
 import { split } from '../../common/helpers';
 import FlatCard from './flatCard';
+import { useMediaQuery } from 'react-responsive';
 
 const { withTranslation } = nextI18Next;
 
@@ -53,9 +54,35 @@ const HackyFiller = styled.div<{ width: string; margin: string }>`
 const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
   const carousel = useRef(null);
 
-  const flatCardWidth = '240px';
+  const isBig = useMediaQuery({ query: '(min-width: 1724px)' });
+  const isMedium = useMediaQuery({ query: '(min-width: 1500px)' });
+  const isSmall = useMediaQuery({ query: '(min-width: 1300px)' });
+  const isVerySmall = useMediaQuery({ query: '(min-width: 1208px)' });
+  const isVeryVerySmall = useMediaQuery({ query: '(min-width: 1110px)' });
+
+  let baseFlatCardWith = 340;
+  let flatsPerPage = 8;
+  if (isBig == true) {
+    baseFlatCardWith = 340;
+    flatsPerPage = 8;
+  } else if (isMedium == true) {
+    baseFlatCardWith = 280;
+    flatsPerPage = 8;
+  } else if (isSmall == true) {
+    baseFlatCardWith = 230;
+    flatsPerPage = 8;
+  } else if (isVerySmall == true) {
+    baseFlatCardWith = 280;
+    flatsPerPage = 6;
+  } else if (isVeryVerySmall == true) {
+    baseFlatCardWith = 380;
+    flatsPerPage = 4;
+  }
+
+  const aspectRatio = 1.68;
+  const flatCardWidth = `${baseFlatCardWith}px`;
+  const flatCardImageHeight = `${baseFlatCardWith / aspectRatio}px`;
   const flatCardMargin = '8px';
-  const flatsPerPage = 8; // TODO change depending on screen size
 
   function previous() {
     carousel.current.prev();
@@ -81,6 +108,7 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
                   margin={flatCardMargin}
                   key={flat.name}
                   flat={flat}
+                  imageHeight={flatCardImageHeight}
                 />
               ))}
               {page.map((flat) => (

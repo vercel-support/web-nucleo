@@ -6,8 +6,6 @@ import { useState } from 'react';
 
 const { withTranslation } = nextI18Next;
 
-const actionButtonsHeight = 9;
-
 const Background = styled.div`
   background-image: url(/images/HeroHome.png);
   background-size: cover;
@@ -62,18 +60,22 @@ const Subtitle = styled.h1`
 const ActionButtons = styled.div`
   position: absolute;
   margin: auto auto;
-  bottom: -${actionButtonsHeight / 2}vh;
+  bottom: 0;
   left: 0;
   right: 0;
 
   z-index: 99;
   display: flex;
   justify-content: center;
+
+  -ms-transform: translateY(50%);
+  transform: translateY(50%);
 `;
 
 const ActionButton = styled(Button)<{ side: string }>`
   width: 275px;
-  height: ${actionButtonsHeight}vh;
+  height: 8vh;
+  max-height: 76px;
   min-height: 38px;
   font-weight: bold;
   font-size: 20px;
