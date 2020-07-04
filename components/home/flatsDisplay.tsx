@@ -81,7 +81,7 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
 
   const aspectRatio = 1.68;
   const flatCardWidth = `${baseFlatCardWith}px`;
-  const flatCardImageHeight = `${baseFlatCardWith / aspectRatio}px`;
+  const flatCardImageHeight = `${Math.round(baseFlatCardWith / aspectRatio)}px`;
   const flatCardMargin = '8px';
 
   function previous() {
