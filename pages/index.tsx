@@ -9,7 +9,7 @@ import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
 import { Header, Footer } from '../components/shared';
 import dynamic from 'next/dynamic';
 
-const FlatsDisplay = dynamic(() => import('../components/home/flatsDisplay'));
+const FlatsDisplay = dynamic(() => import('../components/home/flatsDisplay'), { ssr: false });
 
 const { withTranslation } = nextI18Next;
 
