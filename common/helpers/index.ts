@@ -19,3 +19,12 @@ export const memoize = (
   };
   return descriptor;
 };
+
+export const split = <T>(array: T[], max_chunk_size: number): T[][] => {
+  let [...arr] = array;
+  var res = [];
+  while (arr.length) {
+    res.push(arr.splice(0, max_chunk_size));
+  }
+  return res;
+};

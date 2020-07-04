@@ -10,7 +10,7 @@
     },
     {
         "name": "Fixture flat 2",
-        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "pictureUrls": ["/fixtures/flat2.png", "/fixtures/flat1.png"],
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
@@ -28,7 +28,7 @@
     },
     {
         "name": "Fixture flat 4",
-        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "pictureUrls": ["/fixtures/flat2.png", "/fixtures/flat1.png"],
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
@@ -46,7 +46,7 @@
     },
     {
         "name": "Fixture flat 6",
-        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "pictureUrls": ["/fixtures/flat2.png", "/fixtures/flat1.png"],
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
@@ -64,7 +64,7 @@
     },
     {
         "name": "Fixture flat 8",
-        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "pictureUrls": ["/fixtures/flat2.png", "/fixtures/flat1.png"],
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
@@ -82,7 +82,7 @@
     },
     {
         "name": "Fixture flat 10",
-        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "pictureUrls": ["/fixtures/flat2.png", "/fixtures/flat1.png"],
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
@@ -100,7 +100,7 @@
     },
     {
         "name": "Fixture flat 12",
-        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "pictureUrls": ["/fixtures/flat2.png", "/fixtures/flat1.png"],
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
@@ -118,7 +118,7 @@
     },
     {
         "name": "Fixture flat 14",
-        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "pictureUrls": ["/fixtures/flat2.png", "/fixtures/flat1.png"],
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
@@ -136,7 +136,7 @@
     },
     {
         "name": "Fixture flat 16",
-        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "pictureUrls": ["/fixtures/flat2.png", "/fixtures/flat1.png"],
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,

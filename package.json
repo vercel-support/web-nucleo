@@ -17,6 +17,7 @@
     }
   },
   "dependencies": {
+    "@ant-design/icons": "^4.2.1",
     "@babel/plugin-proposal-decorators": "^7.10.3",
     "@types/styled-components": "^5.1.0",
     "@zeit/next-less": "^1.0.1",

@@ -66,6 +66,7 @@ const ActionButtons = styled.div`
   left: 0;
   right: 0;
 
+  z-index: 99;
   display: flex;
   justify-content: center;
 `;

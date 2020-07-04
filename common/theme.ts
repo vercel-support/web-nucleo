@@ -4,6 +4,7 @@ const theme: DefaultTheme = {
   colors: {
     primary: '#F94F28',
     secondary: '#332E31',
+    shadow: '#F2F2F2'
   },
 
   font: {
@@ -11,7 +12,7 @@ const theme: DefaultTheme = {
     style: 'normal',
   },
 
-  borderRadius: '0px',
+  borderRadius: '2px',
 };
 
 export default theme;
