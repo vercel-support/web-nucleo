@@ -19,6 +19,13 @@ export default class Flat {
   public yearConstruction?: string;
   public yearReform?: string;
 
+  // TODO implement
+  public price?: number;
+  public rooms?: number;
+  public sqrMeters?: number;
+  public type?: string;
+  public zone?: string;
+
   static async preprocessPictures(picturesHtml: string): Promise<string[]> {
     const sfClient = await getSalesforceClient();
 
@@ -74,7 +81,7 @@ export default class Flat {
     });
   }
 
-  static async getFlats() {
+  static async getFlats(): Promise<Flat[]> {
     const sfClient = await getSalesforceClient();
 
     const records = await sfClient.fetchAllObjectInstances(

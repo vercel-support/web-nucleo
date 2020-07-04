@@ -1,3 +1,20 @@
 {
-  "title": "English title"
+  "title": "English title",
+  "hero-title-1": "Welcome to",
+  "hero-title-2": "Nucleo",
+  "hero-subtitle": "Te asesoramos ya sea con la venta como con la compra de inmuebles en Alicante.",
+  "idioma": "Language",
+  "comprar": "Buy",
+  "vender": "Sell",
+  "section-flats-title": "Opportunities",
+  "enviar": "Send",
+  "email": "Email",
+  "newsletter-title": "Subscribe to our newsletter",
+  "blog-showcase-title": "Nosotros nos encargamos de inspirarte",
+  "blog-showcase-subtitle": "Sé el primero en conocer las últimas tendencias, los mejores rincones de Alicante y mucho más",
+  "habitaciones": "rooms",
+  "nucleo-sl": "© 2020 Núcleo S.L.",
+  "aviso-legal": "Terms of Service",
+  "politica-datos": "Privacy",
+  "politica-cookies": "Cookies"
 }
