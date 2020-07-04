@@ -6,6 +6,8 @@ import { useState } from 'react';
 
 const { withTranslation } = nextI18Next;
 
+const actionButtonsHeight = 9;
+
 const Background = styled.div`
   background-image: url(/images/HeroHome.png);
   background-size: cover;
@@ -60,7 +62,7 @@ const Subtitle = styled.h1`
 const ActionButtons = styled.div`
   position: absolute;
   margin: auto auto;
-  bottom: -36px;
+  bottom: -${actionButtonsHeight/2}vh;
   left: 0;
   right: 0;
 
@@ -70,8 +72,8 @@ const ActionButtons = styled.div`
 
 const ActionButton = styled(Button)<{ side: string }>`
   width: 275px;
-  height: 72px;
-
+  height: ${actionButtonsHeight}vh;
+  min-height: 38px;
   font-weight: bold;
   font-size: 20px;
   line-height: 20px;
@@ -112,16 +114,18 @@ const Hero = ({ t }: Props): JSX.Element => {
       <ActionButtons>
         <ActionButton
           side="left"
-          onClick={() => {
+          onClick={(a) => {
             setModalVisible(true);
+            (a.target as HTMLButtonElement).blur();
           }}
         >
           Comprar
         </ActionButton>
         <ActionButton
           side="right"
-          onClick={() => {
+          onClick={(a) => {
             setModalVisible(true);
+            (a.target as HTMLButtonElement).blur();
           }}
         >
           Vender
