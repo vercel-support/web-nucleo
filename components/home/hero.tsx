@@ -62,7 +62,7 @@ const Subtitle = styled.h1`
 const ActionButtons = styled.div`
   position: absolute;
   margin: auto auto;
-  bottom: -${actionButtonsHeight/2}vh;
+  bottom: -${actionButtonsHeight / 2}vh;
   left: 0;
   right: 0;
 
