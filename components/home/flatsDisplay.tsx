@@ -51,7 +51,7 @@ const HackyFiller = styled.div<{ width: string; margin: string }>`
 `;
 
 const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
-  let carousel = useRef(null);
+  const carousel = useRef(null);
 
   const flatCardWidth = '240px';
   const flatCardMargin = '8px';
@@ -73,8 +73,8 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
       <Arrow left rotate={180} onClick={previous} />
       <Carousel ref={carousel} dots={false}>
         {flatPages.map((page, i) => (
-          <div>
-            <FlatsPage key={`page_${i}`}>
+          <div key={`page_${i}`}>
+            <FlatsPage>
               {page.map((flat) => (
                 <FlatCard
                   width={flatCardWidth}
@@ -83,8 +83,12 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
                   flat={flat}
                 />
               ))}
-              {page.map(() => (
-                <HackyFiller width={flatCardWidth} margin={flatCardMargin} />
+              {page.map((flat) => (
+                <HackyFiller
+                  key={flat.name}
+                  width={flatCardWidth}
+                  margin={flatCardMargin}
+                />
               ))}
             </FlatsPage>
           </div>

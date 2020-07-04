@@ -26,7 +26,6 @@ export default class Flat {
   public type?: string;
   public zone?: string;
 
-
   static async preprocessPictures(picturesHtml: string): Promise<string[]> {
     const sfClient = await getSalesforceClient();
 

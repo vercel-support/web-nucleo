@@ -4,7 +4,7 @@ const theme: DefaultTheme = {
   colors: {
     primary: '#F94F28',
     secondary: '#332E31',
-    shadow: '#F2F2F2'
+    shadow: '#F2F2F2',
   },
 
   font: {

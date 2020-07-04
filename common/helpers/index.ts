@@ -21,8 +21,8 @@ export const memoize = (
 };
 
 export const split = <T>(array: T[], max_chunk_size: number): T[][] => {
-  let [...arr] = array;
-  var res = [];
+  const [...arr] = array;
+  const res = [];
   while (arr.length) {
     res.push(arr.splice(0, max_chunk_size));
   }
