@@ -80,4 +80,9 @@ export default withTheme(styled(FlatCard)<{ width: string; margin: string }>`
   width: ${(props) => props.width};
   margin: ${(props) => props.margin};
   background-color: white;
+  border-radius: ${props => props.theme.borderRadius};
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 0px 2px 6px;
+  }
 `);
