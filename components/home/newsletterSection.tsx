@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import i18Next from '../../i18n';
 import { WithTranslation } from 'next-i18next';
+import { Input } from 'antd';
 
 const { withTranslation } = i18Next;
 
@@ -9,7 +10,7 @@ type Props = WithTranslation;
 const Banner = styled.div`
   height: 40vh;
 
-  background-image: url(/images/banner_blog.png);
+  background-image: url(/images/banner_newsletter.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -17,7 +18,7 @@ const Banner = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
 
   padding: 14px 10%;
 `;
@@ -27,22 +28,21 @@ const SectionTitle = styled.h2`
   font-size: 42px;
   line-height: 42px;
   max-width: 25%;
+
+  text-align: right;
 `;
 
-const SectionSubtitle = styled.h3`
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 25px;
-  max-width: 25%;
+const StyledInput = styled(Input.Search)`
   margin-top: 8px;
+  max-width: 25%;
 `;
 
-const BlogShowcase = ({ t }: Props): JSX.Element => {
+const NewsletterSection = ({ t }: Props): JSX.Element => {
   return (
     <Banner>
-      <SectionTitle>{t('blog-showcase-title')}</SectionTitle>
-      <SectionSubtitle>{t('blog-showcase-subtitle')}</SectionSubtitle>
+      <SectionTitle>{t('newsletter-title')}</SectionTitle>
+      <StyledInput enterButton={t('enviar')} placeholder={t('email')} />
     </Banner>
   );
 };
-export default withTranslation('common')(BlogShowcase);
+export default withTranslation('common')(NewsletterSection);

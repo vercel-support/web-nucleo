@@ -6,6 +6,11 @@ import nextI18Next from '../../i18n';
 
 const { withTranslation } = nextI18Next;
 
+const StyledLink = styled.a`
+  font-family: ${(props) => props.theme.font.family};
+  font-style: ${(props) => props.theme.font.style};
+`;
+
 const menu = (t, i18n) => (
   <Menu>
     <Menu.Item
@@ -14,7 +19,7 @@ const menu = (t, i18n) => (
         i18n.changeLanguage('es');
       }}
     >
-      <a>Español</a>
+      <StyledLink>Español</StyledLink>
     </Menu.Item>
     <Menu.Item
       key="1"
@@ -22,7 +27,7 @@ const menu = (t, i18n) => (
         i18n.changeLanguage('en');
       }}
     >
-      <a>English</a>
+      <StyledLink>English</StyledLink>
     </Menu.Item>
   </Menu>
 );

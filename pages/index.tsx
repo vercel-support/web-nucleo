@@ -5,7 +5,12 @@ import styled from 'styled-components';
 import nextI18Next from '../i18n';
 
 import Flat from '../backend/salesforce/flat';
-import { FlatsDisplay, BlogShowcase, Hero } from '../components/home';
+import {
+  FlatsDisplay,
+  BlogShowcase,
+  Hero,
+  NewsletterSection,
+} from '../components/home';
 import { Header, Footer } from '../components/shared';
 
 const { withTranslation } = nextI18Next;
@@ -51,6 +56,7 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
         <Hero />
         <FlatsDisplay flats={deserializedFlats} />
         <BlogShowcase />
+        <NewsletterSection />
       </Content>
       <Footer />
     </Layout>

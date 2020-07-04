@@ -1,12 +1,16 @@
 import Flat from '../../backend/salesforce/flat';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel, Tag } from 'antd';
+import i18Next from '../../i18n';
+import { WithTranslation } from 'next-i18next';
+
+const { withTranslation } = i18Next;
 
 type Props = {
   flat: Flat;
   className?: string;
   theme: DefaultTheme;
-};
+} & WithTranslation;
 
 const FlatImage = styled.img<{ url: string }>`
   background-image: url(${(props) => props.url});
@@ -52,7 +56,7 @@ const StyledTag = styled(Tag)`
   float: right;
 `;
 
-const FlatCard = ({ flat, className, theme }: Props): JSX.Element => {
+const FlatCard = ({ flat, className, theme, t }: Props): JSX.Element => {
   return (
     <div className={className}>
       <Carousel dots={false} draggable={true}>
@@ -74,14 +78,19 @@ const FlatCard = ({ flat, className, theme }: Props): JSX.Element => {
           >
             {flat.sqrMeters}m<sup>2</sup>
           </span>
-          <span>{flat.rooms} habitaciones</span>
+          <span>
+            {flat.rooms} {t('habitaciones')}
+          </span>
         </BottomText>
       </FlatInfo>
     </div>
   );
 };
 
-export default withTheme(styled(FlatCard)<{ width: string; margin: string }>`
+export default withTheme(styled(withTranslation('common')(FlatCard))<{
+  width: string;
+  margin: string;
+}>`
   width: ${(props) => props.width};
   margin: ${(props) => props.margin};
   background-color: white;
