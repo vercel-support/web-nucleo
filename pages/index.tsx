@@ -58,6 +58,7 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
         <BlogShowcase />
         <NewsletterSection />
       </Content>
+
       <Footer />
     </Layout>
   );
