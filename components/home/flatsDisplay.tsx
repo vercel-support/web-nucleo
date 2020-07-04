@@ -97,7 +97,7 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
   return (
     <div className={className}>
       <SectionTitle>{t('section-flats-title')}</SectionTitle>
-      <Arrow left rotate={180} onClick={previous} />
+      <Arrow left={true} rotate={180} onClick={previous} />
       <Carousel ref={carousel} dots={false}>
         {flatPages.map((page, i) => (
           <div key={`page_${i}`}>
@@ -122,7 +122,7 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
           </div>
         ))}
       </Carousel>
-      <Arrow onClick={next} />
+      <Arrow left={false} onClick={next} />
     </div>
   );
 };
