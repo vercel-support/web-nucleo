@@ -119,7 +119,7 @@ const Hero = ({ t }: Props): JSX.Element => {
             (a.target as HTMLButtonElement).blur();
           }}
         >
-          Comprar
+          {t('comprar')}
         </ActionButton>
         <ActionButton
           side="right"
@@ -128,7 +128,7 @@ const Hero = ({ t }: Props): JSX.Element => {
             (a.target as HTMLButtonElement).blur();
           }}
         >
-          Vender
+          {t('vender')}
         </ActionButton>
         <Modal
           title="Basic Modal"
