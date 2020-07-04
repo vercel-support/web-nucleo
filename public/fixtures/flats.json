@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Fixture flat 1",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 2",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 3",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 4",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 5",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 6",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 7",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 8",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 9",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 10",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 11",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 12",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 13",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 14",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 15",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    },
+    {
+        "name": "Fixture flat 16",
+        "pictureUrls": ["/fixtures/flat1.png", "/fixtures/flat2.png"],
+        "price": 120000,
+        "rooms": 4,
+        "sqrMeters": 120,
+        "type": "apartamento",
+        "zone": "Benalúa"
+    }
+]

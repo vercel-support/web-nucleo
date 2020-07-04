@@ -58,11 +58,15 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const flats = await Flat.getFlats();
+  // const flats = await Flat.getFlats();
+  // const serializedFlats = Flat.serializeResults(flats);
+
+  const flats = require('../public/fixtures/flats.json');
+  const serializedFlats = JSON.stringify(flats);
 
   return {
     props: {
-      flats: Flat.serializeResults(flats),
+      flats: serializedFlats,
     },
   };
 };
