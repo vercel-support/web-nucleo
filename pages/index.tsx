@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import nextI18Next from '../i18n';
 
 import Flat from '../backend/salesforce/flat';
-import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
+import { BlogShowcase, Hero, NewsletterSection, FlatsDisplayPlaceholder } from '../components/home';
 import { Header, Footer } from '../components/shared';
 import dynamic from 'next/dynamic';
 
 const FlatsDisplay = dynamic(() => import('../components/home/flatsDisplay'), {
   ssr: false,
+  loading: () => <FlatsDisplayPlaceholder />
 });
 
 const { withTranslation } = nextI18Next;
