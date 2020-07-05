@@ -129,7 +129,7 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
 
 export const FlatsDisplayPlaceholder = styled.div`
   background-color: #f2f2f2;
-  height: 60vh;
+  height: 80vh;
 `;
 
 export default withTranslation('common')(styled(FlatsDisplay)`

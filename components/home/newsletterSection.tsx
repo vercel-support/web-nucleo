@@ -30,6 +30,8 @@ const SectionTitle = styled.h2`
   max-width: 25%;
 
   text-align: right;
+
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const StyledInput = styled(Input.Search)`

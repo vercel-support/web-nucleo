@@ -19,6 +19,13 @@ const MenuButtons = styled.div`
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
+
+  color: ${(props) => props.theme.colors.secondary};
+`;
+
+const StyledButton = styled(Button)`
+  opacity: 0.55;
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const Footer = ({ className, t }: Props) => {
@@ -35,9 +42,9 @@ const Footer = ({ className, t }: Props) => {
         >
           {t('nucleo-sl')}
         </p>
-        <Button type="text">{t('aviso-legal')}</Button>
-        <Button type="text">{t('politica-datos')}</Button>
-        <Button type="text">{t('politica-cookies')}</Button>
+        <StyledButton type="text">{t('aviso-legal')}</StyledButton>
+        <StyledButton type="text">{t('politica-datos')}</StyledButton>
+        <StyledButton type="text">{t('politica-cookies')}</StyledButton>
       </MenuButtons>
     </footer>
   );

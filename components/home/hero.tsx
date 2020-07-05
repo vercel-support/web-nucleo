@@ -55,6 +55,8 @@ const Subtitle = styled.h1`
   font-size: 24px;
   line-height: 30px;
   max-width: 60%;
+
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const ActionButtons = styled.div`

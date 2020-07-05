@@ -27,6 +27,8 @@ const SectionTitle = styled.h2`
   font-size: 42px;
   line-height: 42px;
   max-width: 25%;
+
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const SectionSubtitle = styled.h3`
@@ -35,6 +37,8 @@ const SectionSubtitle = styled.h3`
   line-height: 25px;
   max-width: 25%;
   margin-top: 8px;
+
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const BlogShowcase = ({ t }: Props): JSX.Element => {

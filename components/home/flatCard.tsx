@@ -37,12 +37,16 @@ const TopText = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const BottomText = styled.p`
   font-weight: normal;
   font-size: 12px;
   line-height: 12px;
+
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const Divider = styled.hr`
@@ -94,7 +98,7 @@ const FlatCard = ({
       onMouseLeave={clearNext}
       onMouseDown={clearNext}
     >
-      <Carousel ref={carousel} dots={false} draggable={true}>
+      <Carousel ref={carousel} dots={true} draggable={true}>
         {flat.pictureUrls.map((url) => (
           <FlatImage imageHeight={imageHeight} key={url} url={url} />
         ))}
