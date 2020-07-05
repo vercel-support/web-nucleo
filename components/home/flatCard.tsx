@@ -16,7 +16,6 @@ type Props = {
 
 const FlatImage = styled.img<{ url: string; imageHeight: string }>`
   background-image: url(${(props) => props.url});
-  background-color: red;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

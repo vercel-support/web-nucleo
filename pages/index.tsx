@@ -49,6 +49,19 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
           href="https://fonts.googleapis.com/css?family=Heebo"
           rel="stylesheet"
         />
+        {typeof window === 'undefined' && (
+          <style
+            id="holderStyle"
+            dangerouslySetInnerHTML={{
+              __html: `
+         *, *::before, *::after {
+           transition: none!important;
+         }
+         `,
+            }}
+          />
+        )}
+        <style> </style>
       </Head>
       <Header />
 
