@@ -24,7 +24,7 @@ declare module 'styled-components' {
       smu: string;
       mdu: string;
       lgu: string;
-    }
+    };
 
     font: {
       family: string;
