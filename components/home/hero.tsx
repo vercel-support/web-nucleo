@@ -48,6 +48,10 @@ const Divider = styled.hr`
   margin-left: 0;
   margin-right: 0;
   border: 1px solid ${(props) => props.theme.colors.primary};
+
+  @media ${(props) => props.theme.breakpoints.smd} {
+    display: none;
+  }
 `;
 
 const Subtitle = styled.h1`
@@ -57,6 +61,10 @@ const Subtitle = styled.h1`
   max-width: 60%;
 
   color: ${(props) => props.theme.colors.secondary};
+
+  @media ${(props) => props.theme.breakpoints.smd} {
+    display: none;
+  }
 `;
 
 const ActionButtons = styled.div`

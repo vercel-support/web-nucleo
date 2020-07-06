@@ -10,6 +10,22 @@ declare module 'styled-components' {
       shadow: string;
     };
 
+    breakpoints: {
+      xs: string;
+      sm: string;
+      md: string;
+      lg: string;
+      xl: string;
+
+      smd: string;
+      mdd: string;
+      lgd: string;
+
+      smu: string;
+      mdu: string;
+      lgu: string;
+    }
+
     font: {
       family: string;
       style: string;
