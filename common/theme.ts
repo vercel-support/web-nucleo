@@ -1,5 +1,11 @@
 import { DefaultTheme } from 'styled-components';
 
+const xsMax = 575;
+const smMax = 767;
+const mdMax = 991;
+const lgMax = 1199;
+const xlMax = 1599;
+
 const theme: DefaultTheme = {
   colors: {
     primary: '#F94F28',
@@ -11,35 +17,42 @@ const theme: DefaultTheme = {
     family: 'Heebo',
     style: 'normal',
     h1: `
-    @media (max-width: 480px) {
+    @media (max-width: ${xsMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 52px;
       line-height: 100%;
     }
-    @media (min-width: 481px) and (max-width: 768px) {
+    @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 80px;
       line-height: 100%;
     }
-    @media (min-width: 769px) and (max-width: 1024px) {
+    @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 80px;
       line-height: 100%;
     }
-    @media (min-width: 1025px) and (max-width: 1200px) {
+    @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 80px;
       line-height: 100%;
     }
-    @media (min-width: 1201px) {
+    @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
+      font-family: Heebo;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 80px;
+      line-height: 100%;
+    }
+    @media (min-width: ${xlMax + 1}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
@@ -48,35 +61,42 @@ const theme: DefaultTheme = {
     }
     `,
     h2: `
-    @media (max-width: 480px) {
+    @media (max-width: ${xsMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 26px;
       line-height: 100%;
     }
-    @media (min-width: 481px) and (max-width: 768px) {
+    @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 42px;
       line-height: 100%;
     }
-    @media (min-width: 769px) and (max-width: 1024px) {
+    @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 42px;
       line-height: 100%;
     }
-    @media (min-width: 1025px) and (max-width: 1200px) {
+    @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 42px;
       line-height: 100%;
     }
-    @media (min-width: 1201px) {
+    @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
+      font-family: Heebo;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 42px;
+      line-height: 100%;
+    }
+    @media (min-width: ${xlMax + 1}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
@@ -85,35 +105,42 @@ const theme: DefaultTheme = {
     }
     `,
     p1: `
-    @media (max-width: 480px) {
+    @media (max-width: ${xsMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: 500;
       font-size: 13px;
       line-height: 100%;
     }
-    @media (min-width: 481px) and (max-width: 768px) {
+    @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 36px;
       line-height: 100%;
     }
-    @media (min-width: 769px) and (max-width: 1024px) {
+    @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 36px;
       line-height: 100%;
     }
-    @media (min-width: 1025px) and (max-width: 1200px) {
+    @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
       font-size: 36px;
       line-height: 100%;
     }
-    @media (min-width: 1201px) {
+    @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
+      font-family: Heebo;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 36px;
+      line-height: 100%;
+    }
+    @media (min-width: ${xlMax + 1}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: bold;
@@ -122,35 +149,42 @@ const theme: DefaultTheme = {
     }
     `,
     p2: `
-    @media (max-width: 480px) {
+    @media (max-width: ${xsMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: normal;
       font-size: 12px;
       line-height: 100%;
     }
-    @media (min-width: 481px) and (max-width: 768px) {
+    @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: 500;
       font-size: 20px;
       line-height: 100%;
     }
-    @media (min-width: 769px) and (max-width: 1024px) {
+    @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: 500;
       font-size: 20px;
       line-height: 100%;
     }
-    @media (min-width: 1025px) and (max-width: 1200px) {
+    @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: 500;
       font-size: 20px;
       line-height: 100%;
     }
-    @media (min-width: 1201px) {
+    @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
+      font-family: Heebo;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 100%;
+    }
+    @media (min-width: ${xlMax + 1}px) {
       font-family: Heebo;
       font-style: normal;
       font-weight: 500;
@@ -161,21 +195,25 @@ const theme: DefaultTheme = {
   },
 
   breakpoints: {
-    xs: '(max-width: 480px)',
-    sm: '(min-width: 481px) and (max-width: 768px)',
-    md: '(min-width: 769px) and (max-width: 1024px)',
-    lg: '(min-width: 1025px) and (max-width: 1200px)',
-    xl: '(min-width: 1201px)',
+    xs: `(max-width: ${xsMax}px)`,
+    sm: `(min-width: ${xsMax + 1}px) and (max-width: ${smMax}px)`,
+    md: `(min-width: ${smMax + 1}px) and (max-width: ${mdMax}px)`,
+    lg: `(min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px)`,
+    xl: `(min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px)`,
+    xxl: `(min-width: ${xlMax + 1}px)`,
+    
 
     // small and down
-    smd: '(max-width: 768px)',
-    mdd: '(max-width: 1024px)',
-    lgd: '(max-width: 1200px)',
+    smd: `(max-width: ${smMax}px)`,
+    mdd: `(max-width: ${mdMax}px)`,
+    lgd: `(max-width: ${lgMax}px)`,
+    xld: `(max-width: ${xlMax}px)`,
 
     // small and up
-    smu: '(min-width: 481px)',
-    mdu: '(min-width: 769px)',
-    lgu: '(min-width: 1025px)',
+    smu: `(min-width: ${xsMax + 1}px)`,
+    mdu: `(min-width: ${smMax + 1}px)`,
+    lgu: `(min-width: ${mdMax + 1}px)`,
+    xlu: `(min-width: ${lgMax + 1}px)`,
   },
 
   borderRadius: '2px',

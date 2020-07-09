@@ -16,14 +16,17 @@ declare module 'styled-components' {
       md: string;
       lg: string;
       xl: string;
+      xxl: string;
 
       smd: string;
       mdd: string;
       lgd: string;
+      xld: string;
 
       smu: string;
       mdu: string;
       lgu: string;
+      xlu: string;
     };
 
     font: {
