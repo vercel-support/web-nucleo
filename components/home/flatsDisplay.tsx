@@ -17,10 +17,9 @@ type Props = {
 } & WithTranslation;
 
 const SectionTitle = styled.h2`
-  font-size: 30px;
-  line-height: 30px;
-  font-weight: bold;
   color: ${(props) => props.theme.colors.secondary};
+
+  ${(props) => props.theme.font.h2}
 `;
 
 const Arrow = styled(PlayCircleFilled)<{ left?: boolean }>`

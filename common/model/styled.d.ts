@@ -29,6 +29,11 @@ declare module 'styled-components' {
     font: {
       family: string;
       style: string;
+
+      h1: string;
+      h2: string;
+      p1: string;
+      p2: string;
     };
   }
 }

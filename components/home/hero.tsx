@@ -23,22 +23,15 @@ const Title = styled.div`
   margin-left: 10%;
   margin-top: 50px;
   margin-bottom: 8px;
-
-  font-family: ${(props) => props.theme.font.family};
-  font-style: ${(props) => props.theme.font.style};
-  font-weight: bold;
-  font-size: 42px;
-  line-height: 22px;
 `;
 
 const TitleParagraph = styled.p<{ themeColor: string }>`
-  font-weight: bold;
-  font-size: 8vh;
-  line-height: 8vh;
   margin-top: 0;
   margin-bottom: 0;
   letter-spacing: 0em;
   color: ${(props) => props.theme.colors[props.themeColor]};
+
+  ${(props) => props.theme.font.h1}
 `;
 
 const Divider = styled.hr`
@@ -61,6 +54,8 @@ const Subtitle = styled.h1`
   max-width: 60%;
 
   color: ${(props) => props.theme.colors.secondary};
+
+  ${(props) => props.theme.font.p1}
 
   @media ${(props) => props.theme.breakpoints.smd} {
     display: none;

@@ -24,14 +24,13 @@ const Banner = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  font-weight: bold;
-  font-size: 42px;
-  line-height: 42px;
   max-width: 25%;
 
   text-align: right;
 
   color: ${(props) => props.theme.colors.secondary};
+
+  ${(props) => props.theme.font.h2}
 `;
 
 const StyledInput = styled(Input.Search)`

@@ -23,22 +23,21 @@ const Banner = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  font-weight: bold;
-  font-size: 42px;
-  line-height: 42px;
   max-width: 25%;
 
   color: ${(props) => props.theme.colors.secondary};
+
+  ${(props) => props.theme.font.h2}
 `;
 
 const SectionSubtitle = styled.h3`
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 25px;
   max-width: 25%;
   margin-top: 8px;
 
   color: ${(props) => props.theme.colors.secondary};
+
+  ${(props) => props.theme.font.p2}
+  line-height: 125%;
 `;
 
 const BlogShowcase = ({ t }: Props): JSX.Element => {
