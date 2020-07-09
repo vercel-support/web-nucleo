@@ -201,7 +201,6 @@ const theme: DefaultTheme = {
     lg: `(min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px)`,
     xl: `(min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px)`,
     xxl: `(min-width: ${xlMax + 1}px)`,
-    
 
     // small and down
     smd: `(max-width: ${smMax}px)`,
