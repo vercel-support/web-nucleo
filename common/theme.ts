@@ -7,7 +7,6 @@ const lgMax = 1199;
 const xlMax = 1599;
 
 const gridColumns = 24;
-const baseGutter = 4;
 
 const theme: DefaultTheme = {
   colors: {
@@ -220,13 +219,20 @@ const theme: DefaultTheme = {
 
   borderRadius: '2px',
 
-  getGridColumns: (cols, extraGutters = 0, gutter = baseGutter) => {
-    const widthCol = 100 / gridColumns;
-    const nGutters = cols - 1 + extraGutters;
-    const totalPercWidth = cols * widthCol;
-    const totalPxWidth = nGutters * gutter;
-    return `calc(${totalPercWidth}% + ${totalPxWidth}px)`;
-  },
+  grid: {
+    getGridColumns: (cols, extraGutters = 0 ) => {
+      const widthCol = 100 / gridColumns;
+      const nGutters = cols - 1 + extraGutters;
+      const totalPercWidth = cols * widthCol;
+      return `calc(${totalPercWidth}% + calc(${nGutters} * var(--gutter)))`;
+    },
+    xsGutter: '4px',
+    smGutter: '8px',
+    mdGutter: '10px',
+    lgGutter: '10px',
+    xlGutter: '12px',
+    xxlGutter: '14px'
+  }
 };
 
 export default theme;

@@ -29,7 +29,15 @@ declare module 'styled-components' {
       xlu: string;
     };
 
-    getGridColumns: (cols: int, extraGutters?: int, gutter?: int) => string;
+    grid: {
+      getGridColumns: (cols: int, extraGutters?: int, gutter?: int) => string;
+      xsGutter: string,
+      smGutter: string,
+      mdGutter: string,
+      lgGutter: string,
+      xlGutter: string,
+      xxlGutter: string
+    }
 
     font: {
       family: string;
