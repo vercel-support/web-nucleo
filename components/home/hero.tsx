@@ -20,7 +20,9 @@ const Background = styled.div`
 `;
 
 const Title = styled.div`
-  margin-left: 10%;
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  width: 100%;
   margin-top: 50px;
   margin-bottom: 8px;
 `;
@@ -35,31 +37,26 @@ const TitleParagraph = styled.p<{ themeColor: string }>`
 `;
 
 const Divider = styled.hr`
-  width: 86px;
+  width: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-top: 24px;
   margin-bottom: 24px;
-  margin-left: 0;
+  margin-left: var(--gutter);
   margin-right: 0;
   border: 1px solid ${(props) => props.theme.colors.primary};
-
-  @media ${(props) => props.theme.breakpoints.smd} {
-    display: none;
-  }
 `;
 
 const Subtitle = styled.h1`
   font-weight: bold;
   font-size: 24px;
   line-height: 30px;
-  max-width: 60%;
+  max-width: ${(props) => props.theme.grid.getGridColumns(12, 0)};;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(18, 0)};;
+  }
 
   color: ${(props) => props.theme.colors.secondary};
 
   ${(props) => props.theme.font.p1}
-
-  @media ${(props) => props.theme.breakpoints.smd} {
-    display: none;
-  }
 `;
 
 const ActionButtons = styled.div`
@@ -75,6 +72,11 @@ const ActionButtons = styled.div`
 
   -ms-transform: translateY(50%);
   transform: translateY(50%);
+
+  @media ${(props) => props.theme.breakpoints.xs} {
+    left: ${(props) => props.theme.grid.getGridColumns(4, 0)};
+    right: ${(props) => props.theme.grid.getGridColumns(4, 0)};
+  }
 `;
 
 const ActionButton = styled(Button)<{ side: string }>`

@@ -221,10 +221,8 @@ const theme: DefaultTheme = {
 
   grid: {
     getGridColumns: (cols, extraGutters = 0 ) => {
-      const widthCol = 100 / gridColumns;
       const nGutters = cols - 1 + extraGutters;
-      const totalPercWidth = cols * widthCol;
-      return `calc(${totalPercWidth}% + calc(${nGutters} * var(--gutter)))`;
+      return `calc((((100% - (23 * var(--gutter))) / 24) * ${cols}) + (${nGutters} * var(--gutter)))`;
     },
     xsGutter: '4px',
     smGutter: '8px',
