@@ -30,7 +30,7 @@ declare module 'styled-components' {
     };
 
     getGridColumns: (cols: int, extraGutters?: int, gutter?: int) => string;
-    
+
     font: {
       family: string;
       style: string;

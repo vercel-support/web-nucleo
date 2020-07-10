@@ -222,11 +222,11 @@ const theme: DefaultTheme = {
 
   getGridColumns: (cols, extraGutters = 0, gutter = baseGutter) => {
     const widthCol = 100 / gridColumns;
-    const nGutters = (cols - 1) + extraGutters;
+    const nGutters = cols - 1 + extraGutters;
     const totalPercWidth = cols * widthCol;
     const totalPxWidth = nGutters * gutter;
     return `calc(${totalPercWidth}% + ${totalPxWidth}px)`;
-  }
+  },
 };
 
 export default theme;
