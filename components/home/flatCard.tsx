@@ -11,6 +11,7 @@ type Props = {
   flat: Flat;
   className?: string;
   theme: DefaultTheme;
+  useCarousel?: boolean;
   imageHeight: string;
 } & WithTranslation;
 
@@ -67,12 +68,16 @@ const FlatCard = ({
   theme,
   t,
   imageHeight,
+  useCarousel = true,
 }: Props): JSX.Element => {
   const carousel = useRef(null);
 
   let timeout = null;
 
   function laggedNext() {
+    if (useCarousel == false) {
+      return;
+    }
     timeout = setTimeout(() => {
       carousel.current.next();
     }, 500);
@@ -98,11 +103,15 @@ const FlatCard = ({
       onMouseLeave={clearNext}
       onMouseDown={clearNext}
     >
-      <Carousel ref={carousel} dots={true} draggable={true}>
-        {flat.pictureUrls.map((url) => (
-          <FlatImage imageHeight={imageHeight} key={url} url={url} />
-        ))}
-      </Carousel>
+      {useCarousel ? (
+        <Carousel ref={carousel} dots={true} draggable={true}>
+          {flat.pictureUrls.map((url) => (
+            <FlatImage imageHeight={imageHeight} key={url} url={url} />
+          ))}
+        </Carousel>
+      ) : (
+        <FlatImage imageHeight={imageHeight} url={flat.pictureUrls[0]} />
+      )}
       <FlatInfo>
         <TopText>
           <span>{flat.price}€</span>
