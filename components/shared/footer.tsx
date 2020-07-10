@@ -26,6 +26,10 @@ const MenuButtons = styled.div`
 const StyledButton = styled(Button)`
   opacity: 0.55;
   color: ${(props) => props.theme.colors.secondary};
+
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    display: none;
+  }
 `;
 
 const Footer = ({ className, t }: Props) => {
@@ -55,9 +59,15 @@ export default styled(withTranslation('common')(Footer))`
   height: 80px;
 
   background-color: white;
-  padding-left: 5%;
-  padding-right: 5%;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+  padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  }
 `;

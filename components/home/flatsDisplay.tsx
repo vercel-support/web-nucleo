@@ -1,7 +1,7 @@
 import Flat from '../../backend/salesforce/flat';
 import { WithTranslation } from 'next-i18next';
 import nextI18Next from '../../i18n';
-import styled from 'styled-components';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel } from 'antd';
 import { useRef } from 'react';
 import { PlayCircleFilled } from '@ant-design/icons';
@@ -14,13 +14,30 @@ const { withTranslation } = nextI18Next;
 type Props = {
   flats: Flat[];
   className?: string;
+  theme: DefaultTheme;
 } & WithTranslation;
 
 const SectionTitle = styled.h2`
-  font-size: 30px;
-  line-height: 30px;
-  font-weight: bold;
   color: ${(props) => props.theme.colors.secondary};
+
+  ${(props) => props.theme.font.h2}
+
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+    margin-right: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.md} {
+    margin-left: ${(props) => props.theme.grid.getGridColumns(1, 0)};
+    margin-right: 0;
+  }
+  @media ${(props) => props.theme.breakpoints.sm} {
+    margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+    margin-right: 0;
+  }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    margin-left: ${(props) => props.theme.grid.getGridColumns(4, 0)};
+    margin-right: 0;
+  }
 `;
 
 const Arrow = styled(PlayCircleFilled)<{ left?: boolean }>`
@@ -51,32 +68,53 @@ const HackyFiller = styled.div<{ width: string; margin: string }>`
   height: 0;
 `;
 
-const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
+const StyledCarousel = styled(Carousel)`
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-left: 0;
+    margin-right: 0;
+  }
+`;
+
+const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
   const carousel = useRef(null);
 
-  const isBig = useMediaQuery({ query: '(min-width: 1724px)' });
-  const isMedium = useMediaQuery({ query: '(min-width: 1500px)' });
-  const isSmall = useMediaQuery({ query: '(min-width: 1300px)' });
-  const isVerySmall = useMediaQuery({ query: '(min-width: 1208px)' });
-  const isVeryVerySmall = useMediaQuery({ query: '(min-width: 1110px)' });
+  const isXxl = useMediaQuery({ query: theme.breakpoints.xxl });
+  const isXl = useMediaQuery({ query: theme.breakpoints.xl });
+  const isXlSmall = useMediaQuery({
+    query: '(min-width: 1200px) and (max-width: 1300px)',
+  });
+  const isLg = useMediaQuery({ query: theme.breakpoints.lg });
+  const isMd = useMediaQuery({ query: theme.breakpoints.md });
+  const isSm = useMediaQuery({ query: theme.breakpoints.sm });
+  const isXs = useMediaQuery({ query: theme.breakpoints.xs });
 
+  // 1200 - 1296 (xl)
   let baseFlatCardWith = 340;
   let flatsPerPage = 8;
-  if (isBig == true) {
-    baseFlatCardWith = 340;
+  if (isXxl == true) {
+    baseFlatCardWith = 320;
     flatsPerPage = 8;
-  } else if (isMedium == true) {
-    baseFlatCardWith = 280;
+  } else if (isXl == true) {
+    baseFlatCardWith = 255;
     flatsPerPage = 8;
-  } else if (isSmall == true) {
-    baseFlatCardWith = 230;
-    flatsPerPage = 8;
-  } else if (isVerySmall == true) {
-    baseFlatCardWith = 280;
-    flatsPerPage = 6;
-  } else if (isVeryVerySmall == true) {
+    if (isXlSmall == true) {
+      baseFlatCardWith = 225;
+      flatsPerPage = 8;
+    }
+  } else if (isLg == true) {
     baseFlatCardWith = 380;
     flatsPerPage = 4;
+  } else if (isMd == true) {
+    baseFlatCardWith = 505;
+    flatsPerPage = 1;
+  } else if (isSm == true) {
+    baseFlatCardWith = 397;
+    flatsPerPage = 1;
+  } else if (isXs == true) {
+    baseFlatCardWith = 397;
+    flatsPerPage = 1;
   }
 
   const aspectRatio = 1.68;
@@ -97,8 +135,16 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
   return (
     <div className={className}>
       <SectionTitle>{t('section-flats-title')}</SectionTitle>
-      <Arrow left={true} rotate={180} onClick={previous} />
-      <Carousel ref={carousel} dots={false}>
+      {isLg || isXl || isXxl ? (
+        <Arrow left={true} rotate={180} onClick={previous} />
+      ) : null}
+      <StyledCarousel
+        ref={carousel}
+        dots={false}
+        draggable={!(isLg || isXl || isXxl)}
+        centerMode={!(isLg || isXl || isXxl)}
+        centerPadding={!(isLg || isXl || isXxl) ? '20%' : null}
+      >
         {flatPages.map((page, i) => (
           <div key={`page_${i}`}>
             <FlatsPage>
@@ -109,6 +155,7 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
                   key={flat.name}
                   flat={flat}
                   imageHeight={flatCardImageHeight}
+                  useCarousel={isLg || isXl || isXxl}
                 />
               ))}
               {page.map((flat) => (
@@ -121,8 +168,8 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
             </FlatsPage>
           </div>
         ))}
-      </Carousel>
-      <Arrow left={false} onClick={next} />
+      </StyledCarousel>
+      {isLg || isXl || isXxl ? <Arrow left={false} onClick={next} /> : null}
     </div>
   );
 };
@@ -132,9 +179,10 @@ export const FlatsDisplayPlaceholder = styled.div`
   height: 80vh;
 `;
 
-export default withTranslation('common')(styled(FlatsDisplay)`
-  padding: 70px 150px;
+export default withTheme(styled(withTranslation('common')(FlatsDisplay))`
   background-color: #f2f2f2;
+  padding-top: 70px;
+  padding-bottom: 70px;
 
   position: relative;
 `);
