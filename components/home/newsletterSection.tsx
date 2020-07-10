@@ -11,7 +11,7 @@ const Banner = styled.div`
   height: 40vh;
 
   background-image: url(/images/banner_newsletter.png);
-  @media ${props => props.theme.breakpoints.mdd} {
+  @media ${(props) => props.theme.breakpoints.mdd} {
     background-image: url(/images/banner_newsletter_small.png);
   }
 
@@ -25,14 +25,14 @@ const Banner = styled.div`
   align-items: flex-end;
 
   padding: 14px ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  @media ${props => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.smd} {
     padding: 14px ${(props) => props.theme.grid.getGridColumns(2, 1)};
   }
 `;
 
 const SectionTitle = styled.h2`
   max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
-  @media ${props => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.smd} {
     max-width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   }
 
@@ -45,7 +45,7 @@ const SectionTitle = styled.h2`
 
 const StyledInput = styled(Input.Search)`
   max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
-  @media ${props => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.smd} {
     max-width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   }
 

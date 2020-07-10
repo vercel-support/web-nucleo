@@ -38,13 +38,13 @@ export default styled(Header)`
 
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  @media ${props => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.smd} {
     padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
     padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   }
 
   background-color: rgba(0, 0, 0, 0);
-  @media ${props => props.theme.breakpoints.mdd} {
+  @media ${(props) => props.theme.breakpoints.mdd} {
     background-color: white;
     position: inherit;
   }

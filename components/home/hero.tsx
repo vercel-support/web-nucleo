@@ -8,7 +8,7 @@ const { withTranslation } = nextI18Next;
 
 const Background = styled.div`
   background-image: url(/images/banner_hero.png);
-  @media ${props => props.theme.breakpoints.mdd} {
+  @media ${(props) => props.theme.breakpoints.mdd} {
     background-image: url(/images/banner_hero_small.png);
   }
   background-size: cover;
