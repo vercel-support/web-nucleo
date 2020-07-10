@@ -220,17 +220,19 @@ const theme: DefaultTheme = {
   borderRadius: '2px',
 
   grid: {
-    getGridColumns: (cols, extraGutters = 0 ) => {
+    getGridColumns: (cols, extraGutters = 0) => {
       const nGutters = cols - 1 + extraGutters;
-      return `calc((((100% - (23 * var(--gutter))) / 24) * ${cols}) + (${nGutters} * var(--gutter)))`;
+      return `calc((((100% - (${
+        gridColumns - 1
+      } * var(--gutter))) / ${gridColumns}) * ${cols}) + (${nGutters} * var(--gutter)))`;
     },
     xsGutter: '4px',
     smGutter: '8px',
     mdGutter: '10px',
     lgGutter: '10px',
     xlGutter: '12px',
-    xxlGutter: '14px'
-  }
+    xxlGutter: '14px',
+  },
 };
 
 export default theme;

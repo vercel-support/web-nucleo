@@ -49,9 +49,9 @@ const Subtitle = styled.h1`
   font-weight: bold;
   font-size: 24px;
   line-height: 30px;
-  max-width: ${(props) => props.theme.grid.getGridColumns(12, 0)};;
+  max-width: ${(props) => props.theme.grid.getGridColumns(12, 0)};
   @media ${(props) => props.theme.breakpoints.xs} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(18, 0)};;
+    max-width: ${(props) => props.theme.grid.getGridColumns(18, 0)};
   }
 
   color: ${(props) => props.theme.colors.secondary};

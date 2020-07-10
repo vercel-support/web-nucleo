@@ -66,22 +66,22 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     @media ${(props) => props.theme.breakpoints.xs} {
-      --gutter: ${props => props.theme.grid.xsGutter};
+      --gutter: ${(props) => props.theme.grid.xsGutter};
     }
     @media ${(props) => props.theme.breakpoints.sm} {
-      --gutter: ${props => props.theme.grid.smGutter};
+      --gutter: ${(props) => props.theme.grid.smGutter};
     }
     @media ${(props) => props.theme.breakpoints.md} {
-      --gutter: ${props => props.theme.grid.mdGutter};
+      --gutter: ${(props) => props.theme.grid.mdGutter};
     }
     @media ${(props) => props.theme.breakpoints.lg} {
-      --gutter: ${props => props.theme.grid.lgGutter};
+      --gutter: ${(props) => props.theme.grid.lgGutter};
     }
     @media ${(props) => props.theme.breakpoints.xl} {
-      --gutter: ${props => props.theme.grid.xlGutter};
+      --gutter: ${(props) => props.theme.grid.xlGutter};
     }
     @media ${(props) => props.theme.breakpoints.xxl} {
-      --gutter: ${props => props.theme.grid.xxlGutter};
+      --gutter: ${(props) => props.theme.grid.xxlGutter};
     }
   }  
 `;
