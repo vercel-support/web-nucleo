@@ -6,6 +6,9 @@ const mdMax = 991;
 const lgMax = 1199;
 const xlMax = 1599;
 
+const gridColumns = 24;
+const baseGutter = 4;
+
 const theme: DefaultTheme = {
   colors: {
     primary: '#F94F28',
@@ -109,7 +112,7 @@ const theme: DefaultTheme = {
       font-family: Heebo;
       font-style: normal;
       font-weight: 500;
-      font-size: 13px;
+      font-size: 15px;
       line-height: 100%;
     }
     @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
@@ -216,6 +219,14 @@ const theme: DefaultTheme = {
   },
 
   borderRadius: '2px',
+
+  getGridColumns: (cols, extraGutters = 0, gutter = baseGutter) => {
+    const widthCol = 100 / gridColumns;
+    const nGutters = (cols - 1) + extraGutters;
+    const totalPercWidth = cols * widthCol;
+    const totalPxWidth = nGutters * gutter;
+    return `calc(${totalPercWidth}% + ${totalPxWidth}px)`;
+  }
 };
 
 export default theme;

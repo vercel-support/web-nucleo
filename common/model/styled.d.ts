@@ -29,6 +29,8 @@ declare module 'styled-components' {
       xlu: string;
     };
 
+    getGridColumns: (cols: int, extraGutters?: int, gutter?: int) => string;
+    
     font: {
       family: string;
       style: string;

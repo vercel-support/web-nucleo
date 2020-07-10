@@ -36,9 +36,11 @@ export default styled(Header)`
   width: 100%;
   height: 80px;
 
+  padding-left: ${(props) => props.theme.getGridColumns(2, 1)};
+  padding-right: ${(props) => props.theme.getGridColumns(2, 1)};
+
   background-color: rgba(0, 0, 0, 0);
-  padding-left: 69px;
-  padding-right: 81px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
