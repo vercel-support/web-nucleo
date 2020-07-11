@@ -1,9 +1,10 @@
-import { WithTranslation } from 'next-i18next';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
+import { WithTranslation } from 'next-i18next';
 import styled from 'styled-components';
-import nextI18Next from '../i18n';
 
+import nextI18Next from '../i18n';
 import Flat from '../backend/salesforce/flat';
 import {
   BlogShowcase,
@@ -12,7 +13,6 @@ import {
   FlatsDisplayPlaceholder,
 } from '../components/home';
 import { Header, Footer } from '../components/shared';
-import dynamic from 'next/dynamic';
 
 const FlatsDisplay = dynamic(() => import('../components/home/flatsDisplay'), {
   ssr: false,
@@ -85,7 +85,7 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   // const flats = await Flat.getFlats();
-  // const serializedFlats = Flat.serializeResults(flats);
+  // const serializedFlats = Flat.serialize(flats);
 
   const flats = require('../public/fixtures/flats.json');
   const serializedFlats = JSON.stringify(flats);

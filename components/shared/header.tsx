@@ -34,7 +34,7 @@ export default styled(Header)`
   z-index: 100;
 
   width: 100%;
-  height: 80px;
+  height: ${(props) => props.theme.headerHeight};
 
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};

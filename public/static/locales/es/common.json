@@ -16,5 +16,30 @@
   "nucleo-sl": "© 2020 Núcleo S.L.",
   "aviso-legal": "Aviso legal",
   "politica-datos": "Protección de datos",
-  "politica-cookies": "Política de cookies"
+  "politica-cookies": "Política de cookies",
+  "flat": {
+    "name": "Nombre",
+    "address": "Dirección",
+    "description": "Descripción",
+    "yearConstruction": "Año de construcción",
+    "yearReform": "Año de reforma",
+    "price": "Precio",
+    "rooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "sqrMeters": "Superficie",
+    "type": "Tipo",
+    "zone": "Zona"
+  },
+  "flatDetail": {
+    "title": "Detalle del piso",
+    "actions": {
+      "requestInfo": "Me interesa este inmueble"
+    }
+  },
+  "calefaccion": "Calefacción",
+  "aireAcondicionado": "A/C",
+  "terraza": "Terraza",
+  "orientacion": "Orientación",
+  "yes": "Sí",
+  "no": "No"
 }
