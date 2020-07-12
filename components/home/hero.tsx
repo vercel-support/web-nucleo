@@ -4,6 +4,7 @@ import nextI18Next from '../../i18n';
 import { Button } from 'antd';
 import { useState } from 'react';
 import { ModalForm } from '../shared';
+import { useRouter } from 'next/router';
 
 const { withTranslation } = nextI18Next;
 
@@ -146,8 +147,27 @@ const ActionButton = styled(Button)<{ side: string }>`
 type Props = WithTranslation;
 
 const Hero = ({ t }: Props): JSX.Element => {
-  const [modalVisible, setModalVisible] = useState(false);
   const [isModalSellerMode, setModalSellerMode] = useState(false);
+  const router = useRouter();
+
+  const modalVisible: boolean =
+    'displayModal' in router.query && router.query['displayModal'] == 'true';
+
+  function setModalVisible(toVisible: boolean): void {
+    if (process.browser == true) {
+      if (toVisible == true && !modalVisible) {
+        router.push({
+          pathname: router.pathname,
+          query: { ...router.query, displayModal: true },
+        });
+      } else if (toVisible == false && modalVisible) {
+        router.push({
+          pathname: router.pathname,
+          query: { ...router.query, displayModal: false },
+        });
+      }
+    }
+  }
 
   return (
     <Background>
