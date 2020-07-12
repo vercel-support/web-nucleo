@@ -85,6 +85,9 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
   const carousel = useRef(null);
 
   const isXxl = useMediaQuery({ query: theme.breakpoints.xxl });
+  const isXxlSmall = useMediaQuery({
+    query: '(min-width: 1600px) and (max-width: 1800px)',
+  });
   const isXl = useMediaQuery({ query: theme.breakpoints.xl });
   const isXlSmall = useMediaQuery({
     query: '(min-width: 1200px) and (max-width: 1300px)',
@@ -98,8 +101,12 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
   let baseFlatCardWith = 340;
   let flatsPerPage = 8;
   if (isXxl == true) {
-    baseFlatCardWith = 320;
+    baseFlatCardWith = 380;
     flatsPerPage = 8;
+    if (isXxlSmall == true) {
+      baseFlatCardWith = 300;
+      flatsPerPage = 8;
+    }
   } else if (isXl == true) {
     baseFlatCardWith = 255;
     flatsPerPage = 8;
