@@ -30,6 +30,11 @@ const InputContainer = styled.div`
 const StyledModal = styled(Modal)`
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
+
+  & .ant-modal-footer {
+    padding-bottom: 14px;
+    padding-top: 14px;
+  }
 `;
 
 const ModalForm = ({

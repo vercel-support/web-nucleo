@@ -9,7 +9,7 @@ type Props = WithTranslation;
 
 const Banner = styled.div`
   height: 40vh;
-
+  min-height: 260px;
   background-image: url(/images/banner_newsletter.png);
   @media ${(props) => props.theme.breakpoints.mdd} {
     background-image: url(/images/banner_newsletter_small.png);
@@ -57,13 +57,22 @@ const StyledInput = styled(Input.Search)`
   @media ${(props) => props.theme.breakpoints.xs} {
     max-width: ${(props) => props.theme.grid.getGridColumns(20, 1)};
   }
-  margin-top: 8px;
+`;
+
+const Divider = styled.hr`
+  width: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: var(--gutter);
+  margin-right: 14px;
+  border: 1px solid ${(props) => props.theme.colors.primary};
 `;
 
 const NewsletterSection = ({ t }: Props): JSX.Element => {
   return (
     <Banner>
       <SectionTitle>{t('newsletter-title')}</SectionTitle>
+      <Divider />
       <StyledInput enterButton={t('enviar')} placeholder={t('email')} />
     </Banner>
   );

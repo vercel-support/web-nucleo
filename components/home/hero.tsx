@@ -10,9 +10,7 @@ const { withTranslation } = nextI18Next;
 
 const Background = styled.div`
   background-image: url(/images/banner_hero.png);
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    background-image: url(/images/banner_hero_small.png);
-  }
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -59,7 +57,15 @@ const Subtitle = styled.h1`
   font-weight: bold;
   font-size: 24px;
   line-height: 30px;
-  max-width: ${(props) => props.theme.grid.getGridColumns(12, 0)};
+  max-width: ${(props) => props.theme.grid.getGridColumns(10, 0)};
+
+  @media ${(props) => props.theme.breakpoints.md} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(14, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.sm} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(14, 0)};
+  }
+
   @media ${(props) => props.theme.breakpoints.xs} {
     max-width: ${(props) => props.theme.grid.getGridColumns(18, 0)};
   }

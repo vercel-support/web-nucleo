@@ -164,7 +164,10 @@ export default withTheme(styled(withTranslation('common')(FlatCard))<{
   background-color: white;
   border-radius: ${(props) => props.theme.borderRadius};
   transition: 0.3s;
+  cursor: pointer;
   &:hover {
-    box-shadow: 0px 2px 6px;
+    -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   }
 `);

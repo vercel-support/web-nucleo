@@ -9,6 +9,7 @@ type Props = WithTranslation;
 const Banner = styled.div`
   height: 40vh;
 
+  min-height: 260px;
   background-image: url(/images/banner_blog.png);
   @media ${(props) => props.theme.breakpoints.mdd} {
     background-image: url(/images/banner_blog_small.png);
@@ -46,18 +47,26 @@ const SectionSubtitle = styled.h3`
     max-width: ${(props) => props.theme.grid.getGridColumns(16, 1)};
   }
 
-  margin-top: 8px;
-
   color: ${(props) => props.theme.colors.secondary};
 
   ${(props) => props.theme.font.p1}
   line-height: 125%;
 `;
 
+const Divider = styled.hr`
+  width: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: var(--gutter);
+  margin-right: 0;
+  border: 1px solid ${(props) => props.theme.colors.primary};
+`;
+
 const BlogShowcase = ({ t }: Props): JSX.Element => {
   return (
     <Banner>
       <SectionTitle>{t('blog-showcase-title')}</SectionTitle>
+      <Divider />
       <SectionSubtitle>{t('blog-showcase-subtitle')}</SectionSubtitle>
     </Banner>
   );
