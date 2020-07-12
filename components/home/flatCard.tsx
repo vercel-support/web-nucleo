@@ -119,7 +119,14 @@ const FlatCard = ({
             ))}
           </StyledCarousel>
         ) : (
-          <FlatImage imageHeight={imageHeight} url={flat.pictureUrls[0]} />
+          <FlatImage
+            imageHeight={imageHeight}
+            url={flat.pictureUrls[0]}
+            css={`
+              border-top-left-radius: ${(props) => props.theme.borderRadius};
+              border-top-right-radius: ${(props) => props.theme.borderRadius};
+            `}
+          />
         )}
         <FlatInfo>
           <TopText>
