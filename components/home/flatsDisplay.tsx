@@ -23,8 +23,8 @@ const SectionTitle = styled.h2`
   ${(props) => props.theme.font.h2}
 
   @media ${(props) => props.theme.breakpoints.xlu} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
-    margin-right: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+    margin-left: ${(props) => props.theme.grid.getGridColumns(2, 2)};
+    margin-right: ${(props) => props.theme.grid.getGridColumns(2, 2)};
   }
   @media ${(props) => props.theme.breakpoints.lg} {
     margin-left: ${(props) => props.theme.grid.getGridColumns(1, 0)};
@@ -75,6 +75,7 @@ const HackyFiller = styled.div<{ width: string; margin: string }>`
 const StyledCarousel = styled(Carousel)`
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+
   @media ${(props) => props.theme.breakpoints.lgd} {
     margin-left: 0;
     margin-right: 0;
