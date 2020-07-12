@@ -161,11 +161,13 @@ const Hero = ({ t }: Props): JSX.Element => {
           query: { ...router.query, displayModal: true },
         });
       } else if (toVisible == false && modalVisible) {
-        const query = Object.assign({}, router.query, {displayModal: undefined});
+        const query = Object.assign({}, router.query, {
+          displayModal: undefined,
+        });
         delete query['displayModal'];
         router.push({
           pathname: router.pathname,
-          query: query
+          query: query,
         });
       }
     }
