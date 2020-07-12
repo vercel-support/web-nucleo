@@ -25,8 +25,7 @@ const FlatImage = styled.img<{ url: string; imageHeight: string }>`
 
   height: ${(props) => props.imageHeight};
   width: 100%;
-  border-top-left-radius: ${(props) => props.theme.borderRadius};
-  border-top-right-radius: ${(props) => props.theme.borderRadius};
+  overflow: hidden;
 `;
 
 const FlatInfo = styled.div`
@@ -64,6 +63,11 @@ const StyledTag = styled(Tag)`
   font-size: 12px;
   line-height: inherit;
   float: right;
+`;
+
+const StyledCarousel = styled(Carousel)`
+  border-top-left-radius: ${(props) => props.theme.borderRadius};
+  border-top-right-radius: ${(props) => props.theme.borderRadius};
 `;
 
 const FlatCard = ({
@@ -109,11 +113,11 @@ const FlatCard = ({
         onMouseDown={clearNext}
       >
         {useCarousel ? (
-          <Carousel ref={carousel} dots={true} draggable={true}>
+          <StyledCarousel ref={carousel} dots={true} draggable={true}>
             {flat.pictureUrls.map((url) => (
               <FlatImage imageHeight={imageHeight} key={url} url={url} />
             ))}
-          </Carousel>
+          </StyledCarousel>
         ) : (
           <FlatImage imageHeight={imageHeight} url={flat.pictureUrls[0]} />
         )}
@@ -169,5 +173,8 @@ export default withTheme(styled(withTranslation('common')(FlatCard))<{
     -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+  }
+  & .slick-initialized {
+    overflow: hidden;
   }
 `);
