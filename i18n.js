@@ -10,7 +10,8 @@ if (process.browser == true) {
 }
 
 module.exports = new NextI18Next({
-  otherLanguages: ['es'],
+  defaultLanguage: 'es',
+  otherLanguages: ['es', 'en'],
   subpaths,
   localePath: path.resolve('./public/static/locales'),
 });
