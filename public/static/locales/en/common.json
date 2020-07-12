@@ -41,5 +41,18 @@
   "terraza": "Terrace",
   "orientacion": "Orientation",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "modalForm": {
+    "titleSell": "¿Quieres vender un inmueble?",
+    "titleBuy": "¿Quieres comprar un inmueble?",
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "address": "Dirección completa del inmueble",
+    "send": "Send",
+    "cancel": "Cancel",
+    "validateEmail": "El correo electrónico introducido es invalido.",
+    "validateRequired": "Por favor rellene este campo."
+  }
 }

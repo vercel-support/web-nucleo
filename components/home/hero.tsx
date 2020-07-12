@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { WithTranslation } from 'next-i18next';
 import nextI18Next from '../../i18n';
-import { Button, Modal } from 'antd';
+import { Button } from 'antd';
 import { useState } from 'react';
+import { ModalForm } from '../shared';
 
 const { withTranslation } = nextI18Next;
 
@@ -146,6 +147,7 @@ type Props = WithTranslation;
 
 const Hero = ({ t }: Props): JSX.Element => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [isModalSellerMode, setModalSellerMode] = useState(false);
 
   return (
     <Background>
@@ -163,6 +165,7 @@ const Hero = ({ t }: Props): JSX.Element => {
         <ActionButton
           side="left"
           onClick={(a) => {
+            setModalSellerMode(false);
             setModalVisible(true);
             (a.target as HTMLButtonElement).blur();
           }}
@@ -172,14 +175,15 @@ const Hero = ({ t }: Props): JSX.Element => {
         <ActionButton
           side="right"
           onClick={(a) => {
+            setModalSellerMode(true);
             setModalVisible(true);
             (a.target as HTMLButtonElement).blur();
           }}
         >
           {t('vender')}
         </ActionButton>
-        <Modal
-          title="Basic Modal"
+        <ModalForm
+          isSellerMode={isModalSellerMode}
           visible={modalVisible}
           onOk={() => {
             setModalVisible(false);
@@ -187,11 +191,7 @@ const Hero = ({ t }: Props): JSX.Element => {
           onCancel={() => {
             setModalVisible(false);
           }}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
+        />
       </ActionButtons>
     </Background>
   );
