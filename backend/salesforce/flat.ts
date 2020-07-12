@@ -12,6 +12,7 @@ export default class Flat {
   ];
   public static objectName = 'Inmueble__c';
 
+  public id: number;
   public name: string;
   public address?: string;
   public pictureUrls?: string[];
@@ -53,6 +54,11 @@ export default class Flat {
     return Object.assign(flat, obj);
   }
 
+  static deserializeResult(json: string): Flat {
+    const obj = JSON.parse(json);
+    return Flat.fromDict(obj);
+  }
+
   static deserializeResults(json: string): Flat[] {
     const objs = JSON.parse(json);
     return objs.map((obj) => {
@@ -60,7 +66,7 @@ export default class Flat {
     });
   }
 
-  static serializeResults(flats: Flat[]): string {
+  static serialize(flats: Flat | Flat[]): string {
     return JSON.stringify(flats);
   }
 

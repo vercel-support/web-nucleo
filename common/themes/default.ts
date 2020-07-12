@@ -220,7 +220,7 @@ const theme: DefaultTheme = {
   borderRadius: '2px',
 
   grid: {
-    getGridColumns: (cols, extraGutters = 0) => {
+    getGridColumns: (cols: number, extraGutters = 0): string => {
       const nGutters = cols - 1 + extraGutters;
       return `calc((((100% - (${
         gridColumns - 1
@@ -233,6 +233,8 @@ const theme: DefaultTheme = {
     xlGutter: '12px',
     xxlGutter: '14px',
   },
+
+  headerHeight: '80px',
 };
 
 export default theme;

@@ -1,10 +1,9 @@
 import React from 'react';
 import App from 'next/app';
-import nextI18Next from '../i18n';
-
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import theme from '../common/theme';
+import nextI18Next from '../i18n';
+import defaultTheme from '../common/themes/default';
 
 import { CSSProp } from 'styled-components';
 
@@ -91,7 +90,7 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={defaultTheme}>
         <GlobalStyle />
         <Component {...pageProps} />
       </ThemeProvider>
