@@ -4,6 +4,8 @@ import { Carousel, Tag } from 'antd';
 import i18Next from '../../i18n';
 import { WithTranslation } from 'next-i18next';
 import { useRef, useEffect } from 'react';
+import { formatCurrency } from '../../common/helpers';
+import Link from 'next/link';
 
 const { withTranslation } = i18Next;
 
@@ -23,6 +25,8 @@ const FlatImage = styled.img<{ url: string; imageHeight: string }>`
 
   height: ${(props) => props.imageHeight};
   width: 100%;
+  border-top-left-radius: ${(props) => props.theme.borderRadius};
+  border-top-right-radius: ${(props) => props.theme.borderRadius};
 `;
 
 const FlatInfo = styled.div`
@@ -31,7 +35,7 @@ const FlatInfo = styled.div`
   justify-content: space-between;
   align-items: stretch;
 
-  padding: 8px;
+  padding: 8%;
 `;
 
 const TopText = styled.div`
@@ -97,41 +101,57 @@ const FlatCard = ({
   });
 
   return (
-    <div
-      className={className}
-      onMouseEnter={laggedNext}
-      onMouseLeave={clearNext}
-      onMouseDown={clearNext}
-    >
-      {useCarousel ? (
-        <Carousel ref={carousel} dots={true} draggable={true}>
-          {flat.pictureUrls.map((url) => (
-            <FlatImage imageHeight={imageHeight} key={url} url={url} />
-          ))}
-        </Carousel>
-      ) : (
-        <FlatImage imageHeight={imageHeight} url={flat.pictureUrls[0]} />
-      )}
-      <FlatInfo>
-        <TopText>
-          <span>{flat.price}€</span>
-          <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
-        </TopText>
-        <Divider />
-        <BottomText>
-          <span
-            css={`
-              margin-right: 8px;
-            `}
-          >
-            {flat.sqrMeters}m<sup>2</sup>
-          </span>
-          <span>
-            {flat.rooms} {t('habitaciones')}
-          </span>
-        </BottomText>
-      </FlatInfo>
-    </div>
+    <Link href={`/pisos/${flat.id}`}>
+      <div
+        className={className}
+        onMouseEnter={laggedNext}
+        onMouseLeave={clearNext}
+        onMouseDown={clearNext}
+      >
+        {useCarousel ? (
+          <Carousel ref={carousel} dots={true} draggable={true}>
+            {flat.pictureUrls.map((url) => (
+              <FlatImage imageHeight={imageHeight} key={url} url={url} />
+            ))}
+          </Carousel>
+        ) : (
+          <FlatImage imageHeight={imageHeight} url={flat.pictureUrls[0]} />
+        )}
+        <FlatInfo>
+          <TopText>
+            <span
+              css={`
+                font-weight: 600;
+              `}
+            >
+              {formatCurrency(flat.price)}€
+            </span>
+            <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
+          </TopText>
+          <Divider />
+          <BottomText>
+            <span
+              css={`
+                margin-right: 8px;
+              `}
+            >
+              {flat.sqrMeters}m
+              <sup
+                css={`
+                  vertical-align: top;
+                  font-size: 0.6em;
+                `}
+              >
+                2
+              </sup>
+            </span>
+            <span>
+              {flat.rooms} {t('habitaciones')}
+            </span>
+          </BottomText>
+        </FlatInfo>
+      </div>
+    </Link>
   );
 };
 

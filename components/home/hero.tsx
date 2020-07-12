@@ -15,6 +15,7 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-position: center center;
   height: 55vh;
+  min-height: 500px;
 
   position: relative;
   display: flex;
@@ -25,6 +26,10 @@ const Background = styled.div`
 const Title = styled.div`
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    margin-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+    margin-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+  }
   width: 100%;
   margin-top: 50px;
   margin-bottom: 8px;
@@ -77,19 +82,30 @@ const ActionButtons = styled.div`
   transform: translateY(50%);
 
   @media ${(props) => props.theme.breakpoints.xs} {
-    left: ${(props) => props.theme.grid.getGridColumns(4, 0)};
-    right: ${(props) => props.theme.grid.getGridColumns(4, 0)};
+    width: ${(props) => props.theme.grid.getGridColumns(18, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.sm} {
+    width: ${(props) => props.theme.grid.getGridColumns(16, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.md} {
+    width: ${(props) => props.theme.grid.getGridColumns(13, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.lg} {
+    width: ${(props) => props.theme.grid.getGridColumns(13, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.xl} {
+    width: ${(props) => props.theme.grid.getGridColumns(11, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    width: ${(props) => props.theme.grid.getGridColumns(10, 0)};
   }
 `;
 
 const ActionButton = styled(Button)<{ side: string }>`
-  width: 275px;
-  height: 8vh;
-  max-height: 76px;
-  min-height: 38px;
+  width: 50%;
   font-weight: bold;
   font-size: 20px;
-  line-height: 20px;
+  line-height: 100%;
 
   color: white;
   background-color: ${(props) =>
@@ -105,6 +121,25 @@ const ActionButton = styled(Button)<{ side: string }>`
   border-top-right-radius: ${(props) => (props.side == 'left' ? 0 : '40px')};
   border-bottom-right-radius: ${(props) => (props.side == 'left' ? 0 : '40px')};
   border-bottom-left-radius: ${(props) => (props.side == 'left' ? '40px' : 0)};
+
+  @media ${(props) => props.theme.breakpoints.xs} {
+    height: 55px;
+  }
+  @media ${(props) => props.theme.breakpoints.sm} {
+    height: 60px;
+  }
+  @media ${(props) => props.theme.breakpoints.md} {
+    height: 65px;
+  }
+  @media ${(props) => props.theme.breakpoints.lg} {
+    height: 68px;
+  }
+  @media ${(props) => props.theme.breakpoints.xl} {
+    height: 70px;
+  }
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    height: 70px;
+  }
 `;
 
 type Props = WithTranslation;

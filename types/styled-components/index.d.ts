@@ -46,7 +46,6 @@ declare module 'styled-components' {
       h1: string;
       h2: string;
       p1: string;
-      p2: string;
     };
 
     headerHeight: string;

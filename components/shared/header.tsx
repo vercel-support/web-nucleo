@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import LanguageSelector from './languageSelector';
+import Link from 'next/link';
 
 type Props = {
   className?: string;
@@ -19,7 +20,11 @@ const MenuButtons = styled.div`
 const Header = ({ className }: Props) => {
   return (
     <header className={className}>
-      <img src="/images/LogoHeaderWeb.svg" />
+      <Link href="/">
+        <a>
+          <img src="/images/LogoHeaderWeb.svg" />
+        </a>
+      </Link>
       <MenuButtons>
         <LanguageSelector themeColor="secondary" />
       </MenuButtons>
@@ -36,11 +41,11 @@ export default styled(Header)`
   width: 100%;
   height: ${(props) => props.theme.headerHeight};
 
-  padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   }
 
   background-color: rgba(0, 0, 0, 0);

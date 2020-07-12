@@ -3,6 +3,8 @@ import LanguageSelector from './languageSelector';
 import { Button } from 'antd';
 import i18Next from '../../i18n';
 import { WithTranslation } from 'next-i18next';
+import { Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
 const { withTranslation } = i18Next;
 
@@ -27,10 +29,23 @@ const StyledButton = styled(Button)`
   opacity: 0.55;
   color: ${(props) => props.theme.colors.secondary};
 
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    display: none;
-  }
+  font-family: ${(props) => props.theme.font.family};
+  font-style: ${(props) => props.theme.font.style};
 `;
+
+const DropdownMenu = (t) => (
+  <Menu>
+    <Menu.Item key="0">
+      <StyledButton type="text">{t('aviso-legal')}</StyledButton>
+    </Menu.Item>
+    <Menu.Item key="1">
+      <StyledButton type="text">{t('politica-datos')}</StyledButton>
+    </Menu.Item>
+    <Menu.Item key="2">
+      <StyledButton type="text">{t('politica-cookies')}</StyledButton>
+    </Menu.Item>
+  </Menu>
+);
 
 const Footer = ({ className, t }: Props) => {
   return (
@@ -38,7 +53,30 @@ const Footer = ({ className, t }: Props) => {
       <MenuButtons>
         <LanguageSelector themeColor="secondary" />
       </MenuButtons>
-      <MenuButtons>
+      <div
+        css={`
+          @media ${(props) => props.theme.breakpoints.xlu} {
+            display: none;
+          }
+        `}
+      >
+        <Dropdown overlay={DropdownMenu(t)} trigger={['click']}>
+          <p
+            css={`
+              padding: 4px 15px;
+            `}
+          >
+            {t('nucleo-sl')} <DownOutlined />
+          </p>
+        </Dropdown>
+      </div>
+      <MenuButtons
+        css={`
+          @media ${(props) => props.theme.breakpoints.lgd} {
+            display: none;
+          }
+        `}
+      >
         <p
           css={`
             padding: 4px 15px;
@@ -64,10 +102,10 @@ export default styled(withTranslation('common')(Footer))`
   justify-content: space-between;
   align-items: center;
 
-  padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   }
 `;

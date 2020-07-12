@@ -24,9 +24,9 @@ const Banner = styled.div`
   justify-content: center;
   align-items: flex-end;
 
-  padding: 14px ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    padding: 14px ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding: 14px ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    padding: 14px ${(props) => props.theme.grid.getGridColumns(1, 1)};
   }
 `;
 
@@ -45,10 +45,18 @@ const SectionTitle = styled.h2`
 
 const StyledInput = styled(Input.Search)`
   max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.lg} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(9, 1)};
+  }
+  @media ${(props) => props.theme.breakpoints.md} {
     max-width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   }
-
+  @media ${(props) => props.theme.breakpoints.smd} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
+  }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(20, 1)};
+  }
   margin-top: 8px;
 `;
 

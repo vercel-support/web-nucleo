@@ -28,3 +28,16 @@ export const split = <T>(array: T[], max_chunk_size: number): T[][] => {
   }
   return res;
 };
+
+export const formatCurrency = (n: number): string => {
+  let res = n
+    .toFixed(2)
+    .replace('.', ',')
+    .replace(/\d{3}(?=(\d{3})*,)/g, function (s) {
+      return '.' + s;
+    });
+  if (res[0] === '.') {
+    res = res.substr(1);
+  }
+  return res;
+};

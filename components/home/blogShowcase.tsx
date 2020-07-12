@@ -23,9 +23,9 @@ const Banner = styled.div`
   justify-content: center;
   align-items: flex-start;
 
-  padding: 14px ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    padding: 14px ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding: 14px ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    padding: 14px ${(props) => props.theme.grid.getGridColumns(1, 1)};
   }
 `;
 
@@ -50,7 +50,7 @@ const SectionSubtitle = styled.h3`
 
   color: ${(props) => props.theme.colors.secondary};
 
-  ${(props) => props.theme.font.p2}
+  ${(props) => props.theme.font.p1}
   line-height: 125%;
 `;
 

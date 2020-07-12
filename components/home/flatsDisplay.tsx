@@ -22,9 +22,13 @@ const SectionTitle = styled.h2`
 
   ${(props) => props.theme.font.h2}
 
-  @media ${(props) => props.theme.breakpoints.lgu} {
+  @media ${(props) => props.theme.breakpoints.xlu} {
     margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
     margin-right: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.lg} {
+    margin-left: ${(props) => props.theme.grid.getGridColumns(1, 0)};
+    margin-right: 0;
   }
   @media ${(props) => props.theme.breakpoints.md} {
     margin-left: ${(props) => props.theme.grid.getGridColumns(1, 0)};
@@ -71,7 +75,7 @@ const HackyFiller = styled.div<{ width: string; margin: string }>`
 const StyledCarousel = styled(Carousel)`
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 0)};
-  @media ${(props) => props.theme.breakpoints.mdd} {
+  @media ${(props) => props.theme.breakpoints.lgd} {
     margin-left: 0;
     margin-right: 0;
   }
@@ -90,7 +94,7 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
   const isSm = useMediaQuery({ query: theme.breakpoints.sm });
   const isXs = useMediaQuery({ query: theme.breakpoints.xs });
 
-  // 1200 - 1296 (xl)
+  let centerPadding = null;
   let baseFlatCardWith = 340;
   let flatsPerPage = 8;
   if (isXxl == true) {
@@ -104,15 +108,19 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
       flatsPerPage = 8;
     }
   } else if (isLg == true) {
-    baseFlatCardWith = 380;
-    flatsPerPage = 4;
+    centerPadding = '30%';
+    baseFlatCardWith = 505;
+    flatsPerPage = 1;
   } else if (isMd == true) {
+    centerPadding = '30%';
     baseFlatCardWith = 505;
     flatsPerPage = 1;
   } else if (isSm == true) {
+    centerPadding = '20%';
     baseFlatCardWith = 397;
     flatsPerPage = 1;
   } else if (isXs == true) {
+    centerPadding = '10%';
     baseFlatCardWith = 397;
     flatsPerPage = 1;
   }
@@ -135,15 +143,15 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
   return (
     <div className={className}>
       <SectionTitle>{t('section-flats-title')}</SectionTitle>
-      {isLg || isXl || isXxl ? (
+      {isXl || isXxl ? (
         <Arrow left={true} rotate={180} onClick={previous} />
       ) : null}
       <StyledCarousel
         ref={carousel}
         dots={false}
-        draggable={!(isLg || isXl || isXxl)}
-        centerMode={!(isLg || isXl || isXxl)}
-        centerPadding={!(isLg || isXl || isXxl) ? '20%' : null}
+        draggable={!(isXl || isXxl)}
+        centerMode={!(isXl || isXxl)}
+        centerPadding={centerPadding}
       >
         {flatPages.map((page, i) => (
           <div key={`page_${i}`}>
@@ -155,7 +163,7 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
                   key={flat.name}
                   flat={flat}
                   imageHeight={flatCardImageHeight}
-                  useCarousel={isLg || isXl || isXxl}
+                  useCarousel={isXl || isXxl}
                 />
               ))}
               {page.map((flat) => (
@@ -169,7 +177,7 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
           </div>
         ))}
       </StyledCarousel>
-      {isLg || isXl || isXxl ? <Arrow left={false} onClick={next} /> : null}
+      {isXl || isXxl ? <Arrow left={false} onClick={next} /> : null}
     </div>
   );
 };

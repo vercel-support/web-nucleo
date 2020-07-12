@@ -16,46 +16,46 @@ const theme: DefaultTheme = {
   },
 
   font: {
-    family: 'Heebo',
+    family: 'Montserrat',
     style: 'normal',
     h1: `
     @media (max-width: ${xsMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 40px;
+      line-height: 100%;
+    }
+    @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
       font-size: 52px;
       line-height: 100%;
     }
-    @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
-      font-family: Heebo;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 80px;
-      line-height: 100%;
-    }
     @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
-      font-size: 80px;
+      font-size: 54px;
       line-height: 100%;
     }
     @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
-      font-size: 80px;
+      font-size: 64px;
       line-height: 100%;
     }
     @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
       font-size: 80px;
       line-height: 100%;
     }
     @media (min-width: ${xlMax + 1}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
       font-size: 80px;
@@ -64,133 +64,89 @@ const theme: DefaultTheme = {
     `,
     h2: `
     @media (max-width: ${xsMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
       font-size: 26px;
       line-height: 100%;
     }
     @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
-      font-size: 42px;
+      font-size: 30px;
       line-height: 100%;
     }
     @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
-      font-size: 42px;
+      font-size: 34px;
       line-height: 100%;
     }
     @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
-      font-size: 42px;
+      font-size: 38px;
       line-height: 100%;
     }
     @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
       font-size: 42px;
       line-height: 100%;
     }
     @media (min-width: ${xlMax + 1}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
       font-weight: bold;
-      font-size: 42px;
+      font-size: 45px;
       line-height: 100%;
     }
     `,
     p1: `
     @media (max-width: ${xsMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 15px;
-      line-height: 100%;
-    }
-    @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
-      font-family: Heebo;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 36px;
-      line-height: 100%;
-    }
-    @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
-      font-family: Heebo;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 36px;
-      line-height: 100%;
-    }
-    @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
-      font-family: Heebo;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 36px;
-      line-height: 100%;
-    }
-    @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
-      font-family: Heebo;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 36px;
-      line-height: 100%;
-    }
-    @media (min-width: ${xlMax + 1}px) {
-      font-family: Heebo;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 36px;
-      line-height: 100%;
-    }
-    `,
-    p2: `
-    @media (max-width: ${xsMax}px) {
-      font-family: Heebo;
-      font-style: normal;
-      font-weight: normal;
+      font-weight: 600;
       font-size: 12px;
       line-height: 100%;
     }
     @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
+      font-weight: 600;
+      font-size: 14px;
       line-height: 100%;
     }
     @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
+      font-weight: 600;
+      font-size: 18px;
       line-height: 100%;
     }
     @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 20px;
       line-height: 100%;
     }
     @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
+      font-weight: 600;
+      font-size: 23px;
       line-height: 100%;
     }
     @media (min-width: ${xlMax + 1}px) {
-      font-family: Heebo;
+      font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
+      font-weight: 600;
+      font-size: 25px;
       line-height: 100%;
     }
     `,
@@ -217,7 +173,7 @@ const theme: DefaultTheme = {
     xlu: `(min-width: ${lgMax + 1}px)`,
   },
 
-  borderRadius: '2px',
+  borderRadius: '20px',
 
   grid: {
     getGridColumns: (cols: number, extraGutters = 0): string => {
@@ -227,11 +183,11 @@ const theme: DefaultTheme = {
       } * var(--gutter))) / ${gridColumns}) * ${cols}) + (${nGutters} * var(--gutter)))`;
     },
     xsGutter: '4px',
-    smGutter: '8px',
-    mdGutter: '10px',
-    lgGutter: '10px',
-    xlGutter: '12px',
-    xxlGutter: '14px',
+    smGutter: '6px',
+    mdGutter: '6px',
+    lgGutter: '6px',
+    xlGutter: '6px',
+    xxlGutter: '6px',
   },
 
   headerHeight: '80px',

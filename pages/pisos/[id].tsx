@@ -73,7 +73,7 @@ const FlatDetailPage = ({ flat, t }: Props): JSX.Element => {
         <title>{t('flatDetail.title')}</title>
         <link rel="icon" href="/favicon.ico" />
         <link
-          href="https://fonts.googleapis.com/css?family=Heebo"
+          href="https://fonts.googleapis.com/css?family=Montserrat"
           rel="stylesheet"
         />
         {typeof window === 'undefined' && (
