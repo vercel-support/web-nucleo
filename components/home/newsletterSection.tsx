@@ -10,9 +10,10 @@ type Props = WithTranslation;
 const Banner = styled.div`
   height: 40vh;
   min-height: 260px;
-  background-image: url(/images/banner_newsletter.png);
+  background-image: ${props => props.theme.loadOptimizedImage('banner_newsletter.png')};
+
   @media ${(props) => props.theme.breakpoints.mdd} {
-    background-image: url(/images/banner_newsletter_small.png);
+    background-image: ${props => props.theme.loadOptimizedImage('banner_newsletter_small.png')};
   }
 
   background-size: cover;
