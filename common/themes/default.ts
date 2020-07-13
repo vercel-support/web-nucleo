@@ -66,42 +66,42 @@ const theme: DefaultTheme = {
     @media (max-width: ${xsMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 20px;
       line-height: 100%;
     }
     @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 22px;
       line-height: 100%;
     }
     @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 23px;
       line-height: 100%;
     }
     @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 23px;
       line-height: 100%;
     }
     @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 25px;
       line-height: 100%;
     }
     @media (min-width: ${xlMax + 1}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 28px;
       line-height: 100%;
     }
@@ -110,44 +110,44 @@ const theme: DefaultTheme = {
     @media (max-width: ${xsMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 300;
       font-size: 12px;
-      line-height: 100%;
+      line-height: 140%;
     }
     @media (min-width: ${xsMax + 1}px) and (max-width: ${smMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 100%;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 140%;
     }
     @media (min-width: ${smMax + 1}px) and (max-width: ${mdMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 100%;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 140%;
     }
     @media (min-width: ${mdMax + 1}px) and (max-width: ${lgMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 100%;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 140%;
     }
     @media (min-width: ${lgMax + 1}px) and (max-width: ${xlMax}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 21px;
-      line-height: 100%;
+      font-weight: 300;
+      font-size: 19px;
+      line-height: 140%;
     }
     @media (min-width: ${xlMax + 1}px) {
       font-family: Montserrat;
       font-style: normal;
-      font-weight: 500;
-      font-size: 22px;
-      line-height: 100%;
+      font-weight: 300;
+      font-size: 20px;
+      line-height: 140%;
     }
     `,
   },

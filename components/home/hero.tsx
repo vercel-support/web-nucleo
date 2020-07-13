@@ -57,9 +57,15 @@ const Divider = styled.hr`
 const Subtitle = styled.h1`
   font-weight: bold;
   font-size: 24px;
-  line-height: 30px;
-  max-width: ${(props) => props.theme.grid.getGridColumns(10, 0)};
 
+  max-width: ${(props) => props.theme.grid.getGridColumns(7, 0)};
+
+  @media ${(props) => props.theme.breakpoints.xl} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(9, 0)};
+  }
+  @media ${(props) => props.theme.breakpoints.lg} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(14, 0)};
+  }
   @media ${(props) => props.theme.breakpoints.md} {
     max-width: ${(props) => props.theme.grid.getGridColumns(14, 0)};
   }
@@ -112,7 +118,7 @@ const ActionButtons = styled.div`
 
 const ActionButton = styled(Button)<{ side: string }>`
   width: 50%;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 20px;
   line-height: 100%;
 
@@ -132,7 +138,8 @@ const ActionButton = styled(Button)<{ side: string }>`
   border-bottom-left-radius: ${(props) => (props.side == 'left' ? '40px' : 0)};
 
   @media ${(props) => props.theme.breakpoints.xs} {
-    height: 55px;
+    height: 47px;
+    font-size: 16px;
   }
   @media ${(props) => props.theme.breakpoints.sm} {
     height: 60px;

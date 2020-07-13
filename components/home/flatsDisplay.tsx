@@ -22,25 +22,12 @@ const SectionTitle = styled.h2`
 
   ${(props) => props.theme.font.h2}
 
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: 0;
+
   @media ${(props) => props.theme.breakpoints.xlu} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(2, 2)};
-    margin-right: ${(props) => props.theme.grid.getGridColumns(2, 2)};
-  }
-  @media ${(props) => props.theme.breakpoints.lg} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(1, 0)};
-    margin-right: 0;
-  }
-  @media ${(props) => props.theme.breakpoints.md} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(1, 0)};
-    margin-right: 0;
-  }
-  @media ${(props) => props.theme.breakpoints.sm} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
-    margin-right: 0;
-  }
-  @media ${(props) => props.theme.breakpoints.xs} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(4, 0)};
-    margin-right: 0;
+    margin-left: calc(${(props) => props.theme.grid.getGridColumns(2, 1)});
+    margin-right: calc(${(props) => props.theme.grid.getGridColumns(2, 1)});
   }
 `;
 
@@ -81,6 +68,15 @@ const StyledCarousel = styled(Carousel)`
     margin-right: 0;
   }
 `;
+
+const Divider = styled.div`
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-top: 1px solid #E0E0E0;
+`;
+
 
 const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
   const carousel = useRef(null);
@@ -151,6 +147,7 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
   return (
     <div className={className}>
       <SectionTitle>{t('section-flats-title')}</SectionTitle>
+      <Divider />
       {isXl || isXxl ? (
         <Arrow left={true} rotate={180} onClick={previous} />
       ) : null}
@@ -197,7 +194,7 @@ export const FlatsDisplayPlaceholder = styled.div`
 
 export default withTheme(styled(withTranslation('common')(FlatsDisplay))`
   background-color: #f2f2f2;
-  padding-top: 70px;
+  padding-top: 100px;
   padding-bottom: 70px;
 
   position: relative;
