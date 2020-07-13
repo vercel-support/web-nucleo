@@ -24,3 +24,6 @@ Configure project with vercel
 With the following command, you can pull the local environmental variables (don't upload them to github as they contain secrets).
 
 ```vercel env pull .env.local```
+
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/pancho111203/web-nucleo)
