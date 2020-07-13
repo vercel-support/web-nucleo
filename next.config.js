@@ -3,6 +3,7 @@ const lessToJS = require('less-vars-to-js');
 const fs = require('fs');
 const path = require('path');
 const { nextI18NextRewrites } = require('next-i18next/rewrites')
+const withOptimizedImages = require('next-optimized-images');
 
 const localeSubpaths = {
   es: 'es',
@@ -14,7 +15,7 @@ const themeVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './assets/antd-custom.less'), 'utf8')
 );
 
-module.exports = withLess({
+module.exports = withOptimizedImages(withLess({
   lessLoaderOptions: {
     javascriptEnabled: true,
     modifyVars: themeVariables, // make your antd custom effective
@@ -22,6 +23,7 @@ module.exports = withLess({
   publicRuntimeConfig: {
     localeSubpaths,
   },
+  optimizeImagesInDev: true, // TODO change to false
   experimental: {
     async rewrites() {
       return [
@@ -54,4 +56,4 @@ module.exports = withLess({
     }
     return config;
   },
-});
+}));

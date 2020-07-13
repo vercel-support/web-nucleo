@@ -191,6 +191,11 @@ const theme: DefaultTheme = {
   },
 
   headerHeight: '80px',
+
+  loadOptimizedImage: (url: string): string => {
+    // TODO remove first image loaded as soon as webp support comes to safari
+    return `url(${require(`../../public/images/${url}`)}), url(${require(`../../public/images/${url}?webp`)})`;
+  }
 };
 
 export default theme;
