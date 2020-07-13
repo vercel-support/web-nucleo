@@ -3,7 +3,6 @@ import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel, Tag } from 'antd';
 import i18Next from '../../i18n';
 import { WithTranslation } from 'next-i18next';
-import { useRef, useEffect } from 'react';
 import { formatCurrency } from '../../common/helpers';
 import Link from 'next/link';
 
@@ -73,42 +72,11 @@ const FlatCard = ({
   imageHeight,
   useCarousel = true,
 }: Props): JSX.Element => {
-  const carousel = useRef(null);
-
-  let timeout = null;
-
-  function laggedNext() {
-    if (useCarousel == false) {
-      return;
-    }
-    timeout = setTimeout(() => {
-      carousel.current.next();
-    }, 500);
-  }
-
-  function clearNext() {
-    if (timeout !== null) {
-      clearTimeout(timeout);
-      timeout = null;
-    }
-  }
-
-  useEffect(() => {
-    return function cleanup() {
-      clearNext();
-    };
-  });
-
   return (
     <Link href={`/pisos/${flat.id}`}>
-      <div
-        className={className}
-        onMouseEnter={laggedNext}
-        onMouseLeave={clearNext}
-        onMouseDown={clearNext}
-      >
+      <div className={className}>
         {useCarousel ? (
-          <StyledCarousel ref={carousel} dots={true} draggable={true}>
+          <StyledCarousel dots={true} draggable={true}>
             {flat.pictureUrls.map((url) => (
               <FlatImage
                 imageHeight={imageHeight}
