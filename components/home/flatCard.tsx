@@ -17,12 +17,7 @@ type Props = {
   imageHeight: string;
 } & WithTranslation;
 
-const FlatImage = styled.img<{ url: string; imageHeight: string }>`
-  background-image: url(${(props) => props.url});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-
+const FlatImage = styled.img<{ imageHeight: string }>`
   height: ${(props) => props.imageHeight};
   width: 100%;
   overflow: hidden;
@@ -115,13 +110,13 @@ const FlatCard = ({
         {useCarousel ? (
           <StyledCarousel ref={carousel} dots={true} draggable={true}>
             {flat.pictureUrls.map((url) => (
-              <FlatImage imageHeight={imageHeight} key={url} url={url} />
+              <FlatImage imageHeight={imageHeight} key={url} src={url} />
             ))}
           </StyledCarousel>
         ) : (
           <FlatImage
             imageHeight={imageHeight}
-            url={flat.pictureUrls[0]}
+            src={flat.pictureUrls[0]}
             css={`
               border-top-left-radius: ${(props) => props.theme.borderRadius};
               border-top-right-radius: ${(props) => props.theme.borderRadius};
