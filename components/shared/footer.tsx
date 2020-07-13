@@ -33,6 +33,15 @@ const StyledButton = styled(Button)`
   font-style: ${(props) => props.theme.font.style};
 `;
 
+const NucleoLabel = styled.p`
+  padding: 4px 15px;
+  font-family: ${(props) => props.theme.font.family};
+  font-style: ${(props) => props.theme.font.style};
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+`;
+
 const DropdownMenu = (t) => (
   <Menu>
     <Menu.Item key="0">
@@ -61,13 +70,9 @@ const Footer = ({ className, t }: Props) => {
         `}
       >
         <Dropdown overlay={DropdownMenu(t)} trigger={['click']}>
-          <p
-            css={`
-              padding: 4px 15px;
-            `}
-          >
+          <NucleoLabel>
             {t('nucleo-sl')} <DownOutlined />
-          </p>
+          </NucleoLabel>
         </Dropdown>
       </div>
       <MenuButtons
@@ -77,13 +82,9 @@ const Footer = ({ className, t }: Props) => {
           }
         `}
       >
-        <p
-          css={`
-            padding: 4px 15px;
-          `}
-        >
+        <NucleoLabel>
           {t('nucleo-sl')}
-        </p>
+        </NucleoLabel>
         <StyledButton type="text">{t('aviso-legal')}</StyledButton>
         <StyledButton type="text">{t('politica-datos')}</StyledButton>
         <StyledButton type="text">{t('politica-cookies')}</StyledButton>
