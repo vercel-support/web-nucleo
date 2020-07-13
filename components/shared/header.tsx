@@ -26,7 +26,10 @@ const Header = ({ className, t }: Props) => {
     <header className={className}>
       <Link href="/">
         <a>
-          <img alt={t('header.logo-alt')} src={require('../../public/images/LogoHeaderWeb.svg')} />
+          <img
+            alt={t('header.logo-alt')}
+            src={require('../../public/images/LogoHeaderWeb.svg')}
+          />
         </a>
       </Link>
       <MenuButtons>

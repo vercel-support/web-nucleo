@@ -110,7 +110,12 @@ const FlatCard = ({
         {useCarousel ? (
           <StyledCarousel ref={carousel} dots={true} draggable={true}>
             {flat.pictureUrls.map((url) => (
-              <FlatImage imageHeight={imageHeight} key={url} src={url} alt={`Vivienda en ${flat.address}`} />
+              <FlatImage
+                imageHeight={imageHeight}
+                key={url}
+                src={url}
+                alt={`Vivienda en ${flat.address}`}
+              />
             ))}
           </StyledCarousel>
         ) : (

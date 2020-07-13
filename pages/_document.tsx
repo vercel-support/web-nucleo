@@ -11,10 +11,10 @@ import { ServerStyleSheet } from 'styled-components';
 
 import { lngFromReq } from 'next-i18next/dist/commonjs/utils';
 
-export default class MyDocument extends Document {
-  static async getInitialProps(
-    ctx: DocumentContext
-  ): Promise<DocumentInitialProps> {
+type Props = DocumentInitialProps & { lng: string };
+
+export default class MyDocument extends Document<Props> {
+  static async getInitialProps(ctx: DocumentContext): Promise<Props> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -35,7 +35,7 @@ export default class MyDocument extends Document {
             {sheet.getStyleElement()}
           </>
         ),
-        lng
+        lng,
       };
     } finally {
       sheet.seal();

@@ -60,7 +60,6 @@ const StyledForm = styled(Form)`
   @media ${(props) => props.theme.breakpoints.xs} {
     width: ${(props) => props.theme.grid.getGridColumns(18, 1)};
   }
-
 `;
 
 const Divider = styled.hr`
