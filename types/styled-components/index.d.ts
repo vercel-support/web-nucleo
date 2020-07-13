@@ -49,5 +49,6 @@ declare module 'styled-components' {
     };
 
     headerHeight: string;
+    loadOptimizedImage: (url: string) => string;
   }
 }
