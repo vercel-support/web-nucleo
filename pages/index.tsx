@@ -48,7 +48,10 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
   return (
     <Layout>
       <Head>
+        <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={t('home.description')} />
+        <meta name="robots" content="index, follow" />
         <title>{t('title')}</title>
         <link rel="icon" href="/favicon.ico" />
         <link

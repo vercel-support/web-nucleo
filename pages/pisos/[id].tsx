@@ -69,8 +69,11 @@ const FlatDetailPage = ({ flat, t }: Props): JSX.Element => {
   return (
     <Layout>
       <Head>
+        <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{t('flatDetail.title')}</title>
+        <meta name="description" content={t('flatDetail.description')} />
+        <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"

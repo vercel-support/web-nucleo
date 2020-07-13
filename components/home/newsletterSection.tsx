@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import i18Next from '../../i18n';
 import { WithTranslation } from 'next-i18next';
-import { Input } from 'antd';
+import { Form, Input } from 'antd';
 
 const { withTranslation } = i18Next;
 
@@ -41,20 +41,26 @@ const SectionTitle = styled.h2`
   ${(props) => props.theme.font.h2}
 `;
 
-const StyledInput = styled(Input.Search)`
-  max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
+const StyledForm = styled(Form)`
+  & .ant-form-item-label {
+    position: absolute;
+    opacity: 0;
+  }
+
+  width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
   @media ${(props) => props.theme.breakpoints.lg} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(9, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(9, 1)};
   }
   @media ${(props) => props.theme.breakpoints.md} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   }
   @media ${(props) => props.theme.breakpoints.smd} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
   }
   @media ${(props) => props.theme.breakpoints.xs} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(20, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(18, 1)};
   }
+
 `;
 
 const Divider = styled.hr`
@@ -67,11 +73,25 @@ const Divider = styled.hr`
 `;
 
 const NewsletterSection = ({ t }: Props): JSX.Element => {
+  const validateMessages = {
+    types: {
+      email: t('modalForm.validateEmail'),
+    },
+  };
+
   return (
     <Banner>
       <SectionTitle>{t('newsletter-title')}</SectionTitle>
       <Divider />
-      <StyledInput enterButton={t('enviar')} placeholder={t('email')} />
+      <StyledForm validateMessages={validateMessages}>
+        <Form.Item
+          name="email"
+          label={t('home.newsletter-input-label')}
+          rules={[{ required: false, type: 'email' }]}
+        >
+          <Input.Search enterButton={t('enviar')} placeholder={t('email')} />
+        </Form.Item>
+      </StyledForm>
     </Banner>
   );
 };

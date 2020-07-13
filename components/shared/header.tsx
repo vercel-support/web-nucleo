@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import LanguageSelector from './languageSelector';
 import Link from 'next/link';
+import { WithTranslation } from 'next-i18next';
+import nextI18Next from '../../i18n';
+
+const { withTranslation } = nextI18Next;
 
 type Props = {
   className?: string;
-};
+} & WithTranslation;
 
 const MenuButtons = styled.div`
   display: flex;
@@ -17,12 +21,12 @@ const MenuButtons = styled.div`
   line-height: 22px;
 `;
 
-const Header = ({ className }: Props) => {
+const Header = ({ className, t }: Props) => {
   return (
     <header className={className}>
       <Link href="/">
         <a>
-          <img src={require('../../public/images/LogoHeaderWeb.svg')} />
+          <img alt={t('header.logo-alt')} src={require('../../public/images/LogoHeaderWeb.svg')} />
         </a>
       </Link>
       <MenuButtons>
@@ -32,7 +36,7 @@ const Header = ({ className }: Props) => {
   );
 };
 
-export default styled(Header)`
+export default styled(withTranslation('common')(Header))`
   position: absolute;
   top: 0;
   left: 0;

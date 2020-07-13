@@ -1,5 +1,13 @@
 {
+	"header": {
+		"logo-alt": "Real state agency alicante"
+	},
+	"langCode": "en",
   "title": "Properties in Alicante | Inmobiliaria Nucleo",
+	"home": {
+		"description": "Find houses for sale in Alicante, Spain. Flats, Apartments, Chalets. Inmobiliaria Nucleo helps you choose between the best properties in Alicante. Visit Us!",
+		"newsletter-input-label": "enter you e-mail and subscribe to the newsletter"
+	},
   "hero-title-1": "Welcome to",
   "hero-title-2": "Inmobiliaria Núcleo",
   "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
@@ -31,8 +39,9 @@
     "zone": "Zone"
   },
   "flatDetail": {
-	    "title": "Property details",
-    "actions": {
+    "title": "{type}for sale in {locationcity}, {size}m2, {dormitories}dormitories, {bathrooms}bathrooms, {price}$ - Inmobiliaria Nucleo",
+		"description": "{type} for sale in adress {locationadress}, {locationcity}city, {size}m2, {dormitories}dormitories, {bathrooms}bathrooms, {price}$.",
+	  "actions": {
       "requestInfo": "I am interested in this property"
     }
   },

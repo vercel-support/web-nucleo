@@ -1,5 +1,15 @@
-import Document, { DocumentContext, DocumentInitialProps } from 'next/document';
+import Document, {
+  DocumentContext,
+  DocumentInitialProps,
+  Html,
+  Head,
+  Main,
+  NextScript,
+} from 'next/document';
+
 import { ServerStyleSheet } from 'styled-components';
+
+import { lngFromReq } from 'next-i18next/dist/commonjs/utils';
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -8,6 +18,7 @@ export default class MyDocument extends Document {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
+    const lng = lngFromReq(ctx.req);
     try {
       ctx.renderPage = () =>
         originalRenderPage({
@@ -24,9 +35,23 @@ export default class MyDocument extends Document {
             {sheet.getStyleElement()}
           </>
         ),
+        lng
       };
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    const { lng } = this.props;
+    return (
+      <Html lang={lng}>
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }

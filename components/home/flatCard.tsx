@@ -110,7 +110,7 @@ const FlatCard = ({
         {useCarousel ? (
           <StyledCarousel ref={carousel} dots={true} draggable={true}>
             {flat.pictureUrls.map((url) => (
-              <FlatImage imageHeight={imageHeight} key={url} src={url} />
+              <FlatImage imageHeight={imageHeight} key={url} src={url} alt={`Vivienda en ${flat.address}`} />
             ))}
           </StyledCarousel>
         ) : (
@@ -121,6 +121,7 @@ const FlatCard = ({
               border-top-left-radius: ${(props) => props.theme.borderRadius};
               border-top-right-radius: ${(props) => props.theme.borderRadius};
             `}
+            alt={`Vivienda en ${flat.address}`}
           />
         )}
         <FlatInfo>
