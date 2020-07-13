@@ -13,11 +13,6 @@ const Banner = styled.div`
   background-image: ${(props) =>
     props.theme.loadOptimizedImage('banner_blog.png')};
 
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    background-image: ${(props) =>
-      props.theme.loadOptimizedImage('banner_blog_small.png')};
-  }
-
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -36,7 +31,7 @@ const Banner = styled.div`
 const SectionTitle = styled.h2`
   max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
   @media ${(props) => props.theme.breakpoints.smd} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(16, 1)};
+    max-width: ${(props) => props.theme.grid.getGridColumns(17, 1)};
   }
 
   color: ${(props) => props.theme.colors.secondary};
@@ -47,7 +42,7 @@ const SectionTitle = styled.h2`
 const SectionSubtitle = styled.h3`
   max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
   @media ${(props) => props.theme.breakpoints.smd} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(16, 1)};
+    max-width: ${(props) => props.theme.grid.getGridColumns(15, 1)};
   }
 
   color: ${(props) => props.theme.colors.secondary};
