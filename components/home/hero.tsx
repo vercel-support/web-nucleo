@@ -9,7 +9,8 @@ import { useRouter } from 'next/router';
 const { withTranslation } = nextI18Next;
 
 const Background = styled.div`
-  background-image: ${props => props.theme.loadOptimizedImage('banner_hero.png')};
+  background-image: ${(props) =>
+    props.theme.loadOptimizedImage('banner_hero.png')};
 
   background-size: cover;
   background-repeat: no-repeat;

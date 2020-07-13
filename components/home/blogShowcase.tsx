@@ -10,10 +10,12 @@ const Banner = styled.div`
   height: 40vh;
 
   min-height: 260px;
-  background-image: ${props => props.theme.loadOptimizedImage('banner_blog.png')};
+  background-image: ${(props) =>
+    props.theme.loadOptimizedImage('banner_blog.png')};
 
   @media ${(props) => props.theme.breakpoints.mdd} {
-    background-image: ${props => props.theme.loadOptimizedImage('banner_blog_small.png')};
+    background-image: ${(props) =>
+      props.theme.loadOptimizedImage('banner_blog_small.png')};
   }
 
   background-size: cover;
