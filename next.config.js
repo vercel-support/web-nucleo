@@ -23,6 +23,7 @@ module.exports = withOptimizedImages(withLess({
   publicRuntimeConfig: {
     localeSubpaths,
   },
+  optimizeImagesInDev: true, // TODO remove
   experimental: {
     async rewrites() {
       return [

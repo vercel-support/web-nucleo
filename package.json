@@ -25,6 +25,7 @@
     "babel-plugin-import": "^1.13.0",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
+    "image-trace-loader": "^1.0.2",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^8.0.0",
     "jsforce": "^2.0.0-alpha.12",
