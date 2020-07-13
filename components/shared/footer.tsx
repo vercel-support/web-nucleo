@@ -82,9 +82,7 @@ const Footer = ({ className, t }: Props) => {
           }
         `}
       >
-        <NucleoLabel>
-          {t('nucleo-sl')}
-        </NucleoLabel>
+        <NucleoLabel>{t('nucleo-sl')}</NucleoLabel>
         <StyledButton type="text">{t('aviso-legal')}</StyledButton>
         <StyledButton type="text">{t('politica-datos')}</StyledButton>
         <StyledButton type="text">{t('politica-cookies')}</StyledButton>
