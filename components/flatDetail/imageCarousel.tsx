@@ -63,20 +63,20 @@ const NextArrow = styled.div`
 `;
 
 const ImageCarousel = ({ flat, className, theme }: Props): JSX.Element => {
-  const isMdUp = useMediaQuery({ query: theme.breakpoints.mdu });
+  const isSmDown = useMediaQuery({ query: theme.breakpoints.smd });
 
   return (
     <div className={className} style={{ position: 'relative' }}>
       <Title>{flat.name}</Title>
       <Carousel
         arrows={true}
-        dots={isMdUp}
+        dots={!isSmDown}
         prevArrow={<PrevArrow />}
         nextArrow={<NextArrow />}
       >
         {flat.pictureUrls.map((url) => (
           <FlatImage
-            imageHeight={isMdUp ? '72vh' : '56vh'}
+            imageHeight={isSmDown ? '56vh' : '72vh'}
             key={url}
             url={url}
           />
