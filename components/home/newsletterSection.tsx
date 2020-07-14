@@ -10,11 +10,26 @@ type Props = WithTranslation;
 const Banner = styled.div`
   height: 40vh;
   min-height: 260px;
-  background-image: ${(props) =>
-    props.theme.loadOptimizedImage('banner_newsletter.png')};
 
-  background-size: cover;
-  background-position: center center;
+  @media ${(props) => props.theme.breakpoints.lg} {
+    min-height: 0;
+    height: 260px;
+  }
+
+  @media ${(props) => props.theme.breakpoints.md} {
+    min-height: 240px;
+  }
+
+  @media ${(props) => props.theme.breakpoints.smd} {
+    min-height: 0;
+    height: 220px;
+  }
+
+  background-image: url(${require('../../public/images/tangram_newsletter.png')}), url(${require('../../public/images/banner_newsletter.png')});
+
+  background-size: 100% 100%, auto 100%;
+
+  background-position: center center, left center;
   background-repeat: no-repeat;
 
   display: flex;
@@ -31,7 +46,7 @@ const Banner = styled.div`
 const SectionTitle = styled.h2`
   max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
   @media ${(props) => props.theme.breakpoints.smd} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(15, 1)};
+    max-width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   }
 
   text-align: right;
@@ -58,7 +73,7 @@ const StyledForm = styled(Form)`
     width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
   }
   @media ${(props) => props.theme.breakpoints.xs} {
-    width: ${(props) => props.theme.grid.getGridColumns(18, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(15, 1)};
   }
 `;
 

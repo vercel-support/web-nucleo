@@ -17,7 +17,7 @@
   "section-flats-title": "Viviendas en Alicante",
   "enviar": "Enviar",
   "email": "Correo electrónico",
-  "newsletter-title": "Suscríbete a nuestra Newsletter",
+  "newsletter-title": "Suscríbete a nuestro boletín",
   "blog-showcase-title": "Conoce las tendencias del mercado inmobiliario",
   "blog-showcase-subtitle": "¡Sé el primero en conocer todas las novedades, los mejores rincones de Alicante y mucho más!",
   "habitaciones": "habitaciones",
@@ -39,8 +39,8 @@
     "zone": "Zona"
   },
   "flatDetail": {
-    "title": "{type} en venta en {locationcity}, {size}m2,{dormitories}dormitorios, {bathrooms}baños, {price}$. - Inmobiliaria Nucleo",
-		"description": "{type} en venta en calle {locationadress}, ciudad {locationcity}, {size}m2, {dormitories}dormitorios, {baños}baños, {precio}$",
+    "title": "{propertytype} en venta en {locationadress},{locationcity}. - Inmobiliaria Nucleo",
+		"description": "{propertytype} en venta por {price}€. {dormitories} dormitorios, {bathrooms} baños, {size} en {locationadress},{locationcity}",
     "actions": {
       "requestInfo": "Me interesa este inmueble"
     }

@@ -39,8 +39,8 @@
     "zone": "Zone"
   },
   "flatDetail": {
-    "title": "{type}for sale in {locationcity}, {size}m2, {dormitories}dormitories, {bathrooms}bathrooms, {price}$ - Inmobiliaria Nucleo",
-		"description": "{type} for sale in adress {locationadress}, {locationcity}city, {size}m2, {dormitories}dormitories, {bathrooms}bathrooms, {price}$.",
+    "title": "{propertytype} for sale in {locationadress},{locationcity}. - Inmobiliaria Nucleo",
+		"description": "{propertytype} for sale for {price}€. {dormitories} dormitories, {bathrooms} bathrooms, {size}m2 in {locationadress},{locationcity}",
 	  "actions": {
       "requestInfo": "I am interested in this property"
     }
