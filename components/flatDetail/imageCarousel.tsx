@@ -75,11 +75,7 @@ const ImageCarousel = ({ flat, className, theme }: Props): JSX.Element => {
         nextArrow={<NextArrow />}
       >
         {flat.pictureUrls.map((url) => (
-          <FlatImage
-            imageHeight={isSmDown ? '56vh' : '72vh'}
-            key={url}
-            url={url}
-          />
+          <FlatImage imageHeight={'72vh'} key={url} url={url} />
         ))}
       </Carousel>
     </div>
