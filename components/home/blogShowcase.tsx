@@ -24,7 +24,8 @@ const Banner = styled.div`
     height: 220px;
   }
 
-  background-image: url(${require('../../public/images/tangram_blog.png')}), url(${require('../../public/images/banner_blog.png')});
+  background-image: url(${require('../../public/images/tangram_blog.png')}),
+    url(${require('../../public/images/banner_blog.png')});
 
   background-size: 100% 100%, auto 100%;
 
