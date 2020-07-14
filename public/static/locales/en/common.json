@@ -39,9 +39,12 @@
     "zone": "Zone"
   },
   "flatDetail": {
-    "title": "{propertytype} for sale in {locationadress},{locationcity}. - Inmobiliaria Nucleo",
-		"description": "{propertytype} for sale for {price}€. {dormitories} dormitories, {bathrooms} bathrooms, {size}m2 in {locationadress},{locationcity}",
-	  "actions": {
+    "title": "{{type}} for sale in {{address}}, {{city}}. - Inmobiliaria Nucleo",
+    "description": "{{type}} for sale for {{price}}€. {{dormitories}} dormitories, {{bathrooms}} bathrooms, {{sqrMeters}}m2 in {{address}}, {{city}}",
+    "messages": {
+      "recommendedFlats": "You might also like"
+    },
+    "actions": {
       "requestInfo": "I am interested in this property"
     }
   },
@@ -51,6 +54,10 @@
   "orientacion": "Orientation",
   "yes": "Yes",
   "no": "No",
+  "south": "South",
+  "north": "North",
+  "west": "West",
+  "east": "East",
   "modalForm": {
     "titleSell": "Do you want to sell a property?",
     "titleBuy": "Do you want to buy a property?",

@@ -25,6 +25,7 @@ export default class Flat {
   public rooms?: number;
   public sqrMeters?: number;
   public type?: string;
+  public city?: string;
   public zone?: string;
 
   static async preprocessPictures(picturesHtml: string): Promise<string[]> {

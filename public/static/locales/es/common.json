@@ -39,8 +39,11 @@
     "zone": "Zona"
   },
   "flatDetail": {
-    "title": "{propertytype} en venta en {locationadress},{locationcity}. - Inmobiliaria Nucleo",
-		"description": "{propertytype} en venta por {price}€. {dormitories} dormitorios, {bathrooms} baños, {size} en {locationadress},{locationcity}",
+    "title": "{{type}} en venta en {{address}}, {{city}}. - Inmobiliaria Nucleo",
+    "description": "{{type}} en venta por {{price}}€. {{dormitories}} dormitorios, {{bathrooms}} baños, {{sqrMeters}} en {{address}}, {{city}}",
+    "messages": {
+      "recommendedFlats": "También le puede interesar"
+    },
     "actions": {
       "requestInfo": "Me interesa este inmueble"
     }
@@ -51,6 +54,10 @@
   "orientacion": "Orientación",
   "yes": "Sí",
   "no": "No",
+  "south": "Sur",
+  "north": "Norte",
+  "west": "Oeste",
+  "east": "Este",
   "modalForm": {
     "titleSell": "¿Quieres vender un inmueble?",
     "titleBuy": "¿Quieres comprar un inmueble?",

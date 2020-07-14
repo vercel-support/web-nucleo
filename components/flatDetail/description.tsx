@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import styled from 'styled-components';
 import { WithTranslation } from 'next-i18next';
 
@@ -8,18 +9,18 @@ const { withTranslation } = nextI18Next;
 
 type Props = {
   flat: Flat;
-  className?: string;
 } & WithTranslation;
 
 const Title = styled.h2`
-  font-size: 24px;
-  font-weight: 500;
   color: ${(props) => props.theme.colors.secondary};
+
+  ${(props) => props.theme.font.h2}
 `;
 
-const Separator = styled.hr`
-  border: 1px solid #f2f2f2;
-  margin-bottom: 1rem;
+const Divider = styled.div`
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-top: 1px solid #e0e0e0;
 `;
 
 const Zone = styled.div`
@@ -33,14 +34,14 @@ const Info = styled.div`
   line-height: 30px;
 `;
 
-const Description = ({ flat, className, t }: Props): JSX.Element => {
+const Description = ({ flat, t }: Props): JSX.Element => {
   return (
-    <div className={className}>
+    <Fragment>
       <Title>{t('flat.description')}</Title>
-      <Separator />
+      <Divider />
       <Zone>{`${t('flat.zone')}: ${flat.zone}`}</Zone>
-      <Info>{flat.description}</Info>
-    </div>
+      <Info dangerouslySetInnerHTML={{ __html: flat.description }} />
+    </Fragment>
   );
 };
 

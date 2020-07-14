@@ -164,7 +164,7 @@ const Hero = ({ t }: Props): JSX.Element => {
   const [isModalSellerMode, setModalSellerMode] = useState(false);
   const router = useRouter();
 
-  const modalVisible: boolean =
+  const modalVisible =
     'displayModal' in router.query && router.query['displayModal'] == 'true';
 
   function setModalVisible(toVisible: boolean): void {

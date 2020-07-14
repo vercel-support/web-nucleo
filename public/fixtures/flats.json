@@ -6,9 +6,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
+        "type": "Apartamento",
         "zone": "Benalúa",
-        "description": "Es un piso muy amplio que da al exterior. Está recién reformado, se encuentra en pleno casco antiguo de alicante a tan solo 5 minutos andando de la playa del postiguet y situada en una calle peatonal de las más concurridas de la ciudad al lado de la rambla, del barrio y cerca del Castillo de Santa Bárbara. En pleno centro de Alicante podrás disfrutar de una experiencia única al alcance de muy pocos."
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 2,
@@ -17,8 +18,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 3,
@@ -27,8 +30,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 4,
@@ -37,8 +42,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 5,
@@ -47,8 +54,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 6,
@@ -57,8 +66,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 7,
@@ -67,8 +78,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 8,
@@ -77,8 +90,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 9,
@@ -87,8 +102,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 10,
@@ -97,8 +114,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 11,
@@ -107,8 +126,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 12,
@@ -117,8 +138,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 13,
@@ -127,8 +150,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 14,
@@ -137,8 +162,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 15,
@@ -147,8 +174,10 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     },
     {
         "id": 16,
@@ -157,7 +186,9 @@
         "price": 120000,
         "rooms": 4,
         "sqrMeters": 120,
-        "type": "apartamento",
-        "zone": "Benalúa"
+        "type": "Apartamento",
+        "zone": "Benalúa",
+        "description": "Piso de 124 m2 en PAU I, junto a plaza Juan pablo II, en Residencial Nuevo Parque.<br>La vivienda se divide en cocina con galería, salón con gran balcón y vistas a la piscina, 4 dormitorios y 2 baños, uno de ellos en suite. Suelo de toda la vivienda de tarima. Además, dispone de garaje y trastero incluido en el precio.<br>Situado en urbanización con Piscina, 2 pistas de padel, 2 clubs sociales en una zona tranquila, en plena expansión, rodeada de todos los servicios, centros educativos de mayor calidad de la ciudad, cercano al centro de Alicante, estación de tren, de autobuses, centros comerciales, restaurantes, etc.",
+        "city": "Alicante"
     }
 ]
