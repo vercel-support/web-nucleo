@@ -4,7 +4,6 @@ import nextI18Next from '../../i18n';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel } from 'antd';
 import { useRef } from 'react';
-import { PlayCircleFilled } from '@ant-design/icons';
 import { split } from '../../common/helpers';
 import FlatCard from './flatCard';
 import { useMediaQuery } from 'react-responsive';
@@ -40,8 +39,10 @@ const Arrow = styled.div<{ left?: boolean }>`
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 
-
-  background-image: url(${(props) => props.left ? require('../../public/images/prev_black.svg') : require('../../public/images/next_black.svg')});
+  background-image: url(${(props) =>
+    props.left
+      ? require('../../public/images/prev_black.svg')
+      : require('../../public/images/next_black.svg')});
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -153,9 +154,7 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
     <div className={className}>
       <SectionTitle>{t('section-flats-title')}</SectionTitle>
       <Divider />
-      {isXl || isXxl ? (
-        <Arrow left={true} onClick={previous} />
-      ) : null}
+      {isXl || isXxl ? <Arrow left={true} onClick={previous} /> : null}
       <StyledCarousel
         ref={carousel}
         dots={false}
