@@ -31,7 +31,7 @@ const SectionTitle = styled.h2`
   }
 `;
 
-const Arrow = styled(PlayCircleFilled)<{ left?: boolean }>`
+const Arrow = styled.div<{ left?: boolean }>`
   position: absolute;
   margin: 0;
   top: 50%;
@@ -39,6 +39,12 @@ const Arrow = styled(PlayCircleFilled)<{ left?: boolean }>`
   right: ${(props) => (!props.left ? '4%' : 'inherit')};
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+
+
+  background-image: url(${(props) => props.left ? require('../../public/images/prev_black.svg') : require('../../public/images/next_black.svg')});
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
 
   font-size: 38px;
   color: ${(props) => props.theme.colors.secondary};
@@ -148,7 +154,7 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
       <SectionTitle>{t('section-flats-title')}</SectionTitle>
       <Divider />
       {isXl || isXxl ? (
-        <Arrow left={true} rotate={180} onClick={previous} />
+        <Arrow left={true} onClick={previous} />
       ) : null}
       <StyledCarousel
         ref={carousel}
