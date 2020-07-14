@@ -175,7 +175,7 @@ const FlatsDisplay = ({
                 <FlatCard
                   width={flatCardWidth}
                   margin={flatCardMargin}
-                  key={flat.name}
+                  key={flat.id}
                   flat={flat}
                   imageHeight={flatCardImageHeight}
                   useCarousel={isXl || isXxl}
@@ -183,7 +183,7 @@ const FlatsDisplay = ({
               ))}
               {page.map((flat) => (
                 <HackyFiller
-                  key={flat.name}
+                  key={flat.id}
                   width={flatCardWidth}
                   margin={flatCardMargin}
                 />

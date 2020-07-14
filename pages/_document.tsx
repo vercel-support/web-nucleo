@@ -42,8 +42,9 @@ export default class MyDocument extends Document<Props> {
     }
   }
 
-  render() {
+  render(): JSX.Element {
     const { lng } = this.props;
+
     return (
       <Html lang={lng}>
         <Head />

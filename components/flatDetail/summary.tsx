@@ -56,7 +56,7 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
       <Col xs={6} sm={5} md={4} xl={3} style={{ textAlign: 'center' }}>
         <ImageContainer>
           <ImageFlexContainer>
-            <Image src="/images/superficie.svg" alt={t('flat.sqrMeters')} />
+            <Image src="/images/superficie.png" alt={t('flat.sqrMeters')} />
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
@@ -81,7 +81,7 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
       <Col xs={6} sm={5} md={4} xl={3} style={{ textAlign: 'center' }}>
         <ImageContainer>
           <ImageFlexContainer>
-            <Image src="/images/dormitorios.svg" alt={t('flat.rooms')} />
+            <Image src="/images/dormitorios.png" alt={t('flat.rooms')} />
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
@@ -96,7 +96,7 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
       <Col xs={6} sm={5} md={4} xl={3} style={{ textAlign: 'center' }}>
         <ImageContainer>
           <ImageFlexContainer>
-            <Image src="/images/banyos.svg" alt={t('flat.bathrooms')} />
+            <Image src="/images/banyos.png" alt={t('flat.bathrooms')} />
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
@@ -111,7 +111,7 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
       <Col xs={6} sm={5} md={4} xl={3} style={{ textAlign: 'center' }}>
         <ImageContainer>
           <ImageFlexContainer>
-            <Image src="/images/precio.svg" alt={t('flat.price')} />
+            <Image src="/images/precio.png" alt={t('flat.price')} />
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
