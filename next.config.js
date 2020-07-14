@@ -20,9 +20,6 @@ module.exports = withOptimizedImages(withLess({
     javascriptEnabled: true,
     modifyVars: themeVariables, // make your antd custom effective
   },
-  publicRuntimeConfig: {
-    localeSubpaths,
-  },
   experimental: {
     async rewrites() {
       return [

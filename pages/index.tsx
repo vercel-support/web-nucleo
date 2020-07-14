@@ -14,6 +14,12 @@ import {
 } from '../components/home';
 import { Header, Footer } from '../components/shared';
 
+const FlatsDisplayContainer = styled.div`
+  background-color: #f2f2f2;
+  padding-top: 100px;
+  padding-bottom: 70px;
+`;
+
 const FlatsDisplay = dynamic(() => import('../components/home/flatsDisplay'), {
   ssr: false,
   loading: () => <FlatsDisplayPlaceholder />,
@@ -76,7 +82,12 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
 
       <Content>
         <Hero />
-        <FlatsDisplay flats={deserializedFlats} />
+        <FlatsDisplayContainer>
+          <FlatsDisplay
+            flats={deserializedFlats}
+            title={t('section-flats-title')}
+          />
+        </FlatsDisplayContainer>
         <BlogShowcase />
         <NewsletterSection />
       </Content>

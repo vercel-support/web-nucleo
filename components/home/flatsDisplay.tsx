@@ -1,6 +1,4 @@
 import Flat from '../../backend/salesforce/flat';
-import { WithTranslation } from 'next-i18next';
-import nextI18Next from '../../i18n';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel } from 'antd';
 import { useRef } from 'react';
@@ -8,13 +6,13 @@ import { split } from '../../common/helpers';
 import FlatCard from './flatCard';
 import { useMediaQuery } from 'react-responsive';
 
-const { withTranslation } = nextI18Next;
-
 type Props = {
   flats: Flat[];
+  title: string;
+  arrows?: boolean;
   className?: string;
   theme: DefaultTheme;
-} & WithTranslation;
+};
 
 const SectionTitle = styled.h2`
   color: ${(props) => props.theme.colors.secondary};
@@ -84,7 +82,13 @@ const Divider = styled.div`
   border-top: 1px solid #e0e0e0;
 `;
 
-const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
+const FlatsDisplay = ({
+  className,
+  flats,
+  title,
+  arrows = true,
+  theme,
+}: Props): JSX.Element => {
   const carousel = useRef(null);
 
   const isXxl = useMediaQuery({ query: theme.breakpoints.xxl });
@@ -152,9 +156,11 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
 
   return (
     <div className={className}>
-      <SectionTitle>{t('section-flats-title')}</SectionTitle>
+      <SectionTitle>{title}</SectionTitle>
       <Divider />
-      {isXl || isXxl ? <Arrow left={true} onClick={previous} /> : null}
+      {arrows && (isXl || isXxl) ? (
+        <Arrow left={true} onClick={previous} />
+      ) : null}
       <StyledCarousel
         ref={carousel}
         dots={false}
@@ -186,7 +192,7 @@ const FlatsDisplay = ({ className, t, flats, theme }: Props): JSX.Element => {
           </div>
         ))}
       </StyledCarousel>
-      {isXl || isXxl ? <Arrow left={false} onClick={next} /> : null}
+      {arrows && (isXl || isXxl) ? <Arrow left={false} onClick={next} /> : null}
     </div>
   );
 };
@@ -196,10 +202,6 @@ export const FlatsDisplayPlaceholder = styled.div`
   height: 80vh;
 `;
 
-export default withTheme(styled(withTranslation('common')(FlatsDisplay))`
-  background-color: #f2f2f2;
-  padding-top: 100px;
-  padding-bottom: 70px;
-
+export default withTheme(styled(FlatsDisplay)`
   position: relative;
 `);

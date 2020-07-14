@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { WithTranslation } from 'next-i18next';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
@@ -13,12 +14,14 @@ import {
   FeaturesCard,
   RequestInfoButton,
 } from '../../components/flatDetail';
+import { FlatsDisplayPlaceholder } from '../../components/home';
 import { Header, Footer } from '../../components/shared';
 
 const { withTranslation } = nextI18Next;
 
 interface StaticProps {
   flat: string;
+  recommendedFlats: string;
 }
 
 type Props = StaticProps & WithTranslation;
@@ -49,7 +52,7 @@ const SummarySection = styled.div`
 `;
 
 const DescriptionSection = styled.div`
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   @media ${(props) => props.theme.breakpoints.sm} {
@@ -58,21 +61,67 @@ const DescriptionSection = styled.div`
   }
 `;
 
-const RequestInfoSection = styled.div`
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+const DescriptionRow = styled(Row)`
+  margin-bottom: 0 !important;
 `;
 
-const FlatDetailPage = ({ flat, t }: Props): JSX.Element => {
+const FeaturesCardContainer = styled.div`
+  margin-top: 0;
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    margin-top: 34px;
+  }
+`;
+
+const RequestInfoSection = styled.div`
+  margin-top: 2rem;
+`;
+
+const FlatsDisplayContainer = styled.div`
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+`;
+
+const FlatsDisplay = dynamic(
+  () => import('../../components/home/flatsDisplay'),
+  {
+    ssr: false,
+    loading: () => <FlatsDisplayPlaceholder />,
+  }
+);
+
+const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
   const deserializedFlat = Flat.deserializeResult(flat);
+  const deserializedRecommendedFlats = Flat.deserializeResults(
+    recommendedFlats
+  );
 
   return (
     <Layout>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{t('flatDetail.title')}</title>
-        <meta name="description" content={t('flatDetail.description')} />
+        <title>
+          {t('flatDetail.title', {
+            type: deserializedFlat.type,
+            city: deserializedFlat.city,
+            sqrMeters: deserializedFlat.sqrMeters,
+            dormitories: deserializedFlat.rooms,
+            bathrooms: deserializedFlat.rooms,
+            price: deserializedFlat.price,
+          })}
+        </title>
+        <meta
+          name="description"
+          content={t('flatDetail.description', {
+            type: deserializedFlat.type,
+            address: deserializedFlat.address,
+            city: deserializedFlat.city,
+            sqrMeters: deserializedFlat.sqrMeters,
+            dormitories: deserializedFlat.rooms,
+            bathrooms: deserializedFlat.rooms,
+            price: deserializedFlat.price,
+          })}
+        />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -100,26 +149,36 @@ const FlatDetailPage = ({ flat, t }: Props): JSX.Element => {
           <Summary flat={deserializedFlat} />
         </SummarySection>
         <DescriptionSection>
-          <Row gutter={[80, 24]}>
+          <DescriptionRow gutter={[80, 48]}>
             <Col xs={24} lg={14} xl={15}>
               <Description flat={deserializedFlat} />
             </Col>
             <Col xs={24} lg={10} xl={9}>
-              <FeaturesCard flat={deserializedFlat} />
+              <FeaturesCardContainer>
+                <FeaturesCard flat={deserializedFlat} />
+                <RequestInfoSection>
+                  <Row>
+                    <Col
+                      xs={{ span: 24, offset: 0 }}
+                      sm={{ span: 18, offset: 3 }}
+                      md={{ span: 12, offset: 6 }}
+                      lg={{ span: 24, offset: 0 }}
+                    >
+                      <RequestInfoButton />
+                    </Col>
+                  </Row>
+                </RequestInfoSection>
+              </FeaturesCardContainer>
             </Col>
-          </Row>
+          </DescriptionRow>
         </DescriptionSection>
-        <RequestInfoSection>
-          <Row>
-            <Col
-              xs={{ span: 20, offset: 2 }}
-              sm={{ span: 12, offset: 6 }}
-              lg={{ span: 6, offset: 2 }}
-            >
-              <RequestInfoButton />
-            </Col>
-          </Row>
-        </RequestInfoSection>
+        <FlatsDisplayContainer>
+          <FlatsDisplay
+            flats={deserializedRecommendedFlats}
+            title={t('flatDetail.messages.recommendedFlats')}
+            arrows={false}
+          />
+        </FlatsDisplayContainer>
       </Content>
 
       <Footer />
@@ -144,12 +203,21 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
   // const serializedFlats = Flat.serialize(flats);
 
   const flats: Flat[] = require('../../public/fixtures/flats.json');
-  const flat = flats.filter((f) => f.id === +params.id)[0];
+  const flatIndex = flats.findIndex((f) => f.id === +params.id);
+  const flat = flats[flatIndex];
+  const recommendedFlats = [
+    flats[(flatIndex + 1) % flats.length],
+    flats[(flatIndex + 2) % flats.length],
+    flats[(flatIndex + 3) % flats.length],
+    flats[(flatIndex + 4) % flats.length],
+  ];
   const serializedFlat = JSON.stringify(flat);
+  const serializedRecommendedFlats = JSON.stringify(recommendedFlats);
 
   return {
     props: {
       flat: serializedFlat,
+      recommendedFlats: serializedRecommendedFlats,
     },
   };
 };

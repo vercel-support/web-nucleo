@@ -68,6 +68,7 @@ const FlatCard = ({
   flat,
   className,
   theme,
+  i18n,
   t,
   imageHeight,
   useCarousel = true,
@@ -104,7 +105,7 @@ const FlatCard = ({
                 font-weight: 600;
               `}
             >
-              {formatCurrency(flat.price)}€
+              {formatCurrency(flat.price, i18n.language)}
             </span>
             <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
           </TopText>
@@ -115,7 +116,7 @@ const FlatCard = ({
                 margin-right: 8px;
               `}
             >
-              {flat.sqrMeters}m
+              {flat.sqrMeters} m
               <sup
                 css={`
                   vertical-align: top;
@@ -145,6 +146,9 @@ export default withTheme(styled(withTranslation('common')(FlatCard))<{
   border-radius: ${(props) => props.theme.borderRadius};
   transition: 0.3s;
   cursor: pointer;
+  -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.15);
   &:hover {
     -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);

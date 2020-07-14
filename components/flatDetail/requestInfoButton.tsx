@@ -1,8 +1,10 @@
+import { useState, Fragment } from 'react';
 import styled from 'styled-components';
 import { WithTranslation } from 'next-i18next';
 import { Button } from 'antd';
 
 import nextI18Next from '../../i18n';
+import { ModalForm } from '../shared';
 
 const { withTranslation } = nextI18Next;
 
@@ -11,8 +13,30 @@ type Props = {
 } & WithTranslation;
 
 const RequestInfoButton = ({ className, t }: Props): JSX.Element => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
   return (
-    <Button className={className}>{t('flatDetail.actions.requestInfo')}</Button>
+    <Fragment>
+      <Button
+        className={className}
+        onClick={(e) => {
+          (e.target as HTMLButtonElement).blur();
+          setModalVisible(true);
+        }}
+      >
+        {t('flatDetail.actions.requestInfo')}
+      </Button>
+      <ModalForm
+        isSellerMode={false}
+        visible={isModalVisible}
+        onOk={() => {
+          setModalVisible(false);
+        }}
+        onCancel={() => {
+          setModalVisible(false);
+        }}
+      />
+    </Fragment>
   );
 };
 
