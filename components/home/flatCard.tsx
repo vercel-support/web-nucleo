@@ -20,6 +20,8 @@ const FlatImage = styled.img<{ imageHeight: string }>`
   height: ${(props) => props.imageHeight};
   width: 100%;
   overflow: hidden;
+
+  object-fit: cover;
 `;
 
 const FlatInfo = styled.div`
