@@ -59,7 +59,6 @@ const StyledTag = styled(Tag)`
   font-size: 12px;
   line-height: inherit;
   float: right;
-  border-radius: 16px;
 `;
 
 const StyledCarousel = styled(Carousel)`

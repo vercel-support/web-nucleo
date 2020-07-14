@@ -173,7 +173,7 @@ const theme: DefaultTheme = {
     xlu: `(min-width: ${lgMax + 1}px)`,
   },
 
-  borderRadius: '20px',
+  borderRadius: '16px',
 
   grid: {
     getGridColumns: (cols: number, extraGutters = 0): string => {

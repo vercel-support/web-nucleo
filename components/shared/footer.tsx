@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LanguageSelector from './languageSelector';
 import { Button } from 'antd';
 import i18Next from '../../i18n';
-import { WithTranslation } from 'next-i18next';
+import { WithTranslation, TFunction } from 'next-i18next';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
@@ -42,7 +42,7 @@ const NucleoLabel = styled.p`
   line-height: 22px;
 `;
 
-const DropdownMenu = (t) => (
+const DropdownMenu = (t: TFunction) => (
   <Menu>
     <Menu.Item key="0">
       <StyledButton type="text">{t('aviso-legal')}</StyledButton>

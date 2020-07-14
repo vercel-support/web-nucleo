@@ -1,18 +1,22 @@
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { WithTranslation } from 'next-i18next';
+import { WithTranslation, TFunction, I18n } from 'next-i18next';
 import styled from 'styled-components';
 import nextI18Next from '../../i18n';
 
 const { withTranslation } = nextI18Next;
+
+const StyledMenu = styled(Menu)`
+  border-radius: 0;
+`;
 
 const StyledLink = styled.a`
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
 `;
 
-const menu = (t, i18n) => (
-  <Menu>
+const menu = (t: TFunction, i18n: I18n) => (
+  <StyledMenu>
     <Menu.Item
       key="0"
       onClick={() => {
@@ -29,7 +33,7 @@ const menu = (t, i18n) => (
     >
       <StyledLink>English</StyledLink>
     </Menu.Item>
-  </Menu>
+  </StyledMenu>
 );
 
 type Props = { themeColor?: string } & WithTranslation;
