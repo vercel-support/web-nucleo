@@ -117,25 +117,19 @@ const ActionButtons = styled.div`
 `;
 
 const ActionButton = styled(Button)<{ side: string }>`
-  width: 50%;
+  width: 100%;
   font-weight: 500;
   font-size: 20px;
   line-height: 100%;
 
   color: white;
-  background-color: ${(props) =>
-    props.side == 'right'
-      ? props.theme.colors.primary
-      : props.theme.colors.secondary};
-  border-color: ${(props) =>
-    props.side == 'right'
-      ? props.theme.colors.primary
-      : props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
+  border-color: ${(props) => props.theme.colors.primary};
 
-  border-top-left-radius: ${(props) => (props.side == 'left' ? '40px' : 0)};
-  border-top-right-radius: ${(props) => (props.side == 'left' ? 0 : '40px')};
-  border-bottom-right-radius: ${(props) => (props.side == 'left' ? 0 : '40px')};
-  border-bottom-left-radius: ${(props) => (props.side == 'left' ? '40px' : 0)};
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 40px;
 
   @media ${(props) => props.theme.breakpoints.xs} {
     height: 47px;
@@ -200,7 +194,7 @@ const Hero = ({ t }: Props): JSX.Element => {
         <Subtitle>{t('hero-subtitle')}</Subtitle>
       </Title>
       <ActionButtons>
-        <ActionButton
+        {/* <ActionButton
           side="left"
           onClick={(a) => {
             setModalSellerMode(false);
@@ -209,7 +203,7 @@ const Hero = ({ t }: Props): JSX.Element => {
           }}
         >
           {t('comprar')}
-        </ActionButton>
+        </ActionButton> */}
         <ActionButton
           side="right"
           onClick={(a) => {
