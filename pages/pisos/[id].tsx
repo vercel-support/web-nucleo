@@ -187,10 +187,10 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const flats: Flat[] = require('../../public/fixtures/flats.json');
+  const flats = await Flat.getFlats();
 
   const paths = flats.map((flat) => ({
-    params: { id: flat.id + '' },
+    params: { id: flat.id },
   }));
 
   return { paths, fallback: false };
@@ -202,7 +202,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
   // const flat = await Flat.getFlat(+params.id);
   // const serializedFlats = Flat.serialize(flats);
 
-  const flats: Flat[] = require('../../public/fixtures/flats.json');
+  const flats = await Flat.getFlats();
   const flatIndex = flats.findIndex((f) => f.id === params.id);
   const flat = flats[flatIndex];
   const recommendedFlats = [

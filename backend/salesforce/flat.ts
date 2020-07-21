@@ -27,7 +27,7 @@ export default class Flat {
     'Terraza__c',
     'Sotano__c',
     'Ano_costruccion__c',
-    'Ano_reforma__c'  
+    'Ano_reforma__c',
   ];
   public static objectName = 'Opportunity';
 
@@ -53,8 +53,6 @@ export default class Flat {
 
   public yearConstruction?: number;
   public yearReform?: number;
-
-
 
   static async preprocessPictures(picturesHtml: string): Promise<string[]> {
     const sfClient = await getSalesforceClient();
@@ -106,7 +104,7 @@ export default class Flat {
     const pictureUrls = await Flat.preprocessPictures(record['Fotos__c']);
     const price = record['Precio_Web__c'];
     const rooms = record['Dormitorios__c'];
-    const bathrooms = record['Ba_os__c']
+    const bathrooms = record['Ba_os__c'];
     const type = record['Tipologia_inmueble__c'];
     const sqrMeters = record['M2_utiles__c'];
     const zone = record['Localidad_Inmueble__c'];
@@ -115,14 +113,14 @@ export default class Flat {
     const description_EN = record['Descripci_n_Ingl_s__c'];
     const showInWebsite = record['Mostrar_en_la_Web__c'];
 
-    const hasElevator = record['Ascensor__c']
-    const hasGarden = record['Jardin__c']
-    const hasBalcony = record['Balcon__c']
-    const hasTerrace = record['Terraza__c']
-    const hasBasement = record['Sotano__c']
-  
-    const yearConstruction = record['Ano_costruccion__c']
-    const yearReform = record['Ano_reforma__c']
+    const hasElevator = record['Ascensor__c'];
+    const hasGarden = record['Jardin__c'];
+    const hasBalcony = record['Balcon__c'];
+    const hasTerrace = record['Terraza__c'];
+    const hasBasement = record['Sotano__c'];
+
+    const yearConstruction = record['Ano_costruccion__c'];
+    const yearReform = record['Ano_reforma__c'];
 
     // TODO do proper validation using typescript class, directly in 'fromDict'
     if (
@@ -166,7 +164,7 @@ export default class Flat {
       hasTerrace,
       hasBasement,
       yearConstruction,
-      yearReform
+      yearReform,
     });
   }
 

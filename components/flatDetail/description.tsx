@@ -34,13 +34,22 @@ const Info = styled.div`
   line-height: 30px;
 `;
 
-const Description = ({ flat, t }: Props): JSX.Element => {
+const Description = ({ flat, t, i18n }: Props): JSX.Element => {
+  let description: string = null;
+  switch (i18n.language) {
+    case 'es':
+      description = flat.description_ES;
+      break;
+    case 'en':
+      description = flat.description_ES;
+      break;
+  }
   return (
     <Fragment>
       <Title>{t('flat.description')}</Title>
       <Divider />
       <Zone>{`${t('flat.zone')}: ${flat.zone}`}</Zone>
-      <Info dangerouslySetInnerHTML={{ __html: flat.description }} />
+      <Info dangerouslySetInnerHTML={{ __html: description }} />
     </Fragment>
   );
 };
