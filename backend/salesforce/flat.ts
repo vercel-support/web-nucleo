@@ -9,34 +9,52 @@ export default class Flat {
   public static fields = [
     'Id',
     'Name',
-    'Direccion__c',
-    'Fotos__c',
-    'M2_tiles__c',
-    'Tipologia_inmueble__c',
-    'Dormitorios__c',
-    'Localidad__c',
-    'Provincia__c',
-    'Descripcion_Web_ES__c',
-    'Descripcion_Web_EN__c',
+    'Direccion_Inmueble__c',
     'Precio_Web__c',
-    'Mostrar_en_Web__c',
+    'Fotos__c',
+    'Dormitorios__c',
+    'Ba_os__c',
+    'M2_utiles__c',
+    'Tipologia_inmueble__c',
+    'Localidad_Inmueble__c',
+    'Provincia__c',
+    'Descripci_n_Espa_ol__c',
+    'Descripci_n_Ingl_s__c',
+    'Mostrar_en_la_Web__c',
+    'Ascensor__c',
+    'Jardin__c',
+    'Balcon__c',
+    'Terraza__c',
+    'Sotano__c',
+    'Ano_costruccion__c',
+    'Ano_reforma__c'  
   ];
-  public static objectName = 'Inmueble__c';
+  public static objectName = 'Opportunity';
 
   public id: string;
   public name: string;
+  public address: string;
   public pictureUrls: string[];
   public price: number;
   public rooms: number;
+  public bathrooms: number;
   public sqrMeters: number;
   public type: string;
   public zone: string;
   public city: string;
-  public address: string;
-  public description: string;
   public description_ES: string;
   public description_EN: string;
   public showInWebsite: boolean;
+  public hasElevator: boolean;
+  public hasGarden: boolean;
+  public hasBalcony: boolean;
+  public hasTerrace: boolean;
+  public hasBasement: boolean;
+
+  public yearConstruction?: number;
+  public yearReform?: number;
+
+
 
   static async preprocessPictures(picturesHtml: string): Promise<string[]> {
     const sfClient = await getSalesforceClient();
@@ -84,17 +102,27 @@ export default class Flat {
   static async fromRecord(record: IStringToAnyDictionary): Promise<Flat> {
     const id = record['Id'];
     const name = record['Name'];
-    const address = record['Direccion__c'];
+    const address = record['Direccion_Inmueble__c'];
     const pictureUrls = await Flat.preprocessPictures(record['Fotos__c']);
     const price = record['Precio_Web__c'];
     const rooms = record['Dormitorios__c'];
+    const bathrooms = record['Ba_os__c']
     const type = record['Tipologia_inmueble__c'];
-    const sqrMeters = record['M2_tiles__c'];
-    const zone = record['Localidad__c'];
+    const sqrMeters = record['M2_utiles__c'];
+    const zone = record['Localidad_Inmueble__c'];
     const city = record['Provincia__c'];
-    const description_ES = record['Descripcion_Web_ES__c'];
-    const description_EN = record['Descripcion_Web_EN__c'];
-    const showInWebsite = record['Mostrar_en_Web__c'];
+    const description_ES = record['Descripci_n_Espa_ol__c'];
+    const description_EN = record['Descripci_n_Ingl_s__c'];
+    const showInWebsite = record['Mostrar_en_la_Web__c'];
+
+    const hasElevator = record['Ascensor__c']
+    const hasGarden = record['Jardin__c']
+    const hasBalcony = record['Balcon__c']
+    const hasTerrace = record['Terraza__c']
+    const hasBasement = record['Sotano__c']
+  
+    const yearConstruction = record['Ano_costruccion__c']
+    const yearReform = record['Ano_reforma__c']
 
     // TODO do proper validation using typescript class, directly in 'fromDict'
     if (
@@ -108,6 +136,7 @@ export default class Flat {
       isnull(sqrMeters) ||
       isnull(zone) ||
       isnull(city) ||
+      isnull(bathrooms) ||
       isnull(description_ES) ||
       isnull(description_EN) ||
       isnull(showInWebsite) ||
@@ -123,6 +152,7 @@ export default class Flat {
       pictureUrls,
       price,
       rooms,
+      bathrooms,
       type,
       sqrMeters,
       zone,
@@ -130,6 +160,13 @@ export default class Flat {
       description_ES,
       description_EN,
       showInWebsite,
+      hasElevator,
+      hasGarden,
+      hasBalcony,
+      hasTerrace,
+      hasBasement,
+      yearConstruction,
+      yearReform
     });
   }
 
