@@ -203,7 +203,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
   // const serializedFlats = Flat.serialize(flats);
 
   const flats: Flat[] = require('../../public/fixtures/flats.json');
-  const flatIndex = flats.findIndex((f) => f.id === +params.id);
+  const flatIndex = flats.findIndex((f) => f.id === params.id);
   const flat = flats[flatIndex];
   const recommendedFlats = [
     flats[(flatIndex + 1) % flats.length],
