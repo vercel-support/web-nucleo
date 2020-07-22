@@ -105,7 +105,7 @@ export default class Flat {
     const type = record['Tipologia_inmueble__c'];
     const sqrMeters = record['M2_utiles__c'];
     const zone = record['Localidad_Inmueble__c'];
-    const city = record['Provincia__c'];
+    const city = record['Provincia__c'] || 'Alicante';
     const description_ES = record['Descripci_n_Espa_ol__c'];
     const description_EN = record['Descripci_n_Ingl_s__c'];
     const showInWebsite = record['Mostrar_en_la_Web__c'];

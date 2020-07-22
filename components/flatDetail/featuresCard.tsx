@@ -72,7 +72,7 @@ const FeaturesCard = ({ flat, className, t }: Props): JSX.Element => {
         </RoomsCol>
         <BathroomsCol xs={12} sm={8} lg={12}>
           <FeatureTitle>{t('flat.bathrooms')}</FeatureTitle>
-          <FeatureInfo>{flat.rooms}</FeatureInfo>
+          <FeatureInfo>{flat.bathrooms}</FeatureInfo>
         </BathroomsCol>
         <HeatingCol xs={12} sm={8} lg={12}>
           <FeatureTitle>{t('calefaccion')}</FeatureTitle>

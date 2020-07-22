@@ -100,7 +100,7 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
-          <Info>{flat.rooms}</Info>
+          <Info>{flat.bathrooms}</Info>
         </div>
         {isLgUp && (
           <div style={{ marginTop: '1rem' }}>

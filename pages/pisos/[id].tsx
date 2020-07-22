@@ -106,7 +106,7 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
             city: deserializedFlat.city,
             sqrMeters: deserializedFlat.sqrMeters,
             dormitories: deserializedFlat.rooms,
-            bathrooms: deserializedFlat.rooms,
+            bathrooms: deserializedFlat.bathrooms,
             price: deserializedFlat.price,
           })}
         </title>
@@ -118,7 +118,7 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
             city: deserializedFlat.city,
             sqrMeters: deserializedFlat.sqrMeters,
             dormitories: deserializedFlat.rooms,
-            bathrooms: deserializedFlat.rooms,
+            bathrooms: deserializedFlat.bathrooms,
             price: deserializedFlat.price,
           })}
         />
