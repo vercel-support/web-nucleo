@@ -67,7 +67,7 @@ const ImageCarousel = ({ flat, className, theme }: Props): JSX.Element => {
 
   return (
     <div className={className} style={{ position: 'relative' }}>
-      <Title>{flat.name}</Title>
+      <Title>{flat.address}</Title>
       <Carousel
         arrows={true}
         dots={!isSmDown}

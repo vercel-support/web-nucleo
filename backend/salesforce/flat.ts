@@ -9,7 +9,6 @@ export default class Flat {
   public static fields = [
     'Id',
     'Name',
-    'Direccion_Inmueble__c',
     'Precio_Web__c',
     'Fotos__c',
     'Dormitorios__c',
@@ -32,7 +31,6 @@ export default class Flat {
   public static objectName = 'Opportunity';
 
   public id: string;
-  public name: string;
   public address: string;
   public pictureUrls: string[];
   public price: number;
@@ -99,8 +97,7 @@ export default class Flat {
 
   static async fromRecord(record: IStringToAnyDictionary): Promise<Flat> {
     const id = record['Id'];
-    const name = record['Name'];
-    const address = record['Direccion_Inmueble__c'];
+    const address = record['Name'];
     const pictureUrls = await Flat.preprocessPictures(record['Fotos__c']);
     const price = record['Precio_Web__c'];
     const rooms = record['Dormitorios__c'];
@@ -125,7 +122,6 @@ export default class Flat {
     // TODO do proper validation using typescript class, directly in 'fromDict'
     if (
       isnull(id) ||
-      isnull(name) ||
       isnull(address) ||
       isnull(pictureUrls) ||
       isnull(price) ||
@@ -145,7 +141,6 @@ export default class Flat {
 
     return Flat.fromDict({
       id,
-      name,
       address,
       pictureUrls,
       price,
