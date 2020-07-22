@@ -108,6 +108,7 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
             dormitories: deserializedFlat.rooms,
             bathrooms: deserializedFlat.bathrooms,
             price: deserializedFlat.price,
+            address: deserializedFlat.address,
           })}
         </title>
         <meta
