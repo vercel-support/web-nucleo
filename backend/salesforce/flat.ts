@@ -53,26 +53,10 @@ export default class Flat {
   public yearConstruction?: number;
   public yearReform?: number;
 
-  static async preprocessPictures(picturesHtml: string): Promise<string[]> {
+  static async preprocessPictures(entityId: string): Promise<string[]> {
     const sfClient = await getSalesforceClient();
 
-    if (picturesHtml == null) {
-      return [];
-    }
-    const elements = parse(picturesHtml);
-    const urls = elements
-      .querySelectorAll('img')
-      .map((img) => img.attributes.src);
-
-    return await Promise.all(
-      urls.map((url) => {
-        return sfClient.fetchBase64ImageSource(
-          url,
-          Flat.objectName,
-          'Fotos__c'
-        );
-      })
-    );
+    return sfClient.fetchAttachedImages(entityId);
   }
 
   static fromDict(obj: IStringToAnyDictionary): Flat {
@@ -99,7 +83,7 @@ export default class Flat {
   static async fromRecord(record: IStringToAnyDictionary): Promise<Flat> {
     const id = record['Id'];
     const address = record['Name'];
-    const pictureUrls = await Flat.preprocessPictures(record['Fotos__c']);
+    const pictureUrls = await Flat.preprocessPictures(record['Id']);
     const price = record['Precio_Web__c'];
     const rooms = record['Dormitorios__c'];
     const bathrooms = record['Ba_os__c'];
@@ -128,6 +112,7 @@ export default class Flat {
       isnull(id) ||
       isnull(address) ||
       isnull(pictureUrls) ||
+      pictureUrls.length <= 0 ||
       isnull(price) ||
       isnull(rooms) ||
       isnull(type) ||

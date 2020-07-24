@@ -37,3 +37,8 @@ export const formatCurrency = (value: number, locale: string): string => {
     .format(value)
     .replace(/\D00(?=\D*$)/, '');
 };
+
+export const binaryToBase64ImageSrc = (data: any): string => {
+  const base64 = new Buffer(data, 'binary').toString('base64');
+  return `data:image/*;base64,${base64}`;
+}
