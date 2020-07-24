@@ -1,5 +1,4 @@
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
-import { parse } from 'node-html-parser';
 import { getSalesforceClient } from './index';
 
 function isnull(value) {

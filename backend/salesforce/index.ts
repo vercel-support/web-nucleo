@@ -2,7 +2,7 @@ import { Connection } from 'jsforce';
 import { memoize, binaryToBase64ImageSrc } from '../../common/helpers';
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
 
-import axios from 'axios';
+import axios, { AxiosRequestConfig, Method, ResponseType } from 'axios';
 
 export class Salesforce {
   private conn = new Connection();
@@ -18,29 +18,36 @@ export class Salesforce {
 
   async fetchApi(
     relativeUrl: string,
-    method: string = 'GET',
-    responseType: string = 'arraybuffer'
+    method: Method = 'GET',
+    responseType: ResponseType = 'arraybuffer'
   ) {
-    return await axios({
+    const requestConfig: AxiosRequestConfig = {
       method,
       url: `${this.conn._baseUrl()}${relativeUrl}`,
       headers: {
         Authorization: `Bearer ${this.conn.accessToken}`,
       },
       responseType,
-    });
+    };
+    return await axios(requestConfig);
   }
 
   @memoize
   async fetchAttachedImages(entityId: string): Promise<string[]> {
-    const queryRes = await this.conn.query(`Select id,ContentDocumentId,ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId = '${entityId}'`);
+    const queryRes = await this.conn.query(
+      `Select id,ContentDocumentId,ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId = '${entityId}'`
+    );
     const records = queryRes.records;
 
-    return Promise.all(records.map(async (record) => {
-      const versionId = record['ContentDocument']['LatestPublishedVersionId'];
-      const res = await this.fetchApi(`/sobjects/ContentVersion/${versionId}/VersionData`);
-      return binaryToBase64ImageSrc(res.data);
-    }))    
+    return Promise.all(
+      records.map(async (record) => {
+        const versionId = record['ContentDocument']['LatestPublishedVersionId'];
+        const res = await this.fetchApi(
+          `/sobjects/ContentVersion/${versionId}/VersionData`
+        );
+        return binaryToBase64ImageSrc(res.data);
+      })
+    );
   }
 
   @memoize
