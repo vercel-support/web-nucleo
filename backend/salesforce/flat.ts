@@ -9,7 +9,6 @@ export default class Flat {
     'Id',
     'Name',
     'Precio_Web__c',
-    'Fotos__c',
     'Dormitorios__c',
     'Ba_os__c',
     'M2_utiles__c',
