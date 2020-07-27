@@ -36,7 +36,7 @@
     "bathrooms": "Bathrooms",
     "sqrMeters": "Surface",
     "type": "Type",
-    "zone": "Zone"
+    "zone": "Area"
   },
   "flatDetail": {
     "title": "{{type}} for sale in {{address}}, {{city}}. - Inmobiliaria Nucleo",
