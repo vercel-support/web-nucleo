@@ -10,6 +10,7 @@ import Document, {
 import { ServerStyleSheet } from 'styled-components';
 
 import { lngFromReq } from 'next-i18next/dist/commonjs/utils';
+import { GA_TRACKING_ID } from '../libs/gtag';
 
 type Props = DocumentInitialProps & { lng: string };
 
@@ -47,7 +48,25 @@ export default class MyDocument extends Document<Props> {
 
     return (
       <Html lang={lng}>
-        <Head />
+        <Head>
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

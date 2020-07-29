@@ -1,9 +1,12 @@
 import React from 'react';
 import App from 'next/app';
+import Router from 'next/router';
+
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import nextI18Next from '../i18n';
 import defaultTheme from '../common/themes/default';
+import * as gtag from '../libs/gtag';
 
 import { CSSProp } from 'styled-components';
 
@@ -86,6 +89,18 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class MyApp extends App {
+  componentDidMount() {
+    Router.events.on('routeChangeComplete', this.handleRouteChange);
+  }
+
+  componentWillUnmount() {
+    Router.events.off('routeChangeComplete', this.handleRouteChange);
+  }
+
+  handleRouteChange(url) {
+    gtag.pageview(url);
+  }
+
   render() {
     const { Component, pageProps } = this.props;
 
