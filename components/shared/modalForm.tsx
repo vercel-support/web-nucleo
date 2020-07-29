@@ -1,15 +1,21 @@
 import styled from 'styled-components';
 import { WithTranslation } from 'next-i18next';
-import nextI18Next from '../../i18n';
-
 import { Row, Col, Form, Input, Modal } from 'antd';
+
+import nextI18Next from '../../i18n';
 
 const { withTranslation } = nextI18Next;
 
 type Props = {
   isSellerMode: boolean;
   visible: boolean;
-  onOk: () => void;
+  onOk: (
+    name: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    address: string
+  ) => void;
   onCancel: () => void;
 } & WithTranslation;
 
@@ -62,7 +68,19 @@ const ModalForm = ({
       okText={t('modalForm.send')}
       cancelText={t('modalForm.cancel')}
     >
-      <Form validateMessages={validateMessages} form={form} onFinish={onOk}>
+      <Form
+        validateMessages={validateMessages}
+        form={form}
+        onFinish={(values) =>
+          onOk(
+            values.name,
+            values.lastName,
+            values.email,
+            values.phone,
+            values.address || null
+          )
+        }
+      >
         <Row>
           <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
             <InputContainer>

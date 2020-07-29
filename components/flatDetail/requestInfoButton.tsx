@@ -9,10 +9,20 @@ import { ModalForm } from '../shared';
 const { withTranslation } = nextI18Next;
 
 type Props = {
+  onBuyButtonClicked: (
+    name: string,
+    lastName: string,
+    email: string,
+    phone: string
+  ) => void;
   className?: string;
 } & WithTranslation;
 
-const RequestInfoButton = ({ className, t }: Props): JSX.Element => {
+const RequestInfoButton = ({
+  onBuyButtonClicked,
+  className,
+  t,
+}: Props): JSX.Element => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
@@ -29,7 +39,8 @@ const RequestInfoButton = ({ className, t }: Props): JSX.Element => {
       <ModalForm
         isSellerMode={false}
         visible={isModalVisible}
-        onOk={() => {
+        onOk={(name, lastName, email, phone) => {
+          onBuyButtonClicked(name, lastName, email, phone);
           setModalVisible(false);
         }}
         onCancel={() => {

@@ -152,9 +152,17 @@ const ActionButton = styled(Button)<{ side: string }>`
   }
 `;
 
-type Props = WithTranslation;
+type Props = {
+  onSellButtonClicked: (
+    name: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    address: string
+  ) => void;
+} & WithTranslation;
 
-const Hero = ({ t }: Props): JSX.Element => {
+const Hero = ({ onSellButtonClicked, t }: Props): JSX.Element => {
   const [isModalSellerMode, setModalSellerMode] = useState(false);
   const router = useRouter();
 
@@ -217,7 +225,8 @@ const Hero = ({ t }: Props): JSX.Element => {
         <ModalForm
           isSellerMode={isModalSellerMode}
           visible={modalVisible}
-          onOk={() => {
+          onOk={(name, lastName, email, phone, address) => {
+            onSellButtonClicked(name, lastName, email, phone, address);
             setModalVisible(false);
           }}
           onCancel={() => {
