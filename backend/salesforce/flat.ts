@@ -129,7 +129,7 @@ export default class Flat {
     return Flat.fromDict({
       id,
       address,
-      pictureUrls,
+      pictureUrls: pictureUrls.slice(0, 4), // TODO remove hack to reduce load time
       price,
       rooms,
       bathrooms,
