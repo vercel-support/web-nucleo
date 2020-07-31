@@ -1,4 +1,3 @@
-
 const GLOBAL_CACHE = {};
 export const memoize = (
   target: any,

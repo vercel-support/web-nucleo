@@ -38,7 +38,7 @@ async function uploadFile(
           validation: false,
           metadata: {
             'Cache-Control': 'public, max-age=31536000',
-            'Content-Type': 'image/jpeg'
+            'Content-Type': 'image/jpeg',
           },
         })
       )
