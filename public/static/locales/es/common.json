@@ -36,7 +36,8 @@
     "bathrooms": "Baños",
     "sqrMeters": "Superficie",
     "type": "Tipo",
-    "zone": "Zona"
+    "zone": "Zona",
+    "pictures": "Fotos"
   },
   "flatDetail": {
     "title": "{{type}} en venta en {{address}}, {{city}}. - Inmobiliaria Nucleo",
@@ -45,6 +46,7 @@
       "recommendedFlats": "También le puede interesar"
     },
     "actions": {
+      "showAllPhotos": "Mostrar todas las fotos",
       "requestInfo": "Me interesa este inmueble"
     }
   },

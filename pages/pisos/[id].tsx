@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
@@ -15,6 +16,7 @@ import {
   Description,
   FeaturesCard,
   RequestInfoButton,
+  Gallery,
 } from '../../components/flatDetail';
 import { FlatsDisplayPlaceholder } from '../../components/home';
 import { Header, Footer } from '../../components/shared';
@@ -99,6 +101,8 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
     recommendedFlats
   );
 
+  const [isGalleryVisible, setIsGalleryVisible] = useState(false);
+
   const onBuyButtonClicked = async (
     name: string,
     lastName: string,
@@ -172,7 +176,10 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
       <Header />
 
       <Content>
-        <ImageCarousel flat={deserializedFlat} />
+        <ImageCarousel
+          flat={deserializedFlat}
+          onShowAllPhotosButtonClik={() => setIsGalleryVisible(true)}
+        />
         <SummarySection>
           <Summary flat={deserializedFlat} />
         </SummarySection>
@@ -209,6 +216,11 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
             arrows={false}
           />
         </FlatsDisplayContainer>
+        <Gallery
+          flat={deserializedFlat}
+          visible={isGalleryVisible}
+          onCancel={() => setIsGalleryVisible(false)}
+        />
       </Content>
 
       <Footer />
