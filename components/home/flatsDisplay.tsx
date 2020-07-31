@@ -1,29 +1,34 @@
 import Flat from '../../backend/salesforce/flat';
-import { WithTranslation } from 'next-i18next';
-import nextI18Next from '../../i18n';
-import styled from 'styled-components';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel } from 'antd';
 import { useRef } from 'react';
-import { PlayCircleFilled } from '@ant-design/icons';
 import { split } from '../../common/helpers';
 import FlatCard from './flatCard';
 import { useMediaQuery } from 'react-responsive';
 
-const { withTranslation } = nextI18Next;
-
 type Props = {
   flats: Flat[];
+  title: string;
+  arrows?: boolean;
   className?: string;
-} & WithTranslation;
+  theme: DefaultTheme;
+};
 
 const SectionTitle = styled.h2`
-  font-size: 30px;
-  line-height: 30px;
-  font-weight: bold;
   color: ${(props) => props.theme.colors.secondary};
+
+  ${(props) => props.theme.font.h2}
+
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: 0;
+
+  @media ${(props) => props.theme.breakpoints.xlu} {
+    margin-left: calc(${(props) => props.theme.grid.getGridColumns(2, 1)});
+    margin-right: calc(${(props) => props.theme.grid.getGridColumns(2, 1)});
+  }
 `;
 
-const Arrow = styled(PlayCircleFilled)<{ left?: boolean }>`
+const Arrow = styled.div<{ left?: boolean }>`
   position: absolute;
   margin: 0;
   top: 50%;
@@ -31,6 +36,14 @@ const Arrow = styled(PlayCircleFilled)<{ left?: boolean }>`
   right: ${(props) => (!props.left ? '4%' : 'inherit')};
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+
+  background-image: url(${(props) =>
+    props.left
+      ? require('../../public/images/prev_black.svg')
+      : require('../../public/images/next_black.svg')});
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
 
   font-size: 38px;
   color: ${(props) => props.theme.colors.secondary};
@@ -51,32 +64,79 @@ const HackyFiller = styled.div<{ width: string; margin: string }>`
   height: 0;
 `;
 
-const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
+const StyledCarousel = styled(Carousel)`
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 0)};
+
+  @media ${(props) => props.theme.breakpoints.lgd} {
+    margin-left: 0;
+    margin-right: 0;
+  }
+`;
+
+const Divider = styled.div`
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-top: 1px solid #e0e0e0;
+`;
+
+const FlatsDisplay = ({
+  className,
+  flats,
+  title,
+  arrows = true,
+  theme,
+}: Props): JSX.Element => {
   const carousel = useRef(null);
 
-  const isBig = useMediaQuery({ query: '(min-width: 1724px)' });
-  const isMedium = useMediaQuery({ query: '(min-width: 1500px)' });
-  const isSmall = useMediaQuery({ query: '(min-width: 1300px)' });
-  const isVerySmall = useMediaQuery({ query: '(min-width: 1208px)' });
-  const isVeryVerySmall = useMediaQuery({ query: '(min-width: 1110px)' });
+  const isXxl = useMediaQuery({ query: theme.breakpoints.xxl });
+  const isXxlSmall = useMediaQuery({
+    query: '(min-width: 1600px) and (max-width: 1895px)',
+  });
+  const isXl = useMediaQuery({ query: theme.breakpoints.xl });
+  const isXlSmall = useMediaQuery({
+    query: '(min-width: 1200px) and (max-width: 1300px)',
+  });
+  const isLg = useMediaQuery({ query: theme.breakpoints.lg });
+  const isMd = useMediaQuery({ query: theme.breakpoints.md });
+  const isSm = useMediaQuery({ query: theme.breakpoints.sm });
+  const isXs = useMediaQuery({ query: theme.breakpoints.xs });
 
+  let centerPadding = null;
   let baseFlatCardWith = 340;
   let flatsPerPage = 8;
-  if (isBig == true) {
-    baseFlatCardWith = 340;
-    flatsPerPage = 8;
-  } else if (isMedium == true) {
-    baseFlatCardWith = 280;
-    flatsPerPage = 8;
-  } else if (isSmall == true) {
-    baseFlatCardWith = 230;
-    flatsPerPage = 8;
-  } else if (isVerySmall == true) {
-    baseFlatCardWith = 280;
-    flatsPerPage = 6;
-  } else if (isVeryVerySmall == true) {
+  if (isXxl == true) {
     baseFlatCardWith = 380;
-    flatsPerPage = 4;
+    flatsPerPage = 8;
+    if (isXxlSmall == true) {
+      baseFlatCardWith = 310;
+      flatsPerPage = 8;
+    }
+  } else if (isXl == true) {
+    baseFlatCardWith = 255;
+    flatsPerPage = 8;
+    if (isXlSmall == true) {
+      baseFlatCardWith = 225;
+      flatsPerPage = 8;
+    }
+  } else if (isLg == true) {
+    centerPadding = '30%';
+    baseFlatCardWith = 505;
+    flatsPerPage = 1;
+  } else if (isMd == true) {
+    centerPadding = '30%';
+    baseFlatCardWith = 505;
+    flatsPerPage = 1;
+  } else if (isSm == true) {
+    centerPadding = '20%';
+    baseFlatCardWith = 397;
+    flatsPerPage = 1;
+  } else if (isXs == true) {
+    centerPadding = '10%';
+    baseFlatCardWith = 397;
+    flatsPerPage = 1;
   }
 
   const aspectRatio = 1.68;
@@ -96,9 +156,18 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
 
   return (
     <div className={className}>
-      <SectionTitle>{t('section-flats-title')}</SectionTitle>
-      <Arrow left={true} rotate={180} onClick={previous} />
-      <Carousel ref={carousel} dots={false}>
+      <SectionTitle>{title}</SectionTitle>
+      <Divider />
+      {arrows && (isXl || isXxl) ? (
+        <Arrow left={true} onClick={previous} />
+      ) : null}
+      <StyledCarousel
+        ref={carousel}
+        dots={false}
+        draggable={!(isXl || isXxl)}
+        centerMode={!(isXl || isXxl)}
+        centerPadding={centerPadding}
+      >
         {flatPages.map((page, i) => (
           <div key={`page_${i}`}>
             <FlatsPage>
@@ -106,14 +175,15 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
                 <FlatCard
                   width={flatCardWidth}
                   margin={flatCardMargin}
-                  key={flat.name}
+                  key={flat.id}
                   flat={flat}
                   imageHeight={flatCardImageHeight}
+                  useCarousel={isXl || isXxl}
                 />
               ))}
               {page.map((flat) => (
                 <HackyFiller
-                  key={flat.name}
+                  key={flat.id}
                   width={flatCardWidth}
                   margin={flatCardMargin}
                 />
@@ -121,15 +191,17 @@ const FlatsDisplay = ({ className, t, flats }: Props): JSX.Element => {
             </FlatsPage>
           </div>
         ))}
-      </Carousel>
-      <Arrow left={false} onClick={next} />
+      </StyledCarousel>
+      {arrows && (isXl || isXxl) ? <Arrow left={false} onClick={next} /> : null}
     </div>
   );
 };
 
-export default withTranslation('common')(styled(FlatsDisplay)`
-  padding: 70px 150px;
+export const FlatsDisplayPlaceholder = styled.div`
   background-color: #f2f2f2;
+  height: 80vh;
+`;
 
+export default withTheme(styled(FlatsDisplay)`
   position: relative;
 `);

@@ -1,10 +1,12 @@
 import React from 'react';
 import App from 'next/app';
-import nextI18Next from '../i18n';
+import Router from 'next/router';
 
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import theme from '../common/theme';
+import nextI18Next from '../i18n';
+import defaultTheme from '../common/themes/default';
+import * as gtag from '../libs/gtag';
 
 import { CSSProp } from 'styled-components';
 
@@ -63,14 +65,47 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+  :root {
+    @media ${(props) => props.theme.breakpoints.xs} {
+      --gutter: ${(props) => props.theme.grid.xsGutter};
+    }
+    @media ${(props) => props.theme.breakpoints.sm} {
+      --gutter: ${(props) => props.theme.grid.smGutter};
+    }
+    @media ${(props) => props.theme.breakpoints.md} {
+      --gutter: ${(props) => props.theme.grid.mdGutter};
+    }
+    @media ${(props) => props.theme.breakpoints.lg} {
+      --gutter: ${(props) => props.theme.grid.lgGutter};
+    }
+    @media ${(props) => props.theme.breakpoints.xl} {
+      --gutter: ${(props) => props.theme.grid.xlGutter};
+    }
+    @media ${(props) => props.theme.breakpoints.xxl} {
+      --gutter: ${(props) => props.theme.grid.xxlGutter};
+    }
+  }  
 `;
 
 class MyApp extends App {
+  componentDidMount() {
+    Router.events.on('routeChangeComplete', this.handleRouteChange);
+  }
+
+  componentWillUnmount() {
+    Router.events.off('routeChangeComplete', this.handleRouteChange);
+  }
+
+  handleRouteChange(url) {
+    gtag.pageview(url);
+  }
+
   render() {
     const { Component, pageProps } = this.props;
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={defaultTheme}>
         <GlobalStyle />
         <Component {...pageProps} />
       </ThemeProvider>

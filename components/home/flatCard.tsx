@@ -3,7 +3,8 @@ import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel, Tag } from 'antd';
 import i18Next from '../../i18n';
 import { WithTranslation } from 'next-i18next';
-import { useRef, useEffect } from 'react';
+import { formatCurrency } from '../../common/helpers';
+import Link from 'next/link';
 
 const { withTranslation } = i18Next;
 
@@ -11,18 +12,16 @@ type Props = {
   flat: Flat;
   className?: string;
   theme: DefaultTheme;
+  useCarousel?: boolean;
   imageHeight: string;
 } & WithTranslation;
 
-const FlatImage = styled.img<{ url: string; imageHeight: string }>`
-  background-image: url(${(props) => props.url});
-  background-color: red;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-
+const FlatImage = styled.img<{ imageHeight: string }>`
   height: ${(props) => props.imageHeight};
   width: 100%;
+  overflow: hidden;
+
+  object-fit: cover;
 `;
 
 const FlatInfo = styled.div`
@@ -31,19 +30,23 @@ const FlatInfo = styled.div`
   justify-content: space-between;
   align-items: stretch;
 
-  padding: 8px;
+  padding: 8%;
 `;
 
 const TopText = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const BottomText = styled.p`
   font-weight: normal;
   font-size: 12px;
   line-height: 12px;
+
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const Divider = styled.hr`
@@ -58,68 +61,80 @@ const StyledTag = styled(Tag)`
   float: right;
 `;
 
+const StyledCarousel = styled(Carousel)`
+  border-top-left-radius: ${(props) => props.theme.borderRadius};
+  border-top-right-radius: ${(props) => props.theme.borderRadius};
+`;
+
 const FlatCard = ({
   flat,
   className,
   theme,
+  i18n,
   t,
   imageHeight,
+  useCarousel = true,
 }: Props): JSX.Element => {
-  const carousel = useRef(null);
-
-  let timeout = null;
-
-  function laggedNext() {
-    timeout = setTimeout(() => {
-      carousel.current.next();
-    }, 500);
-  }
-
-  function clearNext() {
-    if (timeout !== null) {
-      clearTimeout(timeout);
-      timeout = null;
-    }
-  }
-
-  useEffect(() => {
-    return function cleanup() {
-      clearNext();
-    };
-  });
-
   return (
-    <div
-      className={className}
-      onMouseEnter={laggedNext}
-      onMouseLeave={clearNext}
-      onMouseDown={clearNext}
-    >
-      <Carousel ref={carousel} dots={false} draggable={true}>
-        {flat.pictureUrls.map((url) => (
-          <FlatImage imageHeight={imageHeight} key={url} url={url} />
-        ))}
-      </Carousel>
-      <FlatInfo>
-        <TopText>
-          <span>{flat.price}€</span>
-          <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
-        </TopText>
-        <Divider />
-        <BottomText>
-          <span
+    <Link href={`/pisos/${flat.id}`}>
+      <div className={className}>
+        {useCarousel ? (
+          <StyledCarousel dots={true} draggable={true}>
+            {flat.pictureUrls.map((url) => (
+              <FlatImage
+                imageHeight={imageHeight}
+                key={url}
+                src={url}
+                alt={`Vivienda en ${flat.address}`}
+              />
+            ))}
+          </StyledCarousel>
+        ) : (
+          <FlatImage
+            imageHeight={imageHeight}
+            src={flat.pictureUrls[0]}
             css={`
-              margin-right: 8px;
+              border-top-left-radius: ${(props) => props.theme.borderRadius};
+              border-top-right-radius: ${(props) => props.theme.borderRadius};
             `}
-          >
-            {flat.sqrMeters}m<sup>2</sup>
-          </span>
-          <span>
-            {flat.rooms} {t('habitaciones')}
-          </span>
-        </BottomText>
-      </FlatInfo>
-    </div>
+            alt={`Vivienda en ${flat.address}`}
+          />
+        )}
+        <FlatInfo>
+          <TopText>
+            <span
+              css={`
+                font-weight: 600;
+              `}
+            >
+              {formatCurrency(flat.price, i18n.language)}
+            </span>
+            <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
+          </TopText>
+          <Divider />
+          <BottomText>
+            <span
+              css={`
+                margin-right: 8px;
+              `}
+            >
+              {flat.sqrMeters} m
+              <sup
+                css={`
+                  vertical-align: top;
+                  font-size: 0.6em;
+                `}
+              >
+                2
+              </sup>
+            </span>
+            <span>
+              {flat.rooms} {t('habitaciones')}
+            </span>
+          </BottomText>
+        </FlatInfo>
+      </div>
+    </Link>
   );
 };
 
@@ -132,7 +147,16 @@ export default withTheme(styled(withTranslation('common')(FlatCard))<{
   background-color: white;
   border-radius: ${(props) => props.theme.borderRadius};
   transition: 0.3s;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.15);
   &:hover {
-    box-shadow: 0px 2px 6px;
+    -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+  }
+  & .slick-initialized {
+    overflow: hidden;
   }
 `);

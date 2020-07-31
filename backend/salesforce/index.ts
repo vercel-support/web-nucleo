@@ -1,8 +1,10 @@
 import { Connection } from 'jsforce';
-import { memoize } from '../../common/helpers';
+import { retry } from 'async-retry-decorator';
+import { memoize, binaryToBase64ImageSrc } from '../../common/helpers';
+import { uploadImagesToGS } from '../storage';
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
 
-import axios from 'axios';
+import axios, { AxiosRequestConfig, Method, ResponseType } from 'axios';
 
 export class Salesforce {
   private conn = new Connection();
@@ -14,6 +16,61 @@ export class Salesforce {
     await this.conn.login(user, password);
     this.initialized = true;
     return this;
+  }
+
+  @retry({
+    retries: 3,
+    onRetry: (error, attempt) => {
+      console.log(`Retry querySOQL (${attempt}) on error`, error.message);
+    },
+  })
+  async querySOQL(query: string): Promise<any> {
+    return this.conn.query(query);
+  }
+
+  @retry({
+    retries: 3,
+    onRetry: (error, attempt) => {
+      console.log(`Retry fetchApi (${attempt}) on error`, error.message);
+    },
+  })
+  async fetchApi(
+    relativeUrl: string,
+    method: Method = 'GET',
+    responseType: ResponseType = 'arraybuffer'
+  ) {
+    const requestConfig: AxiosRequestConfig = {
+      method,
+      url: `${this.conn._baseUrl()}${relativeUrl}`,
+      headers: {
+        Authorization: `Bearer ${this.conn.accessToken}`,
+      },
+      responseType,
+    };
+    return await axios(requestConfig);
+  }
+
+  @memoize
+  async fetchAttachedImages(entityId: string): Promise<string[]> {
+    const queryRes = await this.querySOQL(
+      `Select id,ContentDocumentId,ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId = '${entityId}'`
+    );
+    const records = queryRes.records;
+
+    const images = await Promise.all(
+      records.map(async (record) => {
+        const versionId = record['ContentDocument']['LatestPublishedVersionId'];
+        const res = await this.fetchApi(
+          `/sobjects/ContentVersion/${versionId}/VersionData`
+        );
+        return res.data;
+      })
+    );
+    if (images.length <= 0) {
+      return [];
+    }
+    const urls = await uploadImagesToGS('salesforce-image-', images);
+    return urls;
   }
 
   @memoize
@@ -30,17 +87,11 @@ export class Salesforce {
     const objectId = searchParams.get('eid');
     const fieldId = searchParams.get('refid');
 
-    const res = await axios({
-      method: 'GET',
-      url: `${this.conn._baseUrl()}/sobjects/${objectName}/${objectId}/richTextImageFields/${fieldName}/${fieldId}`,
-      headers: {
-        Authorization: `Bearer ${this.conn.accessToken}`,
-      },
-      responseType: 'arraybuffer',
-    });
+    const res = await this.fetchApi(
+      `/sobjects/${objectName}/${objectId}/richTextImageFields/${fieldName}/${fieldId}`
+    );
 
-    const base64 = new Buffer(res.data, 'binary').toString('base64');
-    return `data:image/*;base64,${base64}`;
+    return binaryToBase64ImageSrc(res.data);
   }
 
   @memoize
@@ -52,7 +103,7 @@ export class Salesforce {
       throw Error('Initialize the salesforce client before using it.');
     }
 
-    const results = await this.conn.query(
+    const results = await this.querySOQL(
       `SELECT ${fields.join(', ')} FROM ${objectName}`
     );
 
