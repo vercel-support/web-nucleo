@@ -7,6 +7,11 @@ import { Row, Col } from 'antd';
 
 import nextI18Next from '../../i18n';
 import Flat from '../../backend/salesforce/flat';
+import { IFlat } from '../../common/model/flat.model';
+import {
+  deserializeMultiple,
+  deserializeSingle,
+} from '../../common/helpers/serialization';
 import {
   ImageCarousel,
   Summary,
@@ -90,10 +95,11 @@ const FlatsDisplay = dynamic(
 );
 
 const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
-  const deserializedFlat = Flat.deserializeResult(flat);
-  const deserializedRecommendedFlats = Flat.deserializeResults(
-    recommendedFlats
+  const deserializedRecommendedFlats = deserializeMultiple(
+    recommendedFlats,
+    IFlat
   );
+  const deserializedFlat = deserializeSingle(flat, IFlat);
 
   return (
     <Layout>

@@ -26,7 +26,6 @@ async function uploadFile(
   bucketName: string
 ): Promise<void> {
   const gcFile = gStorage.bucket(bucketName).file(filename);
-
   const dataStream = new PassThrough();
   dataStream.push(data);
   dataStream.push(null);
@@ -37,7 +36,10 @@ async function uploadFile(
         gcFile.createWriteStream({
           resumable: false,
           validation: false,
-          metadata: { 'Cache-Control': 'public, max-age=31536000' },
+          metadata: {
+            'Cache-Control': 'public, max-age=31536000',
+            'Content-Type': 'image/jpeg'
+          },
         })
       )
       .on('error', (error: Error) => {
@@ -61,7 +63,7 @@ export const uploadImagesToGS = async (
 
   const promises: Promise<void>[] = [];
   const filenames: string[] = [];
-  for (const image in images) {
+  for (const image of images) {
     const contentHash = createHash('md5').update(image).digest('hex');
     const filename = `${prefix}${contentHash}`;
     if (!existingFileNames.includes(filename)) {

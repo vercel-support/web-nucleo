@@ -5,6 +5,8 @@ import { WithTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
 import nextI18Next from '../i18n';
+import { IFlat } from '../common/model/flat.model';
+import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
 import {
   BlogShowcase,
@@ -49,8 +51,7 @@ const Content = styled.main`
 `;
 
 export const Home = ({ flats, t }: Props): JSX.Element => {
-  const deserializedFlats = Flat.deserializeResults(flats);
-
+  const deserializedFlats = deserializeMultiple(flats, IFlat);
   return (
     <Layout>
       <Head>

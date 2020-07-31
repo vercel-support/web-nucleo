@@ -1,4 +1,5 @@
 import { Connection } from 'jsforce';
+import { retry } from 'async-retry-decorator';
 import { memoize, binaryToBase64ImageSrc } from '../../common/helpers';
 import { uploadImagesToGS } from '../storage';
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
@@ -17,6 +18,22 @@ export class Salesforce {
     return this;
   }
 
+  @retry({
+    retries: 3,
+    onRetry: (error, attempt) => {
+      console.log(`Retry querySOQL (${attempt}) on error`, error.message);
+    },
+  })
+  async querySOQL(query: string): Promise<any> {
+    return this.conn.query(query);
+  }
+
+  @retry({
+    retries: 3,
+    onRetry: (error, attempt) => {
+      console.log(`Retry fetchApi (${attempt}) on error`, error.message);
+    },
+  })
   async fetchApi(
     relativeUrl: string,
     method: Method = 'GET',
@@ -35,7 +52,7 @@ export class Salesforce {
 
   @memoize
   async fetchAttachedImages(entityId: string): Promise<string[]> {
-    const queryRes = await this.conn.query(
+    const queryRes = await this.querySOQL(
       `Select id,ContentDocumentId,ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId = '${entityId}'`
     );
     const records = queryRes.records;
@@ -49,6 +66,9 @@ export class Salesforce {
         return res.data;
       })
     );
+    if (images.length <= 0) {
+      return [];
+    }
     const urls = await uploadImagesToGS('salesforce-image-', images);
     return urls;
   }
@@ -83,7 +103,7 @@ export class Salesforce {
       throw Error('Initialize the salesforce client before using it.');
     }
 
-    const results = await this.conn.query(
+    const results = await this.querySOQL(
       `SELECT ${fields.join(', ')} FROM ${objectName}`
     );
 
