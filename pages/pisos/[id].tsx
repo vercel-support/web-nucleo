@@ -8,6 +8,11 @@ import { Row, Col } from 'antd';
 import nextI18Next from '../../i18n';
 import { IContact } from '../../common/model/mailchimp/contact.model';
 import Flat from '../../backend/salesforce/flat';
+import { IFlat } from '../../common/model/flat.model';
+import {
+  deserializeMultiple,
+  deserializeSingle,
+} from '../../common/helpers/serialization';
 import { useMailchimpService } from '../../services/mailchimpService';
 import {
   ImageCarousel,
@@ -93,11 +98,11 @@ const FlatsDisplay = dynamic(
 
 const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
   const mailchimpService = useMailchimpService();
-
-  const deserializedFlat = Flat.deserializeResult(flat);
-  const deserializedRecommendedFlats = Flat.deserializeResults(
-    recommendedFlats
+  const deserializedRecommendedFlats = deserializeMultiple(
+    recommendedFlats,
+    IFlat
   );
+  const deserializedFlat = deserializeSingle(flat, IFlat);
 
   const onBuyButtonClicked = async (
     name: string,
