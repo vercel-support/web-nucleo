@@ -7,7 +7,9 @@ import styled from 'styled-components';
 import nextI18Next from '../i18n';
 import { IFlat } from '../common/model/flat.model';
 import { deserializeMultiple } from '../common/helpers/serialization';
+import { IContact } from '../common/model/mailchimp/contact.model';
 import Flat from '../backend/salesforce/flat';
+import { useMailchimpService } from '../services/mailchimpService';
 import {
   BlogShowcase,
   Hero,
@@ -51,7 +53,46 @@ const Content = styled.main`
 `;
 
 export const Home = ({ flats, t }: Props): JSX.Element => {
+  const mailchimpService = useMailchimpService();
+
   const deserializedFlats = deserializeMultiple(flats, IFlat);
+
+  const onSellButtonClicked = async (
+    name: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    address: string
+  ): Promise<void> => {
+    try {
+      const contact: IContact = { EMAIL: email };
+      if (name) {
+        contact.FNAME = name;
+      }
+      if (lastName) {
+        contact.LNAME = lastName;
+      }
+      if (phone) {
+        contact.PHONE = phone;
+      }
+      if (address) {
+        contact.HADDRESS = address;
+      }
+      await mailchimpService.subscribe(contact);
+    } catch (error) {
+      // TODO: manage error
+    }
+  };
+
+  const onSubscribeButtonClicked = async (email: string): Promise<void> => {
+    try {
+      const contact: IContact = { EMAIL: email };
+      await mailchimpService.subscribe(contact);
+    } catch (error) {
+      // TODO: manage error
+    }
+  };
+
   return (
     <Layout>
       <Head>
@@ -82,7 +123,7 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
       <Header />
 
       <Content>
-        <Hero />
+        <Hero onSellButtonClicked={onSellButtonClicked} />
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={deserializedFlats}
@@ -90,7 +131,9 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
           />
         </FlatsDisplayContainer>
         <BlogShowcase />
-        <NewsletterSection />
+        <NewsletterSection
+          onSubscribeButtonClicked={onSubscribeButtonClicked}
+        />
       </Content>
 
       <Footer />

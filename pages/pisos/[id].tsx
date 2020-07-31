@@ -6,12 +6,14 @@ import styled from 'styled-components';
 import { Row, Col } from 'antd';
 
 import nextI18Next from '../../i18n';
+import { IContact } from '../../common/model/mailchimp/contact.model';
 import Flat from '../../backend/salesforce/flat';
 import { IFlat } from '../../common/model/flat.model';
 import {
   deserializeMultiple,
   deserializeSingle,
 } from '../../common/helpers/serialization';
+import { useMailchimpService } from '../../services/mailchimpService';
 import {
   ImageCarousel,
   Summary,
@@ -95,11 +97,35 @@ const FlatsDisplay = dynamic(
 );
 
 const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
+  const mailchimpService = useMailchimpService();
   const deserializedRecommendedFlats = deserializeMultiple(
     recommendedFlats,
     IFlat
   );
   const deserializedFlat = deserializeSingle(flat, IFlat);
+
+  const onBuyButtonClicked = async (
+    name: string,
+    lastName: string,
+    email: string,
+    phone: string
+  ): Promise<void> => {
+    try {
+      const contact: IContact = { EMAIL: email };
+      if (name) {
+        contact.FNAME = name;
+      }
+      if (lastName) {
+        contact.LNAME = lastName;
+      }
+      if (phone) {
+        contact.PHONE = phone;
+      }
+      await mailchimpService.subscribe(contact);
+    } catch (error) {
+      // TODO: manage error
+    }
+  };
 
   return (
     <Layout>
@@ -171,7 +197,9 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
                       md={{ span: 12, offset: 6 }}
                       lg={{ span: 24, offset: 0 }}
                     >
-                      <RequestInfoButton />
+                      <RequestInfoButton
+                        onBuyButtonClicked={onBuyButtonClicked}
+                      />
                     </Col>
                   </Row>
                 </RequestInfoSection>
