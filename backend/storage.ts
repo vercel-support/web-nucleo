@@ -61,7 +61,7 @@ export const uploadImagesToGS = async (
 
   const promises: Promise<void>[] = [];
   const filenames: string[] = [];
-  for (let image in images) {
+  for (const image in images) {
     const contentHash = createHash('md5').update(image).digest('hex');
     const filename = `${prefix}${contentHash}`;
     if (!existingFileNames.includes(filename)) {

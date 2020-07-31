@@ -6,7 +6,7 @@
       "request": "launch",
       "name": "Next.js server-side",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--inspect", "node_modules/.bin/next", "dev"],
+      "runtimeArgs": ["--inspect", "node_modules/.bin/next", "dev", "-p", "3005"],
       "port": 9229
     }
   ]
