@@ -70,5 +70,15 @@
     "cancel": "Cancelar",
     "validateEmail": "El correo electrónico introducido es inválido.",
     "validateRequired": "Por favor, rellene este campo."
+  },
+  "cookies": {
+    "text": "Utilizamos cookies propias y de terceros para evaluar el uso que se hace de la web y la actividad general de la misma. Si usted continúa navegando, consideramos que acepta su uso.",
+    "detail": {
+      "title": "Política de cookies"
+    },
+    "actions": {
+      "ok": "Aceptar",
+      "moreInfo": "Más información"
+    }
   }
 }

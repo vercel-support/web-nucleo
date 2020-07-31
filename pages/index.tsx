@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import nextI18Next from '../i18n';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import Flat from '../backend/salesforce/flat';
+import { useCookiesState } from '../services/cookiesService';
 import { useMailchimpService } from '../services/mailchimpService';
 import {
   BlogShowcase,
@@ -14,7 +15,7 @@ import {
   NewsletterSection,
   FlatsDisplayPlaceholder,
 } from '../components/home';
-import { Header, Footer } from '../components/shared';
+import { Header, Footer, CookiesBanner } from '../components/shared';
 
 const FlatsDisplayContainer = styled.div`
   background-color: #f2f2f2;
@@ -51,6 +52,7 @@ const Content = styled.main`
 `;
 
 export const Home = ({ flats, t }: Props): JSX.Element => {
+  const [cookiesAccepted, setCookiesAccepted] = useCookiesState();
   const mailchimpService = useMailchimpService();
 
   const deserializedFlats = Flat.deserializeResults(flats);
@@ -135,6 +137,10 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
       </Content>
 
       <Footer />
+
+      {!cookiesAccepted && (
+        <CookiesBanner setCookiesAccepted={setCookiesAccepted} />
+      )}
     </Layout>
   );
 };

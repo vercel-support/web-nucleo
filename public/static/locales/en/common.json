@@ -70,5 +70,15 @@
     "cancel": "Cancel",
     "validateEmail": "The e-mail you wrote is invalid.",
     "validateRequired": "Please, fill in this field."
+  },
+  "cookies": {
+    "text": "This site uses profiling cookies to track users. If you continue browsing, we consider you accept it.",
+    "detail": {
+      "title": "Cookies policy"
+    },
+    "actions": {
+      "ok": "OK",
+      "moreInfo": "More information"
+    }
   }
 }

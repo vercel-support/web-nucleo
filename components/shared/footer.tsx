@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import LanguageSelector from './languageSelector';
 import { Button } from 'antd';
@@ -51,7 +52,9 @@ const DropdownMenu = (t: TFunction) => (
       <StyledButton type="text">{t('politica-datos')}</StyledButton>
     </Menu.Item>
     <Menu.Item key="2">
-      <StyledButton type="text">{t('politica-cookies')}</StyledButton>
+      <Link href="/legal/cookies">
+        <StyledButton type="text">{t('politica-cookies')}</StyledButton>
+      </Link>
     </Menu.Item>
   </Menu>
 );
@@ -85,7 +88,9 @@ const Footer = ({ className, t }: Props) => {
         <NucleoLabel>{t('nucleo-sl')}</NucleoLabel>
         <StyledButton type="text">{t('aviso-legal')}</StyledButton>
         <StyledButton type="text">{t('politica-datos')}</StyledButton>
-        <StyledButton type="text">{t('politica-cookies')}</StyledButton>
+        <Link href="/legal/cookies">
+          <StyledButton type="text">{t('politica-cookies')}</StyledButton>
+        </Link>
       </MenuButtons>
     </footer>
   );
@@ -93,7 +98,7 @@ const Footer = ({ className, t }: Props) => {
 
 export default styled(withTranslation('common')(Footer))`
   width: 100%;
-  height: 80px;
+  height: ${(props) => props.theme.footerHeight};
 
   background-color: white;
 
