@@ -1,5 +1,6 @@
 import { Connection } from 'jsforce';
 import { memoize, binaryToBase64ImageSrc } from '../../common/helpers';
+import { uploadImagesToGS } from '../storage';
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
 
 import axios, { AxiosRequestConfig, Method, ResponseType } from 'axios';
@@ -39,15 +40,17 @@ export class Salesforce {
     );
     const records = queryRes.records;
 
-    return Promise.all(
+    const images = await Promise.all(
       records.map(async (record) => {
         const versionId = record['ContentDocument']['LatestPublishedVersionId'];
         const res = await this.fetchApi(
           `/sobjects/ContentVersion/${versionId}/VersionData`
         );
-        return binaryToBase64ImageSrc(res.data);
+        return res.data;
       })
     );
+    const urls = await uploadImagesToGS('salesforce-image-', images);
+    return urls;
   }
 
   @memoize
