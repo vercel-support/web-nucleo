@@ -1,10 +1,11 @@
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
+import { IFlat } from '../../common/model/flat.model';
 import { getSalesforceClient } from './index';
 
 function isnull(value) {
   return value === undefined || value === null;
 }
-export default class Flat {
+export default class Flat extends IFlat {
   public static fields = [
     'Id',
     'Name',
@@ -62,18 +63,6 @@ export default class Flat {
     return Object.assign(flat, obj);
   }
 
-  static deserializeResult(json: string): Flat {
-    const obj = JSON.parse(json);
-    return Flat.fromDict(obj);
-  }
-
-  static deserializeResults(json: string): Flat[] {
-    const objs = JSON.parse(json);
-    return objs.map((obj) => {
-      return Flat.fromDict(obj);
-    });
-  }
-
   static serialize(flats: Flat | Flat[]): string {
     return JSON.stringify(flats);
   }
@@ -129,7 +118,7 @@ export default class Flat {
     return Flat.fromDict({
       id,
       address,
-      pictureUrls: pictureUrls.slice(0, 4), // TODO remove hack to reduce load time
+      pictureUrls,
       price,
       rooms,
       bathrooms,

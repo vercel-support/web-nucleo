@@ -5,6 +5,8 @@ import { WithTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
 import nextI18Next from '../i18n';
+import { IFlat } from '../common/model/flat.model';
+import { deserializeMultiple } from '../common/helpers/serialization';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import Flat from '../backend/salesforce/flat';
 import { useCookiesState } from '../services/cookiesService';
@@ -55,7 +57,7 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
   const [cookiesAccepted, setCookiesAccepted] = useCookiesState();
   const mailchimpService = useMailchimpService();
 
-  const deserializedFlats = Flat.deserializeResults(flats);
+  const deserializedFlats = deserializeMultiple(flats, IFlat);
 
   const onSellButtonClicked = async (
     name: string,
