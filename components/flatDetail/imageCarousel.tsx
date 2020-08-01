@@ -1,14 +1,19 @@
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Carousel } from 'antd';
+import { WithTranslation } from 'next-i18next';
+import { Carousel, Button } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 
+import nextI18Next from '../../i18n';
 import Flat from '../../backend/salesforce/flat';
+
+const { withTranslation } = nextI18Next;
 
 type Props = {
   flat: Flat;
+  onShowAllPhotosButtonClik: () => void;
   className?: string;
   theme: DefaultTheme;
-};
+} & WithTranslation;
 
 const Title = styled.div`
   position: absolute;
@@ -21,6 +26,16 @@ const Title = styled.div`
   font-weight: 600;
   font-size: 40px;
   color: #ffffff;
+  z-index: 1;
+`;
+
+const ShowAllPhotosButton = styled(Button)`
+  position: absolute;
+  right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+  @media ${(props) => props.theme.breakpoints.smd} {
+    right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  }
+  bottom: 24px;
   z-index: 1;
 `;
 
@@ -62,12 +77,25 @@ const NextArrow = styled.div`
   z-index: 1;
 `;
 
-const ImageCarousel = ({ flat, className, theme }: Props): JSX.Element => {
+const ImageCarousel = ({
+  flat,
+  onShowAllPhotosButtonClik,
+  className,
+  theme,
+  t,
+}: Props): JSX.Element => {
   const isSmDown = useMediaQuery({ query: theme.breakpoints.smd });
 
   return (
     <div className={className} style={{ position: 'relative' }}>
       <Title>{flat.address}</Title>
+      <ShowAllPhotosButton
+        type={'default'}
+        ghost
+        onClick={() => onShowAllPhotosButtonClik()}
+      >
+        {t('flatDetail.actions.showAllPhotos')}
+      </ShowAllPhotosButton>
       <Carousel
         arrows={true}
         dots={!isSmDown}
@@ -82,7 +110,7 @@ const ImageCarousel = ({ flat, className, theme }: Props): JSX.Element => {
   );
 };
 
-export default withTheme(styled(ImageCarousel)`
+export default withTheme(styled(withTranslation('common')(ImageCarousel))`
   .slick-dots-bottom {
     bottom: 24px;
   }

@@ -191,6 +191,7 @@ const theme: DefaultTheme = {
   },
 
   headerHeight: '80px',
+  footerHeight: '80px',
 
   loadOptimizedImage: (url: string): string => {
     const trace = require(`../../public/images/${url}?trace`).trace;
