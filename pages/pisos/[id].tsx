@@ -246,9 +246,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
   params,
 }) => {
-  // const flat = await Flat.getFlat(+params.id);
-  // const serializedFlats = Flat.serialize(flats);
-
   const flats = await Flat.getFlats();
   const flatIndex = flats.findIndex((f) => f.id === params.id);
   const flat = flats[flatIndex];

@@ -140,6 +140,10 @@ export default class Flat extends IFlat {
   }
 
   static async getFlats(): Promise<Flat[]> {
+    if (process.env.NODE_ENV == 'development') {
+      const flatsObjs = require('../../public/fixtures/flats.json');
+      return flatsObjs.map((flatJson) => Flat.fromDict(flatJson));
+    }
     const sfClient = await getSalesforceClient();
 
     const records = await sfClient.fetchAllObjectInstances(
