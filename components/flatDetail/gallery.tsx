@@ -66,6 +66,7 @@ const Gallery = ({ flat, visible, onCancel, t }: Props): JSX.Element => {
         dots={false}
         prevArrow={<PrevArrow />}
         nextArrow={<NextArrow />}
+        lazyLoad={'progressive'}
       >
         {flat.pictureUrls.map((url) => (
           <FlatImage imageHeight={'80vh'} key={url} url={url} />

@@ -79,7 +79,7 @@ const FlatCard = ({
     <Link href={`/pisos/${flat.id}`}>
       <div className={className}>
         {useCarousel ? (
-          <StyledCarousel dots={true} draggable={true}>
+          <StyledCarousel dots={true} draggable={true} lazyLoad={'progressive'}>
             {flat.pictureUrls.map((url) => (
               <FlatImage
                 imageHeight={imageHeight}

@@ -41,7 +41,7 @@
   },
   "flatDetail": {
     "title": "{{type}} en venta en {{address}}, {{city}}. - Inmobiliaria Nucleo",
-    "description": "{{type}} en venta por {{price}}€. {{dormitories}} dormitorios, {{bathrooms}} baños, {{sqrMeters}} en {{address}}, {{city}}",
+    "description": "{{type}} en venta por {{price}}€. {{rooms}} dormitorio/s, {{bathrooms}} baño/s, {{sqrMeters}} metros cuadrados en {{address}}, {{city}}",
     "messages": {
       "recommendedFlats": "También le puede interesar"
     },
