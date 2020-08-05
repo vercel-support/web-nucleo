@@ -10,4 +10,4 @@ export const gStorage = new Storage({
 });
 
 export const GS_STATIC_DATA_BUCKET_NAME = 'static-data-storage';
-export const GS_STORAGE_BASE_URL = 'http://storage.googleapis.com';
+export const GS_STORAGE_BASE_URL = 'https://storage.googleapis.com';
