@@ -5,7 +5,7 @@ import {
   gStorage,
 } from './config';
 import { File } from '@google-cloud/storage';
-import { join } from 'path';
+import { resolve } from 'url';
 import { PassThrough } from 'stream';
 
 async function listFilesByPrefix(
@@ -77,7 +77,10 @@ export const uploadImagesToGS = async (
 
   await Promise.all(promises);
 
-  return filenames.map((filename) =>
-    join(GS_STORAGE_BASE_URL, GS_STATIC_DATA_BUCKET_NAME, filename)
-  );
+  return filenames.map((filename) => {
+    return resolve(
+      resolve(GS_STORAGE_BASE_URL, GS_STATIC_DATA_BUCKET_NAME),
+      filename
+    );
+  });
 };
