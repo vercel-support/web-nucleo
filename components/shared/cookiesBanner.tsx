@@ -41,7 +41,7 @@ const CookiesBanner = ({
               </Button>
             </Col>
             <Col xs={24} lg={12}>
-              <Link href="/legal/cookies">
+              <Link href="/legal/cookies" passHref>
                 <Button type={'default'} ghost>
                   {t('cookies.actions.moreInfo')}
                 </Button>

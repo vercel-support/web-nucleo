@@ -52,7 +52,7 @@ const DropdownMenu = (t: TFunction) => (
       <StyledButton type="text">{t('politica-datos')}</StyledButton>
     </Menu.Item>
     <Menu.Item key="2">
-      <Link href="/legal/cookies">
+      <Link href="/legal/cookies" passHref>
         <StyledButton type="text">{t('politica-cookies')}</StyledButton>
       </Link>
     </Menu.Item>
@@ -88,7 +88,7 @@ const Footer = ({ className, t }: Props) => {
         <NucleoLabel>{t('nucleo-sl')}</NucleoLabel>
         <StyledButton type="text">{t('aviso-legal')}</StyledButton>
         <StyledButton type="text">{t('politica-datos')}</StyledButton>
-        <Link href="/legal/cookies">
+        <Link href="/legal/cookies" passHref>
           <StyledButton type="text">{t('politica-cookies')}</StyledButton>
         </Link>
       </MenuButtons>

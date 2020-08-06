@@ -1,10 +1,11 @@
-import Flat from '../../../backend/salesforce/flat';
-import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Carousel, Tag } from 'antd';
-import i18Next from '../../../i18n';
-import { WithTranslation } from 'next-i18next';
-import { formatCurrency } from '../../../common/helpers';
 import Link from 'next/link';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
+import { WithTranslation } from 'next-i18next';
+import { Carousel, Tag } from 'antd';
+
+import Flat from '../../../backend/salesforce/flat';
+import i18Next from '../../../i18n';
+import { formatCurrency } from '../../../common/helpers';
 
 const { withTranslation } = i18Next;
 
@@ -76,65 +77,71 @@ const FlatCard = ({
   useCarousel = true,
 }: Props): JSX.Element => {
   return (
-    <Link href={`/pisos/${flat.id}`}>
-      <div className={className}>
-        {useCarousel ? (
-          <StyledCarousel dots={false} lazyLoad={'progressive'}>
-            {flat.pictureUrls.map((url) => (
-              <FlatImage
-                imageHeight={imageHeight}
-                key={url}
-                src={url}
-                alt={`Vivienda en ${flat.address}`}
-              />
-            ))}
-          </StyledCarousel>
-        ) : (
-          <FlatImage
-            imageHeight={imageHeight}
-            src={flat.pictureUrls[0]}
-            css={`
-              border-top-left-radius: ${(props) => props.theme.borderRadius};
-              border-top-right-radius: ${(props) => props.theme.borderRadius};
-            `}
-            alt={`Vivienda en ${flat.address}`}
-          />
-        )}
-        <FlatInfo>
-          <TopText>
-            <span
-              css={`
-                font-weight: 600;
-              `}
+    <div className={className}>
+      <Link href={`/pisos/${flat.id}`}>
+        <a>
+          {useCarousel ? (
+            <StyledCarousel
+              dots={false}
+              draggable={true}
+              lazyLoad={'progressive'}
             >
-              {formatCurrency(flat.price, i18n.language)}
-            </span>
-            <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
-          </TopText>
-          <Divider />
-          <BottomText>
-            <span
+              {flat.pictureUrls.map((url) => (
+                <FlatImage
+                  imageHeight={imageHeight}
+                  key={url}
+                  src={url}
+                  alt={`Vivienda en ${flat.address}`}
+                />
+              ))}
+            </StyledCarousel>
+          ) : (
+            <FlatImage
+              imageHeight={imageHeight}
+              src={flat.pictureUrls[0]}
               css={`
-                margin-right: 8px;
+                border-top-left-radius: ${(props) => props.theme.borderRadius};
+                border-top-right-radius: ${(props) => props.theme.borderRadius};
               `}
-            >
-              {flat.sqrMeters} m
-              <sup
+              alt={`Vivienda en ${flat.address}`}
+            />
+          )}
+          <FlatInfo>
+            <TopText>
+              <span
                 css={`
-                  vertical-align: top;
-                  font-size: 0.6em;
+                  font-weight: 600;
                 `}
               >
-                2
-              </sup>
-            </span>
-            <span>
-              {flat.rooms} {t('habitaciones')}
-            </span>
-          </BottomText>
-        </FlatInfo>
-      </div>
-    </Link>
+                {formatCurrency(flat.price, i18n.language)}
+              </span>
+              <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
+            </TopText>
+            <Divider />
+            <BottomText>
+              <span
+                css={`
+                  margin-right: 8px;
+                `}
+              >
+                {flat.sqrMeters} m
+                <sup
+                  css={`
+                    vertical-align: top;
+                    font-size: 0.6em;
+                  `}
+                >
+                  2
+                </sup>
+              </span>
+              <span>
+                {flat.rooms} {t('habitaciones')}
+              </span>
+            </BottomText>
+          </FlatInfo>
+        </a>
+      </Link>
+    </div>
   );
 };
 
