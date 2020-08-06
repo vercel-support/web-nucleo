@@ -61,6 +61,7 @@ const ModalForm = ({
     <StyledModal
       title={isSellerMode ? t('modalForm.titleSell') : t('modalForm.titleBuy')}
       visible={visible}
+      centered
       onOk={() => {
         form.submit();
       }}

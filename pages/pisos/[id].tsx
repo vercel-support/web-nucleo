@@ -14,7 +14,7 @@ import {
   deserializeMultiple,
   deserializeSingle,
 } from '../../common/helpers/serialization';
-import { useMailchimpService } from '../../services/mailchimpService';
+import { useMailchimpService } from '../../common/mailchimpService';
 import {
   ImageCarousel,
   Summary,
@@ -23,8 +23,11 @@ import {
   RequestInfoButton,
   Gallery,
 } from '../../components/flatDetail';
-import { FlatsDisplayPlaceholder } from '../../components/home';
-import { Header, Footer } from '../../components/shared';
+import {
+  Header,
+  Footer,
+  FlatsDisplayPlaceholder,
+} from '../../components/shared';
 
 const { withTranslation } = nextI18Next;
 
@@ -91,7 +94,7 @@ const FlatsDisplayContainer = styled.div`
 `;
 
 const FlatsDisplay = dynamic(
-  () => import('../../components/home/flatsDisplay'),
+  () => import('../../components/shared/flatsDisplay/flatsDisplay'),
   {
     ssr: false,
     loading: () => <FlatsDisplayPlaceholder />,
@@ -234,7 +237,8 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const flats = await Flat.getFlats();
+  const flats: Flat[] = require('../../public/fixtures/flats.json');
+  /* const flats = await Flat.getFlats(); */
 
   const paths = flats.map((flat) => ({
     params: { id: flat.id },

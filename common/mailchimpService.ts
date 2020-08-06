@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import axios from 'axios';
 
-import { IContact } from '../common/model/mailchimp/contact.model';
+import { IContact } from './model/mailchimp/contact.model';
 
 interface IMailchimpService {
   subscribe(contact: IContact): Promise<void>;

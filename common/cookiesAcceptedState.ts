@@ -1,6 +1,6 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 
-export const useCookiesState = (): [
+export const useCookiesAcceptedState = (): [
   boolean,
   Dispatch<SetStateAction<boolean>>
 ] => {

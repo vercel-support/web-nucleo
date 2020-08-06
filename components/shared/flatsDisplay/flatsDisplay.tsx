@@ -1,8 +1,8 @@
-import Flat from '../../backend/salesforce/flat';
+import Flat from '../../../backend/salesforce/flat';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel } from 'antd';
 import { useRef } from 'react';
-import { split } from '../../common/helpers';
+import { split } from '../../../common/helpers';
 import FlatCard from './flatCard';
 import { useMediaQuery } from 'react-responsive';
 
@@ -39,8 +39,8 @@ const Arrow = styled.div<{ left?: boolean }>`
 
   background-image: url(${(props) =>
     props.left
-      ? require('../../public/images/prev_black.svg')
-      : require('../../public/images/next_black.svg')});
+      ? require('../../../public/images/prev_black.svg')
+      : require('../../../public/images/next_black.svg')});
   cursor: pointer;
   width: 40px;
   height: 40px;

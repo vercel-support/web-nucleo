@@ -1,9 +1,9 @@
-import Flat from '../../backend/salesforce/flat';
+import Flat from '../../../backend/salesforce/flat';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel, Tag } from 'antd';
-import i18Next from '../../i18n';
+import i18Next from '../../../i18n';
 import { WithTranslation } from 'next-i18next';
-import { formatCurrency } from '../../common/helpers';
+import { formatCurrency } from '../../../common/helpers';
 import Link from 'next/link';
 
 const { withTranslation } = i18Next;
@@ -79,7 +79,7 @@ const FlatCard = ({
     <Link href={`/pisos/${flat.id}`}>
       <div className={className}>
         {useCarousel ? (
-          <StyledCarousel dots={true} draggable={true} lazyLoad={'progressive'}>
+          <StyledCarousel dots={false} lazyLoad={'progressive'}>
             {flat.pictureUrls.map((url) => (
               <FlatImage
                 imageHeight={imageHeight}

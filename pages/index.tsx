@@ -9,15 +9,15 @@ import { IFlat } from '../common/model/flat.model';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import Flat from '../backend/salesforce/flat';
-import { useCookiesState } from '../services/cookiesService';
-import { useMailchimpService } from '../services/mailchimpService';
+import { useCookiesAcceptedState } from '../common/cookiesAcceptedState';
+import { useMailchimpService } from '../common/mailchimpService';
+import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
 import {
-  BlogShowcase,
-  Hero,
-  NewsletterSection,
+  Header,
+  Footer,
+  CookiesBanner,
   FlatsDisplayPlaceholder,
-} from '../components/home';
-import { Header, Footer, CookiesBanner } from '../components/shared';
+} from '../components/shared';
 
 const FlatsDisplayContainer = styled.div`
   background-color: #f2f2f2;
@@ -25,10 +25,13 @@ const FlatsDisplayContainer = styled.div`
   padding-bottom: 70px;
 `;
 
-const FlatsDisplay = dynamic(() => import('../components/home/flatsDisplay'), {
-  ssr: false,
-  loading: () => <FlatsDisplayPlaceholder />,
-});
+const FlatsDisplay = dynamic(
+  () => import('../components/shared/flatsDisplay/flatsDisplay'),
+  {
+    ssr: false,
+    loading: () => <FlatsDisplayPlaceholder />,
+  }
+);
 
 const { withTranslation } = nextI18Next;
 
@@ -54,7 +57,7 @@ const Content = styled.main`
 `;
 
 export const Home = ({ flats, t }: Props): JSX.Element => {
-  const [cookiesAccepted, setCookiesAccepted] = useCookiesState();
+  const [cookiesAccepted, setCookiesAccepted] = useCookiesAcceptedState();
   const mailchimpService = useMailchimpService();
 
   const deserializedFlats = deserializeMultiple(flats, IFlat);
