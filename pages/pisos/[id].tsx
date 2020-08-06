@@ -237,8 +237,7 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const flats: Flat[] = require('../../public/fixtures/flats.json');
-  /* const flats = await Flat.getFlats(); */
+  const flats = await Flat.getFlats();
 
   const paths = flats.map((flat) => ({
     params: { id: flat.id },
