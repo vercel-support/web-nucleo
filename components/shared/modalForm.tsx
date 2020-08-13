@@ -1,10 +1,7 @@
 import styled from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Row, Col, Form, Input, Modal } from 'antd';
 
-import nextI18Next from '../../i18n';
-
-const { withTranslation } = nextI18Next;
+import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
   isSellerMode: boolean;
@@ -17,7 +14,7 @@ type Props = {
     address: string
   ) => void;
   onCancel: () => void;
-} & WithTranslation;
+};
 
 const InputContainer = styled.div`
   color: ${(props) => props.theme.colors.secondary};
@@ -44,30 +41,35 @@ const StyledModal = styled(Modal)`
 `;
 
 const ModalForm = ({
-  t,
   isSellerMode,
   visible,
   onOk,
   onCancel,
 }: Props): JSX.Element => {
+  const i18n = useI18n();
+
   const [form] = Form.useForm();
   const validateMessages = {
-    required: t('modalForm.validateRequired'),
+    required: i18n.t('modalForm.validateRequired'),
     types: {
-      email: t('modalForm.validateEmail'),
+      email: i18n.t('modalForm.validateEmail'),
     },
   };
   return (
     <StyledModal
-      title={isSellerMode ? t('modalForm.titleSell') : t('modalForm.titleBuy')}
+      title={
+        isSellerMode
+          ? i18n.t('modalForm.titleSell')
+          : i18n.t('modalForm.titleBuy')
+      }
       visible={visible}
       centered
       onOk={() => {
         form.submit();
       }}
       onCancel={onCancel}
-      okText={t('modalForm.send')}
-      cancelText={t('modalForm.cancel')}
+      okText={i18n.t('modalForm.send')}
+      cancelText={i18n.t('modalForm.cancel')}
     >
       <Form
         validateMessages={validateMessages}
@@ -88,7 +90,7 @@ const ModalForm = ({
               <Form.Item
                 labelCol={{ span: 24 }}
                 name="name"
-                label={t('modalForm.name')}
+                label={i18n.t('modalForm.name')}
                 rules={[{ required: true }]}
               >
                 <Input></Input>
@@ -100,7 +102,7 @@ const ModalForm = ({
               <Form.Item
                 labelCol={{ span: 24 }}
                 name="lastName"
-                label={t('modalForm.lastName')}
+                label={i18n.t('modalForm.lastName')}
                 rules={[{ required: true }]}
               >
                 <Input></Input>
@@ -112,7 +114,7 @@ const ModalForm = ({
               <Form.Item
                 labelCol={{ span: 24 }}
                 name="email"
-                label={t('modalForm.email')}
+                label={i18n.t('modalForm.email')}
                 rules={[{ required: true, type: 'email' }]}
               >
                 <Input></Input>
@@ -124,7 +126,7 @@ const ModalForm = ({
               <Form.Item
                 labelCol={{ span: 24 }}
                 name="phone"
-                label={t('modalForm.phone')}
+                label={i18n.t('modalForm.phone')}
               >
                 <Input></Input>
               </Form.Item>
@@ -136,7 +138,7 @@ const ModalForm = ({
                 <Form.Item
                   labelCol={{ span: 24 }}
                   name="address"
-                  label={t('modalForm.address')}
+                  label={i18n.t('modalForm.address')}
                   rules={[{ required: true }]}
                 >
                   <Input></Input>
@@ -150,4 +152,4 @@ const ModalForm = ({
   );
 };
 
-export default withTranslation('common')(ModalForm);
+export default ModalForm;

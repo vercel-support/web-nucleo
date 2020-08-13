@@ -1,13 +1,14 @@
-import Flat from '../../../backend/salesforce/flat';
+import { useRef } from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Carousel } from 'antd';
-import { useRef } from 'react';
-import { split } from '../../../common/helpers';
-import FlatCard from './flatCard';
 import { useMediaQuery } from 'react-responsive';
 
+import { IFlat } from '../../../common/model/flat.model';
+import { split } from '../../../common/helpers';
+import FlatCard from './flatCard';
+
 type Props = {
-  flats: Flat[];
+  flats: IFlat[];
   title: string;
   arrows?: boolean;
   className?: string;

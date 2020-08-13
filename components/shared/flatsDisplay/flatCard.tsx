@@ -1,21 +1,18 @@
 import Link from 'next/link';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Carousel, Tag } from 'antd';
 
-import Flat from '../../../backend/salesforce/flat';
-import i18Next from '../../../i18n';
+import { IFlat } from '../../../common/model/flat.model';
+import useI18n from '../../../common/hooks/useI18n';
 import { formatCurrency } from '../../../common/helpers';
 
-const { withTranslation } = i18Next;
-
 type Props = {
-  flat: Flat;
+  flat: IFlat;
   className?: string;
   theme: DefaultTheme;
   useCarousel?: boolean;
   imageHeight: string;
-} & WithTranslation;
+};
 
 const FlatImage = styled.img<{ imageHeight: string }>`
   height: ${(props) => props.imageHeight};
@@ -71,11 +68,11 @@ const FlatCard = ({
   flat,
   className,
   theme,
-  i18n,
-  t,
   imageHeight,
   useCarousel = true,
 }: Props): JSX.Element => {
+  const i18n = useI18n();
+
   return (
     <div className={className}>
       <Link href={`/pisos/${flat.id}`}>
@@ -87,6 +84,7 @@ const FlatCard = ({
               lazyLoad={'progressive'}
             >
               {flat.pictureUrls.map((url) => (
+                /* TODO: translate alt */
                 <FlatImage
                   imageHeight={imageHeight}
                   key={url}
@@ -96,6 +94,7 @@ const FlatCard = ({
               ))}
             </StyledCarousel>
           ) : (
+            /* TODO: translate alt */
             <FlatImage
               imageHeight={imageHeight}
               src={flat.pictureUrls[0]}
@@ -113,7 +112,7 @@ const FlatCard = ({
                   font-weight: 600;
                 `}
               >
-                {formatCurrency(flat.price, i18n.language)}
+                {formatCurrency(flat.price, i18n.activeLocale)}
               </span>
               <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
             </TopText>
@@ -135,7 +134,7 @@ const FlatCard = ({
                 </sup>
               </span>
               <span>
-                {flat.rooms} {t('habitaciones')}
+                {flat.rooms} {i18n.t('habitaciones')}
               </span>
             </BottomText>
           </FlatInfo>
@@ -145,7 +144,7 @@ const FlatCard = ({
   );
 };
 
-export default withTheme(styled(withTranslation('common')(FlatCard))<{
+export default withTheme(styled(FlatCard)<{
   width: string;
   margin: string;
 }>`

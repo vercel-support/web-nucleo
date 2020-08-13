@@ -1,17 +1,20 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import LanguageSelector from './languageSelector';
-import { Button } from 'antd';
-import i18Next from '../../i18n';
-import { WithTranslation, TFunction } from 'next-i18next';
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown, Button } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
-const { withTranslation } = i18Next;
+import useI18n from '../../common/hooks/useI18n';
+import LanguageSelector from './languageSelector';
 
 type Props = {
   className?: string;
-} & WithTranslation;
+};
+
+const DropdownContainer = styled.div`
+  @media ${(props) => props.theme.breakpoints.xlu} {
+    display: none;
+  }
+`;
 
 const MenuButtons = styled.div`
   display: flex;
@@ -24,6 +27,10 @@ const MenuButtons = styled.div`
   line-height: 22px;
 
   color: ${(props) => props.theme.colors.secondary};
+
+  @media ${(props) => props.theme.breakpoints.lgd} {
+    display: none;
+  }
 `;
 
 const StyledButton = styled(Button)`
@@ -43,60 +50,50 @@ const NucleoLabel = styled.p`
   line-height: 22px;
 `;
 
-const DropdownMenu = (t: TFunction) => (
-  <Menu>
-    <Menu.Item key="0">
-      <StyledButton type="text">{t('aviso-legal')}</StyledButton>
-    </Menu.Item>
-    <Menu.Item key="1">
-      <StyledButton type="text">{t('politica-datos')}</StyledButton>
-    </Menu.Item>
-    <Menu.Item key="2">
-      <Link href="/legal/cookies" passHref>
-        <StyledButton type="text">{t('politica-cookies')}</StyledButton>
-      </Link>
-    </Menu.Item>
-  </Menu>
-);
+const Footer = ({ className }: Props) => {
+  const i18n = useI18n();
 
-const Footer = ({ className, t }: Props) => {
+  const dropdownMenu = (
+    <Menu>
+      <Menu.Item key="0">
+        <StyledButton type="text">{i18n.t('aviso-legal')}</StyledButton>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <StyledButton type="text">{i18n.t('politica-datos')}</StyledButton>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <Link href="/legal/cookies" passHref>
+          <StyledButton type="text">{i18n.t('politica-cookies')}</StyledButton>
+        </Link>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <footer className={className}>
       <MenuButtons>
         <LanguageSelector themeColor="secondary" />
       </MenuButtons>
-      <div
-        css={`
-          @media ${(props) => props.theme.breakpoints.xlu} {
-            display: none;
-          }
-        `}
-      >
-        <Dropdown overlay={DropdownMenu(t)} trigger={['click']}>
+      <DropdownContainer>
+        <Dropdown overlay={dropdownMenu} trigger={['click']}>
           <NucleoLabel>
-            {t('nucleo-sl')} <DownOutlined />
+            {i18n.t('nucleo-sl')} <DownOutlined />
           </NucleoLabel>
         </Dropdown>
-      </div>
-      <MenuButtons
-        css={`
-          @media ${(props) => props.theme.breakpoints.lgd} {
-            display: none;
-          }
-        `}
-      >
-        <NucleoLabel>{t('nucleo-sl')}</NucleoLabel>
-        <StyledButton type="text">{t('aviso-legal')}</StyledButton>
-        <StyledButton type="text">{t('politica-datos')}</StyledButton>
+      </DropdownContainer>
+      <MenuButtons>
+        <NucleoLabel>{i18n.t('nucleo-sl')}</NucleoLabel>
+        <StyledButton type="text">{i18n.t('aviso-legal')}</StyledButton>
+        <StyledButton type="text">{i18n.t('politica-datos')}</StyledButton>
         <Link href="/legal/cookies" passHref>
-          <StyledButton type="text">{t('politica-cookies')}</StyledButton>
+          <StyledButton type="text">{i18n.t('politica-cookies')}</StyledButton>
         </Link>
       </MenuButtons>
     </footer>
   );
 };
 
-export default styled(withTranslation('common')(Footer))`
+export default styled(Footer)`
   width: 100%;
   height: ${(props) => props.theme.footerHeight};
 

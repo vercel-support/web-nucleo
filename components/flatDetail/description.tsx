@@ -1,15 +1,12 @@
 import { Fragment } from 'react';
 import styled from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 
-import nextI18Next from '../../i18n';
-import Flat from '../../backend/salesforce/flat';
-
-const { withTranslation } = nextI18Next;
+import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
-  flat: Flat;
-} & WithTranslation;
+  flat: IFlat;
+};
 
 const Title = styled.h2`
   color: ${(props) => props.theme.colors.secondary};
@@ -34,24 +31,26 @@ const Info = styled.div`
   line-height: 30px;
 `;
 
-const Description = ({ flat, t, i18n }: Props): JSX.Element => {
-  let description: string = null;
-  switch (i18n.language) {
-    case 'es':
-      description = flat.description_ES;
-      break;
-    case 'en':
-      description = flat.description_ES;
-      break;
+const Description = ({ flat }: Props): JSX.Element => {
+  const i18n = useI18n();
+
+  function computeDescription(): string {
+    switch (i18n.activeLocale) {
+      case 'en':
+        return flat.description_EN;
+      default:
+        return flat.description_ES;
+    }
   }
+
   return (
     <Fragment>
-      <Title>{t('flat.description')}</Title>
+      <Title>{i18n.t('flat.description')}</Title>
       <Divider />
-      <Zone>{`${t('flat.zone')}: ${flat.zone}`}</Zone>
-      <Info dangerouslySetInnerHTML={{ __html: description }} />
+      <Zone>{`${i18n.t('flat.zone')}: ${flat.zone}`}</Zone>
+      <Info dangerouslySetInnerHTML={{ __html: computeDescription() }} />
     </Fragment>
   );
 };
 
-export default withTranslation('common')(Description);
+export default Description;

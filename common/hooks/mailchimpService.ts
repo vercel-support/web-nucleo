@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import axios from 'axios';
 
-import { IContact } from './model/mailchimp/contact.model';
+import { IContact } from '../model/mailchimp/contact.model';
 
 interface IMailchimpService {
   subscribe(contact: IContact): Promise<void>;
@@ -25,6 +25,8 @@ const MailchimpServiceContext = createContext<IMailchimpService>(
   mailchimpService
 );
 
-export const useMailchimpService = (): IMailchimpService => {
+const useMailchimpService = (): IMailchimpService => {
   return useContext(MailchimpServiceContext);
 };
+
+export default useMailchimpService;

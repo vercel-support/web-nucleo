@@ -1,18 +1,15 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Modal, Carousel } from 'antd';
 
-import nextI18Next from '../../i18n';
-import Flat from '../../backend/salesforce/flat';
-
-const { withTranslation } = nextI18Next;
+import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
-  flat: Flat;
+  flat: IFlat;
   visible: boolean;
   onCancel: () => void;
-} & WithTranslation;
+};
 
 const StyledModal = styled(Modal)`
   font-family: ${(props) => props.theme.font.family};
@@ -63,12 +60,13 @@ const Footer = styled.div`
   text-align: center;
 `;
 
-const Gallery = ({ flat, visible, onCancel, t }: Props): JSX.Element => {
+const Gallery = ({ flat, visible, onCancel }: Props): JSX.Element => {
+  const i18n = useI18n();
   const [carouselCurrentIndex, setCarouselCurrentIndex] = useState(0);
 
   return (
     <StyledModal
-      title={t('flat.pictures')}
+      title={i18n.t('flat.pictures')}
       visible={visible}
       footer={
         <Footer>{`${carouselCurrentIndex + 1} / ${
@@ -99,4 +97,4 @@ const Gallery = ({ flat, visible, onCancel, t }: Props): JSX.Element => {
   );
 };
 
-export default withTranslation('common')(Gallery);
+export default Gallery;
