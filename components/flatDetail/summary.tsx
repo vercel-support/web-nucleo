@@ -1,19 +1,16 @@
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Row, Col } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 
-import nextI18Next from '../../i18n';
-import Flat from '../../backend/salesforce/flat';
+import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
 import { formatCurrency } from '../../common/helpers';
 
-const { withTranslation } = nextI18Next;
-
 type Props = {
-  flat: Flat;
+  flat: IFlat;
   className?: string;
   theme: DefaultTheme;
-} & WithTranslation;
+};
 
 const ImageContainer = styled.div`
   height: 64px;
@@ -48,15 +45,19 @@ const Description = styled.span`
   }
 `;
 
-const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
-  const isLgUp = useMediaQuery({ query: theme.breakpoints.lgu });
+const Summary = ({ flat, className, theme }: Props): JSX.Element => {
+  const i18n = useI18n();
+  const isLgUp = useMediaQuery({ query: theme.breakpoints.lgu }); // TODO: needs useEffect and useState
 
   return (
     <Row justify={'center'} className={className}>
       <Col xs={6} sm={5} md={4} xl={3} style={{ textAlign: 'center' }}>
         <ImageContainer>
           <ImageFlexContainer>
-            <Image src="/images/superficie.png" alt={t('flat.sqrMeters')} />
+            <Image
+              src="/images/superficie.png"
+              alt={i18n.t('flat.sqrMeters')}
+            />
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
@@ -74,14 +75,14 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
         </div>
         {isLgUp && (
           <div style={{ marginTop: '1rem' }}>
-            <Description>{t('flat.sqrMeters')}</Description>
+            <Description>{i18n.t('flat.sqrMeters')}</Description>
           </div>
         )}
       </Col>
       <Col xs={6} sm={5} md={4} xl={3} style={{ textAlign: 'center' }}>
         <ImageContainer>
           <ImageFlexContainer>
-            <Image src="/images/dormitorios.png" alt={t('flat.rooms')} />
+            <Image src="/images/dormitorios.png" alt={i18n.t('flat.rooms')} />
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
@@ -89,14 +90,14 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
         </div>
         {isLgUp && (
           <div style={{ marginTop: '1rem' }}>
-            <Description>{t('flat.rooms')}</Description>
+            <Description>{i18n.t('flat.rooms')}</Description>
           </div>
         )}
       </Col>
       <Col xs={6} sm={5} md={4} xl={3} style={{ textAlign: 'center' }}>
         <ImageContainer>
           <ImageFlexContainer>
-            <Image src="/images/banyos.png" alt={t('flat.bathrooms')} />
+            <Image src="/images/banyos.png" alt={i18n.t('flat.bathrooms')} />
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
@@ -104,22 +105,22 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
         </div>
         {isLgUp && (
           <div style={{ marginTop: '1rem' }}>
-            <Description>{t('flat.bathrooms')}</Description>
+            <Description>{i18n.t('flat.bathrooms')}</Description>
           </div>
         )}
       </Col>
       <Col xs={6} sm={5} md={4} xl={3} style={{ textAlign: 'center' }}>
         <ImageContainer>
           <ImageFlexContainer>
-            <Image src="/images/precio.png" alt={t('flat.price')} />
+            <Image src="/images/precio.png" alt={i18n.t('flat.price')} />
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
-          <Info>{formatCurrency(flat.price, i18n.language)}</Info>
+          <Info>{formatCurrency(flat.price, 'es' /* i18n.language */)}</Info>
         </div>
         {isLgUp && (
           <div style={{ marginTop: '1rem' }}>
-            <Description>{t('flat.price')}</Description>
+            <Description>{i18n.t('flat.price')}</Description>
           </div>
         )}
       </Col>
@@ -127,4 +128,4 @@ const Summary = ({ flat, className, theme, i18n, t }: Props): JSX.Element => {
   );
 };
 
-export default withTheme(withTranslation('common')(Summary));
+export default withTheme(Summary);

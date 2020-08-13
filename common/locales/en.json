@@ -41,7 +41,7 @@
   },
   "flatDetail": {
     "title": "{{type}} for sale in {{address}}, {{city}}. - Inmobiliaria Nucleo",
-    "description": "{{type}} for sale for {{price}}€. {{dormitories}} dormitories, {{bathrooms}} bathrooms, {{sqrMeters}}m2 in {{address}}, {{city}}",
+    "description": "{{type}} for sale for {{price}}€. {{rooms}} bedroom/s, {{bathrooms}} bathroom/s, {{sqrMeters}} square meters in {{address}}, {{city}}",
     "messages": {
       "recommendedFlats": "You might also like"
     },
@@ -76,11 +76,23 @@
   "cookies": {
     "text": "This site uses profiling cookies to track users. If you continue browsing, we consider you accept it.",
     "detail": {
-      "title": "Cookies policy"
+      "title": "Cookies policy",
+      "description": "Cookies policy"
     },
     "actions": {
       "ok": "OK",
       "moreInfo": "More information"
     }
+  },
+  "flatTypes": {
+    "Piso": "Flat",
+    "Casa": "House",
+    "Casa Rural": "Cottage",
+    "Box/Plaza de garaje": "Parking space",
+    "Terrenos": "Land",
+    "Comercial": "Shop",
+    "Ático": "Loft",
+    "Edificio": "Building",
+    "Trastero": "Storage"
   }
 }

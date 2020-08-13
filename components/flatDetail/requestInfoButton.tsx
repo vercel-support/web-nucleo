@@ -1,12 +1,9 @@
 import { useState, Fragment } from 'react';
 import styled from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Button } from 'antd';
 
-import nextI18Next from '../../i18n';
+import useI18n from '../../common/hooks/useI18n';
 import { ModalForm } from '../shared';
-
-const { withTranslation } = nextI18Next;
 
 type Props = {
   onBuyButtonClicked: (
@@ -16,13 +13,13 @@ type Props = {
     phone: string
   ) => void;
   className?: string;
-} & WithTranslation;
+};
 
 const RequestInfoButton = ({
   onBuyButtonClicked,
   className,
-  t,
 }: Props): JSX.Element => {
+  const i18n = useI18n();
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
@@ -34,7 +31,7 @@ const RequestInfoButton = ({
           setModalVisible(true);
         }}
       >
-        {t('flatDetail.actions.requestInfo')}
+        {i18n.t('flatDetail.actions.requestInfo')}
       </Button>
       <ModalForm
         isSellerMode={false}
@@ -51,7 +48,7 @@ const RequestInfoButton = ({
   );
 };
 
-export default styled(withTranslation('common')(RequestInfoButton))`
+export default styled(RequestInfoButton)`
   height: 56px;
   width: 100%;
   font-weight: 500;

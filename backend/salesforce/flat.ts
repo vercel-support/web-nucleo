@@ -25,7 +25,7 @@ export default class Flat extends IFlat {
     'Balcon__c',
     'Terraza__c',
     'Sotano__c',
-    'Ano_costruccion__c',
+    'Ano_construccion__c',
     'Ano_reforma__c',
   ];
   public static objectName = 'Opportunity';
@@ -91,7 +91,7 @@ export default class Flat extends IFlat {
     const hasTerrace = record['Terraza__c'];
     const hasBasement = record['Sotano__c'];
 
-    const yearConstruction = record['Ano_costruccion__c'];
+    const yearConstruction = record['Ano_construccion__c'];
     const yearReform = record['Ano_reforma__c'];
 
     // TODO do proper validation using typescript class, directly in 'fromDict'

@@ -2,13 +2,7 @@ const withLess = require('@zeit/next-less');
 const lessToJS = require('less-vars-to-js');
 const fs = require('fs');
 const path = require('path');
-const { nextI18NextRewrites } = require('next-i18next/rewrites')
 const withOptimizedImages = require('next-optimized-images');
-
-const localeSubpaths = {
-  es: 'es',
-  en: 'en',
-}
 
 // Where your antd-custom.less file lives
 const themeVariables = lessToJS(
@@ -19,13 +13,6 @@ module.exports = withOptimizedImages(withLess({
   lessLoaderOptions: {
     javascriptEnabled: true,
     modifyVars: themeVariables, // make your antd custom effective
-  },
-  experimental: {
-    async rewrites() {
-      return [
-        ...nextI18NextRewrites(localeSubpaths)
-      ]
-    }
   },
   webpack: (config, { isServer }) => {
     if (isServer) {

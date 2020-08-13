@@ -1,12 +1,20 @@
-import styled from 'styled-components';
-import { WithTranslation } from 'next-i18next';
-import nextI18Next from '../../i18n';
-import { Button } from 'antd';
 import { useState } from 'react';
-import { ModalForm } from '../shared';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import { Button } from 'antd';
 
-const { withTranslation } = nextI18Next;
+import useI18n from '../../common/hooks/useI18n';
+import { ModalForm } from '../shared';
+
+type Props = {
+  onSellButtonClicked: (
+    name: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    address: string
+  ) => void;
+};
 
 const Background = styled.div`
   background-image: ${(props) =>
@@ -116,7 +124,7 @@ const ActionButtons = styled.div`
   }
 `;
 
-const ActionButton = styled(Button)<{ side: string }>`
+const ActionButton = styled(Button)`
   width: 100%;
   font-weight: 500;
   font-size: 20px;
@@ -152,19 +160,10 @@ const ActionButton = styled(Button)<{ side: string }>`
   }
 `;
 
-type Props = {
-  onSellButtonClicked: (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    address: string
-  ) => void;
-} & WithTranslation;
-
-const Hero = ({ onSellButtonClicked, t }: Props): JSX.Element => {
-  const [isModalSellerMode, setModalSellerMode] = useState(false);
+const Hero = ({ onSellButtonClicked }: Props): JSX.Element => {
   const router = useRouter();
+  const i18n = useI18n();
+  const [isModalSellerMode, setModalSellerMode] = useState(false);
 
   const modalVisible =
     'displayModal' in router.query && router.query['displayModal'] == 'true';
@@ -193,34 +192,23 @@ const Hero = ({ onSellButtonClicked, t }: Props): JSX.Element => {
     <Background>
       <Title>
         <TitleParagraph themeColor="secondary">
-          {t('hero-title-1')}
+          {i18n.t('hero-title-1')}
         </TitleParagraph>
         <TitleParagraph themeColor="primary">
-          {t('hero-title-2')}
+          {i18n.t('hero-title-2')}
         </TitleParagraph>
         <Divider />
-        <Subtitle>{t('hero-subtitle')}</Subtitle>
+        <Subtitle>{i18n.t('hero-subtitle')}</Subtitle>
       </Title>
       <ActionButtons>
-        {/* <ActionButton
-          side="left"
-          onClick={(a) => {
-            setModalSellerMode(false);
-            setModalVisible(true);
-            (a.target as HTMLButtonElement).blur();
-          }}
-        >
-          {t('comprar')}
-        </ActionButton> */}
         <ActionButton
-          side="right"
           onClick={(a) => {
             setModalSellerMode(true);
             setModalVisible(true);
             (a.target as HTMLButtonElement).blur();
           }}
         >
-          {t('vender')}
+          {i18n.t('vender')}
         </ActionButton>
         <ModalForm
           isSellerMode={isModalSellerMode}
@@ -237,4 +225,4 @@ const Hero = ({ onSellButtonClicked, t }: Props): JSX.Element => {
     </Background>
   );
 };
-export default withTranslation('common')(Hero);
+export default Hero;

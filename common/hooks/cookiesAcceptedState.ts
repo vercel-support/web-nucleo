@@ -1,13 +1,15 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 
-export const useCookiesState = (): [
+const cookiesAcceptedKey = 'cookiesAccepted';
+
+const useCookiesAcceptedState = (): [
   boolean,
   Dispatch<SetStateAction<boolean>>
 ] => {
   const [cookiesAccepted, setCookiesAcceptedInternal] = useState(() => {
     return typeof window === 'undefined'
       ? true
-      : localStorage.getItem('cookiesAccepted') === 'true';
+      : localStorage.getItem(cookiesAcceptedKey) === 'true';
   });
 
   const setCookiesAccepted: Dispatch<SetStateAction<boolean>> = (
@@ -20,10 +22,12 @@ export const useCookiesState = (): [
 
     setCookiesAcceptedInternal(cookiesAcceptedValue);
     localStorage.setItem(
-      'cookiesAccepted',
+      cookiesAcceptedKey,
       JSON.stringify(cookiesAcceptedValue)
     );
   };
 
   return [cookiesAccepted, setCookiesAccepted];
 };
+
+export default useCookiesAcceptedState;

@@ -1,14 +1,11 @@
 import styled from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Form, Input } from 'antd';
 
-import i18Next from '../../i18n';
-
-const { withTranslation } = i18Next;
+import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
   onSubscribeButtonClicked: (email: string) => void;
-} & WithTranslation;
+};
 
 const Banner = styled.div`
   height: 40vh;
@@ -92,19 +89,20 @@ const Divider = styled.hr`
 
 const NewsletterSection = ({
   onSubscribeButtonClicked,
-  t,
 }: Props): JSX.Element => {
+  const i18n = useI18n();
+
   const [form] = Form.useForm();
   const validateMessages = {
-    required: t('modalForm.validateRequired'),
+    required: i18n.t('modalForm.validateRequired'),
     types: {
-      email: t('modalForm.validateEmail'),
+      email: i18n.t('modalForm.validateEmail'),
     },
   };
 
   return (
     <Banner>
-      <SectionTitle>{t('newsletter-title')}</SectionTitle>
+      <SectionTitle>{i18n.t('newsletter-title')}</SectionTitle>
       <Divider />
       <StyledForm
         validateMessages={validateMessages}
@@ -113,12 +111,12 @@ const NewsletterSection = ({
       >
         <Form.Item
           name="email"
-          label={t('home.newsletter-input-label')}
+          label={i18n.t('home.newsletter-input-label')}
           rules={[{ required: true, type: 'email' }]}
         >
           <Input.Search
-            enterButton={t('enviar')}
-            placeholder={t('email')}
+            enterButton={i18n.t('enviar')}
+            placeholder={i18n.t('email')}
             onClick={() => form.submit()}
           />
         </Form.Item>
@@ -126,4 +124,4 @@ const NewsletterSection = ({
     </Banner>
   );
 };
-export default withTranslation('common')(NewsletterSection);
+export default NewsletterSection;

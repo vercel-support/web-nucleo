@@ -1,19 +1,16 @@
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Carousel, Button } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 
-import nextI18Next from '../../i18n';
-import Flat from '../../backend/salesforce/flat';
-
-const { withTranslation } = nextI18Next;
+import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
-  flat: Flat;
+  flat: IFlat;
   onShowAllPhotosButtonClik: () => void;
   className?: string;
   theme: DefaultTheme;
-} & WithTranslation;
+};
 
 const Title = styled.div`
   position: absolute;
@@ -82,9 +79,9 @@ const ImageCarousel = ({
   onShowAllPhotosButtonClik,
   className,
   theme,
-  t,
 }: Props): JSX.Element => {
-  const isSmDown = useMediaQuery({ query: theme.breakpoints.smd });
+  const i18n = useI18n();
+  const isSmDown = useMediaQuery({ query: theme.breakpoints.smd }); // TODO: needs useEffect and useState
 
   return (
     <div className={className} style={{ position: 'relative' }}>
@@ -94,13 +91,14 @@ const ImageCarousel = ({
         ghost
         onClick={() => onShowAllPhotosButtonClik()}
       >
-        {t('flatDetail.actions.showAllPhotos')}
+        {i18n.t('flatDetail.actions.showAllPhotos')}
       </ShowAllPhotosButton>
       <Carousel
         arrows={true}
         dots={!isSmDown}
         prevArrow={<PrevArrow />}
         nextArrow={<NextArrow />}
+        lazyLoad={'progressive'}
       >
         {flat.pictureUrls.map((url) => (
           <FlatImage imageHeight={'72vh'} key={url} url={url} />
@@ -110,7 +108,7 @@ const ImageCarousel = ({
   );
 };
 
-export default withTheme(styled(withTranslation('common')(ImageCarousel))`
+export default withTheme(styled(ImageCarousel)`
   .slick-dots-bottom {
     bottom: 24px;
   }

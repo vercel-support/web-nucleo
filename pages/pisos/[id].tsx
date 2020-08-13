@@ -2,19 +2,18 @@ import { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import { WithTranslation } from 'next-i18next';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 
-import nextI18Next from '../../i18n';
 import { IContact } from '../../common/model/mailchimp/contact.model';
-import Flat from '../../backend/salesforce/flat';
 import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
+import useMailchimpService from '../../common/hooks/mailchimpService';
 import {
   deserializeMultiple,
   deserializeSingle,
 } from '../../common/helpers/serialization';
-import { useMailchimpService } from '../../services/mailchimpService';
+import Flat from '../../backend/salesforce/flat';
 import {
   ImageCarousel,
   Summary,
@@ -23,17 +22,18 @@ import {
   RequestInfoButton,
   Gallery,
 } from '../../components/flatDetail';
-import { FlatsDisplayPlaceholder } from '../../components/home';
-import { Header, Footer } from '../../components/shared';
-
-const { withTranslation } = nextI18Next;
+import {
+  Header,
+  Footer,
+  FlatsDisplayPlaceholder,
+} from '../../components/shared';
 
 interface StaticProps {
   flat: string;
   recommendedFlats: string;
 }
 
-type Props = StaticProps & WithTranslation;
+type Props = StaticProps;
 
 const Layout = styled.div`
   display: flex;
@@ -91,22 +91,23 @@ const FlatsDisplayContainer = styled.div`
 `;
 
 const FlatsDisplay = dynamic(
-  () => import('../../components/home/flatsDisplay'),
+  () => import('../../components/shared/flatsDisplay/flatsDisplay'),
   {
     ssr: false,
     loading: () => <FlatsDisplayPlaceholder />,
   }
 );
 
-const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
+const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
+  const i18n = useI18n();
   const mailchimpService = useMailchimpService();
+  const [isGalleryVisible, setIsGalleryVisible] = useState(false);
+
   const deserializedRecommendedFlats = deserializeMultiple(
     recommendedFlats,
     IFlat
   );
   const deserializedFlat = deserializeSingle(flat, IFlat);
-
-  const [isGalleryVisible, setIsGalleryVisible] = useState(false);
 
   const onBuyButtonClicked = async (
     name: string,
@@ -137,11 +138,11 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
-          {t('flatDetail.title', {
-            type: deserializedFlat.type,
+          {i18n.t('flatDetail.title', {
+            type: i18n.t(`flatTypes.${deserializedFlat.type}`),
             city: deserializedFlat.city,
             sqrMeters: deserializedFlat.sqrMeters,
-            dormitories: deserializedFlat.rooms,
+            rooms: deserializedFlat.rooms,
             bathrooms: deserializedFlat.bathrooms,
             price: deserializedFlat.price,
             address: deserializedFlat.address,
@@ -149,12 +150,12 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
         </title>
         <meta
           name="description"
-          content={t('flatDetail.description', {
+          content={i18n.t('flatDetail.description', {
             type: deserializedFlat.type,
             address: deserializedFlat.address,
             city: deserializedFlat.city,
             sqrMeters: deserializedFlat.sqrMeters,
-            dormitories: deserializedFlat.rooms,
+            rooms: deserializedFlat.rooms,
             bathrooms: deserializedFlat.bathrooms,
             price: deserializedFlat.price,
           })}
@@ -217,7 +218,7 @@ const FlatDetailPage = ({ flat, recommendedFlats, t }: Props): JSX.Element => {
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={deserializedRecommendedFlats}
-            title={t('flatDetail.messages.recommendedFlats')}
+            title={i18n.t('flatDetail.messages.recommendedFlats')}
             arrows={false}
           />
         </FlatsDisplayContainer>
@@ -266,4 +267,4 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
   };
 };
 
-export default withTranslation('common')(FlatDetailPage);
+export default FlatDetailPage;

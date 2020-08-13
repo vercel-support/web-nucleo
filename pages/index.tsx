@@ -1,23 +1,28 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import { WithTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
-import nextI18Next from '../i18n';
-import { IFlat } from '../common/model/flat.model';
-import { deserializeMultiple } from '../common/helpers/serialization';
 import { IContact } from '../common/model/mailchimp/contact.model';
+import { IFlat } from '../common/model/flat.model';
+import useI18n from '../common/hooks/useI18n';
+import useCookiesAcceptedState from '../common/hooks/cookiesAcceptedState';
+import useMailchimpService from '../common/hooks/mailchimpService';
+import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
-import { useCookiesState } from '../services/cookiesService';
-import { useMailchimpService } from '../services/mailchimpService';
+import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
 import {
-  BlogShowcase,
-  Hero,
-  NewsletterSection,
+  Header,
+  Footer,
+  CookiesBanner,
   FlatsDisplayPlaceholder,
-} from '../components/home';
-import { Header, Footer, CookiesBanner } from '../components/shared';
+} from '../components/shared';
+
+interface StaticProps {
+  flats: string;
+}
+
+type Props = StaticProps;
 
 const FlatsDisplayContainer = styled.div`
   background-color: #f2f2f2;
@@ -25,18 +30,13 @@ const FlatsDisplayContainer = styled.div`
   padding-bottom: 70px;
 `;
 
-const FlatsDisplay = dynamic(() => import('../components/home/flatsDisplay'), {
-  ssr: false,
-  loading: () => <FlatsDisplayPlaceholder />,
-});
-
-const { withTranslation } = nextI18Next;
-
-interface StaticProps {
-  flats: string;
-}
-
-type Props = StaticProps & WithTranslation;
+const FlatsDisplay = dynamic(
+  () => import('../components/shared/flatsDisplay/flatsDisplay'),
+  {
+    ssr: false,
+    loading: () => <FlatsDisplayPlaceholder />,
+  }
+);
 
 const Layout = styled.div`
   display: flex;
@@ -53,8 +53,9 @@ const Content = styled.main`
   flex: auto;
 `;
 
-export const Home = ({ flats, t }: Props): JSX.Element => {
-  const [cookiesAccepted, setCookiesAccepted] = useCookiesState();
+export const Home = ({ flats }: Props): JSX.Element => {
+  const i18n = useI18n();
+  const [cookiesAccepted, setCookiesAccepted] = useCookiesAcceptedState();
   const mailchimpService = useMailchimpService();
 
   const deserializedFlats = deserializeMultiple(flats, IFlat);
@@ -100,9 +101,9 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={t('home.description')} />
+        <title>{i18n.t('title')}</title>
+        <meta name="description" content={i18n.t('home.description')} />
         <meta name="robots" content="index, follow" />
-        <title>{t('title')}</title>
         <link rel="icon" href="/favicon.ico" />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -120,7 +121,6 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
             }}
           />
         )}
-        <style> </style>
       </Head>
       <Header />
 
@@ -129,7 +129,7 @@ export const Home = ({ flats, t }: Props): JSX.Element => {
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={deserializedFlats}
-            title={t('section-flats-title')}
+            title={i18n.t('section-flats-title')}
           />
         </FlatsDisplayContainer>
         <BlogShowcase />
@@ -158,4 +158,4 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   };
 };
 
-export default withTranslation('common')(Home);
+export default Home;

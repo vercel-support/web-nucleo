@@ -1,14 +1,9 @@
 import Head from 'next/head';
-import { WithTranslation } from 'next-i18next';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 
-import nextI18Next from '../../i18n';
 import { Header, Footer } from '../../components/shared';
-
-const { withTranslation } = nextI18Next;
-
-type Props = WithTranslation;
+import useI18n from '../../common/hooks/useI18n';
 
 const Layout = styled.div`
   display: flex;
@@ -46,14 +41,19 @@ const Text = styled.p`
   line-height: 30px;
 `;
 
-const CookiesPage = ({ t }: Props): JSX.Element => {
+const CookiesPage = (): JSX.Element => {
+  const i18n = useI18n();
+
   return (
     <Layout>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{t('cookies.detail.title')}</title>
-        <meta name="description" content={t('cookies.detail.title')} />
+        <title>{i18n.t('cookies.detail.title')}</title>
+        <meta
+          name="description"
+          content={i18n.t('cookies.detail.description')}
+        />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -78,7 +78,7 @@ const CookiesPage = ({ t }: Props): JSX.Element => {
       <Content>
         <Row justify={'center'}>
           <Col xs={22} md={20} lg={16}>
-            <Title>{t('cookies.detail.title')}</Title>
+            <Title>{i18n.t('cookies.detail.title')}</Title>
             <Divider />
             <Text>
               Una cookie es un fichero que se descarga en su ordenador al
@@ -117,4 +117,4 @@ const CookiesPage = ({ t }: Props): JSX.Element => {
   );
 };
 
-export default withTranslation('common')(CookiesPage);
+export default CookiesPage;

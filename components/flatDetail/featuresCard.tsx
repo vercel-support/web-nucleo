@@ -1,16 +1,13 @@
 import styled from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Row, Col } from 'antd';
 
-import nextI18Next from '../../i18n';
-import Flat from '../../backend/salesforce/flat';
-
-const { withTranslation } = nextI18Next;
+import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
-  flat: Flat;
+  flat: IFlat;
   className?: string;
-} & WithTranslation;
+};
 
 const FeaturesCardRow = styled(Row)`
   margin-bottom: 0 !important;
@@ -62,40 +59,46 @@ const FeatureInfo = styled.div`
   }
 `;
 
-const FeaturesCard = ({ flat, className, t }: Props): JSX.Element => {
+const FeaturesCard = ({ flat, className }: Props): JSX.Element => {
+  const i18n = useI18n();
+
   return (
     <div className={className}>
       <FeaturesCardRow gutter={[16, 32]}>
         <RoomsCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{t('flat.rooms')}</FeatureTitle>
+          <FeatureTitle>{i18n.t('flat.rooms')}</FeatureTitle>
           <FeatureInfo>{flat.rooms}</FeatureInfo>
         </RoomsCol>
         <BathroomsCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{t('flat.bathrooms')}</FeatureTitle>
+          <FeatureTitle>{i18n.t('flat.bathrooms')}</FeatureTitle>
           <FeatureInfo>{flat.bathrooms}</FeatureInfo>
         </BathroomsCol>
         <HeatingCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{t('calefaccion')}</FeatureTitle>
-          <FeatureInfo>{t('yes')}</FeatureInfo>
+          {/* TODO: use existing property in SF */}
+          <FeatureTitle>{i18n.t('calefaccion')}</FeatureTitle>
+          <FeatureInfo>{i18n.t('yes')}</FeatureInfo>
         </HeatingCol>
         <AirConditioningCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{t('aireAcondicionado')}</FeatureTitle>
-          <FeatureInfo>{t('yes')}</FeatureInfo>
+          {/* TODO: use existing property in SF */}
+          <FeatureTitle>{i18n.t('aireAcondicionado')}</FeatureTitle>
+          <FeatureInfo>{i18n.t('yes')}</FeatureInfo>
         </AirConditioningCol>
         <TerraceCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{t('terraza')}</FeatureTitle>
-          <FeatureInfo>{t('yes')}</FeatureInfo>
+          {/* TODO: use existing property in SF */}
+          <FeatureTitle>{i18n.t('terraza')}</FeatureTitle>
+          <FeatureInfo>{i18n.t('yes')}</FeatureInfo>
         </TerraceCol>
         <OrientationCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{t('orientacion')}</FeatureTitle>
-          <FeatureInfo>{t('south')}</FeatureInfo>
+          {/* TODO: use existing property in SF */}
+          <FeatureTitle>{i18n.t('orientacion')}</FeatureTitle>
+          <FeatureInfo>{i18n.t('south')}</FeatureInfo>
         </OrientationCol>
       </FeaturesCardRow>
     </div>
   );
 };
 
-export default styled(withTranslation('common')(FeaturesCard))`
+export default styled(FeaturesCard)`
   -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);

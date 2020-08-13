@@ -1,9 +1,10 @@
 import { Connection } from 'jsforce';
 import { retry } from 'async-retry-decorator';
 import { memoize, binaryToBase64ImageSrc } from '../../common/helpers';
-import { uploadImagesToGS } from '../storage';
+import { processImage } from '../images';
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
-
+import { join } from 'path';
+import fs from 'fs';
 import axios, { AxiosRequestConfig, Method, ResponseType } from 'axios';
 
 export class Salesforce {
@@ -52,24 +53,70 @@ export class Salesforce {
 
   @memoize
   async fetchAttachedImages(entityId: string): Promise<string[]> {
+    const basePath = `${process.cwd()}/public`;
+    const innerPath = '/gen/';
+    const folder = join(basePath, innerPath);
+
+    if (!fs.existsSync(folder)) {
+      fs.mkdirSync(folder);
+    }
+
+    const filesInFolder: string[] = await new Promise((resolve, reject) => {
+      fs.readdir(folder, (err, data) => {
+        if (err) return reject(err);
+        resolve(data);
+      });
+    });
+
     const queryRes = await this.querySOQL(
-      `Select id,ContentDocumentId,ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId = '${entityId}'`
+      `Select id,ContentDocumentId,ContentDocument.LatestPublishedVersionId, ContentDocument.FileExtension, ContentDocument.FileType from ContentDocumentLink where LinkedEntityId = '${entityId}'`
     );
     const records = queryRes.records;
+    if (records.length <= 0) {
+      return [];
+    }
 
-    const images = await Promise.all(
-      records.map(async (record) => {
-        const versionId = record['ContentDocument']['LatestPublishedVersionId'];
+    const imageIds = records.map((record) => {
+      return {
+        id: record['ContentDocument']['LatestPublishedVersionId'],
+        extension: record['ContentDocument']['FileExtension'],
+      };
+    });
+
+    const urls = imageIds.map((imageId) => {
+      const filename = `salesforce-image-${imageId['id']}.${imageId['extension']}`;
+      return join(innerPath, filename);
+    });
+
+    const missingImageIds = imageIds.filter((imageId) => {
+      return !filesInFolder.includes(
+        `salesforce-image-${imageId['id']}.${imageId['extension']}`
+      );
+    });
+
+    const missingImages: Buffer[] = await Promise.all(
+      missingImageIds.map(async (imageId) => {
         const res = await this.fetchApi(
-          `/sobjects/ContentVersion/${versionId}/VersionData`
+          `/sobjects/ContentVersion/${imageId['id']}/VersionData`
         );
         return res.data;
       })
     );
-    if (images.length <= 0) {
-      return [];
+
+    const missingPaths = imageIds.map((imageId) => {
+      return join(
+        folder,
+        `salesforce-image-${imageId['id']}.${imageId['extension']}`
+      );
+    });
+
+    const promises: Promise<void>[] = [];
+    for (let i = 0; i < missingImages.length; i++) {
+      promises.push(processImage(missingImages[i], missingPaths[i]));
     }
-    const urls = await uploadImagesToGS('salesforce-image-', images);
+
+    await Promise.all(promises);
+
     return urls;
   }
 

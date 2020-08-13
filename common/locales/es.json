@@ -41,7 +41,7 @@
   },
   "flatDetail": {
     "title": "{{type}} en venta en {{address}}, {{city}}. - Inmobiliaria Nucleo",
-    "description": "{{type}} en venta por {{price}}€. {{dormitories}} dormitorios, {{bathrooms}} baños, {{sqrMeters}} en {{address}}, {{city}}",
+    "description": "{{type}} en venta por {{price}}€. {{rooms}} dormitorio/s, {{bathrooms}} baño/s, {{sqrMeters}} metros cuadrados en {{address}}, {{city}}",
     "messages": {
       "recommendedFlats": "También le puede interesar"
     },
@@ -76,11 +76,23 @@
   "cookies": {
     "text": "Utilizamos cookies propias y de terceros para evaluar el uso que se hace de la web y la actividad general de la misma. Si usted continúa navegando, consideramos que acepta su uso.",
     "detail": {
-      "title": "Política de cookies"
+      "title": "Política de cookies",
+      "description": "Política de cookies"
     },
     "actions": {
       "ok": "Aceptar",
       "moreInfo": "Más información"
     }
+  },
+  "flatTypes": {
+    "Piso": "Piso",
+    "Casa": "Casa",
+    "Casa Rural": "Casa Rural",
+    "Box/Plaza de garaje": "Plaza de garaje",
+    "Terrenos": "Terreno",
+    "Comercial": "Comercio",
+    "Ático": "Ático",
+    "Edificio": "Edificio",
+    "Trastero": "Trastero"
   }
 }

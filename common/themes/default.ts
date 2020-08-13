@@ -195,8 +195,7 @@ const theme: DefaultTheme = {
 
   loadOptimizedImage: (url: string): string => {
     const trace = require(`../../public/images/${url}?trace`).trace;
-    // TODO remove first image loaded as soon as webp support comes to safari
-    return `url(${require(`../../public/images/${url}`)}), url(${require(`../../public/images/${url}?webp`)}), url("${trace}")`;
+    return `url(${require(`../../public/images/${url}`)}), url("${trace}")`;
   },
 };
 

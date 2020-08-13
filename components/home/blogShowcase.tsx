@@ -1,10 +1,6 @@
 import styled from 'styled-components';
-import i18Next from '../../i18n';
-import { WithTranslation } from 'next-i18next';
 
-const { withTranslation } = i18Next;
-
-type Props = WithTranslation;
+import useI18n from '../../common/hooks/useI18n';
 
 const Banner = styled.div`
   height: 40vh;
@@ -75,13 +71,15 @@ const Divider = styled.hr`
   border: 1px solid ${(props) => props.theme.colors.primary};
 `;
 
-const BlogShowcase = ({ t }: Props): JSX.Element => {
+const BlogShowcase = (): JSX.Element => {
+  const i18n = useI18n();
+
   return (
     <Banner>
-      <SectionTitle>{t('blog-showcase-title')}</SectionTitle>
+      <SectionTitle>{i18n.t('blog-showcase-title')}</SectionTitle>
       <Divider />
-      <SectionSubtitle>{t('blog-showcase-subtitle')}</SectionSubtitle>
+      <SectionSubtitle>{i18n.t('blog-showcase-subtitle')}</SectionSubtitle>
     </Banner>
   );
 };
-export default withTranslation('common')(BlogShowcase);
+export default BlogShowcase;

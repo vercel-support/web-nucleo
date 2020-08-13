@@ -6,20 +6,18 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document';
-
 import { ServerStyleSheet } from 'styled-components';
 
-import { lngFromReq } from 'next-i18next/dist/commonjs/utils';
 import { GA_TRACKING_ID } from '../libs/gtag';
+import { defaultLanguage } from '../libs/i18n';
 
-type Props = DocumentInitialProps & { lng: string };
+type Props = DocumentInitialProps;
 
 export default class MyDocument extends Document<Props> {
   static async getInitialProps(ctx: DocumentContext): Promise<Props> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
-    const lng = lngFromReq(ctx.req);
     try {
       ctx.renderPage = () =>
         originalRenderPage({
@@ -36,7 +34,6 @@ export default class MyDocument extends Document<Props> {
             {sheet.getStyleElement()}
           </>
         ),
-        lng,
       };
     } finally {
       sheet.seal();
@@ -44,10 +41,8 @@ export default class MyDocument extends Document<Props> {
   }
 
   render(): JSX.Element {
-    const { lng } = this.props;
-
     return (
-      <Html lang={lng}>
+      <Html lang={defaultLanguage}>
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
@@ -60,6 +55,7 @@ export default class MyDocument extends Document<Props> {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            
             gtag('config', '${GA_TRACKING_ID}', {
               page_path: window.location.pathname,
             });

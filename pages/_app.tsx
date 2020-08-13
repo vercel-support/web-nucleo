@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import App from 'next/app';
 import Router from 'next/router';
+import { CSSProp, createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-
-import nextI18Next from '../i18n';
-import defaultTheme from '../common/themes/default';
+import I18n from '../libs/i18n';
 import * as gtag from '../libs/gtag';
-
-import { CSSProp } from 'styled-components';
+import defaultTheme from '../common/themes/default';
 
 declare module 'react' {
   interface HTMLAttributes<T> extends DOMAttributes<T> {
@@ -97,7 +94,7 @@ class MyApp extends App {
     Router.events.off('routeChangeComplete', this.handleRouteChange);
   }
 
-  handleRouteChange(url) {
+  handleRouteChange(url: string) {
     gtag.pageview(url);
   }
 
@@ -106,11 +103,13 @@ class MyApp extends App {
 
     return (
       <ThemeProvider theme={defaultTheme}>
-        <GlobalStyle />
-        <Component {...pageProps} />
+        <I18n>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </I18n>
       </ThemeProvider>
     );
   }
 }
 
-export default nextI18Next.appWithTranslation(MyApp);
+export default MyApp as ComponentType;

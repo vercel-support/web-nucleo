@@ -1,17 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { WithTranslation } from 'next-i18next';
 import { Row, Col, Button } from 'antd';
 
-import i18Next from '../../i18n';
-
-const { withTranslation } = i18Next;
+import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
   className?: string;
   setCookiesAccepted: Dispatch<SetStateAction<boolean>>;
-} & WithTranslation;
+};
 
 const Text = styled.div`
   color: #f5f5f5;
@@ -20,13 +17,14 @@ const Text = styled.div`
 const CookiesBanner = ({
   className,
   setCookiesAccepted,
-  t,
 }: Props): JSX.Element => {
+  const i18n = useI18n();
+
   return (
     <div className={className}>
       <Row align={'middle'}>
         <Col xs={12} lg={14} xl={16}>
-          <Text>{t('cookies.text')}</Text>
+          <Text>{i18n.t('cookies.text')}</Text>
         </Col>
         <Col span={2} />
         <Col xs={8} lg={6} xl={4}>
@@ -37,13 +35,13 @@ const CookiesBanner = ({
                 ghost
                 onClick={() => setCookiesAccepted(true)}
               >
-                {t('cookies.actions.ok')}
+                {i18n.t('cookies.actions.ok')}
               </Button>
             </Col>
             <Col xs={24} lg={12}>
-              <Link href="/legal/cookies">
+              <Link href="/legal/cookies" passHref>
                 <Button type={'default'} ghost>
-                  {t('cookies.actions.moreInfo')}
+                  {i18n.t('cookies.actions.moreInfo')}
                 </Button>
               </Link>
             </Col>
@@ -55,7 +53,7 @@ const CookiesBanner = ({
   );
 };
 
-export default styled(withTranslation('common')(CookiesBanner))`
+export default styled(CookiesBanner)`
   position: fixed;
   left: 0;
   right: 0;
