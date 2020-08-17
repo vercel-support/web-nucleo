@@ -69,19 +69,26 @@ export class Salesforce {
     });
 
     const queryRes = await this.querySOQL(
-      `Select id,ContentDocumentId,ContentDocument.LatestPublishedVersionId, ContentDocument.FileExtension, ContentDocument.FileType from ContentDocumentLink where LinkedEntityId = '${entityId}'`
+      `Select id,ContentDocumentId,ContentDocument.LatestPublishedVersionId, ContentDocument.FileExtension, ContentDocument.FileType, ContentDocument.Title from ContentDocumentLink where LinkedEntityId = '${entityId}'`
     );
     const records = queryRes.records;
     if (records.length <= 0) {
       return [];
     }
 
-    const imageIds = records.map((record) => {
-      return {
-        id: record['ContentDocument']['LatestPublishedVersionId'],
-        extension: record['ContentDocument']['FileExtension'],
-      };
-    });
+    const imageIds = records
+      .map((record) => {
+        return {
+          id: record['ContentDocument']['LatestPublishedVersionId'],
+          extension: record['ContentDocument']['FileExtension'],
+          title: record['ContentDocument']['Title'],
+        };
+      })
+      .sort((a, b) => {
+        return a['title'].localeCompare(b['title'], undefined, {
+          numeric: true,
+        });
+      });
 
     const urls = imageIds.map((imageId) => {
       const filename = `salesforce-image-${imageId['id']}.${imageId['extension']}`;
