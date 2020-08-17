@@ -76,15 +76,19 @@ export class Salesforce {
       return [];
     }
 
-    const imageIds = records.map((record) => {
-      return {
-        id: record['ContentDocument']['LatestPublishedVersionId'],
-        extension: record['ContentDocument']['FileExtension'],
-        title: record['ContentDocument']['Title']
-      };
-    }).sort((a, b) => {
-      return a['title'].localeCompare(b['title'], undefined, {numeric: true});
-    });
+    const imageIds = records
+      .map((record) => {
+        return {
+          id: record['ContentDocument']['LatestPublishedVersionId'],
+          extension: record['ContentDocument']['FileExtension'],
+          title: record['ContentDocument']['Title'],
+        };
+      })
+      .sort((a, b) => {
+        return a['title'].localeCompare(b['title'], undefined, {
+          numeric: true,
+        });
+      });
 
     const urls = imageIds.map((imageId) => {
       const filename = `salesforce-image-${imageId['id']}.${imageId['extension']}`;
