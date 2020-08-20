@@ -27,6 +27,7 @@ export default class Flat extends IFlat {
     'Sotano__c',
     'Ano_construccion__c',
     'Ano_reforma__c',
+    'StageName'
   ];
   public static objectName = 'Opportunity';
 
@@ -48,6 +49,7 @@ export default class Flat extends IFlat {
   public hasBalcony: boolean;
   public hasTerrace: boolean;
   public hasBasement: boolean;
+  public stage: string;
 
   public yearConstruction?: number;
   public yearReform?: number;
@@ -84,6 +86,7 @@ export default class Flat extends IFlat {
     const description_ES = record['Descripci_n_Espa_ol__c'];
     const description_EN = record['Descripci_n_Ingl_s__c'];
     const showInWebsite = record['Mostrar_en_la_Web__c'];
+    const stage = record['StageName'];
 
     const hasElevator = record['Ascensor__c'];
     const hasGarden = record['Jardin__c'];
@@ -103,6 +106,7 @@ export default class Flat extends IFlat {
       isnull(price) ||
       isnull(rooms) ||
       isnull(type) ||
+      isnull(stage) ||
       isnull(sqrMeters) ||
       isnull(zone) ||
       isnull(city) ||
@@ -110,7 +114,8 @@ export default class Flat extends IFlat {
       isnull(description_ES) ||
       isnull(description_EN) ||
       isnull(showInWebsite) ||
-      showInWebsite == false
+      showInWebsite == false ||
+      stage != 'Activo'
     ) {
       return null;
     }
