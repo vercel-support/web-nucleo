@@ -27,7 +27,7 @@ export default class Flat extends IFlat {
     'Sotano__c',
     'Ano_construccion__c',
     'Ano_reforma__c',
-    'StageName'
+    'StageName',
   ];
   public static objectName = 'Opportunity';
 
