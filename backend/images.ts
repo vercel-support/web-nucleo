@@ -7,15 +7,19 @@ const QUALITY = 60;
 const JPEG_PROGRESSIVE = true;
 
 const optimizeImage = async (data: Buffer): Promise<Buffer> => {
-  let image = sharp(data);
-  const info = await image.metadata();
+  try {
+    let image = sharp(data);
+    const info = await image.metadata();
 
-  image = image.jpeg({ quality: QUALITY, progressive: JPEG_PROGRESSIVE });
-  if (info.width < MAX_WIDTH) {
-    return image.toBuffer();
+    image = image.jpeg({ quality: QUALITY, progressive: JPEG_PROGRESSIVE });
+    if (info.width < MAX_WIDTH) {
+      return image.toBuffer();
+    }
+
+    return image.resize({ width: MAX_WIDTH }).toBuffer();
+  } catch (error) {
+    return data;
   }
-
-  return image.resize({ width: MAX_WIDTH }).toBuffer();
 };
 
 const storeFile = async (data: Buffer, path: string): Promise<void> =>
