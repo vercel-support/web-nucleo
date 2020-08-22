@@ -94,9 +94,9 @@ const NewsletterSection = ({
 
   const [form] = Form.useForm();
   const validateMessages = {
-    required: i18n.t('modalForm.validateRequired'),
+    required: i18n.t('contactForm.validateRequired'),
     types: {
-      email: i18n.t('modalForm.validateEmail'),
+      email: i18n.t('contactForm.validateEmail'),
     },
   };
 

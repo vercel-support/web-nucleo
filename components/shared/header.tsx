@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { Row, Col, Button } from 'antd';
 
 import useI18n from '../../common/hooks/useI18n';
 import LanguageSelector from './languageSelector';
@@ -8,15 +9,22 @@ type Props = {
   className?: string;
 };
 
-const MenuButtons = styled.div`
-  display: flex;
-  justify-content: space-between;
-
+const MenuButtons = styled(Row)`
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
+`;
+
+const SecondaryButton = styled(Button)`
+  background: ${(props) => props.theme.colors.secondary};
+  border-color: ${(props) => props.theme.colors.secondary};
+  &:hover {
+    background: ${(props) => props.theme.colors.secondary};
+    border-color: ${(props) => props.theme.colors.secondary};
+    opacity: 0.8;
+  }
 `;
 
 const Header = ({ className }: Props) => {
@@ -32,8 +40,17 @@ const Header = ({ className }: Props) => {
           />
         </a>
       </Link>
-      <MenuButtons>
-        <LanguageSelector themeColor="secondary" />
+      <MenuButtons gutter={32} align="middle">
+        <Col>
+          <Link href="/vender-casa" passHref>
+            <SecondaryButton type="primary">
+              {i18n.t('sellHouse.title')}
+            </SecondaryButton>
+          </Link>
+        </Col>
+        <Col>
+          <LanguageSelector themeColor="secondary" />
+        </Col>
       </MenuButtons>
     </header>
   );

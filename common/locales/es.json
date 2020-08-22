@@ -60,7 +60,7 @@
   "north": "Norte",
   "west": "Oeste",
   "east": "Este",
-  "modalForm": {
+  "contactForm": {
     "titleSell": "¿Quieres vender un inmueble?",
     "titleBuy": "¿Quieres comprar un inmueble?",
     "name": "Nombre",
@@ -82,6 +82,49 @@
     "actions": {
       "ok": "Aceptar",
       "moreInfo": "Más información"
+    }
+  },
+  "sellHouse": {
+    "title": "Vender casa",
+    "metaDescription": "Vender casa",
+    "form": {
+      "title": "Venda su inmueble con nosotros",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
+      "subtitle2": "Valoración gratuita y sin compromiso",
+      "send": "Enviar",
+      "contactUs": "Contacte con nosotros"
+    },
+    "why": {
+      "title": "¿Por qué vender con nosotros?",
+      "properties": {
+        "professional": {
+          "title": "Profesionalidad",
+          "description": "Desde Núcleo le ofrecemos un servicio completo y personal desde el inicio hasta el fin del proceso de venta"
+        },
+        "fast": {
+          "title": "Rapidez",
+          "description": "Contamos con una red de 18.000 personas que buscan una nueva vivienda"
+        },
+        "experience": {
+          "title": "Experiencia",
+          "description": "El equipo de profesionales de Núcleo conoce bien el mercado inmobiliario y cuenta profundos conocimientos especializados"
+        }
+      }
+    },
+    "houseValue": {
+      "title": "Conozca el valor de su inmueble", 
+      "subtitle": "Le ofrecemos un servicio gratuito de valoración de su inmueble",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis nisl non ipsum lacinia sodales. Morbi at purus eu mauris mollis fermentum non eu tellus"
+    },
+    "idealBuyer": {
+      "title": "Encontramos al comprador ideal", 
+      "subtitle": "Encontramos al comprador ideal",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis nisl non ipsum lacinia sodales. Morbi at purus eu mauris mollis fermentum non eu tellus"
+    },
+    "adjustNeeds": {
+      "title": "Nos ajustamos a sus necesidades", 
+      "subtitle": "En Núcleo nuestros clientes son lo primero",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis nisl non ipsum lacinia sodales. Morbi at purus eu mauris mollis fermentum non eu tellus"
     }
   },
   "flatTypes": {

@@ -3,6 +3,7 @@ export { default as Header } from './header';
 export { default as CookiesBanner } from './cookiesBanner';
 export { default as LanguageSelector } from './languageSelector';
 export { default as ModalForm } from './modalForm';
+export { default as ContactForm } from './contactForm';
 export {
   FlatsDisplayPlaceholder,
   default as FlatsDisplay,
