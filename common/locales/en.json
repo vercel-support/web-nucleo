@@ -140,5 +140,15 @@
     "Ático": "Loft",
     "Edificio": "Building",
     "Trastero": "Storage"
+  },
+  "who-are-we": {
+    "title": "¿Quiénes somos? | Inmobiliaria Nucleo",
+    "description": "¿Quiénes somos? | Inmobiliaria Nucleo",
+    "section-1-title": "¿Quiénes somos?",
+    "section-1-text": "Núcleo es una red de inmobiliarias en Alicante con un objetivo claro:<br><br>Ofrecer el servicio de compra-venta de inmuebles más rápido, económico y transparente del mercado.<br><br>Nuestra aventura empieza en Alicante. Ciudad conocida mundialmente tanto por sus costas, como por sus playas y núcleos turisticos. Ciudad en la que vivimos.",
+    "section-2-title": "¿De dónde venimos?",
+    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico con más de 30 años de experiencia, somos la proptech líder en el sector. Unimos lo mejor de los dos mundos: la experiencia de nuestros asesores inmobiliarios y tecnología puntera, para hacer que el proceso de compraventa sea rápido, sencillo y económico.",
+    "section-3-title": "¿A dónde vamos?",
+    "section-3-text": "Formada por profesionales de los sectores inmobiliario y tecnológico con más de 30 años de experiencia, somos la proptech líder en el sector. Unimos lo mejor de los dos mundos: la experiencia de nuestros asesores inmobiliarios y tecnología puntera, para hacer que el proceso de compraventa sea rápido, sencillo y económico."
   }
 }

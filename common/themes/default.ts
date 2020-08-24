@@ -178,7 +178,7 @@ const theme: DefaultTheme = {
   grid: {
     getGridColumns: (cols: number, extraGutters = 0): string => {
       const nGutters = cols - 1 + extraGutters;
-      return `calc((((100% - (${
+      return `calc((((100vw - (${
         gridColumns - 1
       } * var(--gutter))) / ${gridColumns}) * ${cols}) + (${nGutters} * var(--gutter)))`;
     },
