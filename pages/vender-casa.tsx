@@ -40,15 +40,15 @@ const WhySellWithUsSection = styled.div`
 `;
 
 const HouseValueSection = styled.div`
-  margin-top: 3rem;
+  margin-top: 64px;
 `;
 
 const IdealBuyerSection = styled.div`
-  margin-top: 3rem;
+  margin-top: 64px;
 `;
 
 const AdjustNeedsSection = styled.div`
-  margin-top: 3rem;
+  margin-top: 64px;
 `;
 
 const ContactUsSection = styled.div`
