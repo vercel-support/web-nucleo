@@ -17,7 +17,7 @@ const MenuButtons = styled(Row)`
   line-height: 22px;
 `;
 
-const SellHouseCol = styled(Col)`
+const SmDownHiddenCol = styled(Col)`
   @media ${(props) => props.theme.breakpoints.smd} {
     display: none;
   }
@@ -26,7 +26,9 @@ const SellHouseCol = styled(Col)`
 const SecondaryButton = styled(Button)`
   background: ${(props) => props.theme.colors.secondary};
   border-color: ${(props) => props.theme.colors.secondary};
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     background: ${(props) => props.theme.colors.secondary};
     border-color: ${(props) => props.theme.colors.secondary};
     opacity: 0.8;
@@ -47,13 +49,18 @@ const Header = ({ className }: Props) => {
         </a>
       </Link>
       <MenuButtons gutter={32} align="middle">
-        <SellHouseCol>
+        <SmDownHiddenCol>
+          <Link href="/nucleo" passHref>
+            <Button type="text">{i18n.t('aboutUs.title')}</Button>
+          </Link>
+        </SmDownHiddenCol>
+        <SmDownHiddenCol>
           <Link href="/vender-casa" passHref>
             <SecondaryButton type="primary">
               {i18n.t('sellHouse.title')}
             </SecondaryButton>
           </Link>
-        </SellHouseCol>
+        </SmDownHiddenCol>
         <Col>
           <LanguageSelector themeColor="secondary" />
         </Col>

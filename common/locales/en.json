@@ -127,6 +127,9 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis nisl non ipsum lacinia sodales. Morbi at purus eu mauris mollis fermentum non eu tellus"
     }
   },
+  "aboutUs": {
+    "title": "About us"
+  },
   "flatTypes": {
     "Piso": "Flat",
     "Casa": "House",
