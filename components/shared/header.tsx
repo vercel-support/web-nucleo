@@ -67,7 +67,7 @@ const HeaderComp = styled.header<{ alwaysShown: boolean; dropShadow: boolean }>`
     props.dropShadow ? '0px 3px 25px rgba(0, 0, 0, 0.15)' : 'inherit'};
 `;
 
-const Header = ({ alwaysShown, dropShadow }: Props) => {
+const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
   const i18n = useI18n();
 
   return (
