@@ -17,6 +17,12 @@ const MenuButtons = styled(Row)`
   line-height: 22px;
 `;
 
+const SellHouseCol = styled(Col)`
+  @media ${(props) => props.theme.breakpoints.smd} {
+    display: none;
+  }
+`;
+
 const SecondaryButton = styled(Button)`
   background: ${(props) => props.theme.colors.secondary};
   border-color: ${(props) => props.theme.colors.secondary};
@@ -41,13 +47,13 @@ const Header = ({ className }: Props) => {
         </a>
       </Link>
       <MenuButtons gutter={32} align="middle">
-        <Col>
+        <SellHouseCol>
           <Link href="/vender-casa" passHref>
             <SecondaryButton type="primary">
               {i18n.t('sellHouse.title')}
             </SecondaryButton>
           </Link>
-        </Col>
+        </SellHouseCol>
         <Col>
           <LanguageSelector themeColor="secondary" />
         </Col>

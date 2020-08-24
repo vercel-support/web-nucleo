@@ -9,16 +9,26 @@ const Background = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center left;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
 `;
 
 const Content = styled.div`
-  height: 545px;
-  @media ${(props) => props.theme.breakpoints.smd} {
-    height: 388px;
-  }
+  min-height: 545px;
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   text-align: right;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    min-height: 388px;
+    text-align: left;
+    border-radius: ${(props) => props.theme.borderRadius};
+    background-color: #ffffff;
+    opacity: 0.9;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+  }
 `;
 
 const Title = styled.h2`

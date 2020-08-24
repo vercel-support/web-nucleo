@@ -1,6 +1,5 @@
 import Head from 'next/head';
-import styled, { withTheme, DefaultTheme } from 'styled-components';
-/* import { useMediaQuery } from 'react-responsive'; */
+import styled from 'styled-components';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import useI18n from '../common/hooks/useI18n';
@@ -14,10 +13,6 @@ import {
   ContactUsButton,
 } from '../components/sellHouse';
 import { Header, Footer } from '../components/shared';
-
-type Props = {
-  theme: DefaultTheme;
-};
 
 const Layout = styled.div`
   display: flex;
@@ -58,18 +53,20 @@ const AdjustNeedsSection = styled.div`
 
 const ContactUsSection = styled.div`
   margin-top: 3rem;
+  &.smd-only {
+    @media ${(props) => props.theme.breakpoints.mdu} {
+      display: none;
+    }
+  }
 `;
 
 const Separator = styled.div`
   margin-top: 1rem;
 `;
 
-const VenderCasaPage = (/* { theme }: Props */): JSX.Element => {
+const VenderCasaPage = (): JSX.Element => {
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
-
-  // TODO: needs useEffect and useState
-  /* const isSmDown = useMediaQuery({ query: theme.breakpoints.smd }); */
 
   const onSendButtonClicked = async (
     name: string,
@@ -139,11 +136,9 @@ const VenderCasaPage = (/* { theme }: Props */): JSX.Element => {
         <WhySellWithUsSection>
           <WhySellWithUs />
         </WhySellWithUsSection>
-        {/* {isSmDown ? (
-          <ContactUsSection>
-            <ContactUsButton onClick={onContactUsButtonClicked} />
-          </ContactUsSection>
-        ) : null} */}
+        <ContactUsSection className="smd-only">
+          <ContactUsButton onClick={onContactUsButtonClicked} />
+        </ContactUsSection>
         <HouseValueSection>
           <HouseValue />
         </HouseValueSection>
@@ -164,4 +159,4 @@ const VenderCasaPage = (/* { theme }: Props */): JSX.Element => {
   );
 };
 
-export default withTheme(VenderCasaPage);
+export default VenderCasaPage;

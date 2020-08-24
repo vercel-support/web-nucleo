@@ -23,8 +23,8 @@ const Background = styled.div`
 
   padding-top: 80px;
   padding-bottom: 80px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   @media ${(props) => props.theme.breakpoints.smd} {
     padding-top: 40px;
     padding-bottom: 40px;
@@ -36,7 +36,6 @@ const Card = styled.div`
   background-color: #ffffff;
   opacity: 0.9;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
-
   padding: 40px;
 `;
 
