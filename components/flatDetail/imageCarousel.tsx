@@ -81,7 +81,7 @@ const ImageCarousel = ({
   theme,
 }: Props): JSX.Element => {
   const i18n = useI18n();
-  const isSmDown = useMediaQuery({ query: theme.breakpoints.smd }); // TODO: needs useEffect and useState
+  const isSmDown = useMediaQuery({ query: theme.breakpoints.smd });
 
   return (
     <div className={className} style={{ position: 'relative' }}>

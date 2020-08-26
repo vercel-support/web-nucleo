@@ -82,7 +82,19 @@ const GlobalStyle = createGlobalStyle`
     @media ${(props) => props.theme.breakpoints.xxl} {
       --gutter: ${(props) => props.theme.grid.xxlGutter};
     }
-  }  
+  }
+
+  .hamburger-menu {
+    &.ant-dropdown {
+      position: absolute;
+      left: 0;
+      right: 0;
+      padding-top: 20px;
+    }
+    .ant-dropdown-menu {
+      border-radius: 0;
+    }
+  }
 `;
 
 class MyApp extends App {

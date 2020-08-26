@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import styled from 'styled-components';
+import * as Scroll from 'react-scroll';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import useI18n from '../common/hooks/useI18n';
@@ -96,7 +97,7 @@ const VenderCasaPage = (): JSX.Element => {
   };
 
   const onContactUsButtonClicked = () => {
-    window.scrollTo(0, 0); // TODO: smooth
+    Scroll.animateScroll.scrollToTop({ smooth: true });
     document.getElementById('name').focus(); // TODO: make non-hardcoded
   };
 

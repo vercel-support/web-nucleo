@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Dropdown, Menu } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
 
 import useI18n from '../../common/hooks/useI18n';
 import LanguageSelector from './languageSelector';
@@ -20,6 +21,12 @@ const MenuButtons = styled(Row)`
 
 const SmDownHiddenCol = styled(Col)`
   @media ${(props) => props.theme.breakpoints.smd} {
+    display: none;
+  }
+`;
+
+const MdUpHiddenCol = styled(Col)`
+  @media ${(props) => props.theme.breakpoints.mdu} {
     display: none;
   }
 `;
@@ -67,8 +74,56 @@ const HeaderComp = styled.header<{ alwaysShown: boolean; dropShadow: boolean }>`
     props.dropShadow ? '0px 3px 25px rgba(0, 0, 0, 0.15)' : 'inherit'};
 `;
 
+const StyledMenu = styled(Menu)`
+  border-radius: 0;
+  font-family: ${(props) => props.theme.font.family};
+  font-style: ${(props) => props.theme.font.style};
+`;
+
+const StyledLink = styled.a`
+  font-family: ${(props) => props.theme.font.family};
+  font-style: ${(props) => props.theme.font.style};
+`;
+
 const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
   const i18n = useI18n();
+
+  const hamburgerMenu = (
+    <StyledMenu>
+      <Menu.Item key="1">
+        <Link href="/nucleo">
+          <a>{i18n.t('aboutUs.title')}</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <Link href="/vender-casa">
+          <a>{i18n.t('sellHouse.title')}</a>
+        </Link>
+      </Menu.Item>
+      <Menu.SubMenu
+        key="sub1"
+        title={i18n.t('idioma')}
+        popupClassName="hamburger-menu"
+      >
+        <Menu.Item
+          key="3"
+          onClick={() => {
+            i18n.locale('es');
+          }}
+        >
+          <StyledLink>Español</StyledLink>
+        </Menu.Item>
+        <Menu.Item
+          key="4"
+          onClick={() => {
+            i18n.locale('en');
+          }}
+        >
+          <StyledLink>English</StyledLink>
+        </Menu.Item>
+      </Menu.SubMenu>
+    </StyledMenu>
+  );
 
   return (
     <HeaderComp alwaysShown={!!alwaysShown} dropShadow={!!dropShadow}>
@@ -93,9 +148,18 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
             </SecondaryButton>
           </Link>
         </SmDownHiddenCol>
-        <Col>
-          <LanguageSelector themeColor="secondary" />
-        </Col>
+        <SmDownHiddenCol>
+          <LanguageSelector />
+        </SmDownHiddenCol>
+        <MdUpHiddenCol>
+          <Dropdown
+            overlay={hamburgerMenu}
+            trigger={['click']}
+            overlayClassName="hamburger-menu"
+          >
+            <Button type="text" shape="circle" icon={<MenuOutlined />}></Button>
+          </Dropdown>
+        </MdUpHiddenCol>
       </MenuButtons>
     </HeaderComp>
   );

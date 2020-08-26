@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown, Button } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
 import useI18n from '../../common/hooks/useI18n';
@@ -15,11 +15,7 @@ const StyledLink = styled.a`
   font-style: ${(props) => props.theme.font.style};
 `;
 
-const ColorLink = styled.a<{ themeColor: string }>`
-  color: ${(props) => props.theme.colors[props.themeColor]};
-`;
-
-const LanguageSelector = ({ themeColor = 'primary' }: Props): JSX.Element => {
+const LanguageSelector = (): JSX.Element => {
   const i18n = useI18n();
 
   const menu = (
@@ -45,13 +41,9 @@ const LanguageSelector = ({ themeColor = 'primary' }: Props): JSX.Element => {
 
   return (
     <Dropdown overlay={menu} trigger={['click']}>
-      <ColorLink
-        themeColor={themeColor}
-        className="ant-dropdown-link"
-        onClick={(e) => e.preventDefault()}
-      >
+      <Button type="text" onClick={(e) => e.preventDefault()}>
         {i18n.t('idioma')} <DownOutlined />
-      </ColorLink>
+      </Button>
     </Dropdown>
   );
 };

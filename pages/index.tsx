@@ -60,33 +60,6 @@ export const Home = ({ flats }: Props): JSX.Element => {
 
   const deserializedFlats = deserializeMultiple(flats, IFlat);
 
-  const onSellButtonClicked = async (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    address: string
-  ): Promise<void> => {
-    try {
-      const contact: IContact = { EMAIL: email };
-      if (name) {
-        contact.FNAME = name;
-      }
-      if (lastName) {
-        contact.LNAME = lastName;
-      }
-      if (phone) {
-        contact.PHONE = phone;
-      }
-      if (address) {
-        contact.HADDRESS = address;
-      }
-      await mailchimpService.subscribe(contact);
-    } catch (error) {
-      // TODO: manage error
-    }
-  };
-
   const onSubscribeButtonClicked = async (email: string): Promise<void> => {
     try {
       const contact: IContact = { EMAIL: email };
@@ -125,7 +98,7 @@ export const Home = ({ flats }: Props): JSX.Element => {
       <Header />
 
       <Content>
-        <Hero onSellButtonClicked={onSellButtonClicked} />
+        <Hero />
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={deserializedFlats}
@@ -140,6 +113,7 @@ export const Home = ({ flats }: Props): JSX.Element => {
 
       <Footer />
 
+      {/* TODO: show in all pages */}
       {!cookiesAccepted && (
         <CookiesBanner setCookiesAccepted={setCookiesAccepted} />
       )}
