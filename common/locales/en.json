@@ -1,6 +1,9 @@
 {
 	"header": {
-		"logo-alt": "Real state agency alicante"
+    "logoAlt": "Real state agency alicante",
+    "whoWeAre": "About us",
+    "language": "English",
+    "hamburgerLanguage": "Language"
 	},
 	"langCode": "en",
   "title": "Properties in Alicante | Inmobiliaria Nucleo",
@@ -11,7 +14,6 @@
   "hero-title-1": "Welcome to",
   "hero-title-2": "Inmobiliaria Núcleo",
   "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
-  "idioma": "English",
   "comprar": "Buy",
   "vender": "Sell your house",
   "section-flats-title": "Properties in Alicante",
@@ -126,9 +128,6 @@
       "subtitle": "En Núcleo nuestros clientes son lo primero",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis nisl non ipsum lacinia sodales. Morbi at purus eu mauris mollis fermentum non eu tellus"
     }
-  },
-  "aboutUs": {
-    "title": "About us"
   },
   "flatTypes": {
     "Piso": "Flat",

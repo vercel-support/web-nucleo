@@ -52,6 +52,10 @@ const Content = styled.main`
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-top: 0;
   }
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  }
 `;
 
 const SummarySection = styled.div`

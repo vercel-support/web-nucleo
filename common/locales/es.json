@@ -1,6 +1,9 @@
 {
 	"header": {
-		"logo-alt": "Gestión inmobiliaria alicante"
+    "logoAlt": "Gestión inmobiliaria alicante",
+    "whoWeAre": "Quiénes somos",
+    "language": "Español",
+    "hamburgerLanguage": "Idioma"
 	},
 	"langCode": "es",
   "title": "Inmobiliaria en Alicante | Inmobiliaria Nucleo",
@@ -11,7 +14,6 @@
   "hero-title-1": "Bienvenido a",
   "hero-title-2": "Inmobiliaria Núcleo",
   "hero-subtitle": "Te asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
-  "idioma": "Español",
   "comprar": "Comprar",
   "vender": "Vende tu casa",
   "section-flats-title": "Viviendas en Alicante",
@@ -126,9 +128,6 @@
       "subtitle": "En Núcleo nuestros clientes son lo primero",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis nisl non ipsum lacinia sodales. Morbi at purus eu mauris mollis fermentum non eu tellus"
     }
-  },
-  "aboutUs": {
-    "title": "Quiénes somos"
   },
   "flatTypes": {
     "Piso": "Piso",

@@ -42,7 +42,7 @@ const LanguageSelector = (): JSX.Element => {
   return (
     <Dropdown overlay={menu} trigger={['click']}>
       <Button type="text" onClick={(e) => e.preventDefault()}>
-        {i18n.t('idioma')} <DownOutlined />
+        {i18n.t('header.language')} <DownOutlined />
       </Button>
     </Dropdown>
   );

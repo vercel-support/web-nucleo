@@ -80,9 +80,10 @@ const StyledMenu = styled(Menu)`
   font-style: ${(props) => props.theme.font.style};
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled.a<{ active: boolean }>`
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
+  font-weight: ${(props) => (props.active ? 500 : 400)};
 `;
 
 const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
@@ -92,7 +93,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
     <StyledMenu>
       <Menu.Item key="1">
         <Link href="/nucleo">
-          <a>{i18n.t('aboutUs.title')}</a>
+          <a>{i18n.t('header.whoWeAre')}</a>
         </Link>
       </Menu.Item>
       <Menu.Item key="2">
@@ -100,9 +101,10 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
           <a>{i18n.t('sellHouse.title')}</a>
         </Link>
       </Menu.Item>
+      <Menu.Divider />
       <Menu.SubMenu
         key="sub1"
-        title={i18n.t('idioma')}
+        title={i18n.t('header.hamburgerLanguage')}
         popupClassName="hamburger-menu"
       >
         <Menu.Item
@@ -111,7 +113,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
             i18n.locale('es');
           }}
         >
-          <StyledLink>Español</StyledLink>
+          <StyledLink active={i18n.activeLocale === 'es'}>Español</StyledLink>
         </Menu.Item>
         <Menu.Item
           key="4"
@@ -119,7 +121,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
             i18n.locale('en');
           }}
         >
-          <StyledLink>English</StyledLink>
+          <StyledLink active={i18n.activeLocale === 'en'}>English</StyledLink>
         </Menu.Item>
       </Menu.SubMenu>
     </StyledMenu>
@@ -130,7 +132,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
       <Link href="/">
         <a>
           <img
-            alt={i18n.t('header.logo-alt')}
+            alt={i18n.t('header.logoAlt')}
             src={require('../../public/images/LogoHeaderWeb.svg')}
           />
         </a>
@@ -138,7 +140,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
       <MenuButtons gutter={32} align="middle">
         <SmDownHiddenCol>
           <Link href="/nucleo" passHref>
-            <Button type="text">{i18n.t('aboutUs.title')}</Button>
+            <Button type="text">{i18n.t('header.whoWeAre')}</Button>
           </Link>
         </SmDownHiddenCol>
         <SmDownHiddenCol>
