@@ -107,7 +107,7 @@ const WhySellWithUs = (): JSX.Element => {
             <ImageContainer>
               <ImageFlexContainer>
                 <Image
-                  src="/images/sell_house_experience.png"
+                  src="/images/sell_house_experience.jpg"
                   alt={i18n.t('sellHouse.why.properties.experience.title')}
                 />
               </ImageFlexContainer>
