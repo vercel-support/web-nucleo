@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
-import { Row, Col } from 'antd';
+import { Row, Col, message } from 'antd';
 
 import { IContact } from '../../common/model/mailchimp/contact.model';
 import { IFlat } from '../../common/model/flat.model';
@@ -138,8 +138,9 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
         contact.PHONE = phone;
       }
       await mailchimpService.subscribe(contact);
+      message.success(i18n.t('messages.subscriptionSuccess'));
     } catch (error) {
-      // TODO: manage error
+      message.error(i18n.t('messages.subscriptionError'));
     }
   };
 

@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
+import { message } from 'antd';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
@@ -64,8 +65,9 @@ export const Home = ({ flats }: Props): JSX.Element => {
     try {
       const contact: IContact = { EMAIL: email };
       await mailchimpService.subscribe(contact);
+      message.success(i18n.t('messages.subscriptionSuccess'));
     } catch (error) {
-      // TODO: manage error
+      message.error(i18n.t('messages.subscriptionError'));
     }
   };
 

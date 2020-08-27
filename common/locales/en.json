@@ -9,7 +9,7 @@
   "title": "Properties in Alicante | Inmobiliaria Nucleo",
 	"home": {
 		"description": "Find houses for sale in Alicante, Spain. Flats, Apartments, Chalets. Inmobiliaria Nucleo helps you choose between the best properties in Alicante. Visit Us!",
-		"newsletter-input-label": "enter you e-mail and subscribe to the newsletter"
+		"newsletter-input-label": "enter you e-mail and subscribe to the newsletter"    
 	},
   "hero-title-1": "Welcome to",
   "hero-title-2": "Inmobiliaria Núcleo",
@@ -149,5 +149,9 @@
     "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico con más de 30 años de experiencia, somos la proptech líder en el sector. Unimos lo mejor de los dos mundos: la experiencia de nuestros asesores inmobiliarios y tecnología puntera, para hacer que el proceso de compraventa sea rápido, sencillo y económico.",
     "section-3-title": "¿A dónde vamos?",
     "section-3-text": "Formada por profesionales de los sectores inmobiliario y tecnológico con más de 30 años de experiencia, somos la proptech líder en el sector. Unimos lo mejor de los dos mundos: la experiencia de nuestros asesores inmobiliarios y tecnología puntera, para hacer que el proceso de compraventa sea rápido, sencillo y económico."
+  },
+  "messages": {
+    "subscriptionSuccess": "Check your email to complete your subscription",
+    "subscriptionError": "There was an error in the subscription process. Please try again"
   }
 }

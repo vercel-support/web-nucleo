@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 import * as Scroll from 'react-scroll';
+import { message } from 'antd';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import useI18n from '../common/hooks/useI18n';
@@ -91,8 +92,9 @@ const VenderCasaPage = (): JSX.Element => {
         contact.HADDRESS = address;
       }
       await mailchimpService.subscribe(contact);
+      message.success(i18n.t('messages.subscriptionSuccess'));
     } catch (error) {
-      // TODO: manage error
+      message.error(i18n.t('messages.subscriptionError'));
     }
   };
 
