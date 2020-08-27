@@ -72,10 +72,17 @@ const DescriptionSection = styled.div`
     margin-left: ${(props) => props.theme.grid.getGridColumns(3, 1)};
     margin-right: ${(props) => props.theme.grid.getGridColumns(3, 1)};
   }
-`;
-
-const DescriptionRow = styled(Row)`
-  margin-bottom: 0 !important;
+  .ant-row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .ant-col:first-child {
+    padding-left: 0 !important;
+  }
+  .ant-col:last-child {
+    padding-right: 0 !important;
+  }
 `;
 
 const FeaturesCardContainer = styled.div`
@@ -194,7 +201,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
           <Summary flat={deserializedFlat} />
         </SummarySection>
         <DescriptionSection>
-          <DescriptionRow gutter={[80, 48]}>
+          <Row gutter={[80, 48]}>
             <Col xs={24} lg={14} xl={15}>
               <Description flat={deserializedFlat} />
             </Col>
@@ -217,7 +224,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
                 </RequestInfoSection>
               </FeaturesCardContainer>
             </Col>
-          </DescriptionRow>
+          </Row>
         </DescriptionSection>
         <FlatsDisplayContainer>
           <FlatsDisplay
