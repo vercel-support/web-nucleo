@@ -6,6 +6,7 @@ import { CSSProp, createGlobalStyle, ThemeProvider } from 'styled-components';
 import I18n from '../libs/i18n';
 import * as gtag from '../libs/gtag';
 import defaultTheme from '../common/themes/default';
+import { CookiesBanner } from '../components/shared';
 
 declare module 'react' {
   interface HTMLAttributes<T> extends DOMAttributes<T> {
@@ -117,7 +118,10 @@ class MyApp extends App {
       <ThemeProvider theme={defaultTheme}>
         <I18n>
           <GlobalStyle />
+
           <Component {...pageProps} />
+
+          <CookiesBanner />
         </I18n>
       </ThemeProvider>
     );

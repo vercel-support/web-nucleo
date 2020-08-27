@@ -7,17 +7,11 @@ import { message } from 'antd';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
 import useI18n from '../common/hooks/useI18n';
-import useCookiesAcceptedState from '../common/hooks/cookiesAcceptedState';
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
 import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
-import {
-  Header,
-  Footer,
-  CookiesBanner,
-  FlatsDisplayPlaceholder,
-} from '../components/shared';
+import { Header, Footer, FlatsDisplayPlaceholder } from '../components/shared';
 
 interface StaticProps {
   flats: string;
@@ -56,7 +50,6 @@ const Content = styled.main`
 
 export const Home = ({ flats }: Props): JSX.Element => {
   const i18n = useI18n();
-  const [cookiesAccepted, setCookiesAccepted] = useCookiesAcceptedState();
   const mailchimpService = useMailchimpService();
 
   const deserializedFlats = deserializeMultiple(flats, IFlat);
@@ -114,11 +107,6 @@ export const Home = ({ flats }: Props): JSX.Element => {
       </Content>
 
       <Footer />
-
-      {/* TODO: show in all pages */}
-      {!cookiesAccepted && (
-        <CookiesBanner setCookiesAccepted={setCookiesAccepted} />
-      )}
     </Layout>
   );
 };
