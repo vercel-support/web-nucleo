@@ -1,15 +1,11 @@
-name: daily vercel deployment
-
+name: hourly vercel deployment
 on:
   schedule:
     - cron:  '0 * * * *'
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: amondnet/vercel-action@v19.0.1+3
         with:
