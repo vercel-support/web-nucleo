@@ -276,7 +276,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
       flat: serializedFlat,
       recommendedFlats: serializedRecommendedFlats,
     },
-    revalidate: 60
+    revalidate: 60,
   };
 };
 
