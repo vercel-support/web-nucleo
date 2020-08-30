@@ -40,9 +40,12 @@ const Banner = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(17, 1)};
+  max-width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
+  @media ${(props) => props.theme.breakpoints.sm} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(13, 1)};
+  }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   }
 
   color: ${(props) => props.theme.colors.secondary};
@@ -51,11 +54,13 @@ const SectionTitle = styled.h2`
 `;
 
 const SectionSubtitle = styled.h3`
-  max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
+  max-width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
+  @media ${(props) => props.theme.breakpoints.sm} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(11, 1)};
   }
-
+  @media ${(props) => props.theme.breakpoints.xs} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
+  }
   color: ${(props) => props.theme.colors.secondary};
 
   ${(props) => props.theme.font.p1}

@@ -45,9 +45,12 @@ const Banner = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  max-width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
+  max-width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
+  @media ${(props) => props.theme.breakpoints.sm} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
+  }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    max-width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
   }
 
   text-align: right;
@@ -68,13 +71,13 @@ const StyledForm = styled(Form)`
     width: ${(props) => props.theme.grid.getGridColumns(9, 1)};
   }
   @media ${(props) => props.theme.breakpoints.md} {
-    width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
   }
   @media ${(props) => props.theme.breakpoints.smd} {
-    width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
   }
   @media ${(props) => props.theme.breakpoints.xs} {
-    width: ${(props) => props.theme.grid.getGridColumns(15, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   }
 `;
 
