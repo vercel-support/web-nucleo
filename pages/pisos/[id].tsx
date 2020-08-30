@@ -157,14 +157,14 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
             rooms: deserializedFlat.rooms,
             bathrooms: deserializedFlat.bathrooms,
             price: deserializedFlat.price,
-            address: deserializedFlat.address,
+            zone: deserializedFlat.zone,
           })}
         </title>
         <meta
           name="description"
           content={i18n.t('flatDetail.description', {
             type: deserializedFlat.type,
-            address: deserializedFlat.address,
+            zone: deserializedFlat.zone,
             city: deserializedFlat.city,
             sqrMeters: deserializedFlat.sqrMeters,
             rooms: deserializedFlat.rooms,

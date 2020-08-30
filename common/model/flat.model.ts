@@ -1,6 +1,5 @@
 export class IFlat {
   id: string;
-  address: string;
   pictureUrls: string[];
   price: number;
   rooms: number;

@@ -42,8 +42,8 @@
     "pictures": "Photos"
   },
   "flatDetail": {
-    "title": "{{type}} for sale in {{address}}, {{city}}. - Inmobiliaria Nucleo",
-    "description": "{{type}} for sale for {{price}}€. {{rooms}} bedroom/s, {{bathrooms}} bathroom/s, {{sqrMeters}} square meters in {{address}}, {{city}}",
+    "title": "{{type}} for sale in {{zone}}, {{city}}. - Inmobiliaria Nucleo",
+    "description": "{{type}} for sale for {{price}}€. {{rooms}} bedroom/s, {{bathrooms}} bathroom/s, {{sqrMeters}} square meters in {{zone}}, {{city}}",
     "messages": {
       "recommendedFlats": "You might also like"
     },
@@ -56,6 +56,9 @@
   "aireAcondicionado": "A/C",
   "terraza": "Terrace",
   "orientacion": "Orientation",
+  "jardin": "Garden",
+  "ascensor": "Elevator",
+  "anio_construccion": "Year built",
   "yes": "Yes",
   "no": "No",
   "south": "South",

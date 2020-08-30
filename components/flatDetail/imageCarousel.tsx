@@ -85,7 +85,7 @@ const ImageCarousel = ({
 
   return (
     <div className={className} style={{ position: 'relative' }}>
-      <Title>{flat.address}</Title>
+      <Title>{flat.zone}</Title>
       <ShowAllPhotosButton
         type={'default'}
         ghost
