@@ -85,7 +85,12 @@ const ImageCarousel = ({
 
   return (
     <div className={className} style={{ position: 'relative' }}>
-      <Title>{flat.zone}</Title>
+      <Title>
+        {i18n.t('flatDetail.imageCarouselTitle', {
+          type: i18n.t(`flatTypes.${flat.type}`),
+          zone: flat.zone,
+        })}
+      </Title>
       <ShowAllPhotosButton
         type={'default'}
         ghost

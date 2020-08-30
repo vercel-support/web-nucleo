@@ -44,6 +44,7 @@
   "flatDetail": {
     "title": "{{type}} for sale in {{zone}}, {{city}}. - Inmobiliaria Nucleo",
     "description": "{{type}} for sale for {{price}}€. {{rooms}} bedroom/s, {{bathrooms}} bathroom/s, {{sqrMeters}} square meters in {{zone}}, {{city}}",
+    "imageCarouselTitle": "{{type}} in {{zone}}",
     "messages": {
       "recommendedFlats": "You might also like"
     },
