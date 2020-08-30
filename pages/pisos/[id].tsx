@@ -253,7 +253,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { id: flat.id },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
@@ -276,6 +276,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
       flat: serializedFlat,
       recommendedFlats: serializedRecommendedFlats,
     },
+    revalidate: 60
   };
 };
 
