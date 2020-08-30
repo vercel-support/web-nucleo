@@ -117,7 +117,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
   return {
     props: {
-      flats: serializedFlats
+      flats: serializedFlats,
     },
   };
 };
