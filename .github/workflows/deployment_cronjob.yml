@@ -10,9 +10,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: amondnet/vercel-action@v19.0.1
         with:
-          vercel-token: ${{ secrets.O_VERCEL_TOKEN }}
+          vercel-token: '4nDBl2ZGJhRQwA6aLdRn2r7Y'
           github-comment: false
-          vercel-project-id: ${{ secrets.O_VERCEL_PROJECT_ID }}
-          vercel-org-id: ${{ secrets.O_VERCEL_ORG_ID }}
+          vercel-project-id: 'QmdQSiWv2hNGAu3pppwBC6UNtMwUSD8hNw8eeMWSHwC5yu'
+          vercel-org-id: 'hnjM1b2rcmt0PrkXfLHwkMVi'
           vercel-args: '--prod'
-          vercel-project-name: web-nucleo
