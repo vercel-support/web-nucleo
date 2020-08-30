@@ -253,7 +253,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { id: flat.id },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
