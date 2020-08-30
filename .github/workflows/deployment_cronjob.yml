@@ -1,16 +1,17 @@
-name: hourly vercel deployment
+name: daily vercel deployment
 on:
   schedule:
-    - cron:  '0 * * * *'
+    - cron:  '0 20 * * *'
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: amondnet/vercel-action@v19.0.1+3
+      - uses: amondnet/vercel-action@v19.0.1
         with:
           vercel-token: ${{ secrets.O_VERCEL_TOKEN }}
           github-comment: false
           vercel-project-id: ${{ secrets.O_VERCEL_PROJECT_ID }}
           vercel-org-id: ${{ secrets.O_VERCEL_ORG_ID }}
           vercel-args: '--prod'
+          vercel-project-name: web-nucleo
