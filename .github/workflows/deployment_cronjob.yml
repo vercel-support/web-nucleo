@@ -7,11 +7,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: amondnet/vercel-action@v19.0.1
+      - uses: fjogeleit/http-request-action@master
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-comment: false
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-args: '--prod'
+          url: https://api.vercel.com/v1/integrations/deploy/QmdQSiWv2hNGAu3pppwBC6UNtMwUSD8hNw8eeMWSHwC5yu/GPVTmxMOQz
