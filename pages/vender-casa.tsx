@@ -108,7 +108,7 @@ const VenderCasaPage = (): JSX.Element => {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{i18n.t('sellHouse.title')}</title>
+        <title>{i18n.t('sellHouse.metaTitle')}</title>
         <meta
           name="description"
           content={i18n.t('sellHouse.metaDescription')}

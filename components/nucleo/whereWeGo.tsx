@@ -77,8 +77,8 @@ const WhereWeGo = (): JSX.Element => {
   return (
     <Background>
       <TextSection
-        title={i18n.t('who-are-we.section-3-title')}
-        content={i18n.t('who-are-we.section-3-text')}
+        title={i18n.t('aboutUs.section-3-title')}
+        content={i18n.t('aboutUs.section-3-text')}
         titleStyle={{ marginRight: '-80px' }}
       />
       <TangramHouse />

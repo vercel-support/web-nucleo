@@ -37,8 +37,8 @@ export const Nucleo = (): JSX.Element => {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{i18n.t('who-are-we.title')}</title>
-        <meta name="description" content={i18n.t('who-are-we.description')} />
+        <title>{i18n.t('aboutUs.title')}</title>
+        <meta name="description" content={i18n.t('aboutUs.description')} />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -63,8 +63,8 @@ export const Nucleo = (): JSX.Element => {
       <Content>
         <WhoAreWe />
         <Banner
-          src={require('../public/images/banner_who_are_we.png')}
-          alt={i18n.t('who-are-we.title')}
+          src={require('../public/images/banner_who_are_we.jpg')}
+          alt={i18n.t('aboutUs.title')}
         />
         <WhereWeFrom />
         <WhereWeGo />

@@ -55,8 +55,8 @@ const WhereWeFrom = (): JSX.Element => {
   return (
     <Background>
       <TextSection
-        title={i18n.t('who-are-we.section-2-title')}
-        content={i18n.t('who-are-we.section-2-text')}
+        title={i18n.t('aboutUs.section-2-title')}
+        content={i18n.t('aboutUs.section-2-text')}
         right
         titleStyle={{ marginLeft: '-80px' }}
       />

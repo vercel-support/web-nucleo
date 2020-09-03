@@ -1,14 +1,15 @@
 {
 	"header": {
     "logoAlt": "Gestión inmobiliaria alicante",
-    "whoWeAre": "Quiénes somos",
+    "sellHouse": "Vender casa",
+    "aboutUs": "Quiénes somos",
     "language": "Español",
     "hamburgerLanguage": "Idioma"
 	},
 	"langCode": "es",
-  "title": "Inmobiliaria en Alicante | Inmobiliaria Nucleo",
+  "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",
 	"home": {
-		"description": "Compra-Venta de viviendas en Alicante. Encuentra inmuebles al mejor precio. Visita Inmobiliaria Nucleo y conoce nuestra oferta de casas en venta en Alicante.",
+		"description": "Compra-Venta de viviendas en Alicante. Encuentra inmuebles al mejor precio. Visita Inmobiliaria Núcleo y conoce nuestra oferta de casas en venta en Alicante.",
     "newsletter-input-label": "introduce tu correo para suscribirte a la newsletter"
 },
   "hero-title-1": "Bienvenido a",
@@ -42,7 +43,7 @@
     "pictures": "Fotos"
   },
   "flatDetail": {
-    "title": "{{type}} en venta en {{address}}, {{city}}. - Inmobiliaria Nucleo",
+    "title": "{{type}} en venta en {{address}}, {{city}}. - Inmobiliaria Núcleo",
     "description": "{{type}} en venta por {{price}}€. {{rooms}} dormitorio/s, {{bathrooms}} baño/s, {{sqrMeters}} metros cuadrados en {{address}}, {{city}}",
     "imageCarouselTitle": "{{type}} en {{zone}}",
     "messages": {
@@ -91,8 +92,8 @@
     }
   },
   "sellHouse": {
-    "title": "Vender casa",
-    "metaDescription": "Vender casa",
+    "metaTitle": "Vender casa | Inmobiliaria Núcleo",
+    "metaDescription": "Vender casa | Inmobiliaria Núcleo",
     "form": {
       "title": "Venda su inmueble con nosotros",
       "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
@@ -144,15 +145,15 @@
     "Edificio": "Edificio",
     "Trastero": "Trastero"
   },
-  "who-are-we": {
-    "title": "¿Quiénes somos? | Inmobiliaria Nucleo",
-    "description": "¿Quiénes somos? | Inmobiliaria Nucleo",
+  "aboutUs": {
+    "title": "¿Quiénes somos? | Inmobiliaria Núcleo",
+    "description": "¿Quiénes somos? | Inmobiliaria Núcleo",
     "section-1-title": "¿Quiénes somos?",
-    "section-1-text": "Núcleo es una red de inmobiliarias en Alicante con un objetivo claro:<br><br>Ofrecer el servicio de compra-venta de inmuebles más rápido, económico y transparente del mercado.<br><br>Nuestra aventura empieza en Alicante. Ciudad conocida mundialmente tanto por sus costas, como por sus playas y núcleos turisticos. Ciudad en la que vivimos.",
+    "section-1-text": "Inmobiliaria Núcleo es una red de inmobiliarias en Alicante con más de 10 años de experiencia en el sector.<br><br>Actualmente, Núcleo cuenta con 5 oficinas repartidas por toda la geografía de la provincia de Alicante.<br><br>Nuestro equipo tiene ese espíritu joven con garbo e iniciativa a la vanguardia de la tecnología, pero que a la vez cuenta con una gran formación y experiencia en el mercado inmobiliario.",
     "section-2-title": "¿De dónde venimos?",
-    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico con más de 30 años de experiencia, somos la proptech líder en el sector. Unimos lo mejor de los dos mundos: la experiencia de nuestros asesores inmobiliarios y tecnología puntera, para hacer que el proceso de compraventa sea rápido, sencillo y económico.",
+    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico que llevan detrás más de 10 años de experiencia. Nuestro punto de vista estratégico siempre ha estado orientado hacia la evolución y el crecimiento, hacia la continua adaptación que nos ofrece la tecnología.<br><br>Con el tiempo, hemos dejado atrás la visión tradicional que consideramos estancada de los servicios de sector inmobiliario, para basarnos en progresar y mirar hacia el futuro.",
     "section-3-title": "¿A dónde vamos?",
-    "section-3-text": "Formada por profesionales de los sectores inmobiliario y tecnológico con más de 30 años de experiencia, somos la proptech líder en el sector. Unimos lo mejor de los dos mundos: la experiencia de nuestros asesores inmobiliarios y tecnología puntera, para hacer que el proceso de compraventa sea rápido, sencillo y económico."
+    "section-3-text": "Honestidad, integridad y profesionalismo, son las tres palabras que nos ha caracterizado a lo largo de nuestro recorrido. Nuestra proyección de futuro tiene un sentido evolutivo. Mantenemos nuestra esencia y personalidad, a a vez que nos adaptamos de forma pro-activa a las necesidades del mercado.<br><br>Para conseguir nuestros objetivos, nos rodeamos de los mejores profesionales con experiencia en los distintos campos de interés que necesitan nuestros clientes. De esta forma, ofrecemos las mejores soluciones y un asesoramiento completo, de principio a fin, a quienes confían en nosotros para trabajar."
   },
   "messages": {
     "subscriptionSuccess": "Revise su correo para completar la suscripción",

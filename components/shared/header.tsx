@@ -93,12 +93,12 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
     <StyledMenu>
       <Menu.Item key="1">
         <Link href="/nucleo">
-          <a>{i18n.t('header.whoWeAre')}</a>
+          <a>{i18n.t('header.aboutUs')}</a>
         </Link>
       </Menu.Item>
       <Menu.Item key="2">
         <Link href="/vender-casa">
-          <a>{i18n.t('sellHouse.title')}</a>
+          <a>{i18n.t('header.sellHouse')}</a>
         </Link>
       </Menu.Item>
       <Menu.Divider />
@@ -140,13 +140,13 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
       <MenuButtons gutter={32} align="middle">
         <SmDownHiddenCol>
           <Link href="/nucleo" passHref>
-            <Button type="text">{i18n.t('header.whoWeAre')}</Button>
+            <Button type="text">{i18n.t('header.aboutUs')}</Button>
           </Link>
         </SmDownHiddenCol>
         <SmDownHiddenCol>
           <Link href="/vender-casa" passHref>
             <SecondaryButton type="primary">
-              {i18n.t('sellHouse.title')}
+              {i18n.t('header.sellHouse')}
             </SecondaryButton>
           </Link>
         </SmDownHiddenCol>
