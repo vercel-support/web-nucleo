@@ -45,6 +45,9 @@ const Divider = styled.div`
 const Subtitle = styled.div`
   font-size: 20px;
   line-height: 22px;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    font-size: 18px;
+  }
 `;
 
 const Description = styled.div`
@@ -52,6 +55,10 @@ const Description = styled.div`
   line-height: 22px;
   font-weight: 500;
   margin-top: 24px;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    font-size: 16px;
+    line-height: 20px;
+  }
 `;
 
 const AdjustNeeds = (): JSX.Element => {
@@ -65,9 +72,11 @@ const AdjustNeeds = (): JSX.Element => {
             <Title>{i18n.t('sellHouse.adjustNeeds.title')}</Title>
             <Divider />
             <Subtitle>{i18n.t('sellHouse.adjustNeeds.subtitle')}</Subtitle>
-            <Description>
-              {i18n.t('sellHouse.adjustNeeds.description')}
-            </Description>
+            <Description
+              dangerouslySetInnerHTML={{
+                __html: i18n.t('sellHouse.adjustNeeds.description'),
+              }}
+            />
           </Col>
         </Row>
       </Content>

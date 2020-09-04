@@ -25,7 +25,7 @@ const Banner = styled.img`
   max-height: 65vh;
   width: 100%;
   @media ${(props) => props.theme.breakpoints.smd} {
-    min-height: 40vh;
+    object-fit: contain;
   }
 `;
 

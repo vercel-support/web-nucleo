@@ -45,7 +45,6 @@ const Background = styled.div`
   }
   @media ${(props) => props.theme.breakpoints.xs} {
     min-height: 280px;
-    margin-top: 50px;
   }
 `;
 
