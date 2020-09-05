@@ -29,6 +29,7 @@ const Content = styled.div<{ left: boolean }>`
   text-align: ${(props) => (props.left ? 'left' : 'right')};
   @media ${(props) => props.theme.breakpoints.smd} {
     min-height: unset;
+    text-align: left;
     border-radius: ${(props) => props.theme.borderRadius};
     background-color: #ffffff;
     opacity: 0.9;
