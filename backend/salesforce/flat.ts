@@ -77,7 +77,11 @@ export default class Flat extends IFlat {
     const type = record['Tipologia_inmueble__c'];
     const sqrMeters = record['M2_utiles__c'];
     let zone = record['Localidad_Inmueble__c'];
-    if (isnull(zone) && 'Localidad__r' in record && !isnull(record['Localidad__r'])) {
+    if (
+      isnull(zone) &&
+      'Localidad__r' in record &&
+      !isnull(record['Localidad__r'])
+    ) {
       zone = record['Localidad__r']['Nombre_de_la_Localidad__c'];
     }
     const city = record['Provincia__c'] || 'Alicante';
