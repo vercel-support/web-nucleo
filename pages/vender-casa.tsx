@@ -9,9 +9,7 @@ import useMailchimpService from '../common/hooks/mailchimpService';
 import {
   SellHouseForm,
   WhySellWithUs,
-  HouseValue,
-  IdealBuyer,
-  AdjustNeeds,
+  InfoSection,
   ContactUsButton,
 } from '../components/sellHouse';
 import { Header, Footer } from '../components/shared';
@@ -143,13 +141,31 @@ const VenderCasaPage = (): JSX.Element => {
           <ContactUsButton onClick={onContactUsButtonClicked} />
         </ContactUsSection>
         <HouseValueSection>
-          <HouseValue />
+          <InfoSection
+            imageUrl={'sell_house_house_value_background.png'}
+            left={true}
+            title={i18n.t('sellHouse.houseValue.title')}
+            subtitle={i18n.t('sellHouse.houseValue.subtitle')}
+            description={i18n.t('sellHouse.houseValue.description')}
+          />
         </HouseValueSection>
         <IdealBuyerSection>
-          <IdealBuyer />
+          <InfoSection
+            imageUrl={'sell_house_ideal_buyer_background.png'}
+            left={false}
+            title={i18n.t('sellHouse.idealBuyer.title')}
+            subtitle={i18n.t('sellHouse.idealBuyer.subtitle')}
+            description={i18n.t('sellHouse.idealBuyer.description')}
+          />
         </IdealBuyerSection>
         <AdjustNeedsSection>
-          <AdjustNeeds />
+          <InfoSection
+            imageUrl={'sell_house_adjust_needs_background.png'}
+            left={true}
+            title={i18n.t('sellHouse.adjustNeeds.title')}
+            subtitle={i18n.t('sellHouse.adjustNeeds.subtitle')}
+            description={i18n.t('sellHouse.adjustNeeds.description')}
+          />
         </AdjustNeedsSection>
         <ContactUsSection>
           <ContactUsButton onClick={onContactUsButtonClicked} />

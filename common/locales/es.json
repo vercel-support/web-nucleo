@@ -106,7 +106,7 @@
       "properties": {
         "professional": {
           "title": "Profesionalidad",
-          "description": "Desde Núcleo le ofrecemos un servicio completo y personal desde el inicio hasta el final del proceso de venta"
+          "description": "Desde Núcleo le ofrecemos un servicio completo y personalizado desde el inicio hasta el final del proceso de venta"
         },
         "fast": {
           "title": "Rapidez",
@@ -114,24 +114,24 @@
         },
         "experience": {
           "title": "Experiencia",
-          "description": "El equipo de profesionales de Núcleo conoce bien el mercado inmobiliario y cuenta con profundos conocimientos especializados"
+          "description": "Tras más de 10 años trabajando en la provincia de Alicante, nuestro equipo conoce a la perfección el mercado inmobiliario local"
         }
       }
     },
     "houseValue": {
       "title": "Conozca el valor de su inmueble", 
-      "subtitle": "Servicio gratuito de valoración de su inmueble",
-      "description": "Gracias a nuestra experiencia en el sector inmobiliario local, conocemos los precios de venta reales de cada barrio.<br><br>Si a esto le sumamos el software más avanzado en gestión inmobiliaria, somos capaces de proponerle el precio adecuado para vender su vivienda.<br><br>Y lo mejor, todo ello de forma totalmente gratuita."
+      "subtitle": "Servicio gratuito de valoración de su vivienda",
+      "description": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada barrio.<br><br>Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender su vivienda.<br><br>Y lo mejor, todo ello sin compromiso y de forma totalmente gratuita."
     },
     "idealBuyer": {
       "title": "Encontramos al comprador ideal", 
-      "subtitle": "Plan de Marketing totalmente personalizado",
-      "description": "Contamos con cámaras de realidad virtual para que tu vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la máxima visibilidad posible<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a sus intereses en nuestra amplia base de datos."
+      "subtitle": "Plan de marketing totalmente personalizado",
+      "description": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la máxima visibilidad<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a sus intereses."
     },
     "adjustNeeds": {
       "title": "Nos ajustamos a sus necesidades", 
       "subtitle": "Gestión integral, de principio a fin",
-      "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como online.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de la firma.<br><br>Durante todo proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados de atenderle."
+      "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de la firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados de atenderle."
     }
   },
   "flatTypes": {

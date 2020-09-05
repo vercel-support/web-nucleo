@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 
-import useI18n from '../../common/hooks/useI18n';
+type Props = {
+  imageUrl: string;
+  left: boolean;
+  title: string;
+  subtitle: string;
+  description: string;
+};
 
-const Background = styled.div`
+const Background = styled.div<{ imageUrl: string; left: boolean }>`
   background-image: ${(props) =>
-    props.theme.loadOptimizedImage('sell_house_ideal_buyer_background.png')};
+    props.theme.loadOptimizedImage(props.imageUrl)};
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center left;
+  background-position: ${(props) => `center ${props.left ? 'right' : 'left'}`};
   @media ${(props) => props.theme.breakpoints.smd} {
     background-size: cover;
     padding-top: 24px;
@@ -16,14 +22,13 @@ const Background = styled.div`
   }
 `;
 
-const Content = styled.div`
+const Content = styled.div<{ left: boolean }>`
   min-height: calc((((100vw / 4) - 32px) * 3) * 0.6622);
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  text-align: right;
+  text-align: ${(props) => (props.left ? 'left' : 'right')};
   @media ${(props) => props.theme.breakpoints.smd} {
     min-height: unset;
-    text-align: left;
     border-radius: ${(props) => props.theme.borderRadius};
     background-color: #ffffff;
     opacity: 0.9;
@@ -62,22 +67,30 @@ const Description = styled.div`
   }
 `;
 
-const IdealBuyer = (): JSX.Element => {
-  const i18n = useI18n();
-
+const InfoSection = ({
+  imageUrl,
+  left,
+  title,
+  subtitle,
+  description,
+}: Props): JSX.Element => {
   return (
-    <Background>
-      <Content>
-        <Row justify="end">
-          <Col xs={24} md={12} xxl={8}>
-            <Title>{i18n.t('sellHouse.idealBuyer.title')}</Title>
+    <Background imageUrl={imageUrl} left={left}>
+      <Content left={left}>
+        <Row justify={left ? 'start' : 'end'}>
+          <Col xs={24} md={12}>
+            <Title>{title}</Title>
             <Divider />
-            <Subtitle>{i18n.t('sellHouse.idealBuyer.subtitle')}</Subtitle>
-            <Description
-              dangerouslySetInnerHTML={{
-                __html: i18n.t('sellHouse.idealBuyer.description'),
-              }}
-            />
+            <Row justify={left ? 'start' : 'end'}>
+              <Col xs={24} xxl={16}>
+                <Subtitle>{subtitle}</Subtitle>
+                <Description
+                  dangerouslySetInnerHTML={{
+                    __html: description,
+                  }}
+                />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Content>
@@ -85,4 +98,4 @@ const IdealBuyer = (): JSX.Element => {
   );
 };
 
-export default IdealBuyer;
+export default InfoSection;
