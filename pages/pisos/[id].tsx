@@ -66,23 +66,10 @@ const SummarySection = styled.div`
 
 const DescriptionSection = styled.div`
   margin-top: 3rem;
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  @media ${(props) => props.theme.breakpoints.sm} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(3, 1)};
-    margin-right: ${(props) => props.theme.grid.getGridColumns(3, 1)};
-  }
-  .ant-row {
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-    margin-bottom: 0 !important;
-  }
-  .ant-col:first-child {
-    padding-left: 0 !important;
-  }
-  .ant-col:last-child {
-    padding-right: 0 !important;
-  }
+  margin-left: ${(props) =>
+    `max(${props.theme.grid.getGridColumns(2, 1)}, 40px)`};
+  margin-right: ${(props) =>
+    `max(${props.theme.grid.getGridColumns(2, 1)}, 40px)`};
 `;
 
 const FeaturesCardContainer = styled.div`
