@@ -19,14 +19,14 @@ const MenuButtons = styled(Row)`
   line-height: 22px;
 `;
 
-const SmDownHiddenCol = styled(Col)`
-  @media ${(props) => props.theme.breakpoints.smd} {
+const MdDownHiddenCol = styled(Col)`
+  @media ${(props) => props.theme.breakpoints.mdd} {
     display: none;
   }
 `;
 
-const MdUpHiddenCol = styled(Col)`
-  @media ${(props) => props.theme.breakpoints.mdu} {
+const LgUpHiddenCol = styled(Col)`
+  @media ${(props) => props.theme.breakpoints.lgu} {
     display: none;
   }
 `;
@@ -92,13 +92,18 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
   const hamburgerMenu = (
     <StyledMenu>
       <Menu.Item key="1">
+        <Link href="/vender-casa">
+          <a>{i18n.t('header.sellHouse')}</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="2">
         <Link href="/nucleo">
           <a>{i18n.t('header.aboutUs')}</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="2">
-        <Link href="/vender-casa">
-          <a>{i18n.t('header.sellHouse')}</a>
+      <Menu.Item key="3">
+        <Link href="/contacto">
+          <a>{i18n.t('header.contact')}</a>
         </Link>
       </Menu.Item>
       <Menu.Divider />
@@ -108,7 +113,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
         popupClassName="hamburger-menu"
       >
         <Menu.Item
-          key="3"
+          key="4"
           onClick={() => {
             i18n.locale('es');
           }}
@@ -116,7 +121,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
           <StyledLink active={i18n.activeLocale === 'es'}>Español</StyledLink>
         </Menu.Item>
         <Menu.Item
-          key="4"
+          key="5"
           onClick={() => {
             i18n.locale('en');
           }}
@@ -137,23 +142,28 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
           />
         </a>
       </Link>
-      <MenuButtons gutter={32} align="middle">
-        <SmDownHiddenCol>
+      <MenuButtons gutter={16} align="middle">
+        <MdDownHiddenCol>
           <Link href="/nucleo" passHref>
             <Button type="text">{i18n.t('header.aboutUs')}</Button>
           </Link>
-        </SmDownHiddenCol>
-        <SmDownHiddenCol>
+        </MdDownHiddenCol>
+        <MdDownHiddenCol>
+          <Link href="/contacto" passHref>
+            <Button type="text">{i18n.t('header.contact')}</Button>
+          </Link>
+        </MdDownHiddenCol>
+        <MdDownHiddenCol>
           <Link href="/vender-casa" passHref>
             <SecondaryButton type="primary">
               {i18n.t('header.sellHouse')}
             </SecondaryButton>
           </Link>
-        </SmDownHiddenCol>
-        <SmDownHiddenCol>
+        </MdDownHiddenCol>
+        <MdDownHiddenCol>
           <LanguageSelector />
-        </SmDownHiddenCol>
-        <MdUpHiddenCol>
+        </MdDownHiddenCol>
+        <LgUpHiddenCol>
           <Dropdown
             overlay={hamburgerMenu}
             trigger={['click']}
@@ -161,7 +171,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
           >
             <Button type="text" shape="circle" icon={<MenuOutlined />}></Button>
           </Dropdown>
-        </MdUpHiddenCol>
+        </LgUpHiddenCol>
       </MenuButtons>
     </HeaderComp>
   );

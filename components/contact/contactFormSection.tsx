@@ -9,20 +9,19 @@ type Props = {
   onSendButtonClicked: (contact: IContact) => void;
 };
 
-const Background = styled.div`
+const Image = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70vh;
   background-image: ${(props) =>
-    props.theme.loadOptimizedImage('sell_house_hero.png')};
+    props.theme.loadOptimizedImage('banner_who_are_we.jpg')};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-
-  padding-top: 80px;
-  padding-bottom: 80px;
-  padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    padding-top: 40px;
-    padding-bottom: 40px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    height: 40vh;
   }
 `;
 
@@ -31,7 +30,13 @@ const Card = styled.div`
   background-color: #ffffff;
   opacity: 0.9;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+  margin-top: 30vh;
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   padding: 40px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    margin-top: 15vh;
+  }
 `;
 
 const CardRow = styled(Row)`
@@ -67,27 +72,28 @@ const Subtitle = styled.div`
   line-height: 22px;
 `;
 
-const SellHouseForm = ({ onSendButtonClicked }: Props): JSX.Element => {
+const ContactFormSection = ({ onSendButtonClicked }: Props): JSX.Element => {
   const i18n = useI18n();
   const [form] = Form.useForm();
 
   return (
-    <Background>
+    <div>
+      <Image />
       <Card>
         <CardRow gutter={[24, 32]} align="middle">
           <Col xs={24} md={12}>
-            <Title>{i18n.t('sellHouse.form.title')}</Title>
+            <Title>{i18n.t('contact.form.title')}</Title>
             <Divider />
-            <Subtitle>{i18n.t('sellHouse.form.subtitle')}</Subtitle>
+            <Subtitle>{i18n.t('contact.form.subtitle')}</Subtitle>
             <Subtitle style={{ marginTop: '16px' }}>
-              {i18n.t('sellHouse.form.subtitle2')}
+              {i18n.t('contact.form.subtitle2')}
             </Subtitle>
           </Col>
           <Col xs={24} md={12}>
             <ContactForm
               form={form}
               onFinish={onSendButtonClicked}
-              showAddress={true}
+              showSubject={true}
             />
             <Row justify="end">
               <Col>
@@ -96,15 +102,15 @@ const SellHouseForm = ({ onSendButtonClicked }: Props): JSX.Element => {
                   htmlType="button"
                   onClick={() => form.submit()}
                 >
-                  {i18n.t('sellHouse.form.send')}
+                  {i18n.t('contact.form.send')}
                 </Button>
               </Col>
             </Row>
           </Col>
         </CardRow>
       </Card>
-    </Background>
+    </div>
   );
 };
 
-export default SellHouseForm;
+export default ContactFormSection;

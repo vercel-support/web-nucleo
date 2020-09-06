@@ -26,6 +26,7 @@ const Layout = styled.div`
 `;
 
 const Content = styled.main`
+  position: relative;
   flex: auto;
   margin-top: ${(props) => props.theme.headerHeight};
   @media ${(props) => props.theme.breakpoints.mdd} {
@@ -37,18 +38,6 @@ const WhySellWithUsSection = styled.div`
   margin-top: 3rem;
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-`;
-
-const HouseValueSection = styled.div`
-  margin-top: 64px;
-`;
-
-const IdealBuyerSection = styled.div`
-  margin-top: 64px;
-`;
-
-const AdjustNeedsSection = styled.div`
-  margin-top: 64px;
 `;
 
 const ContactUsSection = styled.div`
@@ -68,27 +57,8 @@ const VenderCasaPage = (): JSX.Element => {
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
-  const onSendButtonClicked = async (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    address: string
-  ): Promise<void> => {
+  const onSendButtonClicked = async (contact: IContact): Promise<void> => {
     try {
-      const contact: IContact = { EMAIL: email };
-      if (name) {
-        contact.FNAME = name;
-      }
-      if (lastName) {
-        contact.LNAME = lastName;
-      }
-      if (phone) {
-        contact.PHONE = phone;
-      }
-      if (address) {
-        contact.HADDRESS = address;
-      }
       await mailchimpService.subscribe(contact);
       message.success(i18n.t('messages.subscriptionSuccess'));
     } catch (error) {
@@ -140,33 +110,27 @@ const VenderCasaPage = (): JSX.Element => {
         <ContactUsSection className="smd-only">
           <ContactUsButton onClick={onContactUsButtonClicked} />
         </ContactUsSection>
-        <HouseValueSection>
-          <InfoSection
-            imageUrl={'sell_house_house_value_background.png'}
-            left={true}
-            title={i18n.t('sellHouse.houseValue.title')}
-            subtitle={i18n.t('sellHouse.houseValue.subtitle')}
-            description={i18n.t('sellHouse.houseValue.description')}
-          />
-        </HouseValueSection>
-        <IdealBuyerSection>
-          <InfoSection
-            imageUrl={'sell_house_ideal_buyer_background.png'}
-            left={false}
-            title={i18n.t('sellHouse.idealBuyer.title')}
-            subtitle={i18n.t('sellHouse.idealBuyer.subtitle')}
-            description={i18n.t('sellHouse.idealBuyer.description')}
-          />
-        </IdealBuyerSection>
-        <AdjustNeedsSection>
-          <InfoSection
-            imageUrl={'sell_house_adjust_needs_background.png'}
-            left={true}
-            title={i18n.t('sellHouse.adjustNeeds.title')}
-            subtitle={i18n.t('sellHouse.adjustNeeds.subtitle')}
-            description={i18n.t('sellHouse.adjustNeeds.description')}
-          />
-        </AdjustNeedsSection>
+        <InfoSection
+          imageUrl={'sell_house_house_value_background.png'}
+          left={true}
+          title={i18n.t('sellHouse.houseValue.title')}
+          subtitle={i18n.t('sellHouse.houseValue.subtitle')}
+          description={i18n.t('sellHouse.houseValue.description')}
+        />
+        <InfoSection
+          imageUrl={'sell_house_ideal_buyer_background.png'}
+          left={false}
+          title={i18n.t('sellHouse.idealBuyer.title')}
+          subtitle={i18n.t('sellHouse.idealBuyer.subtitle')}
+          description={i18n.t('sellHouse.idealBuyer.description')}
+        />
+        <InfoSection
+          imageUrl={'sell_house_adjust_needs_background.png'}
+          left={true}
+          title={i18n.t('sellHouse.adjustNeeds.title')}
+          subtitle={i18n.t('sellHouse.adjustNeeds.subtitle')}
+          description={i18n.t('sellHouse.adjustNeeds.description')}
+        />
         <ContactUsSection>
           <ContactUsButton onClick={onContactUsButtonClicked} />
         </ContactUsSection>

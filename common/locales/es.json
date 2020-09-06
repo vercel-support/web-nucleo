@@ -3,6 +3,7 @@
     "logoAlt": "Gestión inmobiliaria alicante",
     "sellHouse": "Vender casa",
     "aboutUs": "Quiénes somos",
+    "contact": "Contacto",
     "language": "Español",
     "hamburgerLanguage": "Idioma"
 	},
@@ -75,6 +76,7 @@
     "email": "Correo electrónico",
     "phone": "Teléfono",
     "address": "Dirección completa del inmueble",
+    "subject": "Asunto",
     "send": "Enviar",
     "cancel": "Cancelar",
     "validateEmail": "El correo electrónico introducido es inválido.",
@@ -134,6 +136,26 @@
       "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de la firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados de atenderle."
     }
   },
+  "aboutUs": {
+    "title": "¿Quiénes somos? | Inmobiliaria Núcleo",
+    "description": "¿Quiénes somos? | Inmobiliaria Núcleo",
+    "section-1-title": "¿Quiénes somos?",
+    "section-1-text": "Inmobiliaria Núcleo es una red de inmobiliarias en Alicante con más de 10 años de experiencia en el sector.<br><br>Actualmente, Núcleo cuenta con 5 oficinas repartidas por toda la geografía de la provincia de Alicante.<br><br>Nuestro equipo tiene ese espíritu joven con garbo e iniciativa a la vanguardia de la tecnología, pero que a la vez cuenta con una gran formación y experiencia en el mercado inmobiliario.",
+    "section-2-title": "¿De dónde venimos?",
+    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico que llevan detrás más de 10 años de experiencia. Nuestro punto de vista estratégico siempre ha estado orientado hacia la evolución y el crecimiento, hacia la continua adaptación que nos ofrece la tecnología.<br><br>Con el tiempo, hemos dejado atrás la visión tradicional que consideramos estancada de los servicios de sector inmobiliario, para basarnos en progresar y mirar hacia el futuro.",
+    "section-3-title": "¿A dónde vamos?",
+    "section-3-text": "Honestidad, integridad y profesionalismo, son las tres palabras que nos ha caracterizado a lo largo de nuestro recorrido. Nuestra proyección de futuro tiene un sentido evolutivo. Mantenemos nuestra esencia y personalidad, a a vez que nos adaptamos de forma pro-activa a las necesidades del mercado.<br><br>Para conseguir nuestros objetivos, nos rodeamos de los mejores profesionales con experiencia en los distintos campos de interés que necesitan nuestros clientes. De esta forma, ofrecemos las mejores soluciones y un asesoramiento completo, de principio a fin, a quienes confían en nosotros para trabajar."
+  },
+  "contact": {
+    "metaTitle": "Contacto | Inmobiliaria Núcleo",
+    "metaDescription": "Contacto | Inmobiliaria Núcleo",
+    "form": {
+      "title": "Contacte con nosotros",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
+      "subtitle2": "Llámenos al (+34) 666 666 666",
+      "send": "Enviar"
+    }
+  },
   "flatTypes": {
     "Piso": "Piso",
     "Casa": "Casa",
@@ -144,16 +166,6 @@
     "Ático": "Ático",
     "Edificio": "Edificio",
     "Trastero": "Trastero"
-  },
-  "aboutUs": {
-    "title": "¿Quiénes somos? | Inmobiliaria Núcleo",
-    "description": "¿Quiénes somos? | Inmobiliaria Núcleo",
-    "section-1-title": "¿Quiénes somos?",
-    "section-1-text": "Inmobiliaria Núcleo es una red de inmobiliarias en Alicante con más de 10 años de experiencia en el sector.<br><br>Actualmente, Núcleo cuenta con 5 oficinas repartidas por toda la geografía de la provincia de Alicante.<br><br>Nuestro equipo tiene ese espíritu joven con garbo e iniciativa a la vanguardia de la tecnología, pero que a la vez cuenta con una gran formación y experiencia en el mercado inmobiliario.",
-    "section-2-title": "¿De dónde venimos?",
-    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico que llevan detrás más de 10 años de experiencia. Nuestro punto de vista estratégico siempre ha estado orientado hacia la evolución y el crecimiento, hacia la continua adaptación que nos ofrece la tecnología.<br><br>Con el tiempo, hemos dejado atrás la visión tradicional que consideramos estancada de los servicios de sector inmobiliario, para basarnos en progresar y mirar hacia el futuro.",
-    "section-3-title": "¿A dónde vamos?",
-    "section-3-text": "Honestidad, integridad y profesionalismo, son las tres palabras que nos ha caracterizado a lo largo de nuestro recorrido. Nuestra proyección de futuro tiene un sentido evolutivo. Mantenemos nuestra esencia y personalidad, a a vez que nos adaptamos de forma pro-activa a las necesidades del mercado.<br><br>Para conseguir nuestros objetivos, nos rodeamos de los mejores profesionales con experiencia en los distintos campos de interés que necesitan nuestros clientes. De esta forma, ofrecemos las mejores soluciones y un asesoramiento completo, de principio a fin, a quienes confían en nosotros para trabajar."
   },
   "messages": {
     "subscriptionSuccess": "Revise su correo para completar la suscripción",

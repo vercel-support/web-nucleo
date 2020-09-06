@@ -7,6 +7,7 @@ type Props = {
   title: string;
   subtitle: string;
   description: string;
+  className?: string;
 };
 
 const Background = styled.div<{ imageUrl: string; left: boolean }>`
@@ -74,9 +75,10 @@ const InfoSection = ({
   title,
   subtitle,
   description,
+  className,
 }: Props): JSX.Element => {
   return (
-    <Background imageUrl={imageUrl} left={left}>
+    <Background imageUrl={imageUrl} left={left} className={className}>
       <Content left={left}>
         <Row justify={left ? 'start' : 'end'}>
           <Col xs={24} md={12}>
@@ -99,4 +101,6 @@ const InfoSection = ({
   );
 };
 
-export default InfoSection;
+export default styled(InfoSection)`
+  margin-top: 64px;
+`;

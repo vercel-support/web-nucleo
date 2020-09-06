@@ -1,9 +1,12 @@
 import Head from 'next/head';
 import styled from 'styled-components';
+import { message } from 'antd';
 
+import { IContact } from '../common/model/mailchimp/contact.model';
 import useI18n from '../common/hooks/useI18n';
+import useMailchimpService from '../common/hooks/mailchimpService';
+import { ContactFormSection } from '../components/contact';
 import { Header, Footer } from '../components/shared';
-import { WhereWeFrom, WhereWeGo, WhoAreWe } from '../components/nucleo';
 
 const Layout = styled.div`
   display: flex;
@@ -19,27 +22,32 @@ const Layout = styled.div`
 const Content = styled.main`
   position: relative;
   flex: auto;
-`;
-
-const Banner = styled.img`
-  object-fit: cover;
-  max-height: 65vh;
-  width: 100%;
-  @media ${(props) => props.theme.breakpoints.smd} {
-    object-fit: contain;
+  margin-top: ${(props) => props.theme.headerHeight};
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-top: 0;
   }
 `;
 
-export const Nucleo = (): JSX.Element => {
+const ContactPage = (): JSX.Element => {
   const i18n = useI18n();
+  const mailchimpService = useMailchimpService();
+
+  const onSendButtonClicked = async (contact: IContact): Promise<void> => {
+    try {
+      await mailchimpService.subscribe(contact);
+      message.success(i18n.t('messages.subscriptionSuccess'));
+    } catch (error) {
+      message.error(i18n.t('messages.subscriptionError'));
+    }
+  };
 
   return (
     <Layout>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{i18n.t('aboutUs.title')}</title>
-        <meta name="description" content={i18n.t('aboutUs.description')} />
+        <title>{i18n.t('contact.metaTitle')}</title>
+        <meta name="description" content={i18n.t('contact.metaDescription')} />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -59,16 +67,10 @@ export const Nucleo = (): JSX.Element => {
           />
         )}
       </Head>
-      <Header alwaysShown dropShadow />
+      <Header />
 
       <Content>
-        <WhoAreWe />
-        <Banner
-          src={require('../public/images/banner_who_are_we.jpg')}
-          alt={i18n.t('aboutUs.title')}
-        />
-        <WhereWeFrom />
-        <WhereWeGo />
+        <ContactFormSection onSendButtonClicked={onSendButtonClicked} />
       </Content>
 
       <Footer />
@@ -76,4 +78,4 @@ export const Nucleo = (): JSX.Element => {
   );
 };
 
-export default Nucleo;
+export default ContactPage;
