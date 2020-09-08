@@ -89,7 +89,7 @@ const FlatCard = ({
                   imageHeight={imageHeight}
                   key={url}
                   src={url}
-                  alt={`Vivienda en ${flat.address}`}
+                  alt={`Vivienda en ${flat.zone}`}
                 />
               ))}
             </StyledCarousel>
@@ -102,7 +102,7 @@ const FlatCard = ({
                 border-top-left-radius: ${(props) => props.theme.borderRadius};
                 border-top-right-radius: ${(props) => props.theme.borderRadius};
               `}
-              alt={`Vivienda en ${flat.address}`}
+              alt={`Vivienda en ${flat.zone}`}
             />
           )}
           <FlatInfo>

@@ -47,7 +47,7 @@ const Description = styled.span`
 
 const Summary = ({ flat, className, theme }: Props): JSX.Element => {
   const i18n = useI18n();
-  const isLgUp = useMediaQuery({ query: theme.breakpoints.lgu }); // TODO: needs useEffect and useState
+  const isLgUp = useMediaQuery({ query: theme.breakpoints.lgu });
 
   return (
     <Row justify={'center'} className={className}>

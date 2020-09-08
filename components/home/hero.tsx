@@ -1,20 +1,8 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from 'antd';
 
 import useI18n from '../../common/hooks/useI18n';
-import { ModalForm } from '../shared';
-
-type Props = {
-  onSellButtonClicked: (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    address: string
-  ) => void;
-};
 
 const Background = styled.div`
   background-image: ${(props) =>
@@ -125,6 +113,10 @@ const ActionButtons = styled.div`
 `;
 
 const ActionButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   font-weight: 500;
   font-size: 20px;
@@ -160,33 +152,8 @@ const ActionButton = styled(Button)`
   }
 `;
 
-const Hero = ({ onSellButtonClicked }: Props): JSX.Element => {
-  const router = useRouter();
+const Hero = (): JSX.Element => {
   const i18n = useI18n();
-  const [isModalSellerMode, setModalSellerMode] = useState(false);
-
-  const modalVisible =
-    'displayModal' in router.query && router.query['displayModal'] == 'true';
-
-  function setModalVisible(toVisible: boolean): void {
-    if (process.browser == true) {
-      if (toVisible == true && !modalVisible) {
-        router.push({
-          pathname: router.pathname,
-          query: { ...router.query, displayModal: true },
-        });
-      } else if (toVisible == false && modalVisible) {
-        const query = Object.assign({}, router.query, {
-          displayModal: undefined,
-        });
-        delete query['displayModal'];
-        router.push({
-          pathname: router.pathname,
-          query: query,
-        });
-      }
-    }
-  }
 
   return (
     <Background>
@@ -201,26 +168,9 @@ const Hero = ({ onSellButtonClicked }: Props): JSX.Element => {
         <Subtitle>{i18n.t('hero-subtitle')}</Subtitle>
       </Title>
       <ActionButtons>
-        <ActionButton
-          onClick={(a) => {
-            setModalSellerMode(true);
-            setModalVisible(true);
-            (a.target as HTMLButtonElement).blur();
-          }}
-        >
-          {i18n.t('vender')}
-        </ActionButton>
-        <ModalForm
-          isSellerMode={isModalSellerMode}
-          visible={modalVisible}
-          onOk={(name, lastName, email, phone, address) => {
-            onSellButtonClicked(name, lastName, email, phone, address);
-            setModalVisible(false);
-          }}
-          onCancel={() => {
-            setModalVisible(false);
-          }}
-        />
+        <Link href="/vender-casa" passHref>
+          <ActionButton>{i18n.t('vender')}</ActionButton>
+        </Link>
       </ActionButtons>
     </Background>
   );

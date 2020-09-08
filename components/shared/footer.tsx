@@ -33,8 +33,16 @@ const MenuButtons = styled.div`
   }
 `;
 
+const StyledMenu = styled(Menu)`
+  border-radius: 0;
+`;
+
+const StyledLink = styled.a`
+  font-family: ${(props) => props.theme.font.family};
+  font-style: ${(props) => props.theme.font.style};
+`;
+
 const StyledButton = styled(Button)`
-  opacity: 0.55;
   color: ${(props) => props.theme.colors.secondary};
 
   font-family: ${(props) => props.theme.font.family};
@@ -45,7 +53,7 @@ const NucleoLabel = styled.p`
   padding: 4px 15px;
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
-  font-weight: normal;
+  font-weight: 500;
   font-size: 14px;
   line-height: 22px;
 `;
@@ -54,31 +62,31 @@ const Footer = ({ className }: Props) => {
   const i18n = useI18n();
 
   const dropdownMenu = (
-    <Menu>
+    <StyledMenu>
       <Menu.Item key="0">
-        <StyledButton type="text">{i18n.t('aviso-legal')}</StyledButton>
+        <StyledLink>{i18n.t('aviso-legal')}</StyledLink>
       </Menu.Item>
       <Menu.Item key="1">
-        <StyledButton type="text">{i18n.t('politica-datos')}</StyledButton>
+        <StyledLink>{i18n.t('politica-datos')}</StyledLink>
       </Menu.Item>
       <Menu.Item key="2">
         <Link href="/legal/cookies" passHref>
-          <StyledButton type="text">{i18n.t('politica-cookies')}</StyledButton>
+          <StyledLink>{i18n.t('politica-cookies')}</StyledLink>
         </Link>
       </Menu.Item>
-    </Menu>
+    </StyledMenu>
   );
 
   return (
     <footer className={className}>
       <MenuButtons>
-        <LanguageSelector themeColor="secondary" />
+        <LanguageSelector />
       </MenuButtons>
       <DropdownContainer>
         <Dropdown overlay={dropdownMenu} trigger={['click']}>
-          <NucleoLabel>
+          <Button type="text" onClick={(e) => e.preventDefault()}>
             {i18n.t('nucleo-sl')} <DownOutlined />
-          </NucleoLabel>
+          </Button>
         </Dropdown>
       </DropdownContainer>
       <MenuButtons>

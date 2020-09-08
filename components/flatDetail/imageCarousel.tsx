@@ -81,11 +81,16 @@ const ImageCarousel = ({
   theme,
 }: Props): JSX.Element => {
   const i18n = useI18n();
-  const isSmDown = useMediaQuery({ query: theme.breakpoints.smd }); // TODO: needs useEffect and useState
+  const isSmDown = useMediaQuery({ query: theme.breakpoints.smd });
 
   return (
     <div className={className} style={{ position: 'relative' }}>
-      <Title>{flat.address}</Title>
+      <Title>
+        {i18n.t('flatDetail.imageCarouselTitle', {
+          type: i18n.t(`flatTypes.${flat.type}`),
+          zone: flat.zone,
+        })}
+      </Title>
       <ShowAllPhotosButton
         type={'default'}
         ghost

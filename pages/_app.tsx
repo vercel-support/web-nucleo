@@ -6,6 +6,7 @@ import { CSSProp, createGlobalStyle, ThemeProvider } from 'styled-components';
 import I18n from '../libs/i18n';
 import * as gtag from '../libs/gtag';
 import defaultTheme from '../common/themes/default';
+import { CookiesBanner } from '../components/shared';
 
 declare module 'react' {
   interface HTMLAttributes<T> extends DOMAttributes<T> {
@@ -82,7 +83,19 @@ const GlobalStyle = createGlobalStyle`
     @media ${(props) => props.theme.breakpoints.xxl} {
       --gutter: ${(props) => props.theme.grid.xxlGutter};
     }
-  }  
+  }
+
+  .hamburger-menu {
+    &.ant-dropdown {
+      position: absolute;
+      left: 0;
+      right: 0;
+      padding-top: 20px;
+    }
+    .ant-dropdown-menu {
+      border-radius: 0;
+    }
+  }
 `;
 
 class MyApp extends App {
@@ -105,7 +118,10 @@ class MyApp extends App {
       <ThemeProvider theme={defaultTheme}>
         <I18n>
           <GlobalStyle />
+
           <Component {...pageProps} />
+
+          <CookiesBanner />
         </I18n>
       </ThemeProvider>
     );

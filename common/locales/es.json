@@ -1,23 +1,26 @@
 {
 	"header": {
-		"logo-alt": "Gestión inmobiliaria alicante"
+    "logoAlt": "Gestión inmobiliaria alicante",
+    "sellHouse": "Vender casa",
+    "aboutUs": "Quiénes somos",
+    "language": "Español",
+    "hamburgerLanguage": "Idioma"
 	},
 	"langCode": "es",
-  "title": "Inmobiliaria en Alicante | Inmobiliaria Nucleo",
+  "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",
 	"home": {
-		"description": "Compra-Venta de viviendas en Alicante. Encuentra inmuebles al mejor precio. Visita Inmobiliaria Nucleo y conoce nuestra oferta de casas en venta en Alicante.",
-		"newsletter-input-label": "introduce tu correo para suscribirte a la newsletter"
+		"description": "Compra-Venta de viviendas en Alicante. Encuentra inmuebles al mejor precio. Visita Inmobiliaria Núcleo y conoce nuestra oferta de casas en venta en Alicante.",
+    "newsletter-input-label": "introduzca su correo para suscribirse a la newsletter"
 },
   "hero-title-1": "Bienvenido a",
   "hero-title-2": "Inmobiliaria Núcleo",
   "hero-subtitle": "Te asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
-  "idioma": "Español",
   "comprar": "Comprar",
-  "vender": "Vende tu casa",
+  "vender": "Vender casa",
   "section-flats-title": "Viviendas en Alicante",
   "enviar": "Enviar",
   "email": "Correo electrónico",
-  "newsletter-title": "Suscríbete a nuestro boletín",
+  "newsletter-title": "Suscríbase a nuestro boletín",
   "blog-showcase-title": "Conoce las tendencias del mercado inmobiliario",
   "blog-showcase-subtitle": "¡Sé el primero en conocer todas las novedades, los mejores rincones de Alicante y mucho más!",
   "habitaciones": "habitaciones",
@@ -40,8 +43,9 @@
     "pictures": "Fotos"
   },
   "flatDetail": {
-    "title": "{{type}} en venta en {{address}}, {{city}}. - Inmobiliaria Nucleo",
-    "description": "{{type}} en venta por {{price}}€. {{rooms}} dormitorio/s, {{bathrooms}} baño/s, {{sqrMeters}} metros cuadrados en {{address}}, {{city}}",
+    "title": "{{type}} en venta en {{zone}}, {{city}}. - Inmobiliaria Núcleo",
+    "description": "{{type}} en venta por {{price}}€. {{rooms}} dormitorio/s, {{bathrooms}} baño/s, {{sqrMeters}} metros cuadrados en {{zone}}, {{city}}",
+    "imageCarouselTitle": "{{type}} en {{zone}}",
     "messages": {
       "recommendedFlats": "También le puede interesar"
     },
@@ -54,13 +58,16 @@
   "aireAcondicionado": "A/C",
   "terraza": "Terraza",
   "orientacion": "Orientación",
+  "jardin": "Jardín",
+  "ascensor": "Ascensor",
+  "anio_construccion": "Año construcción",
   "yes": "Sí",
   "no": "No",
   "south": "Sur",
   "north": "Norte",
   "west": "Oeste",
   "east": "Este",
-  "modalForm": {
+  "contactForm": {
     "titleSell": "¿Quieres vender un inmueble?",
     "titleBuy": "¿Quieres comprar un inmueble?",
     "name": "Nombre",
@@ -83,6 +90,59 @@
       "ok": "Aceptar",
       "moreInfo": "Más información"
     }
+ },
+  "sellHouse": {
+    "metaTitle": "Vender casa en Alicante | Inmobiliaria Núcleo",
+    "metaDescription": "Venta de viviendas en Alicante. Visite Inmobiliaria Núcleo y conozca cómo vender casa en Alicante al mejor precio.",
+    "form": {
+      "title": "Venda su inmueble con nosotros",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
+      "subtitle2": "Valoración gratuita y sin compromiso",
+      "send": "Enviar",
+      "contactUs": "Contacte con nosotros"
+    },
+    "why": {
+      "title": "¿Por qué vender con nosotros?",
+      "properties": {
+        "professional": {
+          "title": "Profesionalidad",
+          "description": "Desde Núcleo le ofrecemos un servicio completo y personalizado desde el inicio hasta el final del proceso de venta"
+        },
+        "fast": {
+          "title": "Rapidez",
+          "description": "Contamos con una potente base de datos compartida entre nuestras oficinas y más de 30 asesores trabajando para vender su vivienda"
+        },
+        "experience": {
+          "title": "Experiencia",
+          "description": "Tras más de 10 años trabajando en la provincia de Alicante, nuestro equipo conoce a la perfección el mercado inmobiliario local"
+        }
+      }
+    },
+    "houseValue": {
+      "title": "Conozca el valor de su inmueble", 
+      "subtitle": "Servicio gratuito de valoración de su vivienda",
+      "description": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada barrio.<br><br>Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender su vivienda.<br><br>Y lo mejor, todo ello sin compromiso y de forma totalmente gratuita."
+    },
+    "idealBuyer": {
+      "title": "Encontramos al comprador ideal", 
+      "subtitle": "Plan de marketing totalmente personalizado",
+      "description": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la máxima visibilidad<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a sus intereses."
+    },
+    "adjustNeeds": {
+      "title": "Nos ajustamos a sus necesidades", 
+      "subtitle": "Gestión integral, de principio a fin",
+      "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de la firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados de atenderle."
+    }
+  },
+  "aboutUs": {
+    "title": "¿Quiénes somos? | Inmobiliaria Núcleo",
+    "description": "Inmobiliaria en Alicante con más de 10 años de experiencia. Le ayudamos a comprar-vender casa en Alicante de la forma más profesional",
+    "section-1-title": "¿Quiénes somos?",
+    "section-1-text": "Inmobiliaria Núcleo es una red de inmobiliarias en Alicante con más de 10 años de experiencia en el sector.<br><br>Actualmente, Núcleo cuenta con 5 oficinas repartidas por toda la geografía de la provincia de Alicante.<br><br>Nuestro equipo tiene ese espíritu joven con garbo e iniciativa a la vanguardia de la tecnología, pero que a la vez cuenta con una gran formación y experiencia en el mercado inmobiliario.",
+    "section-2-title": "¿De dónde venimos?",
+    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico que llevan detrás más de 10 años de experiencia. Nuestro punto de vista estratégico siempre ha estado orientado hacia la evolución y el crecimiento, hacia la continua adaptación que nos ofrece la tecnología.<br><br>Con el tiempo, hemos dejado atrás la visión tradicional que consideramos estancada de los servicios de sector inmobiliario, para basarnos en progresar y mirar hacia el futuro.",
+    "section-3-title": "¿A dónde vamos?",
+    "section-3-text": "Honestidad, integridad y profesionalismo, son las tres palabras que nos ha caracterizado a lo largo de nuestro recorrido. Nuestra proyección de futuro tiene un sentido evolutivo. Mantenemos nuestra esencia y personalidad, a la vez que nos adaptamos de forma pro-activa a las necesidades del mercado.<br><br>Para conseguir nuestros objetivos, nos rodeamos de los mejores profesionales con experiencia en los distintos campos de interés que necesitan nuestros clientes. De esta forma, ofrecemos las mejores soluciones y un asesoramiento completo, de principio a fin, a quienes confían en nosotros para trabajar."
   },
   "flatTypes": {
     "Piso": "Piso",
@@ -94,5 +154,9 @@
     "Ático": "Ático",
     "Edificio": "Edificio",
     "Trastero": "Trastero"
+  },
+  "messages": {
+    "subscriptionSuccess": "Revise su correo para completar la suscripción",
+    "subscriptionError": "Hubo un error en el proceso de suscripción. Por favor inténtelo de nuevo"
   }
 }

@@ -2,21 +2,16 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
+import { message } from 'antd';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
 import useI18n from '../common/hooks/useI18n';
-import useCookiesAcceptedState from '../common/hooks/cookiesAcceptedState';
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
 import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
-import {
-  Header,
-  Footer,
-  CookiesBanner,
-  FlatsDisplayPlaceholder,
-} from '../components/shared';
+import { Header, Footer, FlatsDisplayPlaceholder } from '../components/shared';
 
 interface StaticProps {
   flats: string;
@@ -55,44 +50,17 @@ const Content = styled.main`
 
 export const Home = ({ flats }: Props): JSX.Element => {
   const i18n = useI18n();
-  const [cookiesAccepted, setCookiesAccepted] = useCookiesAcceptedState();
   const mailchimpService = useMailchimpService();
 
   const deserializedFlats = deserializeMultiple(flats, IFlat);
-
-  const onSellButtonClicked = async (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    address: string
-  ): Promise<void> => {
-    try {
-      const contact: IContact = { EMAIL: email };
-      if (name) {
-        contact.FNAME = name;
-      }
-      if (lastName) {
-        contact.LNAME = lastName;
-      }
-      if (phone) {
-        contact.PHONE = phone;
-      }
-      if (address) {
-        contact.HADDRESS = address;
-      }
-      await mailchimpService.subscribe(contact);
-    } catch (error) {
-      // TODO: manage error
-    }
-  };
 
   const onSubscribeButtonClicked = async (email: string): Promise<void> => {
     try {
       const contact: IContact = { EMAIL: email };
       await mailchimpService.subscribe(contact);
+      message.success(i18n.t('messages.subscriptionSuccess'));
     } catch (error) {
-      // TODO: manage error
+      message.error(i18n.t('messages.subscriptionError'));
     }
   };
 
@@ -125,7 +93,7 @@ export const Home = ({ flats }: Props): JSX.Element => {
       <Header />
 
       <Content>
-        <Hero onSellButtonClicked={onSellButtonClicked} />
+        <Hero />
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={deserializedFlats}
@@ -139,10 +107,6 @@ export const Home = ({ flats }: Props): JSX.Element => {
       </Content>
 
       <Footer />
-
-      {!cookiesAccepted && (
-        <CookiesBanner setCookiesAccepted={setCookiesAccepted} />
-      )}
     </Layout>
   );
 };

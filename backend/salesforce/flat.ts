@@ -32,7 +32,6 @@ export default class Flat extends IFlat {
   public static objectName = 'Opportunity';
 
   public id: string;
-  public address: string;
   public pictureUrls: string[];
   public price: number;
   public rooms: number;
@@ -71,19 +70,19 @@ export default class Flat extends IFlat {
 
   static async fromRecord(record: IStringToAnyDictionary): Promise<Flat> {
     const id = record['Id'];
-    const address = record['Name'];
     const pictureUrls = await Flat.preprocessPictures(record['Id']);
     const price = record['Precio_Web__c'];
     const rooms = record['Dormitorios__c'];
     const bathrooms = record['Ba_os__c'];
     const type = record['Tipologia_inmueble__c'];
     const sqrMeters = record['M2_utiles__c'];
-    let zone = null;
-    if ('Localidad__r' in record && !isnull(record['Localidad__r'])) {
+    let zone = record['Localidad_Inmueble__c'];
+    if (
+      isnull(zone) &&
+      'Localidad__r' in record &&
+      !isnull(record['Localidad__r'])
+    ) {
       zone = record['Localidad__r']['Nombre_de_la_Localidad__c'];
-    }
-    if (isnull(zone)) {
-      zone = record['Localidad_Inmueble__c'];
     }
     const city = record['Provincia__c'] || 'Alicante';
     const description_ES = record['Descripci_n_Espa_ol__c'];
@@ -103,7 +102,6 @@ export default class Flat extends IFlat {
     // TODO do proper validation using typescript class, directly in 'fromDict'
     if (
       isnull(id) ||
-      isnull(address) ||
       isnull(pictureUrls) ||
       pictureUrls.length <= 0 ||
       isnull(price) ||
@@ -125,7 +123,6 @@ export default class Flat extends IFlat {
 
     return Flat.fromDict({
       id,
-      address,
       pictureUrls,
       price,
       rooms,

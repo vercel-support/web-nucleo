@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
-import { Row, Col } from 'antd';
+import { Row, Col, message } from 'antd';
 
 import { IContact } from '../../common/model/mailchimp/contact.model';
 import { IFlat } from '../../common/model/flat.model';
@@ -52,6 +52,10 @@ const Content = styled.main`
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-top: 0;
   }
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  }
 `;
 
 const SummarySection = styled.div`
@@ -62,16 +66,10 @@ const SummarySection = styled.div`
 
 const DescriptionSection = styled.div`
   margin-top: 3rem;
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  @media ${(props) => props.theme.breakpoints.sm} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(3, 1)};
-    margin-right: ${(props) => props.theme.grid.getGridColumns(3, 1)};
-  }
-`;
-
-const DescriptionRow = styled(Row)`
-  margin-bottom: 0 !important;
+  margin-left: ${(props) =>
+    `max(${props.theme.grid.getGridColumns(2, 1)}, 40px)`};
+  margin-right: ${(props) =>
+    `max(${props.theme.grid.getGridColumns(2, 1)}, 40px)`};
 `;
 
 const FeaturesCardContainer = styled.div`
@@ -127,8 +125,9 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
         contact.PHONE = phone;
       }
       await mailchimpService.subscribe(contact);
+      message.success(i18n.t('messages.subscriptionSuccess'));
     } catch (error) {
-      // TODO: manage error
+      message.error(i18n.t('messages.subscriptionError'));
     }
   };
 
@@ -141,18 +140,14 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
           {i18n.t('flatDetail.title', {
             type: i18n.t(`flatTypes.${deserializedFlat.type}`),
             city: deserializedFlat.city,
-            sqrMeters: deserializedFlat.sqrMeters,
-            rooms: deserializedFlat.rooms,
-            bathrooms: deserializedFlat.bathrooms,
-            price: deserializedFlat.price,
-            address: deserializedFlat.address,
+            zone: deserializedFlat.zone,
           })}
         </title>
         <meta
           name="description"
           content={i18n.t('flatDetail.description', {
             type: deserializedFlat.type,
-            address: deserializedFlat.address,
+            zone: deserializedFlat.zone,
             city: deserializedFlat.city,
             sqrMeters: deserializedFlat.sqrMeters,
             rooms: deserializedFlat.rooms,
@@ -190,7 +185,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
           <Summary flat={deserializedFlat} />
         </SummarySection>
         <DescriptionSection>
-          <DescriptionRow gutter={[80, 48]}>
+          <Row gutter={[80, 48]}>
             <Col xs={24} lg={14} xl={15}>
               <Description flat={deserializedFlat} />
             </Col>
@@ -213,7 +208,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
                 </RequestInfoSection>
               </FeaturesCardContainer>
             </Col>
-          </DescriptionRow>
+          </Row>
         </DescriptionSection>
         <FlatsDisplayContainer>
           <FlatsDisplay

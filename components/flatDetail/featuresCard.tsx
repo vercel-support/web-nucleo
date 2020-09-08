@@ -21,11 +21,11 @@ const BathroomsCol = styled(Col)`
   border-bottom: 1px solid #f2f2f2;
 `;
 
-const HeatingCol = styled(Col)`
+const ElevatorCol = styled(Col)`
   border-bottom: 1px solid #f2f2f2;
 `;
 
-const AirConditioningCol = styled(Col)`
+const GardenCol = styled(Col)`
   border-bottom: 1px solid #f2f2f2;
   @media ${(props) => props.theme.breakpoints.sm} {
     border-bottom-width: 0;
@@ -39,7 +39,7 @@ const TerraceCol = styled(Col)`
   border-bottom-width: 0;
 `;
 
-const OrientationCol = styled(Col)`
+const YearConstructionCol = styled(Col)`
   border-bottom-width: 0;
 `;
 
@@ -73,26 +73,30 @@ const FeaturesCard = ({ flat, className }: Props): JSX.Element => {
           <FeatureTitle>{i18n.t('flat.bathrooms')}</FeatureTitle>
           <FeatureInfo>{flat.bathrooms}</FeatureInfo>
         </BathroomsCol>
-        <HeatingCol xs={12} sm={8} lg={12}>
-          {/* TODO: use existing property in SF */}
-          <FeatureTitle>{i18n.t('calefaccion')}</FeatureTitle>
-          <FeatureInfo>{i18n.t('yes')}</FeatureInfo>
-        </HeatingCol>
-        <AirConditioningCol xs={12} sm={8} lg={12}>
-          {/* TODO: use existing property in SF */}
-          <FeatureTitle>{i18n.t('aireAcondicionado')}</FeatureTitle>
-          <FeatureInfo>{i18n.t('yes')}</FeatureInfo>
-        </AirConditioningCol>
+        <ElevatorCol xs={12} sm={8} lg={12}>
+          <FeatureTitle>{i18n.t('ascensor')}</FeatureTitle>
+          <FeatureInfo>
+            {flat.hasElevator ? i18n.t('yes') : i18n.t('no')}
+          </FeatureInfo>
+        </ElevatorCol>
+        <GardenCol xs={12} sm={8} lg={12}>
+          <FeatureTitle>{i18n.t('jardin')}</FeatureTitle>
+          <FeatureInfo>
+            {flat.hasGarden ? i18n.t('yes') : i18n.t('no')}
+          </FeatureInfo>
+        </GardenCol>
         <TerraceCol xs={12} sm={8} lg={12}>
-          {/* TODO: use existing property in SF */}
           <FeatureTitle>{i18n.t('terraza')}</FeatureTitle>
-          <FeatureInfo>{i18n.t('yes')}</FeatureInfo>
+          <FeatureInfo>
+            {flat.hasTerrace ? i18n.t('yes') : i18n.t('no')}
+          </FeatureInfo>
         </TerraceCol>
-        <OrientationCol xs={12} sm={8} lg={12}>
-          {/* TODO: use existing property in SF */}
-          <FeatureTitle>{i18n.t('orientacion')}</FeatureTitle>
-          <FeatureInfo>{i18n.t('south')}</FeatureInfo>
-        </OrientationCol>
+        {flat.yearConstruction !== undefined ? (
+          <YearConstructionCol xs={12} sm={8} lg={12}>
+            <FeatureTitle>{i18n.t('anio_construccion')}</FeatureTitle>
+            <FeatureInfo>{flat.yearConstruction}</FeatureInfo>
+          </YearConstructionCol>
+        ) : null}
       </FeaturesCardRow>
     </div>
   );
