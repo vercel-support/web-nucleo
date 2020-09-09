@@ -3,5 +3,17 @@
     "api/**": {
       "excludeFiles": "{public,.next,pages}/**"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": {
+        "Report-To": "{\"group\":\"default\",\"max_age\":10886400,\"endpoints\":[{\"url\":\"https://dgca0gs9.uriports.com/reports\"}],\"include_subdomains\":true}",
+        "NEL": "{\"report_to\":\"default\",\"max_age\":2592000,\"include_subdomains\":true,\"failure_fraction\":1.0}",
+        "Content-Security-Policy-Report-Only": "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; report-uri https://dgca0gs9.uriports.com/reports/report; report-to default",
+        "Expect-CT": "max-age=86400,report-uri=\"https://dgca0gs9.uriports.com/reports/report\"",
+        "Permissions-Policy": "geolocation=(), camera=(), fullscreen=*, payment=self"
+      }
+    }
+  ]
 }
