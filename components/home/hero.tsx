@@ -49,6 +49,7 @@ const Divider = styled.hr`
   margin-right: 0;
   border: 1px solid ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.primary};
+  border-radius: 15px;
 `;
 
 const Subtitle = styled.h1`
