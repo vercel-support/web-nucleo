@@ -50,7 +50,7 @@ const BottomText = styled.p`
 const Divider = styled.hr`
   border: 1px solid ${(props) => props.theme.colors.shadow};
   background-color: ${(props) => props.theme.colors.shadow};
-  border-radius: 15px;
+  border-radius: ${(props) => props.theme.borderRadius};
   width: 100%;
 `;
 
