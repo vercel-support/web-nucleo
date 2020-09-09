@@ -154,6 +154,9 @@
       "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
       "subtitle2": "Llámenos al (+34) 666 666 666",
       "send": "Enviar"
+    },
+    "offices": {
+      "title": "Oficinas"
     }
   },
   "flatTypes": {

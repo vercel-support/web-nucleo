@@ -5,7 +5,7 @@ import { message } from 'antd';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import useI18n from '../common/hooks/useI18n';
 import useMailchimpService from '../common/hooks/mailchimpService';
-import { ContactFormSection } from '../components/contact';
+import { ContactFormSection, OfficesSection } from '../components/contact';
 import { Header, Footer } from '../components/shared';
 
 const Layout = styled.div`
@@ -71,6 +71,7 @@ const ContactPage = (): JSX.Element => {
 
       <Content>
         <ContactFormSection onSendButtonClicked={onSendButtonClicked} />
+        <OfficesSection />
       </Content>
 
       <Footer />

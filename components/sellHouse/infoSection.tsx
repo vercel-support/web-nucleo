@@ -16,7 +16,7 @@ const Background = styled.div<{ imageUrl: string; left: boolean }>`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: ${(props) => `center ${props.left ? 'right' : 'left'}`};
-  @media ${(props) => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.mdd} {
     background-size: cover;
     padding-top: 24px;
     padding-bottom: 24px;
@@ -28,7 +28,11 @@ const Content = styled.div<{ left: boolean }>`
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   text-align: ${(props) => (props.left ? 'left' : 'right')};
-  @media ${(props) => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    min-height: calc((((100vw / 4) - 32px) * 2.05) * 0.6622);
+    padding-top: 32px;
+  }
+  @media ${(props) => props.theme.breakpoints.mdd} {
     min-height: unset;
     text-align: left;
     border-radius: ${(props) => props.theme.borderRadius};
@@ -80,20 +84,16 @@ const InfoSection = ({
   return (
     <Background imageUrl={imageUrl} left={left} className={className}>
       <Content left={left}>
-        <Row justify={left ? 'start' : 'end'}>
-          <Col xs={24} md={12}>
+        <Row>
+          <Col xs={24} lg={{ span: 12, offset: left ? 0 : 12 }}>
             <Title>{title}</Title>
             <Divider />
-            <Row justify={left ? 'start' : 'end'}>
-              <Col xs={24} xxl={16}>
-                <Subtitle>{subtitle}</Subtitle>
-                <Description
-                  dangerouslySetInnerHTML={{
-                    __html: description,
-                  }}
-                />
-              </Col>
-            </Row>
+            <Subtitle>{subtitle}</Subtitle>
+            <Description
+              dangerouslySetInnerHTML={{
+                __html: description,
+              }}
+            />
           </Col>
         </Row>
       </Content>
@@ -103,4 +103,7 @@ const InfoSection = ({
 
 export default styled(InfoSection)`
   margin-top: 64px;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-top: 32px;
+  }
 `;
