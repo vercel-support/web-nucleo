@@ -57,6 +57,8 @@ const Title = styled.h1`
 
 const Divider = styled.div`
   border: 3px solid ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
+
   width: 64px;
   margin-top: 24px;
   margin-bottom: 24px;
