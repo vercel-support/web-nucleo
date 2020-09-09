@@ -12,6 +12,10 @@ type Props = {
   theme: DefaultTheme;
 };
 
+const TitleContainer = styled.div`
+  position: relative;
+`;
+
 const Title = styled.div`
   position: absolute;
   left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
@@ -84,13 +88,15 @@ const ImageCarousel = ({
   const isSmDown = useMediaQuery({ query: theme.breakpoints.smd });
 
   return (
-    <div className={className} style={{ position: 'relative' }}>
-      <Title>
-        {i18n.t('flatDetail.imageCarouselTitle', {
-          type: i18n.t(`flatTypes.${flat.type}`),
-          zone: flat.zone,
-        })}
-      </Title>
+    <div className={className}>
+      <TitleContainer>
+        <Title>
+          {i18n.t('flatDetail.imageCarouselTitle', {
+            type: i18n.t(`flatTypes.${flat.type}`),
+            zone: flat.zone,
+          })}
+        </Title>
+      </TitleContainer>
       <ShowAllPhotosButton
         type={'default'}
         ghost
@@ -114,6 +120,10 @@ const ImageCarousel = ({
 };
 
 export default withTheme(styled(ImageCarousel)`
+  @media ${(props) => props.theme.breakpoints.xxl} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  }
   .slick-dots-bottom {
     bottom: 24px;
   }
