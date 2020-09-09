@@ -31,7 +31,13 @@ const Card = styled.div`
   background-color: #ffffff;
   opacity: 0.9;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
-  padding: 40px;
+  padding: 64px;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    padding: 40px;
+  }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    padding: 32px;
+  }
 `;
 
 const CardRow = styled(Row)`

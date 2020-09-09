@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 
+import { IOffice } from '../../common/model/office.model';
 import useI18n from '../../common/hooks/useI18n';
+import { OfficeDetail } from '.';
 
 type Props = {
+  offices: IOffice[];
   className?: string;
 };
 
@@ -20,6 +23,7 @@ const Title = styled.h2`
   }
 `;
 
+// TODO
 const Divider = styled.div`
   border: 3px solid ${(props) => props.theme.colors.primary};
   width: 64px;
@@ -39,13 +43,16 @@ const Card = styled.div`
   @media ${(props) => props.theme.breakpoints.mdd} {
     padding: 40px;
   }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    padding: 32px;
+  }
 `;
 
 const CardRow = styled(Row)`
   margin-bottom: 0 !important;
 `;
 
-const ContactFormSection = ({ className }: Props): JSX.Element => {
+const ContactFormSection = ({ offices, className }: Props): JSX.Element => {
   const i18n = useI18n();
 
   return (
@@ -54,9 +61,11 @@ const ContactFormSection = ({ className }: Props): JSX.Element => {
       <Divider />
       <Card>
         <CardRow gutter={[24, 32]}>
-          <Col span={24}>
-            <div>TODO</div>
-          </Col>
+          {offices.map((office) => (
+            <Col key={office.id} xs={24} xl={12}>
+              <OfficeDetail office={office} />
+            </Col>
+          ))}
         </CardRow>
       </Card>
     </div>

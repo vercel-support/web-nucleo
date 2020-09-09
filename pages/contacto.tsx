@@ -1,12 +1,21 @@
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { message } from 'antd';
 
+import { IOffice } from '../common/model/office.model';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import useI18n from '../common/hooks/useI18n';
 import useMailchimpService from '../common/hooks/mailchimpService';
+import { getOffices } from '../backend/offices';
 import { ContactFormSection, OfficesSection } from '../components/contact';
 import { Header, Footer } from '../components/shared';
+
+interface StaticProps {
+  offices: IOffice[];
+}
+
+type Props = StaticProps;
 
 const Layout = styled.div`
   display: flex;
@@ -28,7 +37,7 @@ const Content = styled.main`
   }
 `;
 
-const ContactPage = (): JSX.Element => {
+const ContactPage = ({ offices }: Props): JSX.Element => {
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
@@ -71,12 +80,20 @@ const ContactPage = (): JSX.Element => {
 
       <Content>
         <ContactFormSection onSendButtonClicked={onSendButtonClicked} />
-        <OfficesSection />
+        <OfficesSection offices={offices} />
       </Content>
 
       <Footer />
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  return {
+    props: {
+      offices: getOffices(),
+    },
+  };
 };
 
 export default ContactPage;

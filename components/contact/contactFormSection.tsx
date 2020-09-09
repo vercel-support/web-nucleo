@@ -73,12 +73,15 @@ const Card = styled.div`
   background-color: #ffffff;
   opacity: 0.9;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
-  margin-top: calc(100vw * 0.47 * 0.4);
+  margin-top: calc(100vw * 0.47 * 0.44);
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   padding: 64px;
   @media ${(props) => props.theme.breakpoints.mdd} {
     padding: 40px;
+  }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    padding: 32px;
   }
 `;
 
@@ -98,6 +101,7 @@ const Title = styled.h1`
   }
 `;
 
+// TODO
 const Divider = styled.div`
   border: 3px solid ${(props) => props.theme.colors.primary};
   width: 64px;
