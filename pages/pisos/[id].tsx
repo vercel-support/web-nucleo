@@ -47,14 +47,11 @@ const Layout = styled.div`
 `;
 
 const Content = styled.main`
+  position: relative;
   flex: auto;
   margin-top: ${(props) => props.theme.headerHeight};
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-top: 0;
-  }
-  @media ${(props) => props.theme.breakpoints.xxl} {
-    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   }
 `;
 
@@ -107,23 +104,8 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
   );
   const deserializedFlat = deserializeSingle(flat, IFlat);
 
-  const onBuyButtonClicked = async (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string
-  ): Promise<void> => {
+  const onBuyButtonClicked = async (contact: IContact): Promise<void> => {
     try {
-      const contact: IContact = { EMAIL: email };
-      if (name) {
-        contact.FNAME = name;
-      }
-      if (lastName) {
-        contact.LNAME = lastName;
-      }
-      if (phone) {
-        contact.PHONE = phone;
-      }
       await mailchimpService.subscribe(contact);
       message.success(i18n.t('messages.subscriptionSuccess'));
     } catch (error) {

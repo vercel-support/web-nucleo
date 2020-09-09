@@ -17,6 +17,7 @@ const Layout = styled.div`
 `;
 
 const Content = styled.main`
+  position: relative;
   flex: auto;
 `;
 

@@ -2,16 +2,12 @@ import { useState, Fragment } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
 
+import { IContact } from '../../common/model/mailchimp/contact.model';
 import useI18n from '../../common/hooks/useI18n';
 import { ModalForm } from '../shared';
 
 type Props = {
-  onBuyButtonClicked: (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string
-  ) => void;
+  onBuyButtonClicked: (contact: IContact) => void;
   className?: string;
 };
 
@@ -36,8 +32,8 @@ const RequestInfoButton = ({
       <ModalForm
         isSellerMode={false}
         visible={isModalVisible}
-        onOk={(name, lastName, email, phone) => {
-          onBuyButtonClicked(name, lastName, email, phone);
+        onOk={(contact) => {
+          onBuyButtonClicked(contact);
           setModalVisible(false);
         }}
         onCancel={() => {

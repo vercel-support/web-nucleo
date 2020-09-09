@@ -2,25 +2,26 @@ import styled from 'styled-components';
 import { Row, Col, Form, Input } from 'antd';
 import { FormInstance } from 'antd/lib/form/Form';
 
+import { IContact } from '../../common/model/mailchimp/contact.model';
 import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
   form: FormInstance;
-  isSellerMode: boolean;
-  onFinish: (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    address: string
-  ) => void;
+  onFinish: (contact: IContact) => void;
+  showAddress?: boolean;
+  showSubject?: boolean;
 };
 
 const InputContainer = styled.div`
   color: ${(props) => props.theme.colors.secondary};
 `;
 
-const ModalForm = ({ form, isSellerMode, onFinish }: Props): JSX.Element => {
+const ContactForm = ({
+  form,
+  onFinish,
+  showAddress,
+  showSubject,
+}: Props): JSX.Element => {
   const i18n = useI18n();
 
   const validateMessages = {
@@ -34,15 +35,23 @@ const ModalForm = ({ form, isSellerMode, onFinish }: Props): JSX.Element => {
     <Form
       validateMessages={validateMessages}
       form={form}
-      onFinish={(values) =>
-        onFinish(
-          values.name,
-          values.lastName,
-          values.email,
-          values.phone,
-          values.address || null
-        )
-      }
+      onFinish={(values) => {
+        const contact: IContact = {
+          EMAIL: values.email,
+          FNAME: values.name,
+          LNAME: values.lastName,
+        };
+        if (values.phone) {
+          contact.PHONE = values.phone;
+        }
+        if (values.address) {
+          contact.HADDRESS = values.address;
+        }
+        if (values.subject) {
+          contact.SUBJECT = values.subject;
+        }
+        onFinish(contact);
+      }}
     >
       <Row gutter={16}>
         <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
@@ -53,7 +62,7 @@ const ModalForm = ({ form, isSellerMode, onFinish }: Props): JSX.Element => {
               label={i18n.t('contactForm.name')}
               rules={[{ required: true }]}
             >
-              <Input></Input>
+              <Input />
             </Form.Item>
           </InputContainer>
         </Col>
@@ -65,7 +74,7 @@ const ModalForm = ({ form, isSellerMode, onFinish }: Props): JSX.Element => {
               label={i18n.t('contactForm.lastName')}
               rules={[{ required: true }]}
             >
-              <Input></Input>
+              <Input />
             </Form.Item>
           </InputContainer>
         </Col>
@@ -77,7 +86,7 @@ const ModalForm = ({ form, isSellerMode, onFinish }: Props): JSX.Element => {
               label={i18n.t('contactForm.email')}
               rules={[{ required: true, type: 'email' }]}
             >
-              <Input></Input>
+              <Input />
             </Form.Item>
           </InputContainer>
         </Col>
@@ -88,11 +97,11 @@ const ModalForm = ({ form, isSellerMode, onFinish }: Props): JSX.Element => {
               name="phone"
               label={i18n.t('contactForm.phone')}
             >
-              <Input></Input>
+              <Input />
             </Form.Item>
           </InputContainer>
         </Col>
-        {isSellerMode ? (
+        {showAddress ? (
           <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
             <InputContainer>
               <Form.Item
@@ -101,7 +110,21 @@ const ModalForm = ({ form, isSellerMode, onFinish }: Props): JSX.Element => {
                 label={i18n.t('contactForm.address')}
                 rules={[{ required: true }]}
               >
-                <Input></Input>
+                <Input />
+              </Form.Item>
+            </InputContainer>
+          </Col>
+        ) : null}
+        {showSubject ? (
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+            <InputContainer>
+              <Form.Item
+                labelCol={{ span: 24 }}
+                name="subject"
+                label={i18n.t('contactForm.subject')}
+                rules={[{ required: true }]}
+              >
+                <Input.TextArea rows={5} />
               </Form.Item>
             </InputContainer>
           </Col>
@@ -111,4 +134,4 @@ const ModalForm = ({ form, isSellerMode, onFinish }: Props): JSX.Element => {
   );
 };
 
-export default ModalForm;
+export default ContactForm;

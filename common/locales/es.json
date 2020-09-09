@@ -3,6 +3,7 @@
     "logoAlt": "Gestión inmobiliaria alicante",
     "sellHouse": "Vender casa",
     "aboutUs": "Quiénes somos",
+    "contact": "Contacto",
     "language": "Español",
     "hamburgerLanguage": "Idioma"
 	},
@@ -75,6 +76,7 @@
     "email": "Correo electrónico",
     "phone": "Teléfono",
     "address": "Dirección completa del inmueble",
+    "subject": "Asunto",
     "send": "Enviar",
     "cancel": "Cancelar",
     "validateEmail": "El correo electrónico introducido es inválido.",
@@ -143,6 +145,19 @@
     "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico que llevan detrás más de 10 años de experiencia. Nuestro punto de vista estratégico siempre ha estado orientado hacia la evolución y el crecimiento, hacia la continua adaptación que nos ofrece la tecnología.<br><br>Con el tiempo, hemos dejado atrás la visión tradicional que consideramos estancada de los servicios de sector inmobiliario, para basarnos en progresar y mirar hacia el futuro.",
     "section-3-title": "¿A dónde vamos?",
     "section-3-text": "Honestidad, integridad y profesionalismo, son las tres palabras que nos ha caracterizado a lo largo de nuestro recorrido. Nuestra proyección de futuro tiene un sentido evolutivo. Mantenemos nuestra esencia y personalidad, a la vez que nos adaptamos de forma pro-activa a las necesidades del mercado.<br><br>Para conseguir nuestros objetivos, nos rodeamos de los mejores profesionales con experiencia en los distintos campos de interés que necesitan nuestros clientes. De esta forma, ofrecemos las mejores soluciones y un asesoramiento completo, de principio a fin, a quienes confían en nosotros para trabajar."
+  },
+  "contact": {
+    "metaTitle": "Contacto | Inmobiliaria Núcleo",
+    "metaDescription": "Contacto | Inmobiliaria Núcleo",
+    "form": {
+      "title": "Contacte con nosotros",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
+      "subtitle2": "Llámenos al (+34) 965 999 554",
+      "send": "Enviar"
+    },
+    "offices": {
+      "title": "Oficinas"
+    }
   },
   "flatTypes": {
     "Piso": "Piso",

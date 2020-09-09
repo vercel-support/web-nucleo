@@ -48,6 +48,8 @@ const Divider = styled.hr`
   margin-left: var(--gutter);
   margin-right: 0;
   border: 1px solid ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
+  border-radius: ${(props) => props.theme.borderRadius};
 `;
 
 const Subtitle = styled.h1`

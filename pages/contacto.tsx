@@ -1,37 +1,21 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import { message } from 'antd';
 
+import { IOffice } from '../common/model/office.model';
 import { IContact } from '../common/model/mailchimp/contact.model';
-import { IFlat } from '../common/model/flat.model';
 import useI18n from '../common/hooks/useI18n';
 import useMailchimpService from '../common/hooks/mailchimpService';
-import { deserializeMultiple } from '../common/helpers/serialization';
-import Flat from '../backend/salesforce/flat';
-import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
-import { Header, Footer, FlatsDisplayPlaceholder } from '../components/shared';
+import { getOffices } from '../backend/offices';
+import { ContactFormSection, OfficesSection } from '../components/contact';
+import { Header, Footer } from '../components/shared';
 
 interface StaticProps {
-  flats: string;
+  offices: IOffice[];
 }
 
 type Props = StaticProps;
-
-const FlatsDisplayContainer = styled.div`
-  background-color: #f2f2f2;
-  padding-top: 100px;
-  padding-bottom: 70px;
-`;
-
-const FlatsDisplay = dynamic(
-  () => import('../components/shared/flatsDisplay/flatsDisplay'),
-  {
-    ssr: false,
-    loading: () => <FlatsDisplayPlaceholder />,
-  }
-);
 
 const Layout = styled.div`
   display: flex;
@@ -47,17 +31,18 @@ const Layout = styled.div`
 const Content = styled.main`
   position: relative;
   flex: auto;
+  margin-top: ${(props) => props.theme.headerHeight};
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-top: 0;
+  }
 `;
 
-export const Home = ({ flats }: Props): JSX.Element => {
+const ContactPage = ({ offices }: Props): JSX.Element => {
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
-  const deserializedFlats = deserializeMultiple(flats, IFlat);
-
-  const onSubscribeButtonClicked = async (email: string): Promise<void> => {
+  const onSendButtonClicked = async (contact: IContact): Promise<void> => {
     try {
-      const contact: IContact = { EMAIL: email };
       await mailchimpService.subscribe(contact);
       message.success(i18n.t('messages.subscriptionSuccess'));
     } catch (error) {
@@ -70,8 +55,8 @@ export const Home = ({ flats }: Props): JSX.Element => {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{i18n.t('title')}</title>
-        <meta name="description" content={i18n.t('home.description')} />
+        <title>{i18n.t('contact.metaTitle')}</title>
+        <meta name="description" content={i18n.t('contact.metaDescription')} />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -94,17 +79,8 @@ export const Home = ({ flats }: Props): JSX.Element => {
       <Header />
 
       <Content>
-        <Hero />
-        <FlatsDisplayContainer>
-          <FlatsDisplay
-            flats={deserializedFlats}
-            title={i18n.t('section-flats-title')}
-          />
-        </FlatsDisplayContainer>
-        <BlogShowcase />
-        <NewsletterSection
-          onSubscribeButtonClicked={onSubscribeButtonClicked}
-        />
+        <ContactFormSection onSendButtonClicked={onSendButtonClicked} />
+        <OfficesSection offices={offices} />
       </Content>
 
       <Footer />
@@ -113,14 +89,11 @@ export const Home = ({ flats }: Props): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const flats = await Flat.getFlats();
-  const serializedFlats = Flat.serialize(flats);
-
   return {
     props: {
-      flats: serializedFlats,
+      offices: getOffices(),
     },
   };
 };
 
-export default Home;
+export default ContactPage;

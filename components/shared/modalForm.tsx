@@ -1,19 +1,14 @@
 import styled from 'styled-components';
 import { Modal, Form } from 'antd';
 
+import { IContact } from '../../common/model/mailchimp/contact.model';
 import useI18n from '../../common/hooks/useI18n';
 import { ContactForm } from './';
 
 type Props = {
   isSellerMode: boolean;
   visible: boolean;
-  onOk: (
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    address: string
-  ) => void;
+  onOk: (contact: IContact) => void;
   onCancel: () => void;
 };
 
@@ -53,7 +48,7 @@ const ModalForm = ({
       okText={i18n.t('contactForm.send')}
       cancelText={i18n.t('contactForm.cancel')}
     >
-      <ContactForm form={form} isSellerMode={isSellerMode} onFinish={onOk} />
+      <ContactForm form={form} onFinish={onOk} showAddress={isSellerMode} />
     </StyledModal>
   );
 };

@@ -13,7 +13,7 @@ const ContactUsButton = ({ onClick, className }: Props): JSX.Element => {
 
   return (
     <Row justify="center">
-      <Col xs={20} md={10} lg={8} xl={6} xxl={4}>
+      <Col xs={20} md={10} lg={8} xl={6}>
         <Button
           className={className}
           onClick={(e) => {

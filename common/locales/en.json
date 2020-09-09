@@ -3,6 +3,7 @@
     "logoAlt": "Real state agency alicante",
     "sellHouse": "Sell your house",
     "aboutUs": "About us",
+    "contact": "Contact",
     "language": "English",
     "hamburgerLanguage": "Language"
   },
@@ -75,6 +76,7 @@
     "email": "E-mail adress",
     "phone": "Phone Number",
     "address": "Property´s full adress",
+    "subject": "Subject",
     "send": "Send",
     "cancel": "Cancel",
     "validateEmail": "The e-mail you wrote is invalid.",
@@ -143,6 +145,19 @@
     "section-2-text": "Formed by professionals from the real estate and technology sectors who have more than 10 years of experience. Our strategic point of view has always been oriented towards evolution and growth, towards the continuous adaptation that technology offers us.<br><br>Over time, we have left behind the traditional vision that we consider to be stagnant of real estate services, to focus on progressing and looking to the future.",
     "section-3-title": "Where we go",
     "section-3-text": "Honesty, integrity and professionalism are the three words that have characterized us throughout our journey. Our future projection has an evolutionary sense. We maintain our essence and personality, while we adapt pro-actively to the needs of the market.<br><br>To achieve our objectives, we surround ourselves with the best professionals in the different fields of interest that our clients need. This way, we offer the best solutions and complete advice, from start to finish, for those who trust."
+  },
+  "contact": {
+    "metaTitle": "Contact | Inmobiliaria Núcleo",
+    "metaDescription": "Contact | Inmobiliaria Núcleo",
+    "form": {
+      "title": "Contacte con nosotros",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
+      "subtitle2": "Llámenos al (+34) 965 999 554",
+      "send": "Enviar"
+    },
+    "offices": {
+      "title": "Offices"
+    }
   },
   "flatTypes": {
     "Piso": "Flat",

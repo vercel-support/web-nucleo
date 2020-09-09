@@ -4,4 +4,5 @@ export interface IContact {
   LNAME?: string;
   PHONE?: string;
   HADDRESS?: string;
+  SUBJECT?: string;
 }
