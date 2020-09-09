@@ -1,18 +1,18 @@
 {
-	"header": {
+  "header": {
     "logoAlt": "Real state agency alicante",
     "sellHouse": "Sell your house",
     "aboutUs": "About us",
     "contact": "Contact",
     "language": "English",
     "hamburgerLanguage": "Language"
-	},
-	"langCode": "en",
+  },
+  "langCode": "en",
   "title": "Properties in Alicante | Inmobiliaria Núcleo",
-	"home": {
-		"description": "Find houses for sale in Alicante, Spain. Flats, Apartments, Chalets. Inmobiliaria Núcleo helps you choose between the best properties in Alicante. Visit Us!",
-		"newsletter-input-label": "enter you e-mail and subscribe to the newsletter"    
-	},
+  "home": {
+    "description": "Find houses for sale in Alicante, Spain. Flats, Apartments, Chalets. Inmobiliaria Núcleo helps you choose between the best properties in Alicante. Visit Us!",
+    "newsletter-input-label": "enter you e-mail and subscribe to the newsletter"
+  },
   "hero-title-1": "Welcome to",
   "hero-title-2": "Inmobiliaria Núcleo",
   "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
@@ -52,7 +52,7 @@
     },
     "actions": {
       "showAllPhotos": "Show all photos",
-      "requestInfo": "I am interested in this property"
+      "requestInfo": "I'm interested"
     }
   },
   "calefaccion": "Heating",
@@ -94,57 +94,57 @@
     }
   },
   "sellHouse": {
-    "metaTitle": "Sell your house | Inmobiliaria Núcleo",
-    "metaDescription": "Sell your house | Inmobiliaria Núcleo",
+    "metaTitle": "Your house for sale in Alicante | Inmobiliaria Núcleo",
+    "metaDescription": "Sell your Alicante properties for the best price thanks to Inmobiliaria Núcleo",
     "form": {
-      "title": "Venda su inmueble con nosotros",
-      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
-      "subtitle2": "Valoración gratuita y sin compromiso",
-      "send": "Enviar",
-      "contactUs": "Contacte con nosotros"
+      "title": "Sell house fast with us",
+      "subtitle": "Please, fill in the following form to get in touch with the Núcleo team ",
+      "subtitle2": "Free valuation without commitment",
+      "send": "Send",
+      "contactUs": "Contact us"
     },
     "why": {
-      "title": "¿Por qué vender con nosotros?",
+      "title": "Why sell with us?",
       "properties": {
         "professional": {
-          "title": "Profesionalidad",
-          "description": "Desde Núcleo le ofrecemos un servicio completo y personalizado desde el inicio hasta el final del proceso de venta"
+          "title": "Professionalism",
+          "description": "We offer you a complete and personalized service from the beginning to the end of the sales process"
         },
         "fast": {
-          "title": "Rapidez",
-          "description": "Contamos con una potente base de datos compartida entre nuestras oficinas y más de 30 asesores trabajando para vender su vivienda"
+          "title": "Speed",
+          "description": "We have a powerful database shared between our offices and more than 30 advisers working to sell your home."
         },
         "experience": {
-          "title": "Experiencia",
-          "description": "Tras más de 10 años trabajando en la provincia de Alicante, nuestro equipo conoce a la perfección el mercado inmobiliario local"
+          "title": "Experience",
+          "description": "After more than 10 years working in Alicante, our team knows the local real estate market perfectly"
         }
       }
     },
     "houseValue": {
-      "title": "Conozca el valor de su inmueble", 
-      "subtitle": "Servicio gratuito de valoración de su vivienda",
-      "description": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada barrio.<br><br>Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender su vivienda.<br><br>Y lo mejor, todo ello sin compromiso y de forma totalmente gratuita."
+      "title": "Know the value of your property",
+      "subtitle": "Free home appraisal service",
+      "description": "Thanks to our extensive experience in the local real estate market, we know the real sales prices of each neighborhood.<br><br>In addition, we have the most advanced software in real estate management, which allows us to propose the right price to sell your home.<br><br>All of this without obligation and completely free of charge."
     },
     "idealBuyer": {
-      "title": "Encontramos al comprador ideal", 
-      "subtitle": "Plan de marketing totalmente personalizado",
-      "description": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la máxima visibilidad<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a sus intereses."
+      "title": "We find the ideal buyer",
+      "subtitle": "Fully personalized marketing plan",
+      "description": "We have virtual reality cameras. This way users will visit your property like never before.<br><br> We will also promote your property in our offices as well as in our monthly magazine to give it maximum visibility.<br><br>We carry out an analysis of all the possible buyers profiles to find the ones that best suit your interests."
     },
     "adjustNeeds": {
-      "title": "Nos ajustamos a sus necesidades", 
-      "subtitle": "Gestión integral, de principio a fin",
-      "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de la firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados de atenderle."
+      "title": "We adjust to your needs",
+      "subtitle": "Integral management, from start to finish",
+      "description": "We do a photographic report (2D and 3D) and we take care of the release of the ads on all the media, both online and offline.<br><br>We take care of all the documentation procedures and accompany you to the notary at the time of signing.<br><br>During the entire process, if you have any questions, you just have to pick up the phone and our advisors will be happy to assist you."
     }
   },
   "aboutUs": {
     "title": "About us | Inmobiliaria Núcleo",
-    "description": "About us | Inmobiliaria Núcleo",
+    "description": "Real estate in Alicante with more than 10 years of experience. We help you to sell your property or to find the best houses for sale in Alicante",
     "section-1-title": "About us",
-    "section-1-text": "Inmobiliaria Núcleo es una red de inmobiliarias en Alicante con más de 10 años de experiencia en el sector.<br><br>Actualmente, Núcleo cuenta con 5 oficinas repartidas por toda la geografía de la provincia de Alicante.<br><br>Nuestro equipo tiene ese espíritu joven con garbo e iniciativa a la vanguardia de la tecnología, pero que a la vez cuenta con una gran formación y experiencia en el mercado inmobiliario.",
-    "section-2-title": "¿De dónde venimos?",
-    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico que llevan detrás más de 10 años de experiencia. Nuestro punto de vista estratégico siempre ha estado orientado hacia la evolución y el crecimiento, hacia la continua adaptación que nos ofrece la tecnología.<br><br>Con el tiempo, hemos dejado atrás la visión tradicional que consideramos estancada de los servicios de sector inmobiliario, para basarnos en progresar y mirar hacia el futuro.",
-    "section-3-title": "¿A dónde vamos?",
-    "section-3-text": "Honestidad, integridad y profesionalismo, son las tres palabras que nos ha caracterizado a lo largo de nuestro recorrido. Nuestra proyección de futuro tiene un sentido evolutivo. Mantenemos nuestra esencia y personalidad, a a vez que nos adaptamos de forma pro-activa a las necesidades del mercado.<br><br>Para conseguir nuestros objetivos, nos rodeamos de los mejores profesionales con experiencia en los distintos campos de interés que necesitan nuestros clientes. De esta forma, ofrecemos las mejores soluciones y un asesoramiento completo, de principio a fin, a quienes confían en nosotros para trabajar."
+    "section-1-text": "Inmobiliaria Núcleo is a network of real estate agencies in Alicante with more than 10 years of experience in the sector.<br><br>Currently, Núcleo has 5 offices spread throughout the geography of the province of Alicante.<br><br>Our team has that young spirit with grace and initiative at the forefront of technology and at the same time has great training and experience in the real estate market.",
+    "section-2-title": "Where we come from?",
+    "section-2-text": "Formed by professionals from the real estate and technology sectors who have more than 10 years of experience. Our strategic point of view has always been oriented towards evolution and growth, towards the continuous adaptation that technology offers us.<br><br>Over time, we have left behind the traditional vision that we consider to be stagnant of real estate services, to focus on progressing and looking to the future.",
+    "section-3-title": "Where we go",
+    "section-3-text": "Honesty, integrity and professionalism are the three words that have characterized us throughout our journey. Our future projection has an evolutionary sense. We maintain our essence and personality, while we adapt pro-actively to the needs of the market.<br><br>To achieve our objectives, we surround ourselves with the best professionals in the different fields of interest that our clients need. This way, we offer the best solutions and complete advice, from start to finish, for those who trust."
   },
   "contact": {
     "metaTitle": "Contact | Inmobiliaria Núcleo",

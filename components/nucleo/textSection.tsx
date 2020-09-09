@@ -3,6 +3,8 @@ import styled from 'styled-components';
 const Divider = styled.hr<{ right: boolean }>`
   width: 44px;
   border: 1px solid ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
+  border-radius: 15px;
 
   margin-top: 14px;
   margin-bottom: 14px;

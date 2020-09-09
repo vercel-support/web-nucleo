@@ -88,6 +88,8 @@ const Divider = styled.hr`
   margin-left: var(--gutter);
   margin-right: 14px;
   border: 1px solid ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
+  border-radius: 15px;
 `;
 
 const NewsletterSection = ({
