@@ -21,7 +21,7 @@ const Image = styled.div`
   background-image: linear-gradient(
       180deg,
       rgba(245, 245, 245, 0) 28.13%,
-      ${(props) => props.theme.colors.grey} 100%
+      ${(props) => props.theme.colors.grey} 85%
     ),
     url('/images/contact_hero.jpg');
 `;
