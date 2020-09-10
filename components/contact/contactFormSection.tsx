@@ -18,54 +18,12 @@ const Image = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
-  @media ${(props) => props.theme.breakpoints.xxl} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 28.13%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.xl} {
-    background-image: linear-gradient(
-        180.16deg,
-        rgba(245, 245, 245, 0) 19.03%,
-        #f5f5f5 99.86%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.lg} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 8.85%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.md} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 4.69%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.sm} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 18.23%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.xs} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 10.94%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
+  background-image: linear-gradient(
+      180deg,
+      rgba(245, 245, 245, 0) 28.13%,
+      ${(props) => props.theme.colors.grey} 100%
+    ),
+    url('/images/contact_hero.jpg');
 `;
 
 const Card = styled.div`

@@ -20,7 +20,7 @@ interface StaticProps {
 type Props = StaticProps;
 
 const FlatsDisplayContainer = styled.div`
-  background-color: #f2f2f2;
+  background-color: ${(props) => props.theme.colors.grey};
   padding-top: 100px;
   padding-bottom: 70px;
 `;

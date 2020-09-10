@@ -14,19 +14,19 @@ const FeaturesCardRow = styled(Row)`
 `;
 
 const RoomsCol = styled(Col)`
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid ${(props) => props.theme.colors.grey};
 `;
 
 const BathroomsCol = styled(Col)`
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid ${(props) => props.theme.colors.grey};
 `;
 
 const ElevatorCol = styled(Col)`
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid ${(props) => props.theme.colors.grey};
 `;
 
 const GardenCol = styled(Col)`
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid ${(props) => props.theme.colors.grey};
   @media ${(props) => props.theme.breakpoints.sm} {
     border-bottom-width: 0;
   }

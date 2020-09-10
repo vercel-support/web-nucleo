@@ -10,9 +10,10 @@ const gridColumns = 24;
 
 const theme: DefaultTheme = {
   colors: {
-    primary: '#F94F28',
-    secondary: '#332E31',
-    shadow: '#F2F2F2',
+    primary: '#f94f28',
+    secondary: '#332e31',
+    grey: '#f2f2f2',
+    shadow: '#f5f5f5',
   },
 
   font: {

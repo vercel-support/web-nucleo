@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Text = styled.div`
-  color: #f5f5f5;
+  color: ${(props) => props.theme.colors.shadow};
   font-size: 16px;
   line-height: 20px;
 `;
