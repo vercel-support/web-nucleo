@@ -14,58 +14,16 @@ const Image = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  height: calc(100vw * 0.47);
+  height: calc(100vw * 0.3709);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
-  @media ${(props) => props.theme.breakpoints.xxl} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 28.13%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.xl} {
-    background-image: linear-gradient(
-        180.16deg,
-        rgba(245, 245, 245, 0) 19.03%,
-        #f5f5f5 99.86%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.lg} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 8.85%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.md} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 4.69%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.sm} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 18.23%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
-  @media ${(props) => props.theme.breakpoints.xs} {
-    background-image: linear-gradient(
-        180deg,
-        rgba(245, 245, 245, 0) 10.94%,
-        #f5f5f5 100%
-      ),
-      url('/images/contact_hero.jpg');
-  }
+  background-image: linear-gradient(
+      180deg,
+      rgba(245, 245, 245, 0) 28.13%,
+      ${(props) => props.theme.colors.grey} 85%
+    ),
+    url('/images/contact_hero.jpg');
 `;
 
 const Card = styled.div`
@@ -73,7 +31,7 @@ const Card = styled.div`
   background-color: #ffffff;
   opacity: 0.9;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
-  margin-top: calc(100vw * 0.47 * 0.44);
+  margin-top: calc(100vw * 0.3709 * 0.5);
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   padding: 64px;

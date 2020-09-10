@@ -35,6 +35,7 @@ const Content = styled.main`
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-top: 0;
   }
+  background-color: ${(props) => props.theme.colors.grey};
 `;
 
 const ContactPage = ({ offices }: Props): JSX.Element => {

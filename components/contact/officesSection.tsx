@@ -75,4 +75,5 @@ const ContactFormSection = ({ offices, className }: Props): JSX.Element => {
 
 export default styled(ContactFormSection)`
   margin-top: 64px;
+  margin-bottom: 64px;
 `;

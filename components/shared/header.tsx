@@ -101,11 +101,11 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
           <a>{i18n.t('header.aboutUs')}</a>
         </Link>
       </Menu.Item>
-      {/* <Menu.Item key="3">
+      <Menu.Item key="3">
         <Link href="/contacto">
           <a>{i18n.t('header.contact')}</a>
         </Link>
-      </Menu.Item> */}
+      </Menu.Item>
       <Menu.Divider />
       <Menu.SubMenu
         key="sub1"
@@ -148,11 +148,11 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
             <Button type="text">{i18n.t('header.aboutUs')}</Button>
           </Link>
         </MdDownHiddenCol>
-        {/* <MdDownHiddenCol>
+        <MdDownHiddenCol>
           <Link href="/contacto" passHref>
             <Button type="text">{i18n.t('header.contact')}</Button>
           </Link>
-        </MdDownHiddenCol> */}
+        </MdDownHiddenCol>
         <MdDownHiddenCol>
           <Link href="/vender-casa" passHref>
             <SecondaryButton type="primary">
