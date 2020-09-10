@@ -98,7 +98,7 @@
     "metaDescription": "Sell your Alicante properties for the best price thanks to Inmobiliaria Núcleo",
     "form": {
       "title": "Sell house fast with us",
-      "subtitle": "Please, fill in the following form to get in touch with the Núcleo team ",
+      "subtitle": "Please, fill in the following form to get in touch with the Núcleo team",
       "subtitle2": "Free valuation without commitment",
       "send": "Send",
       "contactUs": "Contact us"
@@ -150,10 +150,10 @@
     "metaTitle": "Contact | Inmobiliaria Núcleo",
     "metaDescription": "Contact | Inmobiliaria Núcleo",
     "form": {
-      "title": "Contacte con nosotros",
-      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
-      "subtitle2": "Llámenos al (+34) 965 999 554",
-      "send": "Enviar"
+      "title": "Contact us",
+      "subtitle": "Please, fill in the following form to get in touch with the Núcleo team",
+      "subtitle2": "Call us at (+34) 965 999 554",
+      "send": "Send"
     },
     "offices": {
       "title": "Offices"
