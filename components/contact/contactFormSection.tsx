@@ -14,7 +14,7 @@ const Image = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  height: calc(100vw * 0.47);
+  height: calc(100vw * 0.3709);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
@@ -73,7 +73,7 @@ const Card = styled.div`
   background-color: #ffffff;
   opacity: 0.9;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
-  margin-top: calc(100vw * 0.47 * 0.44);
+  margin-top: calc(100vw * 0.3709 * 0.5);
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   padding: 64px;
