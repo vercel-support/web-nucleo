@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import md5 from 'blueimp-md5';
 
-import { IContact } from '../../../common/model/mailchimp/contact.model';
-import { MailchimpStatus } from '../../../common/model/mailchimp/enums/mailchimpStatus.enum';
+import { IContact } from '../../common/model/mailchimp/contact.model';
+import { MailchimpStatus } from '../../common/model/mailchimp/enums/mailchimpStatus.enum';
 
 type RequestBodyType = {
   contact: IContact;
