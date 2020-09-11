@@ -5,6 +5,7 @@ import { message } from 'antd';
 
 import { IOffice } from '../common/model/office.model';
 import { IContact } from '../common/model/mailchimp/contact.model';
+import { MailchimpStatus } from '../common/model/mailchimp/enums/mailchimpStatus.enum';
 import useI18n from '../common/hooks/useI18n';
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { getOffices } from '../backend/offices';
@@ -44,8 +45,10 @@ const ContactPage = ({ offices }: Props): JSX.Element => {
 
   const onSendButtonClicked = async (contact: IContact): Promise<void> => {
     try {
-      await mailchimpService.subscribe(contact);
-      message.success(i18n.t('messages.subscriptionSuccess'));
+      const res = await mailchimpService.subscribe(contact);
+      if (res.status === MailchimpStatus.PENDING) {
+        message.success(i18n.t('messages.subscriptionSuccess'));
+      }
     } catch (error) {
       message.error(i18n.t('messages.subscriptionError'));
     }

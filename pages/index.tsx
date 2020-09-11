@@ -6,6 +6,7 @@ import { message } from 'antd';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
+import { MailchimpStatus } from '../common/model/mailchimp/enums/mailchimpStatus.enum';
 import useI18n from '../common/hooks/useI18n';
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
@@ -58,8 +59,10 @@ export const Home = ({ flats }: Props): JSX.Element => {
   const onSubscribeButtonClicked = async (email: string): Promise<void> => {
     try {
       const contact: IContact = { EMAIL: email };
-      await mailchimpService.subscribe(contact);
-      message.success(i18n.t('messages.subscriptionSuccess'));
+      const res = await mailchimpService.subscribe(contact);
+      if (res.status === MailchimpStatus.PENDING) {
+        message.success(i18n.t('messages.subscriptionSuccess'));
+      }
     } catch (error) {
       message.error(i18n.t('messages.subscriptionError'));
     }

@@ -2,9 +2,10 @@ import { createContext, useContext } from 'react';
 import axios from 'axios';
 
 import { IContact } from '../model/mailchimp/contact.model';
+import { ResponseType } from '../../pages/api/mailchimp/subscribe';
 
 interface IMailchimpService {
-  subscribe(contact: IContact): Promise<void>;
+  subscribe(contact: IContact): Promise<ResponseType>;
 }
 
 class MailchimpService implements IMailchimpService {
@@ -12,8 +13,8 @@ class MailchimpService implements IMailchimpService {
     baseURL: '/api/mailchimp/',
   });
 
-  async subscribe(contact: IContact): Promise<void> {
-    return this.axiosInstance.post('subscribe', {
+  async subscribe(contact: IContact): Promise<ResponseType> {
+    return this.axiosInstance.post<IContact, ResponseType>('subscribe', {
       contact,
     });
   }
