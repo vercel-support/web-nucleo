@@ -3,11 +3,10 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
-import { Row, Col, message } from 'antd';
+import { Row, Col } from 'antd';
 
 import { IContact } from '../../common/model/mailchimp/contact.model';
 import { IFlat } from '../../common/model/flat.model';
-import { MailchimpStatus } from '../../common/model/mailchimp/enums/mailchimpStatus.enum';
 import useI18n from '../../common/hooks/useI18n';
 import useMailchimpService from '../../common/hooks/mailchimpService';
 import {
@@ -105,15 +104,8 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
   );
   const deserializedFlat = deserializeSingle(flat, IFlat);
 
-  const onBuyButtonClicked = async (contact: IContact): Promise<void> => {
-    try {
-      const res = await mailchimpService.subscribe(contact);
-      if (res.status === MailchimpStatus.PENDING) {
-        message.success(i18n.t('messages.subscriptionSuccess'));
-      }
-    } catch (error) {
-      message.error(i18n.t('messages.subscriptionError'));
-    }
+  const onBuyButtonClicked = (contact: IContact) => {
+    mailchimpService.subscribe(contact, i18n);
   };
 
   return (

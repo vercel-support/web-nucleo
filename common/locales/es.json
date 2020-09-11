@@ -171,7 +171,11 @@
     "Trastero": "Trastero"
   },
   "messages": {
-    "subscriptionSuccess": "Revise su correo para completar la suscripción",
-    "subscriptionError": "Hubo un error en el proceso de suscripción. Por favor inténtelo de nuevo"
+    "mailchimpSubscription": {
+      "subscribed": "Gracias por suscribirte a nuestra newsletter",
+      "unsubscribed": "Su suscripción ha sido cancelada",
+      "pending": "Revise su correo para completar la suscripción",
+      "error": "Hubo un error en el proceso de suscripción. Por favor inténtelo de nuevo"
+    }
   }
 }
