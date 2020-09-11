@@ -34,7 +34,7 @@ const offices: IOffice[] = [
   {
     id: '4',
     name: 'Sant Joan',
-    address: 'C/ Tomas Capelo, 81',
+    address: 'C/ Tomas Capelo, 8',
     postalCode: '03550',
     city: "Sant Joan d'Alacant",
     country: 'España',

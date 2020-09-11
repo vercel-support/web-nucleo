@@ -96,6 +96,11 @@ const GlobalStyle = createGlobalStyle`
       border-radius: 0;
     }
   }
+
+  .ant-message {
+    font-family: ${(props) => props.theme.font.family};
+    font-style: ${(props) => props.theme.font.style};
+  }
 `;
 
 class MyApp extends App {

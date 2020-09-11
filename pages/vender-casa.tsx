@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 import * as Scroll from 'react-scroll';
-import { message } from 'antd';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import useI18n from '../common/hooks/useI18n';
@@ -57,13 +56,8 @@ const VenderCasaPage = (): JSX.Element => {
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
-  const onSendButtonClicked = async (contact: IContact): Promise<void> => {
-    try {
-      await mailchimpService.subscribe(contact);
-      message.success(i18n.t('messages.subscriptionSuccess'));
-    } catch (error) {
-      message.error(i18n.t('messages.subscriptionError'));
-    }
+  const onSendButtonClicked = (contact: IContact) => {
+    mailchimpService.subscribe(contact, i18n);
   };
 
   const onContactUsButtonClicked = () => {

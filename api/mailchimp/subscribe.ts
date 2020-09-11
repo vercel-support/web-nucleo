@@ -3,13 +3,14 @@ import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import md5 from 'blueimp-md5';
 
 import { IContact } from '../../common/model/mailchimp/contact.model';
+import { MailchimpStatus } from '../../common/model/mailchimp/enums/mailchimpStatus.enum';
 
 type RequestBodyType = {
   contact: IContact;
 };
 
-type ResponseType = {
-  error: string;
+export type ResponseType = {
+  status: string;
 };
 
 const handler = async (
@@ -19,13 +20,13 @@ const handler = async (
   const { contact } = req.body as RequestBodyType;
 
   if (!contact) {
-    return res.status(400).json({ error: 'Bad Request' });
+    return res.status(400).json({ status: MailchimpStatus.ERROR });
   }
 
-  const { EMAIL, FNAME, LNAME, PHONE, HADDRESS } = contact;
+  const { EMAIL, FNAME, LNAME, PHONE, HADDRESS, SUBJECT } = contact;
 
   if (!EMAIL) {
-    return res.status(400).json({ error: 'Bad Request' });
+    return res.status(400).json({ status: MailchimpStatus.ERROR });
   }
 
   try {
@@ -50,9 +51,12 @@ const handler = async (
     if (HADDRESS) {
       merge_fields = { ...merge_fields, HADDRESS };
     }
+    if (SUBJECT) {
+      merge_fields = { ...merge_fields, SUBJECT };
+    }
     const data = {
       email_address: EMAIL,
-      status: 'pending',
+      status: MailchimpStatus.PENDING,
       merge_fields,
     };
 
@@ -71,6 +75,7 @@ const handler = async (
         axiosError.response &&
         axiosError.response.data.title === 'Member Exists'
       ) {
+        data.status = MailchimpStatus.SUBSCRIBED;
         await axiosInstance.put(
           `lists/${LIST_ID}/members/${md5(EMAIL)}`,
           data,
@@ -81,15 +86,15 @@ const handler = async (
       }
     }
 
-    return res.status(200).json({ error: '' });
+    return res.status(200).json({ status: data.status });
   } catch (error) {
     const axiosError = error as AxiosError;
     if (axiosError.response) {
       return res
         .status(axiosError.response.status)
-        .json({ error: 'Bad Request' });
+        .json({ status: MailchimpStatus.ERROR });
     } else {
-      return res.status(500).json({ error: 'Internal Server Error' });
+      return res.status(500).json({ status: MailchimpStatus.ERROR });
     }
   }
 };

@@ -171,7 +171,11 @@
     "Trastero": "Storage"
   },
   "messages": {
-    "subscriptionSuccess": "Check your email to complete your subscription",
-    "subscriptionError": "There was an error in the subscription process. Please try again"
+    "mailchimpSubscription": {
+      "subscribed": "Thank you for subscribing to our newsletter",
+      "unsubscribed": "Your subscription has been cancelled",
+      "pending": "Check your email to complete your subscription",
+      "error": "There was an error in the subscription process. Please try again"
+    }
   }
 }
