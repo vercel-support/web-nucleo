@@ -7,6 +7,7 @@ export class IFlat {
   sqrMeters: number;
   type: string;
   zone: string;
+  address: string;
   city: string;
   description_ES: string;
   description_EN: string;
