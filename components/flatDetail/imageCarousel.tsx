@@ -93,7 +93,7 @@ const ImageCarousel = ({
         <Title>
           {i18n.t('flatDetail.imageCarouselTitle', {
             type: i18n.t(`flatTypes.${flat.type}`),
-            zone: flat.zone,
+            address: flat.address,
           })}
         </Title>
       </TitleContainer>

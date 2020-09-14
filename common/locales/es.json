@@ -46,7 +46,7 @@
   "flatDetail": {
     "title": "{{type}} en venta en {{zone}}, {{city}}. - Inmobiliaria Núcleo",
     "description": "{{type}} en venta por {{price}}€. {{rooms}} dormitorio/s, {{bathrooms}} baño/s, {{sqrMeters}} metros cuadrados en {{zone}}, {{city}}",
-    "imageCarouselTitle": "{{type}} en {{zone}}",
+    "imageCarouselTitle": "{{type}} en {{address}}",
     "messages": {
       "recommendedFlats": "También le puede interesar"
     },

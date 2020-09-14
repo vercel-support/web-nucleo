@@ -9,6 +9,7 @@ export default class Flat extends IFlat {
   public static fields = [
     'Id',
     'Name',
+    'Direccion_Inmueble__c',
     'Precio_Web__c',
     'Dormitorios__c',
     'Ba_os__c',
@@ -33,6 +34,8 @@ export default class Flat extends IFlat {
 
   public id: string;
   public pictureUrls: string[];
+
+  public address: string;
   public price: number;
   public rooms: number;
   public bathrooms: number;
@@ -73,6 +76,7 @@ export default class Flat extends IFlat {
     const pictureUrls = await Flat.preprocessPictures(record['Id']);
     const price = record['Precio_Web__c'];
     const rooms = record['Dormitorios__c'];
+    const address = record['Direccion_Inmueble__c'];
     const bathrooms = record['Ba_os__c'];
     const type = record['Tipologia_inmueble__c'];
     const sqrMeters = record['M2_utiles__c'];
@@ -103,6 +107,7 @@ export default class Flat extends IFlat {
     if (
       isnull(id) ||
       isnull(pictureUrls) ||
+      isnull(address) ||
       pictureUrls.length <= 0 ||
       isnull(price) ||
       isnull(rooms) ||
@@ -125,6 +130,7 @@ export default class Flat extends IFlat {
       id,
       pictureUrls,
       price,
+      address,
       rooms,
       bathrooms,
       type,

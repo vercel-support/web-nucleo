@@ -2,6 +2,8 @@ import React, { ComponentType } from 'react';
 import App from 'next/app';
 import Router from 'next/router';
 import { CSSProp, createGlobalStyle, ThemeProvider } from 'styled-components';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 
 import I18n from '../libs/i18n';
 import * as gtag from '../libs/gtag';
@@ -13,6 +15,12 @@ declare module 'react' {
     css?: CSSProp;
   }
 }
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_URL,
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 0.1,
+});
 
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
