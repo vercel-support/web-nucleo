@@ -34,6 +34,7 @@ class MailchimpService implements IMailchimpService {
       }
     } catch (error) {
       message.error(i18n.t('messages.mailchimpSubscription.error'));
+      throw Error(error);
     }
   }
 }
