@@ -18,9 +18,7 @@ declare module 'react' {
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_URL,
-  integrations: [
-    new Integrations.BrowserTracing(),
-  ],
+  integrations: [new Integrations.BrowserTracing()],
   tracesSampleRate: 0.1,
 });
 
