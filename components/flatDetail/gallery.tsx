@@ -83,7 +83,7 @@ const Gallery = ({ flat, visible, onCancel }: Props): JSX.Element => {
         dots={false}
         prevArrow={<PrevArrow />}
         nextArrow={<NextArrow />}
-        lazyLoad={'progressive'}
+        lazyLoad={'ondemand'}
         beforeChange={(_previousIndex, currentIndex) =>
           setCarouselCurrentIndex(currentIndex)
         }

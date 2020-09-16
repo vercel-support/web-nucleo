@@ -108,33 +108,29 @@ const FlatsDisplay = ({
   let centerPadding = null;
   let baseFlatCardWith = 340;
   let flatsPerPage = 8;
-  if (isXxl == true) {
+  if (isXxl === true) {
     baseFlatCardWith = 380;
     flatsPerPage = 8;
-    if (isXxlSmall == true) {
+    if (isXxlSmall === true) {
       baseFlatCardWith = 310;
       flatsPerPage = 8;
     }
-  } else if (isXl == true) {
+  } else if (isXl === true) {
     baseFlatCardWith = 255;
     flatsPerPage = 8;
-    if (isXlSmall == true) {
+    if (isXlSmall === true) {
       baseFlatCardWith = 225;
       flatsPerPage = 8;
     }
-  } else if (isLg == true) {
+  } else if (isLg === true || isMd === true) {
     centerPadding = '30%';
     baseFlatCardWith = 505;
     flatsPerPage = 1;
-  } else if (isMd == true) {
-    centerPadding = '30%';
-    baseFlatCardWith = 505;
-    flatsPerPage = 1;
-  } else if (isSm == true) {
+  } else if (isSm === true) {
     centerPadding = '20%';
     baseFlatCardWith = 397;
     flatsPerPage = 1;
-  } else if (isXs == true) {
+  } else if (isXs === true) {
     centerPadding = '10%';
     baseFlatCardWith = 397;
     flatsPerPage = 1;
@@ -166,6 +162,7 @@ const FlatsDisplay = ({
         ref={carousel}
         dots={false}
         draggable={!(isXl || isXxl)}
+        lazyLoad={'ondemand'}
         centerMode={!(isXl || isXxl)}
         centerPadding={centerPadding}
       >
