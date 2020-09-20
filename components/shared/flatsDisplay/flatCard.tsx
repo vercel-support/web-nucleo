@@ -80,11 +80,7 @@ const FlatCard = ({
       <Link href={`/pisos/${flat.id}`}>
         <a>
           {useCarousel ? (
-            <StyledCarousel
-              dots={false}
-              draggable={true}
-              lazyLoad={'progressive'}
-            >
+            <StyledCarousel dots={false} draggable={true} lazyLoad={'ondemand'}>
               {flat.pictureUrls.map((url) => (
                 /* TODO: translate alt */
                 <FlatImage

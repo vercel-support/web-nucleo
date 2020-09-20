@@ -109,7 +109,7 @@ const ImageCarousel = ({
         dots={!isSmDown}
         prevArrow={<PrevArrow />}
         nextArrow={<NextArrow />}
-        lazyLoad={'progressive'}
+        lazyLoad={'ondemand'}
       >
         {flat.pictureUrls.map((url) => (
           <FlatImage imageHeight={'72vh'} key={url} url={url} />
