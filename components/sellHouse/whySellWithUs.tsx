@@ -15,7 +15,7 @@ const Divider = styled.div`
   @media ${(props) => props.theme.breakpoints.smd} {
     width: 100%;
   }
-  margin-top: 8px;
+  margin-top: 24px;
   margin-bottom: 24px;
   border-top: 1px solid #e0e0e0;
 `;
@@ -48,14 +48,18 @@ const Image = styled.img`
 
 const PropertyTitle = styled.div`
   font-size: 20px;
+  line-height: 27px;
+  font-weight: 600;
   margin-top: 24px;
 `;
 
 const PropertyDescription = styled.div`
   font-size: 18px;
-  line-height: 22px;
-  font-weight: 500;
+  line-height: 32px;
   margin-top: 24px;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    line-height: 22px;
+  }
 `;
 
 const WhySellWithUs = (): JSX.Element => {
