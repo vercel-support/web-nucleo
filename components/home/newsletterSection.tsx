@@ -73,7 +73,7 @@ const StyledForm = styled(Form)`
   @media ${(props) => props.theme.breakpoints.md} {
     width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
   }
-  @media ${(props) => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.sm} {
     width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
   }
   @media ${(props) => props.theme.breakpoints.xs} {
@@ -129,4 +129,5 @@ const NewsletterSection = ({
     </Banner>
   );
 };
+
 export default NewsletterSection;

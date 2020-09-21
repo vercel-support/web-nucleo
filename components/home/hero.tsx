@@ -70,7 +70,6 @@ const Subtitle = styled.h1`
   @media ${(props) => props.theme.breakpoints.sm} {
     max-width: ${(props) => props.theme.grid.getGridColumns(14, 0)};
   }
-
   @media ${(props) => props.theme.breakpoints.xs} {
     max-width: ${(props) => props.theme.grid.getGridColumns(18, 0)};
   }
@@ -177,4 +176,5 @@ const Hero = (): JSX.Element => {
     </Background>
   );
 };
+
 export default Hero;
