@@ -159,6 +159,14 @@
       "title": "Offices"
     }
   },
+  "search": {
+    "metaTitle": "Search | Inmobiliaria Núcleo",
+    "metaDescription": "Search | Inmobiliaria Núcleo",
+    "title": {
+      "open": "Search results of: \"{{query}}\"",
+        "closed": "Flats in {{query}}"
+    }
+  },
   "flatTypes": {
     "Piso": "Flat",
     "Casa": "House",

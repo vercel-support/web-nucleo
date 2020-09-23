@@ -1,18 +1,18 @@
 {
-	"header": {
+  "header": {
     "logoAlt": "Gestión inmobiliaria alicante",
     "sellHouse": "Vender casa",
     "aboutUs": "Quiénes somos",
     "contact": "Contacto",
     "language": "Español",
     "hamburgerLanguage": "Idioma"
-	},
-	"langCode": "es",
+  },
+  "langCode": "es",
   "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",
-	"home": {
-		"description": "Compra-Venta de viviendas en Alicante. Encuentre inmuebles al mejor precio. Visite Inmobiliaria Núcleo y conozca nuestra oferta de casas en venta en Alicante.",
+  "home": {
+    "description": "Compra-Venta de viviendas en Alicante. Encuentre inmuebles al mejor precio. Visite Inmobiliaria Núcleo y conozca nuestra oferta de casas en venta en Alicante.",
     "newsletter-input-label": "introduzca su correo para suscribirse a la newsletter"
-},
+  },
   "hero-title-1": "Bienvenido a",
   "hero-title-2": "Inmobiliaria Núcleo",
   "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
@@ -92,7 +92,7 @@
       "ok": "Aceptar",
       "moreInfo": "Más información"
     }
- },
+  },
   "sellHouse": {
     "metaTitle": "Vender casa en Alicante | Inmobiliaria Núcleo",
     "metaDescription": "Venta de viviendas en Alicante. Visite Inmobiliaria Núcleo y conozca cómo vender casa en Alicante al mejor precio.",
@@ -121,17 +121,17 @@
       }
     },
     "houseValue": {
-      "title": "Conozca el valor de su inmueble", 
+      "title": "Conozca el valor de su inmueble",
       "subtitle": "Servicio gratuito de valoración de su vivienda",
       "description": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada barrio.<br><br>Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender su vivienda.<br><br>Y lo mejor, todo ello sin compromiso y de forma totalmente gratuita."
     },
     "idealBuyer": {
-      "title": "Encontramos al comprador ideal", 
+      "title": "Encontramos al comprador ideal",
       "subtitle": "Plan de marketing totalmente personalizado",
       "description": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la máxima visibilidad<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a sus intereses."
     },
     "adjustNeeds": {
-      "title": "Nos ajustamos a sus necesidades", 
+      "title": "Nos ajustamos a sus necesidades",
       "subtitle": "Gestión integral, de principio a fin",
       "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de la firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados de atenderle."
     }
@@ -157,6 +157,14 @@
     },
     "offices": {
       "title": "Oficinas"
+    }
+  },
+  "search": {
+    "metaTitle": "Búsqueda | Inmobiliaria Núcleo",
+    "metaDescription": "Búsqueda | Inmobiliaria Núcleo",
+    "title": {
+      "open": "Resultados de la búsqueda: \"{{query}}\"",
+      "closed": "Viviendas en {{query}}"
     }
   },
   "flatTypes": {

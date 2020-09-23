@@ -8,3 +8,4 @@ export {
   FlatsDisplayPlaceholder,
   default as FlatsDisplay,
 } from './flatsDisplay/flatsDisplay';
+export { default as ResultsSection } from './searchResults/resultsSection';

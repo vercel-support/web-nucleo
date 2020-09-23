@@ -39,7 +39,9 @@
         "hasGarden": false,
         "hasBalcony": true,
         "hasTerrace": true,
-        "hasBasement": false
+        "hasBasement": false,
+        "yearConstruction": 1984,
+        "yearReform": 2005
     },
     {
         "id": "3",

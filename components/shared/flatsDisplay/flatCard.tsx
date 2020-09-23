@@ -56,8 +56,8 @@ const Divider = styled.hr`
 
 const StyledTag = styled(Tag)`
   font-weight: 500;
-  font-size: 12px;
-  line-height: inherit;
+  font-size: 14px;
+  line-height: 32px;
   float: right;
 `;
 
