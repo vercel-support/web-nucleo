@@ -13,6 +13,7 @@ import {
   deserializeMultiple,
   deserializeSingle,
 } from '../../common/helpers/serialization';
+import * as flatTypeUtils from '../../common/helpers/flatType.utils';
 import Flat from '../../backend/salesforce/flat';
 import {
   ImageCarousel,
@@ -115,7 +116,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
           {i18n.t('flatDetail.title', {
-            type: i18n.t(`flatTypes.${deserializedFlat.type}`),
+            type: i18n.t(flatTypeUtils.getFlatTypeLabel(deserializedFlat.type)),
             city: deserializedFlat.city,
             zone: deserializedFlat.zone,
           })}

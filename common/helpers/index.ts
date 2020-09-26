@@ -1,9 +1,10 @@
 const GLOBAL_CACHE = {};
+
 export const memoize = (
-  target: any,
+  _target: any,
   propertyKey: string,
   descriptor: PropertyDescriptor
-) => {
+): PropertyDescriptor => {
   if (!(propertyKey in GLOBAL_CACHE)) {
     GLOBAL_CACHE[propertyKey] = {};
   }

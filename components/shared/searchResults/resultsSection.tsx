@@ -21,4 +21,12 @@ const ResultsSection = ({ flats, className }: Props): JSX.Element => {
 export default styled(ResultsSection)`
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+  @media ${(props) => props.theme.breakpoints.md} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(3, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(3, 1)};
+  }
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  }
 `;

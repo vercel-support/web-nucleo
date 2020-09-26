@@ -1,4 +1,5 @@
 {
+  "langCode": "en",
   "header": {
     "logoAlt": "Real state agency alicante",
     "sellHouse": "Sell your house",
@@ -7,46 +8,44 @@
     "language": "English",
     "hamburgerLanguage": "Language"
   },
-  "langCode": "en",
-  "title": "Properties in Alicante | Inmobiliaria Núcleo",
+  "footer": {
+    "nucleo-sl": "© 2020 Núcleo S.L.",
+    "aviso-legal": "Legal warning",
+    "politica-datos": "Data protection",
+    "politica-cookies": "Cookies policy"
+  },
   "home": {
+    "title": "Properties in Alicante | Inmobiliaria Núcleo",
     "description": "Find houses for sale in Alicante, Spain. Flats, Apartments, Chalets. Inmobiliaria Núcleo helps you choose between the best properties in Alicante. Visit Us!",
+    "hero-title-1": "Welcome to",
+    "hero-title-2": "Inmobiliaria Núcleo",
+    "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
+    "vender": "Sell your house",
+    "section-flats-title": "Properties in Alicante",
+    "enviar": "Send",
+    "email": "E-mail address",
+    "blog-showcase-title": "Latest trends in the house market",
+    "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and much more!",
+    "newsletter-title": "Subscribe to our newsletter",
     "newsletter-input-label": "enter you e-mail and subscribe to the newsletter"
   },
-  "hero-title-1": "Welcome to",
-  "hero-title-2": "Inmobiliaria Núcleo",
-  "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
-  "comprar": "Buy",
-  "vender": "Sell your house",
-  "section-flats-title": "Properties in Alicante",
-  "enviar": "Send",
-  "email": "E-mail address",
-  "newsletter-title": "Subscribe to our newsletter",
-  "blog-showcase-title": "Latest trends in the house market",
-  "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and much more!",
-  "habitaciones": "rooms",
-  "nucleo-sl": "© 2020 Núcleo S.L.",
-  "aviso-legal": "Legal warning",
-  "politica-datos": "Data protection",
-  "politica-cookies": "Cookies policy",
   "flat": {
-    "name": "House for sale in Centro Histórico · Alicante",
-    "address": "Av. del Mar Nr. 11",
+    "imageCarouselTitle": "{{type}} in {{address}}",
     "description": "Property description",
-    "yearConstruction": "Year of construction",
-    "yearReform": "Renovation year",
+    "yearConstruction": "Year",
     "price": "Price",
     "rooms": "Rooms",
     "bathrooms": "Bathrooms",
     "sqrMeters": "Surface",
-    "type": "Type",
     "zone": "Area",
+    "terrace": "Terrace",
+    "garden": "Garden",
+    "elevator": "Elevator",
     "pictures": "Photos"
   },
   "flatDetail": {
     "title": "{{type}} for sale in {{zone}}, {{city}}. - Inmobiliaria Núcleo",
     "description": "{{type}} for sale for {{price}}€. {{rooms}} bedroom/s, {{bathrooms}} bathroom/s, {{sqrMeters}} square meters in {{zone}}, {{city}}",
-    "imageCarouselTitle": "{{type}} in {{address}}",
     "messages": {
       "recommendedFlats": "You might also like"
     },
@@ -55,25 +54,12 @@
       "requestInfo": "I'm interested"
     }
   },
-  "calefaccion": "Heating",
-  "aireAcondicionado": "A/C",
-  "terraza": "Terrace",
-  "orientacion": "Orientation",
-  "jardin": "Garden",
-  "ascensor": "Elevator",
-  "anio_construccion": "Year built",
-  "yes": "Yes",
-  "no": "No",
-  "south": "South",
-  "north": "North",
-  "west": "West",
-  "east": "East",
   "contactForm": {
     "titleSell": "Do you want to sell a property?",
     "titleBuy": "Do you want to buy a property?",
     "name": "Name",
     "lastName": "Last Name",
-    "email": "E-mail adress",
+    "email": "E-mail address",
     "phone": "Phone Number",
     "address": "Property´s full adress",
     "subject": "Subject",
@@ -164,21 +150,27 @@
     "metaDescription": "Search | Inmobiliaria Núcleo",
     "title": {
       "open": "Search results of: \"{{query}}\"",
-        "closed": "Flats in {{query}}"
+      "closed": "Flats in {{query}}"
     }
   },
-  "flatTypes": {
-    "Piso": "Flat",
-    "Casa": "House",
-    "Casa Rural": "Cottage",
-    "Box/Plaza de garaje": "Parking space",
-    "Terrenos": "Land",
-    "Comercial": "Shop",
-    "Ático": "Loft",
-    "Edificio": "Building",
-    "Trastero": "Storage"
+  "enums": {
+    "flatType": {
+      "PISO": "Flat",
+      "CASA": "House",
+      "CASA_RURAL": "Cottage",
+      "BOX/PLAZA_DE_GARAJE": "Parking space",
+      "TERRENOS": "Land",
+      "COMERCIAL": "Shop",
+      "ÁTICO": "Loft",
+      "EDIFICIO": "Building",
+      "TRASTERO": "Storage"
+    }
   },
   "messages": {
+    "yes": "Yes",
+    "no": "No",
+    "with": "With",
+    "without": "Without",
     "mailchimpSubscription": {
       "subscribed": "Thank you for subscribing to our newsletter",
       "unsubscribed": "Your subscription has been cancelled",

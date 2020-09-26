@@ -107,7 +107,7 @@ const NewsletterSection = ({
 
   return (
     <Banner>
-      <SectionTitle>{i18n.t('newsletter-title')}</SectionTitle>
+      <SectionTitle>{i18n.t('home.newsletter-title')}</SectionTitle>
       <Divider />
       <StyledForm
         validateMessages={validateMessages}
@@ -120,8 +120,8 @@ const NewsletterSection = ({
           rules={[{ required: true, type: 'email' }]}
         >
           <Input.Search
-            enterButton={i18n.t('enviar')}
-            placeholder={i18n.t('email')}
+            enterButton={i18n.t('home.enviar')}
+            placeholder={i18n.t('home.email')}
             onClick={() => form.submit()}
           />
         </Form.Item>

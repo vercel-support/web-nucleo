@@ -160,17 +160,17 @@ const Hero = (): JSX.Element => {
     <Background>
       <Title>
         <TitleParagraph themeColor="secondary">
-          {i18n.t('hero-title-1')}
+          {i18n.t('home.hero-title-1')}
         </TitleParagraph>
         <TitleParagraph themeColor="primary">
-          {i18n.t('hero-title-2')}
+          {i18n.t('home.hero-title-2')}
         </TitleParagraph>
         <Divider />
-        <Subtitle>{i18n.t('hero-subtitle')}</Subtitle>
+        <Subtitle>{i18n.t('home.hero-subtitle')}</Subtitle>
       </Title>
       <ActionButtons>
         <Link href="/vender-casa" passHref>
-          <ActionButton>{i18n.t('vender')}</ActionButton>
+          <ActionButton>{i18n.t('home.vender')}</ActionButton>
         </Link>
       </ActionButtons>
     </Background>

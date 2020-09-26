@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { IFlat } from '../../common/model/flat.model';
 import useI18n from '../../common/hooks/useI18n';
+import * as flatTypeUtils from '../../common/helpers/flatType.utils';
 
 type Props = {
   flat: IFlat;
@@ -86,8 +87,8 @@ const ImageCarousel = ({
   return (
     <div className={className} style={{ position: 'relative' }}>
       <Title>
-        {i18n.t('flatDetail.imageCarouselTitle', {
-          type: i18n.t(`flatTypes.${flat.type}`),
+        {i18n.t('flat.title', {
+          type: i18n.t(flatTypeUtils.getFlatTypeLabel(flat.type)),
           address: flat.address,
         })}
       </Title>

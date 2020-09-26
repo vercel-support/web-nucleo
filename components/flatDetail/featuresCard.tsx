@@ -74,26 +74,26 @@ const FeaturesCard = ({ flat, className }: Props): JSX.Element => {
           <FeatureInfo>{flat.bathrooms}</FeatureInfo>
         </FeatureTwoCol>
         <FeatureThreeCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{i18n.t('ascensor')}</FeatureTitle>
+          <FeatureTitle>{i18n.t('flat.elevator')}</FeatureTitle>
           <FeatureInfo>
-            {flat.hasElevator ? i18n.t('yes') : i18n.t('no')}
+            {flat.hasElevator ? i18n.t('messages.yes') : i18n.t('messages.no')}
           </FeatureInfo>
         </FeatureThreeCol>
         <FeatureFourCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{i18n.t('jardin')}</FeatureTitle>
+          <FeatureTitle>{i18n.t('flat.garden')}</FeatureTitle>
           <FeatureInfo>
-            {flat.hasGarden ? i18n.t('yes') : i18n.t('no')}
+            {flat.hasGarden ? i18n.t('messages.yes') : i18n.t('messages.no')}
           </FeatureInfo>
         </FeatureFourCol>
         <FeatureFiveCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{i18n.t('terraza')}</FeatureTitle>
+          <FeatureTitle>{i18n.t('flat.terrace')}</FeatureTitle>
           <FeatureInfo>
-            {flat.hasTerrace ? i18n.t('yes') : i18n.t('no')}
+            {flat.hasTerrace ? i18n.t('messages.yes') : i18n.t('messages.no')}
           </FeatureInfo>
         </FeatureFiveCol>
         {flat.yearConstruction ? (
           <FeatureSixCol xs={12} sm={8} lg={12}>
-            <FeatureTitle>{i18n.t('anio_construccion')}</FeatureTitle>
+            <FeatureTitle>{i18n.t('flat.yearConstruction')}</FeatureTitle>
             <FeatureInfo>{flat.yearConstruction}</FeatureInfo>
           </FeatureSixCol>
         ) : null}

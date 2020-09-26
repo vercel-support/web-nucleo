@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Row, Col } from 'antd';
 
 import { IFlat } from '../common/model/flat.model';
 import useI18n from '../common/hooks/useI18n';
@@ -19,9 +18,10 @@ type Props = StaticProps & {
   theme: DefaultTheme;
 };
 
+const layoutId = 'buscarLayoutId';
 const searchBarSectionId = 'buscarSearchBarSection';
 const mapSectionId = 'buscarMapSection';
-const scrolledHeaderClass = 'scrolled-header';
+const headerOutOfScreenClass = 'header-out-of-screen';
 const searchBarHeight = '100px';
 
 const Layout = styled.div`
@@ -49,14 +49,14 @@ const SearchBarSection = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  right: ${(props) => props.theme.grid.getGridColumns(10, 1)};
+  right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
   height: ${searchBarHeight};
   z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdd} {
     right: 0;
   }
 
-  &.${scrolledHeaderClass} {
+  &.${headerOutOfScreenClass} {
     position: fixed;
   }
 `;
@@ -65,21 +65,25 @@ const MapSection = styled.div`
   background-color: red;
   position: absolute;
   top: 0;
-  left: ${(props) => props.theme.grid.getGridColumns(14, 1)};
+  bottom: 0;
+  left: ${(props) => props.theme.grid.getGridColumns(14, -1)};
   right: 0;
-  height: 80vh;
   z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdd} {
     display: none;
   }
 
-  &.${scrolledHeaderClass} {
+  &.${headerOutOfScreenClass} {
     position: fixed;
   }
 `;
 
 const ScrollableSection = styled.div`
   margin-top: ${searchBarHeight};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-right: 0;
+  }
 `;
 
 const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
@@ -88,48 +92,67 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
   const deserializedFlats = deserializeMultiple(flats, IFlat);
 
   useEffect(() => {
+    const headerHeight = +theme.headerHeight.replace('px', '');
+    const footerHeight = +theme.footerHeight.replace('px', '');
+
     // TODO: debounce
     const handleScroll = () => {
-      const headerHeight = +theme.headerHeight.replace('px', '');
+      const layoutElement = document.getElementById(layoutId);
+
       const searchBarSectionElement = document.getElementById(
         searchBarSectionId
       );
       if (searchBarSectionElement) {
         if (
-          !searchBarSectionElement.className.includes(scrolledHeaderClass) &&
+          !searchBarSectionElement.className.includes(headerOutOfScreenClass) &&
           window.scrollY >= headerHeight
         ) {
           searchBarSectionElement.className =
-            searchBarSectionElement.className + ' ' + scrolledHeaderClass;
+            searchBarSectionElement.className + ' ' + headerOutOfScreenClass;
         }
         if (
-          searchBarSectionElement.className.includes(scrolledHeaderClass) &&
+          searchBarSectionElement.className.includes(headerOutOfScreenClass) &&
           window.scrollY < headerHeight
         ) {
           searchBarSectionElement.className = searchBarSectionElement.className.replace(
-            scrolledHeaderClass,
+            headerOutOfScreenClass,
             ''
           );
         }
       }
 
       const mapSectionElement = document.getElementById(mapSectionId);
-      if (mapSectionElement) {
+      if (layoutElement && mapSectionElement) {
         if (
-          !mapSectionElement.className.includes(scrolledHeaderClass) &&
+          !mapSectionElement.className.includes(headerOutOfScreenClass) &&
           window.scrollY >= headerHeight
         ) {
           mapSectionElement.className =
-            mapSectionElement.className + ' ' + scrolledHeaderClass;
+            mapSectionElement.className + ' ' + headerOutOfScreenClass;
         }
         if (
-          mapSectionElement.className.includes(scrolledHeaderClass) &&
+          mapSectionElement.className.includes(headerOutOfScreenClass) &&
           window.scrollY < headerHeight
         ) {
           mapSectionElement.className = mapSectionElement.className.replace(
-            scrolledHeaderClass,
+            headerOutOfScreenClass,
             ''
           );
+        }
+
+        const ammountOfFooterVisible =
+          window.scrollY +
+          window.innerHeight +
+          footerHeight -
+          layoutElement.clientHeight;
+        if (ammountOfFooterVisible > 0) {
+          mapSectionElement.style.setProperty(
+            'bottom',
+            `${ammountOfFooterVisible}px`
+          );
+        }
+        if (ammountOfFooterVisible <= 0) {
+          mapSectionElement.style.setProperty('bottom', '0');
         }
       }
     };
@@ -140,7 +163,7 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
   });
 
   return (
-    <Layout>
+    <Layout id={layoutId}>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -175,12 +198,8 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
           <div>TODO: map</div>
         </MapSection>
         <ScrollableSection>
-          <Row>
-            <Col xs={24} lg={14}>
-              <Title openSearch={false} query={'Centro histórico'} />
-              <ResultsSection flats={deserializedFlats} />
-            </Col>
-          </Row>
+          <Title openSearch={false} query={'Centro histórico'} />
+          <ResultsSection flats={deserializedFlats} />
         </ScrollableSection>
       </Content>
 

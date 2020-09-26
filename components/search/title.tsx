@@ -11,6 +11,9 @@ type Props = {
 const Text = styled.h2`
   ${(props) => props.theme.font.h2}
   color: ${(props) => props.theme.colors.secondary};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Title = ({ openSearch, query, className }: Props): JSX.Element => {
@@ -31,4 +34,8 @@ export default styled(Title)`
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   margin-bottom: 2rem;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  }
 `;

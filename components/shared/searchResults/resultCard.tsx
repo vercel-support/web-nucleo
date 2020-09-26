@@ -1,9 +1,11 @@
+import Link from 'next/link';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Row, Col, Tag } from 'antd';
 
 import { IFlat } from '../../../common/model/flat.model';
 import useI18n from '../../../common/hooks/useI18n';
 import { formatCurrency } from '../../../common/helpers';
+import * as flatTypeUtils from '../../../common/helpers/flatType.utils';
 
 type Props = {
   flat: IFlat;
@@ -11,29 +13,61 @@ type Props = {
   className?: string;
 };
 
+const StyledAnchor = styled.a`
+  color: inherit;
+  &:hover {
+    color: inherit;
+  }
+`;
+
 const ImageCol = styled(Col)<{ imageUrl: string }>`
   border-top-left-radius: ${(props) => props.theme.borderRadius};
-  border-bottom-left-radius: ${(props) => props.theme.borderRadius};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url(${(props) => props.imageUrl});
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: ${(props) => props.theme.borderRadius};
+  }
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    height: 24vh;
+    min-height: 180px;
+    max-height: 300px;
+    border-top-right-radius: ${(props) => props.theme.borderRadius};
+    border-bottom-left-radius: 0;
+  }
+`;
+
+const InfoContainer = styled.div`
+  padding: 24px;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding: 16px;
+  }
+`;
+
+const Title = styled.div`
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 32px;
+  height: 32px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    font-size: 16px;
+  }
 `;
 
 const FeaturesCardRow = styled(Row)`
   margin-bottom: -16px !important;
 `;
 
-const FeatureAtTopCol = styled(Col)`
-  border-bottom: 1px solid ${(props) => props.theme.colors.grey};
-`;
-
-const FeatureTitle = styled.div`
-  font-size: 14px;
-  @media ${(props) => props.theme.breakpoints.xs} {
-    font-size: 12px;
+const FeatureAtBottomCol = styled(Col)`
+  border-top: 1px solid ${(props) => props.theme.colors.grey};
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    display: none;
   }
-  font-weight: 600;
 `;
 
 const FeatureInfo = styled.div`
@@ -46,6 +80,9 @@ const FeatureInfo = styled.div`
 
 const BottomInfoSection = styled.div`
   margin-top: 32px;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-top: 24px;
+  }
 `;
 
 const StyledTag = styled(Tag)`
@@ -66,61 +103,83 @@ const ResultCard = ({ flat, theme, className }: Props): JSX.Element => {
 
   return (
     <div className={className}>
-      <Row>
-        <ImageCol span={8} imageUrl={flat.pictureUrls[0]} />
-        <Col span={16}>
-          <div style={{ padding: '24px' }}>
-            <FeaturesCardRow gutter={[16, 32]}>
-              <FeatureAtTopCol span={8}>
-                <FeatureTitle>{i18n.t('flat.rooms')}</FeatureTitle>
-                <FeatureInfo>{flat.rooms}</FeatureInfo>
-              </FeatureAtTopCol>
-              <FeatureAtTopCol span={8}>
-                <FeatureTitle>{i18n.t('flat.bathrooms')}</FeatureTitle>
-                <FeatureInfo>{flat.bathrooms}</FeatureInfo>
-              </FeatureAtTopCol>
-              <FeatureAtTopCol span={8}>
-                <FeatureTitle>{i18n.t('ascensor')}</FeatureTitle>
-                <FeatureInfo>
-                  {flat.hasElevator ? i18n.t('yes') : i18n.t('no')}
-                </FeatureInfo>
-              </FeatureAtTopCol>
-              <Col span={8}>
-                <FeatureTitle>{i18n.t('jardin')}</FeatureTitle>
-                <FeatureInfo>
-                  {flat.hasGarden ? i18n.t('yes') : i18n.t('no')}
-                </FeatureInfo>
-              </Col>
-              <Col span={8}>
-                <FeatureTitle>{i18n.t('terraza')}</FeatureTitle>
-                <FeatureInfo>
-                  {flat.hasTerrace ? i18n.t('yes') : i18n.t('no')}
-                </FeatureInfo>
-              </Col>
-              {flat.yearConstruction ? (
-                <Col span={8}>
-                  <FeatureTitle>{i18n.t('anio_construccion')}</FeatureTitle>
-                  <FeatureInfo>{flat.yearConstruction}</FeatureInfo>
-                </Col>
-              ) : null}
-            </FeaturesCardRow>
-            <BottomInfoSection>
-              <Row align={'middle'} justify={'space-between'}>
-                <Col>
-                  <StyledTag color={theme.colors.secondary}>
-                    {flat.zone}
-                  </StyledTag>
-                </Col>
-                <Col>
-                  <PriceText>
-                    {formatCurrency(flat.price, i18n.activeLocale)}
-                  </PriceText>
-                </Col>
-              </Row>
-            </BottomInfoSection>
-          </div>
-        </Col>
-      </Row>
+      <Link key={flat.id} href={`/pisos/${flat.id}`}>
+        <StyledAnchor>
+          <Row>
+            <ImageCol xs={24} lg={8} imageUrl={flat.pictureUrls[0]} />
+            <Col xs={24} lg={16}>
+              <InfoContainer>
+                <Title>
+                  {i18n.t('flat.title', {
+                    type: i18n.t(flatTypeUtils.getFlatTypeLabel(flat.type)),
+                    address: flat.address,
+                  })}
+                </Title>
+                <FeaturesCardRow gutter={[16, 32]}>
+                  <Col span={8}>
+                    <FeatureInfo>{`${flat.rooms} ${i18n
+                      .t('flat.rooms')
+                      .toLowerCase()}`}</FeatureInfo>
+                  </Col>
+                  <Col span={8}>
+                    <FeatureInfo>{`${flat.bathrooms} ${i18n
+                      .t('flat.bathrooms')
+                      .toLowerCase()}`}</FeatureInfo>
+                  </Col>
+                  <Col span={8}>
+                    <FeatureInfo>
+                      {`${
+                        flat.hasElevator
+                          ? i18n.t('messages.with')
+                          : i18n.t('messages.without')
+                      } ${i18n.t('flat.elevator').toLowerCase()}`}
+                    </FeatureInfo>
+                  </Col>
+                  <FeatureAtBottomCol span={8}>
+                    <FeatureInfo>
+                      {`${
+                        flat.hasGarden
+                          ? i18n.t('messages.with')
+                          : i18n.t('messages.without')
+                      } ${i18n.t('flat.garden').toLowerCase()}`}
+                    </FeatureInfo>
+                  </FeatureAtBottomCol>
+                  <FeatureAtBottomCol span={8}>
+                    <FeatureInfo>
+                      {`${
+                        flat.hasTerrace
+                          ? i18n.t('messages.with')
+                          : i18n.t('messages.without')
+                      } ${i18n.t('flat.terrace').toLowerCase()}`}
+                    </FeatureInfo>
+                  </FeatureAtBottomCol>
+                  {flat.yearConstruction ? (
+                    <FeatureAtBottomCol span={8}>
+                      <FeatureInfo>{`${i18n.t('flat.yearConstruction')} ${
+                        flat.yearConstruction
+                      }`}</FeatureInfo>
+                    </FeatureAtBottomCol>
+                  ) : null}
+                </FeaturesCardRow>
+                <BottomInfoSection>
+                  <Row align={'middle'} justify={'space-between'}>
+                    <Col>
+                      <StyledTag color={theme.colors.secondary}>
+                        {flat.zone}
+                      </StyledTag>
+                    </Col>
+                    <Col>
+                      <PriceText>
+                        {formatCurrency(flat.price, i18n.activeLocale)}
+                      </PriceText>
+                    </Col>
+                  </Row>
+                </BottomInfoSection>
+              </InfoContainer>
+            </Col>
+          </Row>
+        </StyledAnchor>
+      </Link>
     </div>
   );
 };
@@ -131,4 +190,8 @@ export default withTheme(styled(ResultCard)`
   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => props.theme.borderRadius};
   margin-bottom: 32px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `);

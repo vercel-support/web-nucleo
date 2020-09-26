@@ -1,4 +1,5 @@
 {
+  "langCode": "es",
   "header": {
     "logoAlt": "Gestión inmobiliaria alicante",
     "sellHouse": "Vender casa",
@@ -7,46 +8,44 @@
     "language": "Español",
     "hamburgerLanguage": "Idioma"
   },
-  "langCode": "es",
-  "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",
+  "footer": {
+    "nucleo-sl": "© 2020 Núcleo S.L.",
+    "aviso-legal": "Aviso legal",
+    "politica-datos": "Protección de datos",
+    "politica-cookies": "Política de cookies"
+  },
   "home": {
+    "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",
     "description": "Compra-Venta de viviendas en Alicante. Encuentre inmuebles al mejor precio. Visite Inmobiliaria Núcleo y conozca nuestra oferta de casas en venta en Alicante.",
+    "hero-title-1": "Bienvenido a",
+    "hero-title-2": "Inmobiliaria Núcleo",
+    "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
+    "vender": "Vender casa",
+    "section-flats-title": "Viviendas en Alicante",
+    "enviar": "Enviar",
+    "email": "Correo electrónico",
+    "blog-showcase-title": "Conozca las tendencias del mercado inmobiliario",
+    "blog-showcase-subtitle": "¡Sea el primero en conocer todas las novedades, los mejores rincones de Alicante y mucho más!",
+    "newsletter-title": "Suscríbase a nuestro boletín",
     "newsletter-input-label": "introduzca su correo para suscribirse a la newsletter"
   },
-  "hero-title-1": "Bienvenido a",
-  "hero-title-2": "Inmobiliaria Núcleo",
-  "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
-  "comprar": "Comprar",
-  "vender": "Vender casa",
-  "section-flats-title": "Viviendas en Alicante",
-  "enviar": "Enviar",
-  "email": "Correo electrónico",
-  "newsletter-title": "Suscríbase a nuestro boletín",
-  "blog-showcase-title": "Conozca las tendencias del mercado inmobiliario",
-  "blog-showcase-subtitle": "¡Sea el primero en conocer todas las novedades, los mejores rincones de Alicante y mucho más!",
-  "habitaciones": "habitaciones",
-  "nucleo-sl": "© 2020 Núcleo S.L.",
-  "aviso-legal": "Aviso legal",
-  "politica-datos": "Protección de datos",
-  "politica-cookies": "Política de cookies",
   "flat": {
-    "name": "Casa en venta en Centro Histórico · Alicante",
-    "address": "Av. del Mar Nr. 11",
+    "title": "{{type}} en {{address}}",
     "description": "Descripción del inmueble",
-    "yearConstruction": "Año de construcción",
-    "yearReform": "Año de reforma",
+    "yearConstruction": "Año",
     "price": "Precio",
-    "rooms": "Habitaciones",
+    "rooms": "Habs.",
     "bathrooms": "Baños",
     "sqrMeters": "Superficie",
-    "type": "Tipo",
     "zone": "Zona",
+    "terrace": "Terraza",
+    "garden": "Jardín",
+    "elevator": "Ascensor",
     "pictures": "Fotos"
   },
   "flatDetail": {
     "title": "{{type}} en venta en {{zone}}, {{city}}. - Inmobiliaria Núcleo",
     "description": "{{type}} en venta por {{price}}€. {{rooms}} dormitorio/s, {{bathrooms}} baño/s, {{sqrMeters}} metros cuadrados en {{zone}}, {{city}}",
-    "imageCarouselTitle": "{{type}} en {{address}}",
     "messages": {
       "recommendedFlats": "También le puede interesar"
     },
@@ -55,19 +54,6 @@
       "requestInfo": "Me interesa este inmueble"
     }
   },
-  "calefaccion": "Calefacción",
-  "aireAcondicionado": "A/C",
-  "terraza": "Terraza",
-  "orientacion": "Orientación",
-  "jardin": "Jardín",
-  "ascensor": "Ascensor",
-  "anio_construccion": "Año construcción",
-  "yes": "Sí",
-  "no": "No",
-  "south": "Sur",
-  "north": "Norte",
-  "west": "Oeste",
-  "east": "Este",
   "contactForm": {
     "titleSell": "¿Quieres vender un inmueble?",
     "titleBuy": "¿Quieres comprar un inmueble?",
@@ -167,18 +153,24 @@
       "closed": "Viviendas en {{query}}"
     }
   },
-  "flatTypes": {
-    "Piso": "Piso",
-    "Casa": "Casa",
-    "Casa Rural": "Casa Rural",
-    "Box/Plaza de garaje": "Plaza de garaje",
-    "Terrenos": "Terreno",
-    "Comercial": "Comercio",
-    "Ático": "Ático",
-    "Edificio": "Edificio",
-    "Trastero": "Trastero"
+  "enums": {
+    "flatType": {
+      "PISO": "Piso",
+      "CASA": "Casa",
+      "CASA_RURAL": "Casa Rural",
+      "BOX/PLAZA_DE_GARAJE": "Plaza de garaje",
+      "TERRENOS": "Terreno",
+      "COMERCIAL": "Comercio",
+      "ÁTICO": "Ático",
+      "EDIFICIO": "Edificio",
+      "TRASTERO": "Trastero"
+    }
   },
   "messages": {
+    "yes": "Sí",
+    "no": "No",
+    "with": "Con",
+    "without": "Sin",
     "mailchimpSubscription": {
       "subscribed": "Gracias por suscribirte a nuestra newsletter",
       "unsubscribed": "Su suscripción ha sido cancelada",

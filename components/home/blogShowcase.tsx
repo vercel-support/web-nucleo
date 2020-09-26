@@ -83,9 +83,9 @@ const BlogShowcase = (): JSX.Element => {
 
   return (
     <Banner>
-      <SectionTitle>{i18n.t('blog-showcase-title')}</SectionTitle>
+      <SectionTitle>{i18n.t('home.blog-showcase-title')}</SectionTitle>
       <Divider />
-      <SectionSubtitle>{i18n.t('blog-showcase-subtitle')}</SectionSubtitle>
+      <SectionSubtitle>{i18n.t('home.blog-showcase-subtitle')}</SectionSubtitle>
     </Banner>
   );
 };

@@ -64,7 +64,7 @@ export const Home = ({ flats }: Props): JSX.Element => {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{i18n.t('title')}</title>
+        <title>{i18n.t('home.title')}</title>
         <meta name="description" content={i18n.t('home.description')} />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
@@ -92,7 +92,7 @@ export const Home = ({ flats }: Props): JSX.Element => {
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={deserializedFlats}
-            title={i18n.t('section-flats-title')}
+            title={i18n.t('home.section-flats-title')}
           />
         </FlatsDisplayContainer>
         <BlogShowcase />

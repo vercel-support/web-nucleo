@@ -132,7 +132,7 @@ const FlatCard = ({
                 </sup>
               </span>
               <span>
-                {flat.rooms} {i18n.t('habitaciones')}
+                {flat.rooms} {i18n.t('flat.rooms')}
               </span>
             </BottomText>
           </FlatInfo>
