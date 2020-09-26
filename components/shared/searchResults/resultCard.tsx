@@ -32,7 +32,7 @@ const ImageCol = styled(Col)<{ imageUrl: string }>`
   }
   @media ${(props) => props.theme.breakpoints.mdd} {
     height: 24vh;
-    min-height: 180px;
+    min-height: 220px;
     max-height: 300px;
     border-top-right-radius: ${(props) => props.theme.borderRadius};
     border-bottom-left-radius: 0;
@@ -63,8 +63,11 @@ const FeaturesCardRow = styled(Row)`
   margin-bottom: -16px !important;
 `;
 
+const FeatureAtTopCol = styled(Col)`
+  border-bottom: 1px solid ${(props) => props.theme.colors.grey};
+`;
+
 const FeatureAtBottomCol = styled(Col)`
-  border-top: 1px solid ${(props) => props.theme.colors.grey};
   @media ${(props) => props.theme.breakpoints.mdd} {
     display: none;
   }
@@ -80,9 +83,6 @@ const FeatureInfo = styled.div`
 
 const BottomInfoSection = styled.div`
   margin-top: 32px;
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    margin-top: 24px;
-  }
 `;
 
 const StyledTag = styled(Tag)`
@@ -115,18 +115,23 @@ const ResultCard = ({ flat, theme, className }: Props): JSX.Element => {
                     address: flat.address,
                   })}
                 </Title>
-                <FeaturesCardRow gutter={[16, 32]}>
-                  <Col span={8}>
+                <FeaturesCardRow
+                  gutter={[
+                    16,
+                    { xs: 32, sm: 24, md: 24, lg: 32, xl: 32, xxl: 32 },
+                  ]}
+                >
+                  <FeatureAtTopCol span={8}>
                     <FeatureInfo>{`${flat.rooms} ${i18n
-                      .t('flat.rooms')
+                      .t('flat.roomsShort')
                       .toLowerCase()}`}</FeatureInfo>
-                  </Col>
-                  <Col span={8}>
+                  </FeatureAtTopCol>
+                  <FeatureAtTopCol span={8}>
                     <FeatureInfo>{`${flat.bathrooms} ${i18n
                       .t('flat.bathrooms')
                       .toLowerCase()}`}</FeatureInfo>
-                  </Col>
-                  <Col span={8}>
+                  </FeatureAtTopCol>
+                  <FeatureAtTopCol span={8}>
                     <FeatureInfo>
                       {`${
                         flat.hasElevator
@@ -134,7 +139,7 @@ const ResultCard = ({ flat, theme, className }: Props): JSX.Element => {
                           : i18n.t('messages.without')
                       } ${i18n.t('flat.elevator').toLowerCase()}`}
                     </FeatureInfo>
-                  </Col>
+                  </FeatureAtTopCol>
                   <FeatureAtBottomCol span={8}>
                     <FeatureInfo>
                       {`${

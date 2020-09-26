@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Carousel, Tag } from 'antd';
+import { Row, Col, Carousel, Tag } from 'antd';
 
 import { IFlat } from '../../../common/model/flat.model';
 import useI18n from '../../../common/hooks/useI18n';
@@ -105,14 +105,22 @@ const FlatCard = ({
           )}
           <FlatInfo>
             <TopText>
-              <span
-                css={`
-                  font-weight: 600;
-                `}
-              >
-                {formatCurrency(flat.price, i18n.activeLocale)}
-              </span>
-              <StyledTag color={theme.colors.secondary}>{flat.zone}</StyledTag>
+              <Row align="middle" justify="space-between">
+                <Col>
+                  <span
+                    css={`
+                      font-weight: 600;
+                    `}
+                  >
+                    {formatCurrency(flat.price, i18n.activeLocale)}
+                  </span>
+                </Col>
+                <Col>
+                  <StyledTag color={theme.colors.secondary}>
+                    {flat.zone}
+                  </StyledTag>
+                </Col>
+              </Row>
             </TopText>
             <Divider />
             <BottomText>
@@ -132,7 +140,7 @@ const FlatCard = ({
                 </sup>
               </span>
               <span>
-                {flat.rooms} {i18n.t('flat.rooms')}
+                {flat.rooms} {i18n.t('flat.rooms').toLowerCase()}
               </span>
             </BottomText>
           </FlatInfo>

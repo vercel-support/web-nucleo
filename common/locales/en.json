@@ -35,6 +35,7 @@
     "yearConstruction": "Year",
     "price": "Price",
     "rooms": "Rooms",
+    "roomsShort": "Rooms",
     "bathrooms": "Bathrooms",
     "sqrMeters": "Surface",
     "zone": "Area",
