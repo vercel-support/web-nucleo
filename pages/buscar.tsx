@@ -5,6 +5,8 @@ import styled, { withTheme, DefaultTheme } from 'styled-components';
 
 import { IFlat } from '../common/model/flat.model';
 import useI18n from '../common/hooks/useI18n';
+import useSearchState from '../common/hooks/searchState';
+import useSearchService from '../common/hooks/searchService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
 import { Title } from '../components/search';
@@ -88,8 +90,12 @@ const ScrollableSection = styled.div`
 
 const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
   const i18n = useI18n();
+  const [results, setResults] = useSearchState();
+  const searchService = useSearchService();
 
-  const deserializedFlats = deserializeMultiple(flats, IFlat);
+  useEffect(() => {
+    searchService.init(deserializeMultiple(flats, IFlat), setResults);
+  }, []);
 
   useEffect(() => {
     const headerHeight = +theme.headerHeight.replace('px', '');
@@ -160,7 +166,7 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  });
+  }, []);
 
   return (
     <Layout id={layoutId}>
@@ -199,7 +205,7 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
         </MapSection>
         <ScrollableSection>
           <Title openSearch={false} query={'Centro histórico'} />
-          <ResultsSection flats={deserializedFlats} />
+          <ResultsSection flats={results} />
         </ScrollableSection>
       </Content>
 
