@@ -4,6 +4,7 @@ export { default as CookiesBanner } from './cookiesBanner';
 export { default as LanguageSelector } from './languageSelector';
 export { default as ModalForm } from './modalForm';
 export { default as ContactForm } from './contactForm';
+export { default as SearchBar } from './searchBar';
 export {
   FlatsDisplayPlaceholder,
   default as FlatsDisplay,

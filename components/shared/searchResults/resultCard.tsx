@@ -103,7 +103,7 @@ const ResultCard = ({ flat, theme, className }: Props): JSX.Element => {
 
   return (
     <div className={className}>
-      <Link key={flat.id} href={`/pisos/${flat.id}`}>
+      <Link key={flat.id} href={`/pisos/${flat.id}`} passHref>
         <StyledAnchor>
           <Row>
             <ImageCol xs={24} lg={8} imageUrl={flat.pictureUrls[0]} />
@@ -167,10 +167,11 @@ const ResultCard = ({ flat, theme, className }: Props): JSX.Element => {
                   ) : null}
                 </FeaturesCardRow>
                 <BottomInfoSection>
+                  {/* TODO: don't use row and cols */}
                   <Row align={'middle'} justify={'space-between'}>
                     <Col>
                       <StyledTag color={theme.colors.secondary}>
-                        {flat.zone}
+                        {`${flat.zone} (${flat.city})`}
                       </StyledTag>
                     </Col>
                     <Col>
@@ -195,8 +196,4 @@ export default withTheme(styled(ResultCard)`
   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => props.theme.borderRadius};
   margin-bottom: 32px;
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
 `);

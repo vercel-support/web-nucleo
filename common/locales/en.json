@@ -147,11 +147,19 @@
     }
   },
   "search": {
-    "metaTitle": "Search | Inmobiliaria Núcleo",
     "metaDescription": "Search | Inmobiliaria Núcleo",
     "title": {
       "open": "Search results of: \"{{query}}\"",
       "closed": "Flats in {{query}}"
+    },
+    "searchBar": {
+      "filters": "Filters",
+      "cities": "Cities",
+      "zones": "Zones"
+    },
+    "messages": {
+      "resultsInfo": "Showing {{resultsCount}} results",
+      "noResults": "No results found"
     }
   },
   "enums": {

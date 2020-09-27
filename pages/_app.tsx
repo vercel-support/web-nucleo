@@ -105,7 +105,8 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  .ant-message {
+  .ant-message,
+  .ant-select-dropdown {
     font-family: ${(props) => props.theme.font.family};
     font-style: ${(props) => props.theme.font.style};
   }

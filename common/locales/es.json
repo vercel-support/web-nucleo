@@ -147,11 +147,19 @@
     }
   },
   "search": {
-    "metaTitle": "Búsqueda | Inmobiliaria Núcleo",
     "metaDescription": "Búsqueda | Inmobiliaria Núcleo",
     "title": {
       "open": "Resultados de la búsqueda: \"{{query}}\"",
       "closed": "Viviendas en {{query}}"
+    },
+    "searchBar": {
+      "filters": "Filtros",
+      "cities": "Ciudades",
+      "zones": "Barrios"
+    },
+    "messages": {
+      "resultsInfo": "Mostrando {{resultsCount}} resultados",
+      "noResults": "No se encontraron resultados"
     }
   },
   "enums": {
