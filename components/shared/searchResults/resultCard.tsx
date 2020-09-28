@@ -89,6 +89,7 @@ const StyledTag = styled(Tag)`
   font-weight: 500;
   font-size: 14px;
   line-height: 32px;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
