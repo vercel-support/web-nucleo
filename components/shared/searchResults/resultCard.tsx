@@ -89,9 +89,13 @@ const StyledTag = styled(Tag)`
   font-weight: 500;
   font-size: 14px;
   line-height: 32px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const PriceText = styled.div`
+  float: right;
   font-weight: 500;
   font-size: 18px;
   line-height: 29px;
@@ -167,14 +171,13 @@ const ResultCard = ({ flat, theme, className }: Props): JSX.Element => {
                   ) : null}
                 </FeaturesCardRow>
                 <BottomInfoSection>
-                  {/* TODO: don't use row and cols */}
-                  <Row align={'middle'} justify={'space-between'}>
-                    <Col>
+                  <Row align={'middle'}>
+                    <Col span={14}>
                       <StyledTag color={theme.colors.secondary}>
                         {`${flat.zone} (${flat.city})`}
                       </StyledTag>
                     </Col>
-                    <Col>
+                    <Col span={10}>
                       <PriceText>
                         {formatCurrency(flat.price, i18n.activeLocale)}
                       </PriceText>

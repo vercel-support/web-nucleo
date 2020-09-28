@@ -11,9 +11,6 @@ type Props = {
 const Text = styled.h2`
   ${(props) => props.theme.font.h2}
   color: ${(props) => props.theme.colors.secondary};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 const Title = ({ openSearch, query, className }: Props): JSX.Element => {
