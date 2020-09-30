@@ -49,27 +49,28 @@ const Title = styled.h2`
 `;
 
 const Divider = styled.div`
-  margin-top: 8px;
+  margin-top: 24px;
   margin-bottom: 24px;
   border-top: 1px solid #e0e0e0;
 `;
 
 const Subtitle = styled.div`
   font-size: 20px;
-  line-height: 22px;
+  line-height: 27px;
+  font-weight: 600;
   @media ${(props) => props.theme.breakpoints.smd} {
     font-size: 18px;
+    line-height: 22px;
   }
 `;
 
 const Description = styled.div`
   font-size: 18px;
-  line-height: 22px;
-  font-weight: 500;
-  margin-top: 24px;
+  line-height: 32px;
+  margin-top: 32px;
   @media ${(props) => props.theme.breakpoints.smd} {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 22px;
   }
 `;
 

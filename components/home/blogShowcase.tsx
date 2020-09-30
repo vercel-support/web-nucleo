@@ -89,4 +89,5 @@ const BlogShowcase = (): JSX.Element => {
     </Banner>
   );
 };
+
 export default BlogShowcase;

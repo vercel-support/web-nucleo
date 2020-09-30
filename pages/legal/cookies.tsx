@@ -31,7 +31,7 @@ const Title = styled.h2`
 `;
 
 const Divider = styled.div`
-  margin-top: 8px;
+  margin-top: 24px;
   margin-bottom: 24px;
   border-top: 1px solid #e0e0e0;
 `;

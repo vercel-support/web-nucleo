@@ -12,16 +12,13 @@ type Props = {
   theme: DefaultTheme;
 };
 
-const TitleContainer = styled.div`
-  position: relative;
-`;
-
 const Title = styled.div`
   position: absolute;
   left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   right: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   @media ${(props) => props.theme.breakpoints.smd} {
     left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   }
   top: 24px;
   font-weight: 600;
@@ -38,13 +35,24 @@ const ShowAllPhotosButton = styled(Button)`
   }
   bottom: 24px;
   z-index: 1;
+  font-weight: 500;
+  border-width: 2px;
+
+  &:active,
+  &:hover,
+  &:focus {
+    color: #fff;
+    border-color: #fff;
+  }
 `;
 
 const FlatImage = styled.div<{ url: string; imageHeight: string }>`
   background-image: linear-gradient(
-      325.4deg,
-      rgba(209, 198, 205, 0) 9.24%,
-      rgba(51, 46, 49, 0.65) 78%
+      330deg,
+      rgba(51, 46, 49, 0.6) 0%,
+      rgba(209, 198, 205, 0) 20%,
+      rgba(209, 198, 205, 0) 70%,
+      rgba(51, 46, 49, 0.6) 100%
     ),
     url(${(props) => props.url});
   opacity: 0.9;
@@ -88,15 +96,13 @@ const ImageCarousel = ({
   const isSmDown = useMediaQuery({ query: theme.breakpoints.smd });
 
   return (
-    <div className={className}>
-      <TitleContainer>
-        <Title>
-          {i18n.t('flatDetail.imageCarouselTitle', {
-            type: i18n.t(`flatTypes.${flat.type}`),
-            address: flat.address,
-          })}
-        </Title>
-      </TitleContainer>
+    <div className={className} style={{ position: 'relative' }}>
+      <Title>
+        {i18n.t('flatDetail.imageCarouselTitle', {
+          type: i18n.t(`flatTypes.${flat.type}`),
+          address: flat.address,
+        })}
+      </Title>
       <ShowAllPhotosButton
         type={'default'}
         ghost
@@ -121,8 +127,8 @@ const ImageCarousel = ({
 
 export default withTheme(styled(ImageCarousel)`
   @media ${(props) => props.theme.breakpoints.xxl} {
-    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   }
   .slick-dots-bottom {
     bottom: 24px;
