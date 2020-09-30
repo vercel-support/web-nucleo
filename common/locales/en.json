@@ -158,7 +158,7 @@
       "zones": "Zones"
     },
     "messages": {
-      "resultsInfo": "Showing {{resultsCount}} results",
+      "resultsInfo": "Showing {{pageSize}} results",
       "noResults": "No results found"
     }
   },

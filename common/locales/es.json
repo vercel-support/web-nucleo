@@ -158,7 +158,7 @@
       "zones": "Barrios"
     },
     "messages": {
-      "resultsInfo": "Mostrando {{resultsCount}} resultados",
+      "resultsInfo": "Mostrando {{pageSize}} resultados",
       "noResults": "No se encontraron resultados"
     }
   },

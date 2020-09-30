@@ -1,24 +1,29 @@
 import { useState, useEffect } from 'react';
-import { GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Row, Col } from 'antd';
 
-import { IFlat } from '../common/model/flat.model';
-import useI18n from '../common/hooks/useI18n';
-import useSearchService from '../common/hooks/searchService';
-import { deserializeMultiple } from '../common/helpers/serialization';
-import Flat from '../backend/salesforce/flat';
-import { Title } from '../components/search';
+import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
+import useSearchService, {
+  computeResults,
+  computeSearchOptions,
+} from '../../common/hooks/searchService';
+import Flat from '../../backend/salesforce/flat';
+import { Title } from '../../components/search';
 import {
   Header,
   Footer,
   SearchBar,
   ResultsSection,
-} from '../components/shared';
+} from '../../components/shared';
 
 interface StaticProps {
-  flats: string;
+  serializedResults: string;
+  serializedSearchOptions: string;
+  openSearch: boolean;
 }
 
 type Props = StaticProps & {
@@ -82,7 +87,7 @@ const SearchBarSection = styled.div`
 `;
 
 const MapSection = styled.div`
-  background-color: red;
+  background-color: grey;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -109,16 +114,16 @@ const ScrollableSection = styled.div`
   }
 `;
 
-const ResultsInfoSection = styled.div<{ resultsCount: number }>`
+const ResultsInfoSection = styled.div<{ pageSize: number }>`
   height: ${(props) =>
-    props.resultsCount > 0
+    props.pageSize > 0
       ? 'unset'
       : `calc(
     100vh - ${props.theme.headerHeight} -
       ${props.theme.footerHeight} - ${searchBarSectionPaddingTop} -
       ${searchBarSectionPaddingBottom} - ${searchBarHeight}
   )`};
-  margin-bottom: ${(props) => (props.resultsCount > 0 ? '16px' : '0')};
+  margin-bottom: ${(props) => (props.pageSize > 0 ? '16px' : '0')};
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   @media ${(props) => props.theme.breakpoints.md} {
@@ -131,18 +136,33 @@ const ResultsInfoSection = styled.div<{ resultsCount: number }>`
   }
 `;
 
-const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
+const BuscarPage = ({
+  serializedResults,
+  serializedSearchOptions,
+  openSearch,
+  theme,
+}: Props): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const searchService = useSearchService();
 
-  const [results, setResults] = useState([] as IFlat[]);
-  const [openSearch, setOpenSearch] = useState(false);
-  const [query, setQuery] = useState('');
-  const [autoCompleteValue, setAutoCompleteValue] = useState('');
+  const [currentResults, setCurrentResults] = useState([] as IFlat[]);
+  const [autoCompleteValue, setAutoCompleteValue] = useState(
+    router.query.query as string
+  );
+  const [pageSize, setPageSize] = useState(0);
 
   useEffect(() => {
-    searchService.init(deserializeMultiple(flats, IFlat), setResults);
-  }, []);
+    if (!router.isFallback) {
+      const deserializedResults = JSON.parse(serializedResults);
+      searchService.init(
+        deserializedResults,
+        JSON.parse(serializedSearchOptions),
+        setCurrentResults
+      );
+      setPageSize(Math.min(10, deserializedResults.length));
+    }
+  }, [router.isFallback]);
 
   useEffect(() => {
     const headerHeight = +theme.headerHeight.replace('px', '');
@@ -215,6 +235,14 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const getCurrentResults = () => {
+    return currentResults.slice(0, pageSize);
+  };
+
+  const isOpenSearch = () => {
+    return router.isFallback || openSearch;
+  };
+
   return (
     <Layout id={layoutId}>
       <Head>
@@ -222,9 +250,9 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
           {`${
-            openSearch
-              ? i18n.t('search.title.open', { query })
-              : i18n.t('search.title.closed', { query })
+            isOpenSearch()
+              ? i18n.t('search.title.open', { query: router.query.query })
+              : i18n.t('search.title.closed', { query: router.query.query })
           } | Inmobiliaria Núcleo`}
         </title>
         <meta name="description" content={i18n.t('search.metaDescription')} />
@@ -260,19 +288,13 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
               if (!value) {
                 return;
               }
-              const newOpenSearch = true;
-              setOpenSearch(newOpenSearch);
-              setQuery(value);
               setAutoCompleteValue(value);
-              searchService.updateResults(newOpenSearch, value);
+              router.push(`/buscar/${value}`);
             }}
             onSelect={(option) => {
-              const newOpenSearch = false;
               const newQuery = option.text;
-              setOpenSearch(newOpenSearch);
-              setQuery(newQuery);
               setAutoCompleteValue(newQuery);
-              searchService.updateResults(newOpenSearch, newQuery);
+              router.push(`/buscar/${newQuery}`);
             }}
             onFiltersButtonClick={() => {
               // TODO
@@ -284,16 +306,19 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
           <div>TODO: map</div>
         </MapSection>
         <ScrollableSection>
-          {results.length > 0 && (
-            <Title openSearch={openSearch} query={query} />
+          {getCurrentResults().length > 0 && (
+            <Title
+              openSearch={isOpenSearch()}
+              query={router.query.query as string}
+            />
           )}
-          <ResultsSection flats={results} />
-          <ResultsInfoSection resultsCount={results.length}>
+          <ResultsSection flats={getCurrentResults()} />
+          <ResultsInfoSection pageSize={pageSize}>
             <Row justify="center">
               <Col>
-                {results.length > 0
+                {pageSize > 0
                   ? i18n.t('search.messages.resultsInfo', {
-                      resultsCount: results.length,
+                      pageSize,
                     })
                   : i18n.t('search.messages.noResults')}
               </Col>
@@ -307,13 +332,36 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const flats = await Flat.getFlats();
-  const serializedFlats = Flat.serialize(flats);
+  const searchOptions = computeSearchOptions(flats);
+
+  const paths = searchOptions.map((searchOption) => ({
+    params: { query: searchOption.text },
+  }));
+
+  return { paths, fallback: true };
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async ({
+  params,
+}) => {
+  const flats = await Flat.getFlats();
+
+  const searchOptions = computeSearchOptions(flats);
+
+  const openSearch = searchOptions.every(
+    (searchOption) => searchOption.text !== params.query
+  );
+  const results = Flat.serialize(
+    computeResults(flats, openSearch, params.query as string)
+  );
 
   return {
     props: {
-      flats: serializedFlats,
+      serializedResults: results,
+      serializedSearchOptions: JSON.stringify(searchOptions),
+      openSearch,
     },
   };
 };

@@ -4,56 +4,122 @@ import { IFlat } from '../model/flat.model';
 import { ISearchOption } from '../model/searchOption.model';
 import { SearchOptionType } from '../model/enums/searchOptionType.enum';
 
+export const computeResults = (
+  flats: IFlat[],
+  openSearch: boolean,
+  query: string
+): IFlat[] => {
+  let results: IFlat[] = [];
+
+  const auxQuery = query.trim().toLowerCase();
+  if (auxQuery) {
+    results = flats.filter((flat) => {
+      if (openSearch) {
+        return (
+          flat.city.toLowerCase().includes(auxQuery) ||
+          flat.zone.toLowerCase().includes(auxQuery) ||
+          flat.address.toLowerCase().includes(auxQuery)
+        );
+      } else {
+        const city = extractCityFromQuery(auxQuery);
+        const zone = extractZoneFromQuery(auxQuery);
+        return (
+          flat.city.toLowerCase() === city &&
+          (!zone || flat.zone.toLowerCase() === zone)
+        );
+      }
+    });
+  }
+  return results;
+};
+
+export const computeSearchOptions = (flats: IFlat[]): ISearchOption[] => {
+  const citiesOptionsRepeated = flats.map((flat) => ({
+    text: flat.city,
+    count: 1,
+    type: SearchOptionType.CITY,
+  }));
+  const citiesOptions: ISearchOption[] = [];
+  for (const cityOption of citiesOptionsRepeated) {
+    const index = citiesOptions.findIndex((co) => co.text === cityOption.text);
+    if (index >= 0) {
+      citiesOptions[index].count = citiesOptions[index].count + 1;
+    } else {
+      citiesOptions.push(cityOption);
+    }
+  }
+
+  const zonesOptionsRepeated = flats.map((flat) => ({
+    text: `${flat.zone} (${flat.city})`,
+    count: 1,
+    type: SearchOptionType.ZONE,
+  }));
+  const zonesOptions: ISearchOption[] = [];
+  for (const zoneOption of zonesOptionsRepeated) {
+    const index = zonesOptions.findIndex((zo) => zo.text === zoneOption.text);
+    if (index >= 0) {
+      zonesOptions[index].count = zonesOptions[index].count + 1;
+    } else {
+      zonesOptions.push(zoneOption);
+    }
+  }
+
+  return [...citiesOptions, ...zonesOptions];
+};
+
+const extractCityFromQuery = (query: string): string => {
+  let city = query;
+  if (query.charAt(query.length - 1) === ')') {
+    const parenthesisIndex = query.lastIndexOf('(');
+    if (parenthesisIndex >= 0) {
+      city = query.substring(parenthesisIndex + 1, query.length - 1);
+    }
+  }
+  return city;
+};
+
+const extractZoneFromQuery = (query: string): string => {
+  let zone = '';
+  if (query.charAt(query.length - 1) === ')') {
+    const parenthesisIndex = query.lastIndexOf('(');
+    if (parenthesisIndex >= 0) {
+      zone = query.substring(0, parenthesisIndex - 1);
+    }
+  }
+  return zone;
+};
+
 interface ISearchService {
-  init(flats: IFlat[], setResults: Dispatch<SetStateAction<IFlat[]>>): void;
-  updateResults(openSearch: boolean, query: string): void;
+  init(
+    results: IFlat[],
+    searchOptions: ISearchOption[],
+    setCurrentResults: Dispatch<SetStateAction<IFlat[]>>
+  ): void;
   getSearchOptions(query: string): ISearchOption[];
+  filter(minPrice: number, maxPrice: number): void;
 }
 
 class SearchService implements ISearchService {
-  private flats: IFlat[] = [];
+  private results: IFlat[] = [];
   private searchOptions: ISearchOption[] = [];
-  private setResults: Dispatch<SetStateAction<IFlat[]>>;
+  private setCurrentResults: Dispatch<SetStateAction<IFlat[]>>;
 
-  init(flats: IFlat[], setResults: Dispatch<SetStateAction<IFlat[]>>) {
-    this.flats = flats;
-    this.searchOptions = this.computeSearchOptions();
-    this.setResults = setResults;
+  init(
+    results: IFlat[],
+    searchOptions: ISearchOption[],
+    setCurrentResults: Dispatch<SetStateAction<IFlat[]>>
+  ) {
+    this.results = results;
+    this.searchOptions = searchOptions;
+    this.setCurrentResults = setCurrentResults;
 
-    this.setResults([]);
-  }
-
-  updateResults(openSearch: boolean, query: string): void {
-    const auxQuery = query.trim().toLowerCase();
-
-    if (this.setResults) {
-      let results: IFlat[] = [];
-      if (auxQuery) {
-        results = this.flats.filter((flat) => {
-          if (openSearch) {
-            return (
-              flat.city.toLowerCase().includes(auxQuery) ||
-              flat.zone.toLowerCase().includes(auxQuery) ||
-              flat.address.toLowerCase().includes(auxQuery)
-            );
-          } else {
-            const city = this.extractCityFromQuery(auxQuery);
-            const zone = this.extractZoneFromQuery(auxQuery);
-            return (
-              flat.city.toLowerCase() === city &&
-              (!zone || flat.zone.toLowerCase() === zone)
-            );
-          }
-        });
-      }
-      this.setResults(results);
-    }
+    this.setCurrentResults(this.results);
   }
 
   getSearchOptions(query: string): ISearchOption[] {
     const auxQuery = query.trim().toLowerCase();
-    const city = this.extractCityFromQuery(auxQuery);
-    const zone = this.extractZoneFromQuery(auxQuery);
+    const city = extractCityFromQuery(auxQuery);
+    const zone = extractZoneFromQuery(auxQuery);
 
     return this.searchOptions.filter(
       (searchOption) =>
@@ -62,62 +128,12 @@ class SearchService implements ISearchService {
     );
   }
 
-  private computeSearchOptions(): ISearchOption[] {
-    const citiesOptionsRepeated = this.flats.map((flat) => ({
-      text: flat.city,
-      count: 1,
-      type: SearchOptionType.CITY,
-    }));
-    const citiesOptions: ISearchOption[] = [];
-    for (const cityOption of citiesOptionsRepeated) {
-      const index = citiesOptions.findIndex(
-        (co) => co.text === cityOption.text
-      );
-      if (index >= 0) {
-        citiesOptions[index].count = citiesOptions[index].count + 1;
-      } else {
-        citiesOptions.push(cityOption);
-      }
-    }
-
-    const zonesOptionsRepeated = this.flats.map((flat) => ({
-      text: `${flat.zone} (${flat.city})`,
-      count: 1,
-      type: SearchOptionType.ZONE,
-    }));
-    const zonesOptions: ISearchOption[] = [];
-    for (const zoneOption of zonesOptionsRepeated) {
-      const index = zonesOptions.findIndex((zo) => zo.text === zoneOption.text);
-      if (index >= 0) {
-        zonesOptions[index].count = zonesOptions[index].count + 1;
-      } else {
-        zonesOptions.push(zoneOption);
-      }
-    }
-
-    return [...citiesOptions, ...zonesOptions];
-  }
-
-  private extractCityFromQuery(query: string) {
-    let city = query;
-    if (query.charAt(query.length - 1) === ')') {
-      const parenthesisIndex = query.lastIndexOf('(');
-      if (parenthesisIndex >= 0) {
-        city = query.substring(parenthesisIndex + 1, query.length - 1);
-      }
-    }
-    return city;
-  }
-
-  private extractZoneFromQuery(query: string) {
-    let zone = '';
-    if (query.charAt(query.length - 1) === ')') {
-      const parenthesisIndex = query.lastIndexOf('(');
-      if (parenthesisIndex >= 0) {
-        zone = query.substring(0, parenthesisIndex - 1);
-      }
-    }
-    return zone;
+  filter(minPrice: number, maxPrice: number): void {
+    this.setCurrentResults(
+      this.results.filter(
+        (result) => result.price >= minPrice && result.price <= maxPrice
+      )
+    );
   }
 }
 
