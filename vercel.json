@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/**": {
-      "excludeFiles": "{public,.next,pages}/**"
+      "excludeFiles": "{public,.next,pages,images,_next,gen}/**"
     }
   }
 }
