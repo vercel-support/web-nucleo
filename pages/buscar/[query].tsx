@@ -158,9 +158,13 @@ const BuscarPage = ({
   const searchService = useSearchService();
 
   const [currentResults, setCurrentResults] = useState([] as IFlat[]);
-  const [openSearch, setOpenSearch] = useState(false);
-  const [query, setQuery] = useState('');
-  const [autoCompleteValue, setAutoCompleteValue] = useState('');
+  const [openSearch, setOpenSearch] = useState(router.query.query === 'q');
+  const [query, setQuery] = useState(
+    router.query.query === 'q'
+      ? (router.query.q as string) || ''
+      : (router.query.query as string)
+  );
+  const [autoCompleteValue, setAutoCompleteValue] = useState(query);
 
   useEffect(() => {
     const deserializedResults = JSON.parse(serializedResults);
@@ -170,6 +174,10 @@ const BuscarPage = ({
       JSON.parse(serializedSearchOptions),
       setCurrentResults
     );
+
+    if (openSearch) {
+      searchService.computeResults(openSearch, query);
+    }
   }, []);
 
   useEffect(() => {
@@ -242,22 +250,6 @@ const BuscarPage = ({
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    const auxOpenSearch = router.query.query === 'q';
-    const auxQuery =
-      router.query.query === 'q'
-        ? (router.query.q as string) || ''
-        : (router.query.query as string);
-
-    setOpenSearch(auxOpenSearch);
-    setQuery(auxQuery);
-    setAutoCompleteValue(auxQuery);
-
-    if (auxOpenSearch) {
-      searchService.computeResults(auxOpenSearch, auxQuery);
-    }
-  }, [router.query.query]);
 
   return (
     <Layout id={layoutId}>

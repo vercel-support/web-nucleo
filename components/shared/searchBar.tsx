@@ -27,6 +27,10 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
     }
   }
 
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none;
+  }
+
   .ant-select-selection-search-input {
     height: ${(props) => props.height};
   }
