@@ -91,29 +91,42 @@ const extractZoneFromQuery = (query: string): string => {
 
 interface ISearchService {
   init(
+    flats: IFlat[],
     results: IFlat[],
     searchOptions: ISearchOption[],
     setCurrentResults: Dispatch<SetStateAction<IFlat[]>>
   ): void;
   getSearchOptions(query: string): ISearchOption[];
-  filter(minPrice: number, maxPrice: number): void;
+  computeResults(openSearch: boolean, query: string): void;
+  getResultsCount(): number;
+  getPageSize(): number;
+  incrementPageSize(): void;
 }
 
 class SearchService implements ISearchService {
+  private flats: IFlat[] = [];
   private results: IFlat[] = [];
   private searchOptions: ISearchOption[] = [];
   private setCurrentResults: Dispatch<SetStateAction<IFlat[]>>;
 
+  private pageSize: number;
+
+  private readonly INITIAL_PAGE_SIZE = 10;
+  private readonly PAGE_SIZE_INCREMENT_SIZE = 5;
+
   init(
+    flats: IFlat[],
     results: IFlat[],
     searchOptions: ISearchOption[],
     setCurrentResults: Dispatch<SetStateAction<IFlat[]>>
   ) {
+    this.flats = flats;
     this.results = results;
     this.searchOptions = searchOptions;
     this.setCurrentResults = setCurrentResults;
 
-    this.setCurrentResults(this.results);
+    this.computePageSizeDependingOnResultsCount(this.INITIAL_PAGE_SIZE);
+    this.updateResults();
   }
 
   getSearchOptions(query: string): ISearchOption[] {
@@ -128,12 +141,36 @@ class SearchService implements ISearchService {
     );
   }
 
-  filter(minPrice: number, maxPrice: number): void {
-    this.setCurrentResults(
-      this.results.filter(
-        (result) => result.price >= minPrice && result.price <= maxPrice
-      )
+  computeResults(openSearch: boolean, query: string): void {
+    const results = computeResults(this.flats, openSearch, query);
+    this.results = results;
+    this.computePageSizeDependingOnResultsCount(this.INITIAL_PAGE_SIZE);
+    this.updateResults();
+  }
+
+  getResultsCount(): number {
+    return this.results.length;
+  }
+
+  getPageSize(): number {
+    return this.pageSize;
+  }
+
+  incrementPageSize(): void {
+    this.computePageSizeDependingOnResultsCount(
+      this.pageSize + this.PAGE_SIZE_INCREMENT_SIZE
     );
+    this.updateResults();
+  }
+
+  private updateResults(): void {
+    this.setCurrentResults(this.results.slice(0, this.pageSize));
+  }
+
+  private computePageSizeDependingOnResultsCount(
+    desiredPageSize: number
+  ): void {
+    this.pageSize = Math.min(desiredPageSize, this.results.length);
   }
 }
 

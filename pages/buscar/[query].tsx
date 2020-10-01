@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
 
 import { IFlat } from '../../common/model/flat.model';
 import useI18n from '../../common/hooks/useI18n';
@@ -21,9 +21,9 @@ import {
 } from '../../components/shared';
 
 interface StaticProps {
+  serializedFlats: string;
   serializedResults: string;
   serializedSearchOptions: string;
-  openSearch: boolean;
 }
 
 type Props = StaticProps & {
@@ -58,11 +58,12 @@ const Content = styled.main`
   }
 `;
 
+// TODO: change left to 0 and right to props.theme.grid.getGridColumns(4, -1)
 const SearchBarSection = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
-  right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
+  left: ${(props) => props.theme.grid.getGridColumns(4, -1)};
+  right: ${(props) => props.theme.grid.getGridColumns(4, -1)};
   padding-top: ${searchBarSectionPaddingTop};
   padding-bottom: ${searchBarSectionPaddingBottom};
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
@@ -86,7 +87,7 @@ const SearchBarSection = styled.div`
   }
 `;
 
-const MapSection = styled.div`
+/* const MapSection = styled.div`
   background-color: grey;
   position: absolute;
   top: 0;
@@ -101,14 +102,16 @@ const MapSection = styled.div`
   &.${headerOutOfScreenClass} {
     position: fixed;
   }
-`;
+`; */
 
+// TODO: change margin-left to 0 and margin-right to props.theme.grid.getGridColumns(4, -1)
 const ScrollableSection = styled.div`
   margin-top: calc(
     ${searchBarHeight} + ${searchBarSectionPaddingTop} +
       ${searchBarSectionPaddingBottom}
   );
-  margin-right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
+  margin-left: ${(props) => props.theme.grid.getGridColumns(4, -1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(4, -1)};
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-right: 0;
   }
@@ -136,10 +139,18 @@ const ResultsInfoSection = styled.div<{ pageSize: number }>`
   }
 `;
 
+const LoadMoreButtonRow = styled(Row)`
+  margin-top: 24px;
+`;
+
+const LoadMoreButton = styled(Button)`
+  width: 100%;
+`;
+
 const BuscarPage = ({
+  serializedFlats,
   serializedResults,
   serializedSearchOptions,
-  openSearch,
   theme,
 }: Props): JSX.Element => {
   const router = useRouter();
@@ -147,22 +158,19 @@ const BuscarPage = ({
   const searchService = useSearchService();
 
   const [currentResults, setCurrentResults] = useState([] as IFlat[]);
-  const [autoCompleteValue, setAutoCompleteValue] = useState(
-    router.query.query as string
-  );
-  const [pageSize, setPageSize] = useState(0);
+  const [openSearch, setOpenSearch] = useState(false);
+  const [query, setQuery] = useState('');
+  const [autoCompleteValue, setAutoCompleteValue] = useState('');
 
   useEffect(() => {
-    if (!router.isFallback) {
-      const deserializedResults = JSON.parse(serializedResults);
-      searchService.init(
-        deserializedResults,
-        JSON.parse(serializedSearchOptions),
-        setCurrentResults
-      );
-      setPageSize(Math.min(10, deserializedResults.length));
-    }
-  }, [router.isFallback]);
+    const deserializedResults = JSON.parse(serializedResults);
+    searchService.init(
+      JSON.parse(serializedFlats),
+      deserializedResults,
+      JSON.parse(serializedSearchOptions),
+      setCurrentResults
+    );
+  }, []);
 
   useEffect(() => {
     const headerHeight = +theme.headerHeight.replace('px', '');
@@ -235,13 +243,21 @@ const BuscarPage = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const getCurrentResults = () => {
-    return currentResults.slice(0, pageSize);
-  };
+  useEffect(() => {
+    const auxOpenSearch = router.query.query === 'q';
+    const auxQuery =
+      router.query.query === 'q'
+        ? (router.query.q as string) || ''
+        : (router.query.query as string);
 
-  const isOpenSearch = () => {
-    return router.isFallback || openSearch;
-  };
+    setOpenSearch(auxOpenSearch);
+    setQuery(auxQuery);
+    setAutoCompleteValue(auxQuery);
+
+    if (auxOpenSearch) {
+      searchService.computeResults(auxOpenSearch, auxQuery);
+    }
+  }, [router.query.query]);
 
   return (
     <Layout id={layoutId}>
@@ -250,9 +266,9 @@ const BuscarPage = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
           {`${
-            isOpenSearch()
-              ? i18n.t('search.title.open', { query: router.query.query })
-              : i18n.t('search.title.closed', { query: router.query.query })
+            openSearch
+              ? i18n.t('search.title.open', { query })
+              : i18n.t('search.title.closed', { query })
           } | Inmobiliaria Núcleo`}
         </title>
         <meta name="description" content={i18n.t('search.metaDescription')} />
@@ -288,41 +304,62 @@ const BuscarPage = ({
               if (!value) {
                 return;
               }
+              const newOpenSearch = true;
+              setOpenSearch(newOpenSearch);
+              setQuery(value);
               setAutoCompleteValue(value);
-              router.push(`/buscar/${value}`);
+              searchService.computeResults(newOpenSearch, value);
             }}
             onSelect={(option) => {
+              const newOpenSearch = false;
               const newQuery = option.text;
+              setOpenSearch(newOpenSearch);
+              setQuery(newQuery);
               setAutoCompleteValue(newQuery);
-              router.push(`/buscar/${newQuery}`);
+              searchService.computeResults(newOpenSearch, newQuery);
             }}
-            onFiltersButtonClick={() => {
+            /* onFiltersButtonClick={() => {
               // TODO
-              console.log('onFiltersButtonClick');
-            }}
+            }} */
           />
         </SearchBarSection>
-        <MapSection id={mapSectionId}>
+        {/* <MapSection id={mapSectionId}>
           <div>TODO: map</div>
-        </MapSection>
+        </MapSection> */}
         <ScrollableSection>
-          {getCurrentResults().length > 0 && (
-            <Title
-              openSearch={isOpenSearch()}
-              query={router.query.query as string}
-            />
+          {currentResults.length > 0 && (
+            <Title openSearch={openSearch} query={query} />
           )}
-          <ResultsSection flats={getCurrentResults()} />
-          <ResultsInfoSection pageSize={pageSize}>
+          <ResultsSection flats={currentResults} />
+          <ResultsInfoSection pageSize={searchService.getPageSize()}>
             <Row justify="center">
               <Col>
-                {pageSize > 0
+                {searchService.getPageSize() > 0
                   ? i18n.t('search.messages.resultsInfo', {
-                      pageSize,
+                      pageSize: searchService.getPageSize(),
+                      resultsCount: searchService.getResultsCount(),
                     })
                   : i18n.t('search.messages.noResults')}
               </Col>
             </Row>
+            {searchService.getPageSize() < searchService.getResultsCount() && (
+              <LoadMoreButtonRow justify="center">
+                <Col
+                  xs={{ span: 20 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 10 }}
+                  xl={{ span: 8 }}
+                >
+                  <LoadMoreButton
+                    type="primary"
+                    onClick={() => searchService.incrementPageSize()}
+                  >
+                    <span>{i18n.t('search.actions.loadMore')}</span>
+                  </LoadMoreButton>
+                </Col>
+              </LoadMoreButtonRow>
+            )}
           </ResultsInfoSection>
         </ScrollableSection>
       </Content>
@@ -339,29 +376,33 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = searchOptions.map((searchOption) => ({
     params: { query: searchOption.text },
   }));
+  paths.push({
+    params: { query: 'q' },
+  });
 
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
   params,
 }) => {
   const flats = await Flat.getFlats();
+  const serializedFlats = Flat.serialize(flats);
+
+  let serializedResults = JSON.stringify([]);
+  if (params.query !== 'q') {
+    serializedResults = Flat.serialize(
+      computeResults(flats, false, params.query as string)
+    );
+  }
 
   const searchOptions = computeSearchOptions(flats);
 
-  const openSearch = searchOptions.every(
-    (searchOption) => searchOption.text !== params.query
-  );
-  const results = Flat.serialize(
-    computeResults(flats, openSearch, params.query as string)
-  );
-
   return {
     props: {
-      serializedResults: results,
+      serializedFlats,
+      serializedResults,
       serializedSearchOptions: JSON.stringify(searchOptions),
-      openSearch,
     },
   };
 };

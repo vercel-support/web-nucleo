@@ -158,8 +158,11 @@
       "zones": "Zones"
     },
     "messages": {
-      "resultsInfo": "Showing {{pageSize}} results",
+      "resultsInfo": "Showing {{pageSize}} of {{resultsCount}} results",
       "noResults": "No results found"
+    },
+    "actions": {
+      "loadMore": "Load more"
     }
   },
   "enums": {
