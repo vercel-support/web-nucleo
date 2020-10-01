@@ -48,11 +48,18 @@ const ShowAllPhotosButton = styled(Button)`
 
 const FlatImage = styled.div<{ url: string; imageHeight: string }>`
   background-image: linear-gradient(
-      330deg,
-      rgba(51, 46, 49, 0.6) 0%,
-      rgba(209, 198, 205, 0) 20%,
-      rgba(209, 198, 205, 0) 70%,
-      rgba(51, 46, 49, 0.6) 100%
+      352.5deg,
+      rgba(51, 46, 49, 0.3) 0%,
+      rgba(209, 198, 205, 0) 15%,
+      rgba(209, 198, 205, 0) 80%,
+      rgba(51, 46, 49, 0.3) 100%
+    ),
+    linear-gradient(
+      270deg,
+      rgba(51, 46, 49, 0.2) 0%,
+      rgba(209, 198, 205, 0) 15%,
+      rgba(209, 198, 205, 0) 85%,
+      rgba(51, 46, 49, 0.2) 100%
     ),
     url(${(props) => props.url});
   opacity: 0.9;
