@@ -19,6 +19,7 @@ const Title = styled.div`
   right: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   @media ${(props) => props.theme.breakpoints.smd} {
     left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   }
   top: 24px;
   font-weight: 600;
@@ -35,13 +36,31 @@ const ShowAllPhotosButton = styled(Button)`
   }
   bottom: 24px;
   z-index: 1;
+  font-weight: 500;
+  border-width: 2px;
+
+  &:active,
+  &:hover,
+  &:focus {
+    color: #fff;
+    border-color: #fff;
+  }
 `;
 
 const FlatImage = styled.div<{ url: string; imageHeight: string }>`
   background-image: linear-gradient(
-      325.4deg,
-      rgba(209, 198, 205, 0) 9.24%,
-      rgba(51, 46, 49, 0.65) 78%
+      352.5deg,
+      rgba(51, 46, 49, 0.3) 0%,
+      rgba(209, 198, 205, 0) 15%,
+      rgba(209, 198, 205, 0) 80%,
+      rgba(51, 46, 49, 0.3) 100%
+    ),
+    linear-gradient(
+      270deg,
+      rgba(51, 46, 49, 0.2) 0%,
+      rgba(209, 198, 205, 0) 15%,
+      rgba(209, 198, 205, 0) 85%,
+      rgba(51, 46, 49, 0.2) 100%
     ),
     url(${(props) => props.url});
   opacity: 0.9;
