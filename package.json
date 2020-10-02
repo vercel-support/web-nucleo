@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3005",
     "dev-real": "USE_REAL_DATA=true next dev -p 3005",
-    "build": "NODE_OPTIONS=--max_old_space_size=8192 UV_THREADPOOL_SIZE=1 next build",
+    "build": "NODE_OPTIONS=--max_old_space_size=8192 UV_THREADPOOL_SIZE=16 next build",
     "start": "cross-env NODE_ENV=production next start -p 3005",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write **/*.{js,ts,tsx}",
