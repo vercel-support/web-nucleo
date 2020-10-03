@@ -38,7 +38,7 @@ class MailchimpService implements IMailchimpService {
         res.data.status === MailchimpStatus.SUBSCRIBED ||
         res.data.status === MailchimpStatus.PENDING
       ) {
-        router.push(`/estado-subscripcion/${res.data.status}`);
+        router.push(`/estado-suscripcion/${res.data.status}`);
       }
     } catch (error) {
       message.error(i18n.t('messages.mailchimpSubscription.error'));
