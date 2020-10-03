@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { IOffice } from '../common/model/office.model';
@@ -38,11 +39,12 @@ const Content = styled.main`
 `;
 
 const ContactPage = ({ offices }: Props): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
   const onSendButtonClicked = (contact: IContact) => {
-    mailchimpService.subscribe(contact, i18n);
+    mailchimpService.subscribe(contact, router, i18n);
   };
 
   return (

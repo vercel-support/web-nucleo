@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import axios, { AxiosResponse } from 'axios';
+import { NextRouter } from 'next/router';
 import { message } from 'antd';
 
 import { IContact } from '../model/mailchimp/contact.model';
@@ -8,7 +9,11 @@ import { ResponseType } from '../../api/mailchimp/subscribe';
 import { I18nContextType } from '../../libs/i18n';
 
 interface IMailchimpService {
-  subscribe(contact: IContact, i18n: I18nContextType): Promise<void>;
+  subscribe(
+    contact: IContact,
+    router: NextRouter,
+    i18n: I18nContextType
+  ): Promise<void>;
 }
 
 class MailchimpService implements IMailchimpService {
@@ -16,7 +21,11 @@ class MailchimpService implements IMailchimpService {
     baseURL: '/api/mailchimp/',
   });
 
-  async subscribe(contact: IContact, i18n: I18nContextType): Promise<void> {
+  async subscribe(
+    contact: IContact,
+    router: NextRouter,
+    i18n: I18nContextType
+  ): Promise<void> {
     try {
       const res = await this.axiosInstance.post<
         IContact,
@@ -27,12 +36,9 @@ class MailchimpService implements IMailchimpService {
 
       if (
         res.data.status === MailchimpStatus.SUBSCRIBED ||
-        res.data.status === MailchimpStatus.UNSUBSCRIBED ||
         res.data.status === MailchimpStatus.PENDING
       ) {
-        message.success(
-          i18n.t(`messages.mailchimpSubscription.${res.data.status}`)
-        );
+        router.push(`/estado-subscripcion/${res.data.status}`);
       }
     } catch (error) {
       message.error(i18n.t('messages.mailchimpSubscription.error'));

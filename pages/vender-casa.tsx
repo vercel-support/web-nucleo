@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import * as Scroll from 'react-scroll';
 
@@ -53,11 +54,12 @@ const Separator = styled.div`
 `;
 
 const VenderCasaPage = (): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
   const onSendButtonClicked = (contact: IContact) => {
-    mailchimpService.subscribe(contact, i18n);
+    mailchimpService.subscribe(contact, router, i18n);
   };
 
   const onContactUsButtonClicked = () => {

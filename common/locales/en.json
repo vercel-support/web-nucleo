@@ -165,6 +165,24 @@
       "loadMore": "Load more"
     }
   },
+  "subscriptionStatus": {
+    "metaTitle": "Subscription status | Inmobiliaria Núcleo",
+    "metaDescription": "Subscription status | Inmobiliaria Núcleo",
+    "title": {
+      "subscribed": "Thank you for subscribing to our newsletter!",
+      "pending": "Check your email to complete your subscription"
+    },
+    "subtitle": {
+      "subscribed": "We have correctly received your data. We will get in touch with you soon",
+      "pending": "We need your approval in order to get your submitted data and get in touch with you"
+    },
+    "messages": {
+      "visitBlog": "You can read all our news visiting our blog"
+    },
+    "actions": {
+      "visitBlog": "Inmobiliaria Núcleo Blog"
+    }
+  },
   "enums": {
     "flatType": {
       "PISO": "Flat",
@@ -184,9 +202,6 @@
     "with": "With",
     "without": "Without",
     "mailchimpSubscription": {
-      "subscribed": "Thank you for subscribing to our newsletter",
-      "unsubscribed": "Your subscription has been cancelled",
-      "pending": "Check your email to complete your subscription",
       "error": "There was an error in the subscription process. Please try again"
     }
   }

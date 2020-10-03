@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
@@ -49,6 +50,7 @@ const Content = styled.main`
 `;
 
 export const Home = ({ flats }: Props): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
@@ -56,7 +58,7 @@ export const Home = ({ flats }: Props): JSX.Element => {
 
   const onSubscribeButtonClicked = (email: string) => {
     const contact: IContact = { EMAIL: email };
-    mailchimpService.subscribe(contact, i18n);
+    mailchimpService.subscribe(contact, router, i18n);
   };
 
   return (

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 
@@ -95,6 +96,7 @@ const FlatsDisplay = dynamic(
 );
 
 const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
   const [isGalleryVisible, setIsGalleryVisible] = useState(false);
@@ -106,7 +108,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
   const deserializedFlat = deserializeSingle(flat, IFlat);
 
   const onBuyButtonClicked = (contact: IContact) => {
-    mailchimpService.subscribe(contact, i18n);
+    mailchimpService.subscribe(contact, router, i18n);
   };
 
   return (

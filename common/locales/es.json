@@ -165,6 +165,24 @@
       "loadMore": "Cargar más"
     }
   },
+  "subscriptionStatus": {
+    "metaTitle": "Estado de la subscripción | Inmobiliaria Núcleo",
+    "metaDescription": "Estado de la subscripción | Inmobiliaria Núcleo",
+    "title": {
+      "subscribed": "Gracias por suscribirte a nuestra newsletter",
+      "pending": "Revise su correo para completar la suscripción"
+    },
+    "subtitle": {
+      "subscribed": "Hemos recibido correctamente sus datos. Pronto nos pondremos en contacto con usted",
+      "pending": "Necesitamos su aprobación para obtener los datos introducidos y ponernos en contacto con usted"
+    },
+    "messages": {
+      "visitBlog": "Puede estar al tanto de todas nuestras novedades visitando nuestro blog"
+    },
+    "actions": {
+      "visitBlog": "Blog de Inmobiliaria Núcleo"
+    }
+  },
   "enums": {
     "flatType": {
       "PISO": "Piso",
@@ -184,9 +202,6 @@
     "with": "Con",
     "without": "Sin",
     "mailchimpSubscription": {
-      "subscribed": "Gracias por suscribirte a nuestra newsletter",
-      "unsubscribed": "Su suscripción ha sido cancelada",
-      "pending": "Revise su correo para completar la suscripción",
       "error": "Hubo un error en el proceso de suscripción. Por favor inténtelo de nuevo"
     }
   }
