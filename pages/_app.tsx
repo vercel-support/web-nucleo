@@ -122,6 +122,7 @@ class MyApp extends App {
   }
 
   handleRouteChange(url: string) {
+    window.scrollTo(0, 0);
     gtag.pageview(url);
   }
 
