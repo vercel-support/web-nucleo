@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Input, AutoComplete, Button } from 'antd';
-import { SlidersOutlined } from '@ant-design/icons';
 
 import { ISearchOption } from '../../common/model/searchOption.model';
 import { SearchOptionType } from '../../common/model/enums/searchOptionType.enum';
@@ -14,11 +13,24 @@ type Props = {
   onValueChange: (value: string) => void;
   onSearch: (query: string) => void;
   onSelect: (option: ISearchOption) => void;
-  onFiltersButtonClick: () => void;
+  onFiltersButtonClick?: () => void;
   className?: string;
 };
 
 const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
+  .ant-input-affix-wrapper {
+    border-color: #d9d9d9;
+    &:focus,
+    &:hover {
+      border-color: #d9d9d9;
+      box-shadow: none;
+    }
+  }
+
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none;
+  }
+
   .ant-select-selection-search-input {
     height: ${(props) => props.height};
   }
@@ -30,18 +42,27 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
 
   .ant-input-search-button {
     height: ${(props) => props.height};
+    background-color: white;
+    padding: 8px;
+    border-color: #d9d9d9;
+    border-left-width: 0;
   }
 
   .ant-input-search-enter-button
     + .ant-input-group-addon
     .ant-input-search-button {
+    padding: 0 8px 0 0;
     border-top-right-radius: calc(${(props) => props.height} / 2);
     border-bottom-right-radius: calc(${(props) => props.height} / 2);
   }
 
-  .ant-input-search-icon {
+  .anticon-search {
     background-color: ${(props) => props.theme.colors.primary};
     color: white;
+    padding: 10px;
+    height: 36px;
+    width: 36px;
+    border-radius: 24px;
   }
 `;
 
@@ -50,8 +71,9 @@ const FiltersSuffix = styled.div`
   padding-left: 8px;
 `;
 
-const StyledSlidersOutlined = styled(SlidersOutlined)`
-  font-size: 16px;
+const FiltersIcon = styled.img`
+  height: 16px;
+  width: 16px;
   color: ${(props) => props.theme.colors.primary};
 `;
 
@@ -136,7 +158,7 @@ const SearchBar = ({
             onSelect(selectedOption);
           }
           setOpen(false);
-          autoCompleteRef.current.blur();
+          setTimeout(() => autoCompleteRef.current.blur());
         }}
         onFocus={() => {
           setOpen(!!value);
@@ -156,7 +178,15 @@ const SearchBar = ({
                   onFiltersButtonClick();
                 }}
               >
-                <Button type="text" icon={<StyledSlidersOutlined />}>
+                <Button
+                  type="text"
+                  icon={
+                    <FiltersIcon
+                      className="anticon"
+                      src={'/images/filters.svg'}
+                    />
+                  }
+                >
                   {i18n.t('search.searchBar.filters')}
                 </Button>
               </FiltersSuffix>
@@ -167,6 +197,9 @@ const SearchBar = ({
             setOpen(false);
             onValueChange(newValue);
             onSearch(newValue);
+            if (newValue) {
+              setTimeout(() => autoCompleteRef.current.blur());
+            }
           }}
         />
       </StyledAutoComplete>

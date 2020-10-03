@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
 
 import { IFlat } from '../common/model/flat.model';
 import useI18n from '../common/hooks/useI18n';
-import useSearchService from '../common/hooks/searchService';
-import { deserializeMultiple } from '../common/helpers/serialization';
+import useSearchService, {
+  computeSearchOptions,
+} from '../common/hooks/searchService';
 import Flat from '../backend/salesforce/flat';
 import { Title } from '../components/search';
 import {
@@ -18,7 +20,8 @@ import {
 } from '../components/shared';
 
 interface StaticProps {
-  flats: string;
+  serializedFlats: string;
+  serializedSearchOptions: string;
 }
 
 type Props = StaticProps & {
@@ -53,11 +56,12 @@ const Content = styled.main`
   }
 `;
 
+// TODO: change left to 0 and right to props.theme.grid.getGridColumns(4, -1)
 const SearchBarSection = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
-  right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
+  left: ${(props) => props.theme.grid.getGridColumns(4, -1)};
+  right: ${(props) => props.theme.grid.getGridColumns(4, -1)};
   padding-top: ${searchBarSectionPaddingTop};
   padding-bottom: ${searchBarSectionPaddingBottom};
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
@@ -71,6 +75,7 @@ const SearchBarSection = styled.div`
     rgba(255, 255, 255, 0) 100%
   );
   @media ${(props) => props.theme.breakpoints.mdd} {
+    left: 0;
     right: 0;
     padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
     padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
@@ -81,8 +86,8 @@ const SearchBarSection = styled.div`
   }
 `;
 
-const MapSection = styled.div`
-  background-color: red;
+/* const MapSection = styled.div`
+  background-color: grey;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -96,29 +101,32 @@ const MapSection = styled.div`
   &.${headerOutOfScreenClass} {
     position: fixed;
   }
-`;
+`; */
 
+// TODO: change margin-left to 0 and margin-right to props.theme.grid.getGridColumns(4, -1)
 const ScrollableSection = styled.div`
   margin-top: calc(
     ${searchBarHeight} + ${searchBarSectionPaddingTop} +
       ${searchBarSectionPaddingBottom}
   );
-  margin-right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
+  margin-left: ${(props) => props.theme.grid.getGridColumns(4, -1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(4, -1)};
   @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-left: 0;
     margin-right: 0;
   }
 `;
 
-const ResultsInfoSection = styled.div<{ resultsCount: number }>`
+const ResultsInfoSection = styled.div<{ pageSize: number }>`
   height: ${(props) =>
-    props.resultsCount > 0
+    props.pageSize > 0
       ? 'unset'
       : `calc(
     100vh - ${props.theme.headerHeight} -
       ${props.theme.footerHeight} - ${searchBarSectionPaddingTop} -
       ${searchBarSectionPaddingBottom} - ${searchBarHeight}
   )`};
-  margin-bottom: ${(props) => (props.resultsCount > 0 ? '16px' : '0')};
+  margin-bottom: ${(props) => (props.pageSize > 0 ? '16px' : '0')};
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   @media ${(props) => props.theme.breakpoints.md} {
@@ -131,17 +139,34 @@ const ResultsInfoSection = styled.div<{ resultsCount: number }>`
   }
 `;
 
-const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
+const LoadMoreButtonRow = styled(Row)`
+  margin-top: 24px;
+`;
+
+const LoadMoreButton = styled(Button)`
+  width: 100%;
+`;
+
+const BuscarPage = ({
+  serializedFlats,
+  serializedSearchOptions,
+  theme,
+}: Props): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const searchService = useSearchService();
 
-  const [results, setResults] = useState([] as IFlat[]);
-  const [openSearch, setOpenSearch] = useState(false);
+  const [currentResults, setCurrentResults] = useState([] as IFlat[]);
+
   const [query, setQuery] = useState('');
-  const [autoCompleteValue, setAutoCompleteValue] = useState('');
+  const [autoCompleteValue, setAutoCompleteValue] = useState(query);
 
   useEffect(() => {
-    searchService.init(deserializeMultiple(flats, IFlat), setResults);
+    searchService.init(
+      JSON.parse(serializedFlats),
+      JSON.parse(serializedSearchOptions),
+      setCurrentResults
+    );
   }, []);
 
   useEffect(() => {
@@ -215,6 +240,24 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const q = (router.query.q as string) || '';
+    setQuery(q);
+    setAutoCompleteValue(q);
+    searchService.computeResults(q);
+  }, [router.query]);
+
+  const updateQuery = (q: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { q },
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
+
   return (
     <Layout id={layoutId}>
       <Head>
@@ -222,7 +265,7 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
           {`${
-            openSearch
+            searchService.isOpenSearch()
               ? i18n.t('search.title.open', { query })
               : i18n.t('search.title.closed', { query })
           } | Inmobiliaria Núcleo`}
@@ -260,44 +303,53 @@ const BuscarPage = ({ flats, theme }: Props): JSX.Element => {
               if (!value) {
                 return;
               }
-              const newOpenSearch = true;
-              setOpenSearch(newOpenSearch);
-              setQuery(value);
-              setAutoCompleteValue(value);
-              searchService.updateResults(newOpenSearch, value);
+              updateQuery(value);
             }}
             onSelect={(option) => {
-              const newOpenSearch = false;
-              const newQuery = option.text;
-              setOpenSearch(newOpenSearch);
-              setQuery(newQuery);
-              setAutoCompleteValue(newQuery);
-              searchService.updateResults(newOpenSearch, newQuery);
+              updateQuery(option.text);
             }}
-            onFiltersButtonClick={() => {
+            /* onFiltersButtonClick={() => {
               // TODO
-              console.log('onFiltersButtonClick');
-            }}
+            }} */
           />
         </SearchBarSection>
-        <MapSection id={mapSectionId}>
+        {/* <MapSection id={mapSectionId}>
           <div>TODO: map</div>
-        </MapSection>
+        </MapSection> */}
         <ScrollableSection>
-          {results.length > 0 && (
-            <Title openSearch={openSearch} query={query} />
+          {currentResults.length > 0 && (
+            <Title openSearch={searchService.isOpenSearch()} query={query} />
           )}
-          <ResultsSection flats={results} />
-          <ResultsInfoSection resultsCount={results.length}>
+          <ResultsSection flats={currentResults} />
+          <ResultsInfoSection pageSize={searchService.getPageSize()}>
             <Row justify="center">
               <Col>
-                {results.length > 0
+                {searchService.getPageSize() > 0
                   ? i18n.t('search.messages.resultsInfo', {
-                      resultsCount: results.length,
+                      pageSize: searchService.getPageSize(),
+                      resultsCount: searchService.getResultsCount(),
                     })
                   : i18n.t('search.messages.noResults')}
               </Col>
             </Row>
+            {searchService.getPageSize() < searchService.getResultsCount() && (
+              <LoadMoreButtonRow justify="center">
+                <Col
+                  xs={{ span: 20 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 10 }}
+                  xl={{ span: 8 }}
+                >
+                  <LoadMoreButton
+                    type="primary"
+                    onClick={() => searchService.incrementPageSize()}
+                  >
+                    <span>{i18n.t('search.actions.loadMore')}</span>
+                  </LoadMoreButton>
+                </Col>
+              </LoadMoreButtonRow>
+            )}
           </ResultsInfoSection>
         </ScrollableSection>
       </Content>
@@ -311,9 +363,12 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const flats = await Flat.getFlats();
   const serializedFlats = Flat.serialize(flats);
 
+  const searchOptions = computeSearchOptions(flats);
+
   return {
     props: {
-      flats: serializedFlats,
+      serializedFlats,
+      serializedSearchOptions: JSON.stringify(searchOptions),
     },
   };
 };

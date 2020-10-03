@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { message } from 'antd';
 
 import { IContact } from '../model/mailchimp/contact.model';
@@ -18,23 +18,24 @@ class MailchimpService implements IMailchimpService {
 
   async subscribe(contact: IContact, i18n: I18nContextType): Promise<void> {
     try {
-      const res = await this.axiosInstance.post<IContact, ResponseType>(
-        'subscribe',
-        {
-          contact,
-        }
-      );
+      const res = await this.axiosInstance.post<
+        IContact,
+        AxiosResponse<ResponseType>
+      >('subscribe', {
+        contact,
+      });
 
       if (
-        res.status === MailchimpStatus.SUBSCRIBED ||
-        res.status === MailchimpStatus.UNSUBSCRIBED ||
-        res.status === MailchimpStatus.PENDING
+        res.data.status === MailchimpStatus.SUBSCRIBED ||
+        res.data.status === MailchimpStatus.UNSUBSCRIBED ||
+        res.data.status === MailchimpStatus.PENDING
       ) {
-        message.success(i18n.t(`messages.mailchimpSubscription.${res.status}`));
+        message.success(
+          i18n.t(`messages.mailchimpSubscription.${res.data.status}`)
+        );
       }
     } catch (error) {
       message.error(i18n.t('messages.mailchimpSubscription.error'));
-      throw Error(error);
     }
   }
 }
