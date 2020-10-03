@@ -153,6 +153,7 @@
       "closed": "Viviendas en {{query}}"
     },
     "searchBar": {
+      "placeholder": "Ciudad, barrio o dirección",
       "filters": "Filtros",
       "cities": "Ciudades",
       "zones": "Barrios"

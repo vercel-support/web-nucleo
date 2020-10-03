@@ -153,6 +153,7 @@
       "closed": "Flats in {{query}}"
     },
     "searchBar": {
+      "placeholder": "City, zone or address",
       "filters": "Filters",
       "cities": "Cities",
       "zones": "Zones"
