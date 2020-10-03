@@ -143,7 +143,6 @@ const SearchBar = ({
         value={value}
         open={open}
         options={autoCompleteOptions}
-        placeholder={'search.searchBar.placeholder'}
         height={height}
         style={{ width: '100%' }}
         ref={autoCompleteRef}
@@ -170,6 +169,7 @@ const SearchBar = ({
       >
         <Input.Search
           size="large"
+          placeholder={i18n.t('search.searchBar.placeholder')}
           allowClear={true}
           suffix={
             onFiltersButtonClick ? (

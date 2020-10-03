@@ -30,7 +30,7 @@ const Content = styled.main`
   position: relative;
   flex: auto;
   margin-top: ${(props) => props.theme.headerHeight};
-  height: ${(props) =>
+  min-height: ${(props) =>
     `calc(100vh - ${props.theme.headerHeight} - ${props.theme.footerHeight})`};
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-top: 0;

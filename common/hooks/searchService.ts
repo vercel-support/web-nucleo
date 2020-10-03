@@ -93,7 +93,7 @@ interface ISearchService {
   init(
     flats: IFlat[],
     searchOptions: ISearchOption[],
-    setCurrentResults: Dispatch<SetStateAction<IFlat[]>>
+    setCurrentResults?: Dispatch<SetStateAction<IFlat[]>>
   ): void;
   getSearchOptions(query: string): ISearchOption[];
   computeResults(query: string): void;
@@ -168,7 +168,9 @@ class SearchService implements ISearchService {
   }
 
   private updateResults(): void {
-    this.setCurrentResults(this.results.slice(0, this.pageSize));
+    if (this.setCurrentResults) {
+      this.setCurrentResults(this.results.slice(0, this.pageSize));
+    }
   }
 
   private computeOpenSearch(query: string) {
