@@ -11,6 +11,7 @@ type Props = {
   flat: IFlat;
   theme: DefaultTheme;
   className?: string;
+  cardBackgroundColor?: string;
 };
 
 const StyledAnchor = styled.a`
@@ -39,8 +40,10 @@ const ImageCol = styled(Col)<{ imageUrl: string }>`
   }
 `;
 
-const InfoContainer = styled.div`
+const InfoContainer = styled.div<{ cardBackgroundColor: string }>`
   padding: 24px;
+  background-color: ${(props) => props.cardBackgroundColor};
+
   @media ${(props) => props.theme.breakpoints.smd} {
     padding: 16px;
   }
@@ -103,9 +106,13 @@ const PriceText = styled.div`
   color: ${(props) => props.theme.colors.secondary};
 `;
 
-const ResultCard = ({ flat, theme, className }: Props): JSX.Element => {
+const ResultCard = ({
+  flat,
+  theme,
+  className,
+  cardBackgroundColor = 'default',
+}: Props): JSX.Element => {
   const i18n = useI18n();
-
   return (
     <div className={className}>
       <Link key={flat.id} href={`/pisos/${flat.id}`} passHref>
@@ -113,7 +120,7 @@ const ResultCard = ({ flat, theme, className }: Props): JSX.Element => {
           <Row>
             <ImageCol xs={24} lg={8} imageUrl={flat.pictureUrls[0]} />
             <Col xs={24} lg={16}>
-              <InfoContainer>
+              <InfoContainer cardBackgroundColor={cardBackgroundColor}>
                 <Title>
                   {i18n.t('flat.title', {
                     type: i18n.t(flatTypeUtils.getFlatTypeLabel(flat.type)),
@@ -200,4 +207,5 @@ export default withTheme(styled(ResultCard)`
   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => props.theme.borderRadius};
   margin-bottom: 32px;
+  overflow: hidden;
 `);

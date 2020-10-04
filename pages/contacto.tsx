@@ -2,17 +2,25 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { deserializeMultiple } from '../common/helpers/serialization';
 
 import { IOffice } from '../common/model/office.model';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import useI18n from '../common/hooks/useI18n';
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { getOffices } from '../backend/offices';
-import { ContactFormSection, OfficesSection } from '../components/contact';
+import {
+  ContactFormSection,
+  OfficesSection,
+  OfficeFlatsSection,
+} from '../components/contact';
 import { Header, Footer } from '../components/shared';
+import { IFlat } from '../common/model/flat.model';
+import Flat from '../backend/salesforce/flat';
 
 interface StaticProps {
   offices: IOffice[];
+  serializedFlats: string;
 }
 
 type Props = StaticProps;
@@ -38,10 +46,11 @@ const Content = styled.main`
   background-color: ${(props) => props.theme.colors.grey};
 `;
 
-const ContactPage = ({ offices }: Props): JSX.Element => {
+const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
   const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
+  const flats = deserializeMultiple(serializedFlats, IFlat);
 
   const onSendButtonClicked = (contact: IContact) => {
     mailchimpService.subscribe(contact, router, i18n);
@@ -78,6 +87,7 @@ const ContactPage = ({ offices }: Props): JSX.Element => {
       <Content>
         <ContactFormSection onSendButtonClicked={onSendButtonClicked} />
         <OfficesSection offices={offices} />
+        <OfficeFlatsSection flats={flats} />
       </Content>
 
       <Footer />
@@ -86,9 +96,13 @@ const ContactPage = ({ offices }: Props): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const flats = await Flat.getFlats();
+  const serializedFlats = Flat.serialize(flats);
+
   return {
     props: {
       offices: getOffices(),
+      serializedFlats: serializedFlats,
     },
   };
 };

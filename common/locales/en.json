@@ -1,209 +1,186 @@
 {
-  "langCode": "en",
-  "header": {
-    "logoAlt": "Real state agency alicante",
-    "sellHouse": "Sell your house",
-    "aboutUs": "About us",
-    "contact": "Contact",
-    "language": "English",
-    "hamburgerLanguage": "Language"
-  },
-  "footer": {
-    "nucleo-sl": "© 2020 Núcleo S.L.",
-    "aviso-legal": "Legal warning",
-    "politica-datos": "Data protection",
-    "politica-cookies": "Cookies policy"
-  },
-  "home": {
-    "title": "Properties in Alicante | Inmobiliaria Núcleo",
-    "description": "Find houses for sale in Alicante, Spain. Flats, Apartments, Chalets. Inmobiliaria Núcleo helps you choose between the best properties in Alicante. Visit Us!",
-    "hero-title-1": "Welcome to",
-    "hero-title-2": "Inmobiliaria Núcleo",
-    "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
-    "vender": "Sell your house",
-    "section-flats-title": "Properties in Alicante",
-    "enviar": "Send",
-    "email": "E-mail address",
-    "blog-showcase-title": "Latest trends in the house market",
-    "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and much more!",
-    "newsletter-title": "Subscribe to our newsletter",
-    "newsletter-input-label": "enter you e-mail and subscribe to the newsletter"
-  },
-  "flat": {
-    "imageCarouselTitle": "{{type}} in {{address}}",
-    "description": "Property description",
-    "yearConstruction": "Year",
-    "price": "Price",
-    "rooms": "Rooms",
-    "roomsShort": "Rooms",
-    "bathrooms": "Bathrooms",
-    "sqrMeters": "Surface",
-    "zone": "Area",
-    "terrace": "Terrace",
-    "garden": "Garden",
-    "elevator": "Elevator",
-    "pictures": "Photos"
-  },
-  "flatDetail": {
-    "title": "{{type}} for sale in {{zone}}, {{city}}. - Inmobiliaria Núcleo",
-    "description": "{{type}} for sale for {{price}}€. {{rooms}} bedroom/s, {{bathrooms}} bathroom/s, {{sqrMeters}} square meters in {{zone}}, {{city}}",
-    "messages": {
-      "recommendedFlats": "You might also like"
+    "langCode": "en",
+    "header": {
+      "logoAlt": "Real state agency alicante",
+      "sellHouse": "Sell your house",
+      "aboutUs": "About us",
+      "contact": "Contact",
+      "language": "English",
+      "hamburgerLanguage": "Language"
     },
-    "actions": {
-      "showAllPhotos": "Show all photos",
-      "requestInfo": "I'm interested"
-    }
-  },
-  "contactForm": {
-    "titleSell": "Do you want to sell a property?",
-    "titleBuy": "Do you want to buy a property?",
-    "name": "Name",
-    "lastName": "Last Name",
-    "email": "E-mail address",
-    "phone": "Phone Number",
-    "address": "Property´s full adress",
-    "subject": "Subject",
-    "send": "Send",
-    "cancel": "Cancel",
-    "validateEmail": "The e-mail you wrote is invalid.",
-    "validateRequired": "Please, fill in this field."
-  },
-  "cookies": {
-    "text": "This site uses profiling cookies to track users. If you continue browsing, we consider you accept it.",
-    "detail": {
-      "title": "Cookies policy",
-      "description": "Cookies policy"
+    "footer": {
+      "nucleo-sl": "© 2020 Núcleo S.L.",
+      "aviso-legal": "Legal warning",
+      "politica-datos": "Data protection",
+      "politica-cookies": "Cookies policy"
     },
-    "actions": {
-      "ok": "OK",
-      "moreInfo": "More information"
-    }
-  },
-  "sellHouse": {
-    "metaTitle": "Your house for sale in Alicante | Inmobiliaria Núcleo",
-    "metaDescription": "Sell your Alicante properties for the best price thanks to Inmobiliaria Núcleo",
-    "form": {
-      "title": "Sell house fast with us",
-      "subtitle": "Please, fill in the following form to get in touch with the Núcleo team",
-      "subtitle2": "Free valuation without commitment",
-      "send": "Send",
-      "contactUs": "Contact us"
+    "home": {
+      "title": "Properties in Alicante | Inmobiliaria Núcleo",
+      "description": "Find houses for sale in Alicante, Spain. Flats, Apartments, Chalets. Inmobiliaria Núcleo helps you choose between the best properties in Alicante. Visit Us!",
+      "hero-title-1": "Welcome to",
+      "hero-title-2": "Inmobiliaria Núcleo",
+      "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
+      "vender": "Sell your house",
+      "section-flats-title": "Properties in Alicante",
+      "enviar": "Send",
+      "email": "E-mail address",
+      "blog-showcase-title": "Latest trends in the house market",
+      "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and much more!",
+      "newsletter-title": "Subscribe to our newsletter",
+      "newsletter-input-label": "enter you e-mail and subscribe to the newsletter"
     },
-    "why": {
-      "title": "Why sell with us?",
-      "properties": {
-        "professional": {
-          "title": "Professionalism",
-          "description": "We offer you a complete and personalized service from the beginning to the end of the sales process"
-        },
-        "fast": {
-          "title": "Speed",
-          "description": "We have a powerful database shared between our offices and more than 30 advisers working to sell your home."
-        },
-        "experience": {
-          "title": "Experience",
-          "description": "After more than 10 years working in Alicante, our team knows the local real estate market perfectly"
-        }
+    "flat": {
+      "imageCarouselTitle": "{{type}} in {{address}}",
+      "description": "Property description",
+      "yearConstruction": "Year",
+      "price": "Price",
+      "rooms": "Rooms",
+      "roomsShort": "Rooms",
+      "bathrooms": "Bathrooms",
+      "sqrMeters": "Surface",
+      "zone": "Area",
+      "terrace": "Terrace",
+      "garden": "Garden",
+      "elevator": "Elevator",
+      "pictures": "Photos"
+    },
+    "flatDetail": {
+      "title": "{{type}} for sale in {{zone}}, {{city}}. - Inmobiliaria Núcleo",
+      "description": "{{type}} for sale for {{price}}€. {{rooms}} bedroom/s, {{bathrooms}} bathroom/s, {{sqrMeters}} square meters in {{zone}}, {{city}}",
+      "messages": {
+        "recommendedFlats": "You might also like"
+      },
+      "actions": {
+        "showAllPhotos": "Show all photos",
+        "requestInfo": "I'm interested"
       }
     },
-    "houseValue": {
-      "title": "Know the value of your property",
-      "subtitle": "Free home appraisal service",
-      "description": "Thanks to our extensive experience in the local real estate market, we know the real sales prices of each neighborhood.<br><br>In addition, we have the most advanced software in real estate management, which allows us to propose the right price to sell your home.<br><br>All of this without obligation and completely free of charge."
+    "contactForm": {
+      "titleSell": "Do you want to sell a property?",
+      "titleBuy": "Do you want to buy a property?",
+      "name": "Name",
+      "lastName": "Last Name",
+      "email": "E-mail address",
+      "phone": "Phone Number",
+      "address": "Property´s full adress",
+      "subject": "Subject",
+      "send": "Send",
+      "cancel": "Cancel",
+      "validateEmail": "The e-mail you wrote is invalid.",
+      "validateRequired": "Please, fill in this field."
     },
-    "idealBuyer": {
-      "title": "We find the ideal buyer",
-      "subtitle": "Fully personalized marketing plan",
-      "description": "We have virtual reality cameras. This way users will visit your property like never before.<br><br> We will also promote your property in our offices as well as in our monthly magazine to give it maximum visibility.<br><br>We carry out an analysis of all the possible buyers profiles to find the ones that best suit your interests."
+    "cookies": {
+      "text": "This site uses profiling cookies to track users. If you continue browsing, we consider you accept it.",
+      "detail": {
+        "title": "Cookies policy",
+        "description": "Cookies policy"
+      },
+      "actions": {
+        "ok": "OK",
+        "moreInfo": "More information"
+      }
     },
-    "adjustNeeds": {
-      "title": "We adjust to your needs",
-      "subtitle": "Integral management, from start to finish",
-      "description": "We do a photographic report (2D and 3D) and we take care of the release of the ads on all the media, both online and offline.<br><br>We take care of all the documentation procedures and accompany you to the notary at the time of signing.<br><br>During the entire process, if you have any questions, you just have to pick up the phone and our advisors will be happy to assist you."
-    }
-  },
-  "aboutUs": {
-    "title": "About us | Inmobiliaria Núcleo",
-    "description": "Real estate in Alicante with more than 10 years of experience. We help you to sell your property or to find the best houses for sale in Alicante",
-    "section-1-title": "About us",
-    "section-1-text": "Inmobiliaria Núcleo is a network of real estate agencies in Alicante with more than 10 years of experience in the sector.<br><br>Currently, Núcleo has 5 offices spread throughout the geography of the province of Alicante.<br><br>Our team has that young spirit with grace and initiative at the forefront of technology and at the same time has great training and experience in the real estate market.",
-    "section-2-title": "Where we come from?",
-    "section-2-text": "Formed by professionals from the real estate and technology sectors who have more than 10 years of experience. Our strategic point of view has always been oriented towards evolution and growth, towards the continuous adaptation that technology offers us.<br><br>Over time, we have left behind the traditional vision that we consider to be stagnant of real estate services, to focus on progressing and looking to the future.",
-    "section-3-title": "Where we go",
-    "section-3-text": "Honesty, integrity and professionalism are the three words that have characterized us throughout our journey. Our future projection has an evolutionary sense. We maintain our essence and personality, while we adapt pro-actively to the needs of the market.<br><br>To achieve our objectives, we surround ourselves with the best professionals in the different fields of interest that our clients need. This way, we offer the best solutions and complete advice, from start to finish, for those who trust."
-  },
-  "contact": {
-    "metaTitle": "Contact | Inmobiliaria Núcleo",
-    "metaDescription": "Alicante Real Estate Inmobiliaria Núcleo contact information",
-    "form": {
-      "title": "Contact us",
-      "subtitle": "Please, fill in the following form to get in touch with the Núcleo team",
-      "subtitle2": "Call us at (+34) 965 999 554",
-      "send": "Send"
+    "sellHouse": {
+      "metaTitle": "Your house for sale in Alicante | Inmobiliaria Núcleo",
+      "metaDescription": "Sell your Alicante properties for the best price thanks to Inmobiliaria Núcleo",
+      "form": {
+        "title": "Sell house fast with us",
+        "subtitle": "Please, fill in the following form to get in touch with the Núcleo team",
+        "subtitle2": "Free valuation without commitment",
+        "send": "Send",
+        "contactUs": "Contact us"
+      },
+      "why": {
+        "title": "Why sell with us?",
+        "properties": {
+          "professional": {
+            "title": "Professionalism",
+            "description": "We offer you a complete and personalized service from the beginning to the end of the sales process"
+          },
+          "fast": {
+            "title": "Speed",
+            "description": "We have a powerful database shared between our offices and more than 30 advisers working to sell your home."
+          },
+          "experience": {
+            "title": "Experience",
+            "description": "After more than 10 years working in Alicante, our team knows the local real estate market perfectly"
+          }
+        }
+      },
+      "houseValue": {
+        "title": "Know the value of your property",
+        "subtitle": "Free home appraisal service",
+        "description": "Thanks to our extensive experience in the local real estate market, we know the real sales prices of each neighborhood.<br><br>In addition, we have the most advanced software in real estate management, which allows us to propose the right price to sell your home.<br><br>All of this without obligation and completely free of charge."
+      },
+      "idealBuyer": {
+        "title": "We find the ideal buyer",
+        "subtitle": "Fully personalized marketing plan",
+        "description": "We have virtual reality cameras. This way users will visit your property like never before.<br><br> We will also promote your property in our offices as well as in our monthly magazine to give it maximum visibility.<br><br>We carry out an analysis of all the possible buyers profiles to find the ones that best suit your interests."
+      },
+      "adjustNeeds": {
+        "title": "We adjust to your needs",
+        "subtitle": "Integral management, from start to finish",
+        "description": "We do a photographic report (2D and 3D) and we take care of the release of the ads on all the media, both online and offline.<br><br>We take care of all the documentation procedures and accompany you to the notary at the time of signing.<br><br>During the entire process, if you have any questions, you just have to pick up the phone and our advisors will be happy to assist you."
+      }
     },
-    "offices": {
-      "title": "Offices"
-    }
-  },
-  "search": {
-    "metaDescription": "Search | Inmobiliaria Núcleo",
-    "title": {
-      "open": "Search results of: \"{{query}}\"",
-      "closed": "Flats in {{query}}"
+    "aboutUs": {
+      "title": "About us | Inmobiliaria Núcleo",
+      "description": "Real estate in Alicante with more than 10 years of experience. We help you to sell your property or to find the best houses for sale in Alicante",
+      "section-1-title": "About us",
+      "section-1-text": "Inmobiliaria Núcleo is a network of real estate agencies in Alicante with more than 10 years of experience in the sector.<br><br>Currently, Núcleo has 5 offices spread throughout the geography of the province of Alicante.<br><br>Our team has that young spirit with grace and initiative at the forefront of technology and at the same time has great training and experience in the real estate market.",
+      "section-2-title": "Where we come from?",
+      "section-2-text": "Formed by professionals from the real estate and technology sectors who have more than 10 years of experience. Our strategic point of view has always been oriented towards evolution and growth, towards the continuous adaptation that technology offers us.<br><br>Over time, we have left behind the traditional vision that we consider to be stagnant of real estate services, to focus on progressing and looking to the future.",
+      "section-3-title": "Where we go",
+      "section-3-text": "Honesty, integrity and professionalism are the three words that have characterized us throughout our journey. Our future projection has an evolutionary sense. We maintain our essence and personality, while we adapt pro-actively to the needs of the market.<br><br>To achieve our objectives, we surround ourselves with the best professionals in the different fields of interest that our clients need. This way, we offer the best solutions and complete advice, from start to finish, for those who trust."
     },
-    "searchBar": {
-      "placeholder": "City, zone or address",
-      "filters": "Filters",
-      "cities": "Cities",
-      "zones": "Zones"
+    "contact": {
+      "metaTitle": "Contact | Inmobiliaria Núcleo",
+      "metaDescription": "Alicante Real Estate Inmobiliaria Núcleo contact information",
+      "form": {
+        "title": "Contact us",
+        "subtitle": "Please, fill in the following form to get in touch with the Núcleo team",
+        "subtitle2": "Call us at (+34) 965 999 554",
+        "send": "Send"
+      },
+      "offices": {
+        "title": "Our offices"
+      },
+      "flats": {
+        "title": "Houses offered",
+        "showmore": "Show more"
+      }
+    },
+    "search": {
+      "metaTitle": "Search for properties in alicante | Inmobiliaria Núcleo",
+      "metaDescription": "Search for properties in alicante through Inmobiliaria Núcleo",
+      "title": {
+        "open": "Search results of: \"{{query}}\"",
+        "closed": "Flats in {{query}}"
+      }
+    },
+    "enums": {
+      "flatType": {
+        "PISO": "Flat",
+        "CASA": "House",
+        "CASA_RURAL": "Cottage",
+        "BOX/PLAZA_DE_GARAJE": "Parking space",
+        "TERRENOS": "Land",
+        "COMERCIAL": "Shop",
+        "ÁTICO": "Loft",
+        "EDIFICIO": "Building",
+        "TRASTERO": "Storage"
+      }
     },
     "messages": {
-      "resultsInfo": "Showing {{pageSize}} of {{resultsCount}} results",
-      "noResults": "No results found"
-    },
-    "actions": {
-      "loadMore": "Load more"
-    }
-  },
-  "subscriptionStatus": {
-    "metaTitle": "Subscription status | Inmobiliaria Núcleo",
-    "metaDescription": "Subscription status | Inmobiliaria Núcleo",
-    "title": {
-      "subscribed": "Thank you for subscribing to our newsletter!",
-      "pending": "Check your email to complete your subscription"
-    },
-    "subtitle": {
-      "subscribed": "We have correctly received your data. We will get in touch with you soon",
-      "pending": "We need your approval in order to get your submitted data and get in touch with you"
-    },
-    "messages": {
-      "visitBlog": "You can read all our news visiting our blog"
-    },
-    "actions": {
-      "visitBlog": "Inmobiliaria Núcleo Blog"
-    }
-  },
-  "enums": {
-    "flatType": {
-      "PISO": "Flat",
-      "CASA": "House",
-      "CASA_RURAL": "Cottage",
-      "BOX/PLAZA_DE_GARAJE": "Parking space",
-      "TERRENOS": "Land",
-      "COMERCIAL": "Shop",
-      "ÁTICO": "Loft",
-      "EDIFICIO": "Building",
-      "TRASTERO": "Storage"
-    }
-  },
-  "messages": {
-    "yes": "Yes",
-    "no": "No",
-    "with": "With",
-    "without": "Without",
-    "mailchimpSubscription": {
-      "error": "There was an error in the subscription process. Please try again"
+      "yes": "Yes",
+      "no": "No",
+      "with": "With",
+      "without": "Without",
+      "mailchimpSubscription": {
+        "subscribed": "Thank you for subscribing to our newsletter",
+        "unsubscribed": "Your subscription has been cancelled",
+        "pending": "Check your email to complete your subscription",
+        "error": "There was an error in the subscription process. Please try again"
+      }
     }
   }
-}
