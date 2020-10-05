@@ -2,20 +2,15 @@ import { NextPage, GetStaticProps } from 'next';
 import globby from 'globby';
 
 import Flat from '../backend/salesforce/flat';
-import { computeSearchOptions } from '../common/hooks/searchService';
 
 const SITE_URL = 'https://www.inmobiliarianucleo.com';
 
-const generateSitemap = async (
-  flatsIds: string[],
-  searchOptionsText: string[]
-) => {
+const generateSitemap = async (flatsIds: string[]) => {
   const pages = await globby([
     'pages/**/*.tsx',
     '!pages/_app.tsx',
     '!pages/_document.tsx',
     '!pages/generate-sitemap.tsx',
-    '!pages/buscar/**',
     '!pages/pisos/**',
   ]);
 
@@ -40,14 +35,6 @@ const generateSitemap = async (
   `;
     })
     .join('')}
-  ${searchOptionsText
-    .map((searchOptionText) => {
-      return `<url>
-    <loc>${`${SITE_URL}/buscar/${searchOptionText}`}</loc>
-  </url>
-  `;
-    })
-    .join('')}
 </urlset>`;
 };
 
@@ -57,11 +44,7 @@ const GenerateSitemap: NextPage = () => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const flats = await Flat.getFlats();
-  const searchOptions = computeSearchOptions(flats);
-  const sitemap = await generateSitemap(
-    flats.map((flat) => flat.id),
-    searchOptions.map((option) => option.text)
-  );
+  const sitemap = await generateSitemap(flats.map((flat) => flat.id));
 
   const fs = require('fs');
   fs.writeFileSync('public/sitemap.xml', sitemap);
