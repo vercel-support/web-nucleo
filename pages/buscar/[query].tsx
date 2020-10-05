@@ -1,26 +1,28 @@
 import { useState, useEffect } from 'react';
-import { GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Row, Col, Button } from 'antd';
 
-import { IFlat } from '../common/model/flat.model';
-import useI18n from '../common/hooks/useI18n';
+import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
 import useSearchService, {
   computeSearchOptions,
-} from '../common/hooks/searchService';
-import Flat from '../backend/salesforce/flat';
-import { Title } from '../components/search';
+  computeResults,
+} from '../../common/hooks/searchService';
+import Flat from '../../backend/salesforce/flat';
+import { Title } from '../../components/search';
 import {
   Header,
   Footer,
   SearchBar,
   ResultsSection,
-} from '../components/shared';
+} from '../../components/shared';
 
 interface StaticProps {
   serializedFlats: string;
+  serializedResults: string;
   serializedSearchOptions: string;
 }
 
@@ -149,6 +151,7 @@ const LoadMoreButton = styled(Button)`
 
 const BuscarPage = ({
   serializedFlats,
+  serializedResults,
   serializedSearchOptions,
   theme,
 }: Props): JSX.Element => {
@@ -156,10 +159,29 @@ const BuscarPage = ({
   const i18n = useI18n();
   const searchService = useSearchService();
 
+  const results = JSON.parse(serializedResults);
+
   const [currentResults, setCurrentResults] = useState([] as IFlat[]);
 
   const [query, setQuery] = useState('');
   const [autoCompleteValue, setAutoCompleteValue] = useState(query);
+
+  const updateQuery = (q: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { q },
+      },
+      {
+        pathname: router.pathname.replace(
+          '[query]',
+          router.query.query as string
+        ),
+        query: { q },
+      },
+      { shallow: true }
+    );
+  };
 
   useEffect(() => {
     searchService.init(
@@ -241,22 +263,26 @@ const BuscarPage = ({
   }, []);
 
   useEffect(() => {
-    const q = (router.query.q as string) || '';
+    const q = router.query.q as string;
+
+    if (router.query.query !== 'q' && !q) {
+      updateQuery(router.query.query as string);
+      return;
+    }
+
+    if (!q) {
+      return;
+    }
+
     setQuery(q);
     setAutoCompleteValue(q);
-    searchService.computeResults(q);
+    if (q === router.query.query) {
+      searchService.setOpenSearch(false);
+      searchService.setResults(results);
+    } else {
+      searchService.computeResults(q);
+    }
   }, [router.query]);
-
-  const updateQuery = (q: string) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: { q },
-      },
-      undefined,
-      { shallow: true }
-    );
-  };
 
   return (
     <Layout id={layoutId}>
@@ -359,15 +385,39 @@ const BuscarPage = ({
   );
 };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const flats = await Flat.getFlats();
+  const searchOptions = computeSearchOptions(flats);
+
+  const paths = searchOptions.map((searchOption) => ({
+    params: { query: searchOption.text },
+  }));
+  paths.push({
+    params: { query: 'q' },
+  });
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async ({
+  params,
+}) => {
   const flats = await Flat.getFlats();
   const serializedFlats = Flat.serialize(flats);
+
+  let serializedResults = JSON.stringify([]);
+  if (params.query !== 'q') {
+    serializedResults = Flat.serialize(
+      computeResults(flats, false, params.query as string)
+    );
+  }
 
   const searchOptions = computeSearchOptions(flats);
 
   return {
     props: {
       serializedFlats,
+      serializedResults,
       serializedSearchOptions: JSON.stringify(searchOptions),
     },
   };

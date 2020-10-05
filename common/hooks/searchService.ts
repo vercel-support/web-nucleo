@@ -95,6 +95,8 @@ interface ISearchService {
     searchOptions: ISearchOption[],
     setCurrentResults?: Dispatch<SetStateAction<IFlat[]>>
   ): void;
+  setResults(results: IFlat[]): void;
+  setOpenSearch(openSearch: boolean): void;
   getSearchOptions(query: string): ISearchOption[];
   computeResults(query: string): void;
   getResultsCount(): number;
@@ -128,6 +130,16 @@ class SearchService implements ISearchService {
     this.updateResults();
   }
 
+  setResults(results: IFlat[]): void {
+    this.results = results;
+    this.computePageSizeDependingOnResultsCount(this.INITIAL_PAGE_SIZE);
+    this.updateResults();
+  }
+
+  setOpenSearch(openSearch: boolean): void {
+    this.openSearch = openSearch;
+  }
+
   getSearchOptions(query: string): ISearchOption[] {
     const auxQuery = query.trim().toLowerCase();
     const city = extractCityFromQuery(auxQuery);
@@ -143,9 +155,7 @@ class SearchService implements ISearchService {
   computeResults(query: string): void {
     this.computeOpenSearch(query);
     const results = computeResults(this.flats, this.openSearch, query);
-    this.results = results;
-    this.computePageSizeDependingOnResultsCount(this.INITIAL_PAGE_SIZE);
-    this.updateResults();
+    this.setResults(results);
   }
 
   getResultsCount(): number {

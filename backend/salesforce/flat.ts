@@ -68,7 +68,7 @@ export default class Flat extends IFlat {
     return Object.assign(flat, obj);
   }
 
-  static serialize(flats: Flat | Flat[]): string {
+  static serialize(flats: IFlat | IFlat[]): string {
     return JSON.stringify(flats);
   }
 

@@ -71,6 +71,10 @@ const DescriptionSection = styled.div`
     `max(${props.theme.grid.getGridColumns(2, 1)}, 40px)`};
 `;
 
+const DescriptionRow = styled(Row)`
+  margin-bottom: 0 !important;
+`;
+
 const FeaturesCardContainer = styled.div`
   margin-top: 0;
   @media ${(props) => props.theme.breakpoints.lgu} {
@@ -165,7 +169,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
           <Summary flat={deserializedFlat} />
         </SummarySection>
         <DescriptionSection>
-          <Row gutter={[80, 48]}>
+          <DescriptionRow gutter={[80, 48]}>
             <Col xs={24} lg={14} xl={15}>
               <Description flat={deserializedFlat} />
             </Col>
@@ -188,7 +192,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
                 </RequestInfoSection>
               </FeaturesCardContainer>
             </Col>
-          </Row>
+          </DescriptionRow>
         </DescriptionSection>
         <FlatsDisplayContainer>
           <FlatsDisplay

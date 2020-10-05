@@ -38,10 +38,16 @@ const WhySellWithUsSection = styled.div`
   margin-top: 3rem;
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-top: 2rem;
+  }
 `;
 
 const ContactUsSection = styled.div`
   margin-top: 3rem;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-top: 2rem;
+  }
   &.smd-only {
     @media ${(props) => props.theme.breakpoints.mdu} {
       display: none;
