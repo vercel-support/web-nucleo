@@ -153,6 +153,7 @@ export default class Flat extends IFlat {
 
   @asyncMemoize
   static async getFlats(): Promise<Flat[]> {
+    console.log('CALLED GET FLATS');
     if (
       process.env.NODE_ENV == 'development' &&
       !('USE_REAL_DATA' in process.env && process.env.USE_REAL_DATA == 'true')
@@ -170,6 +171,7 @@ export default class Flat extends IFlat {
     const flats = await Promise.all(
       records.map((record) => Flat.fromRecord(record))
     );
+    console.log('RETURNING GET FLATS');
     return flats.filter((flat) => flat !== null);
   }
 }
