@@ -175,7 +175,3 @@ export default class Flat extends IFlat {
     return flats.filter((flat) => flat !== null);
   }
 }
-
-(async () => {
-  await Flat.getFlats();
-})();
