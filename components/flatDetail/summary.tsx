@@ -116,7 +116,7 @@ const Summary = ({ flat, className, theme }: Props): JSX.Element => {
           </ImageFlexContainer>
         </ImageContainer>
         <div style={{ marginTop: '1rem' }}>
-          <Info>{formatCurrency(flat.price, 'es' /* i18n.language */)}</Info>
+          <Info>{formatCurrency(flat.price, i18n.activeLocale)}</Info>
         </div>
         {isLgUp && (
           <div style={{ marginTop: '1rem' }}>

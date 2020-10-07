@@ -110,6 +110,17 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${(props) => props.theme.font.family};
     font-style: ${(props) => props.theme.font.style};
   }
+
+  .ant-tooltip-inner {
+    font-family: ${(props) => props.theme.font.family};
+    font-style: ${(props) => props.theme.font.style};
+    background-color: ${(props) => props.theme.colors.secondary};
+    font-size: 12px;
+  }
+
+  .ant-checkbox-inner {
+    border-radius: 0;
+  }
 `;
 
 class MyApp extends App {

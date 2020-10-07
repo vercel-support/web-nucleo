@@ -113,6 +113,7 @@ const ResultCard = ({
   cardBackgroundColor = 'default',
 }: Props): JSX.Element => {
   const i18n = useI18n();
+
   return (
     <div className={className}>
       <Link key={flat.id} href={`/pisos/${flat.id}`} passHref>

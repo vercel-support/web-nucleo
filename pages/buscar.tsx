@@ -6,12 +6,13 @@ import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Row, Col, Button } from 'antd';
 
 import { IFlat } from '../common/model/flat.model';
+import { IFilter } from '../common/model/filter.model';
 import useI18n from '../common/hooks/useI18n';
 import useSearchService, {
   computeSearchOptions,
 } from '../common/hooks/searchService';
 import Flat from '../backend/salesforce/flat';
-import { Title } from '../components/search';
+import { Title, FiltersModal } from '../components/search';
 import {
   Header,
   Footer,
@@ -157,23 +158,36 @@ const BuscarPage = ({
   const searchService = useSearchService();
 
   const [currentResults, setCurrentResults] = useState([] as IFlat[]);
+  const [q, setQ] = useState('');
+  const [autoCompleteValue, setAutoCompleteValue] = useState(q);
+  const [filtersModalVisible, setFiltersModalVisible] = useState(false);
 
-  const [query, setQuery] = useState('');
-  const [autoCompleteValue, setAutoCompleteValue] = useState(query);
-
-  const updateQuery = (q: string) => {
+  const updateQ = (newQ: string) => {
     router.push(
       {
         pathname: router.pathname,
-        query: { q },
+        query: {
+          ...router.query,
+          q: newQ,
+        },
       },
+      undefined,
+      { shallow: true }
+    );
+  };
+
+  const updateFilter = (filter: IFilter) => {
+    const query = searchService.generateQueryFromFilter(filter);
+    console.log(query);
+    router.push(
       {
-        pathname: router.pathname.replace(
-          '[query]',
-          router.query.query as string
-        ),
-        query: { q },
+        pathname: router.pathname,
+        query: {
+          q: router.query.q,
+          ...query,
+        },
       },
+      undefined,
       { shallow: true }
     );
   };
@@ -258,15 +272,15 @@ const BuscarPage = ({
   }, []);
 
   useEffect(() => {
-    const q = router.query.q as string;
+    const auxQ = router.query.q as string;
 
-    if (!q) {
+    if (!auxQ) {
       return;
     }
 
-    setQuery(q);
-    setAutoCompleteValue(q);
-    searchService.computeResults(q);
+    setQ(auxQ);
+    setAutoCompleteValue(auxQ);
+    searchService.computeResults(router.query);
   }, [router.query]);
 
   return (
@@ -277,8 +291,8 @@ const BuscarPage = ({
         <title>
           {`${
             searchService.isOpenSearch()
-              ? i18n.t('search.title.open', { query })
-              : i18n.t('search.title.closed', { query })
+              ? i18n.t('search.title.open', { query: q })
+              : i18n.t('search.title.closed', { query: q })
           } | Inmobiliaria Núcleo`}
         </title>
         <meta name="description" content={i18n.t('search.metaDescription')} />
@@ -314,14 +328,14 @@ const BuscarPage = ({
               if (!value) {
                 return;
               }
-              updateQuery(value);
+              updateQ(value);
             }}
             onSelect={(option) => {
-              updateQuery(option.text);
+              updateQ(option.text);
             }}
-            /* onFiltersButtonClick={() => {
-              // TODO
-            }} */
+            onFiltersButtonClick={() => {
+              setFiltersModalVisible(true);
+            }}
           />
         </SearchBarSection>
         {/* <MapSection id={mapSectionId}>
@@ -329,7 +343,7 @@ const BuscarPage = ({
         </MapSection> */}
         <ScrollableSection>
           {currentResults.length > 0 && (
-            <Title openSearch={searchService.isOpenSearch()} query={query} />
+            <Title openSearch={searchService.isOpenSearch()} query={q} />
           )}
           <ResultsSection flats={currentResults} />
           <ResultsInfoSection pageSize={searchService.getPageSize()}>
@@ -363,6 +377,17 @@ const BuscarPage = ({
             )}
           </ResultsInfoSection>
         </ScrollableSection>
+
+        <FiltersModal
+          visible={filtersModalVisible}
+          onOk={(filter) => {
+            updateFilter(filter);
+            setFiltersModalVisible(false);
+          }}
+          onCancel={() => {
+            setFiltersModalVisible(false);
+          }}
+        />
       </Content>
 
       <Footer />

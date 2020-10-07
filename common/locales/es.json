@@ -37,6 +37,7 @@
     "roomsShort": "Habs.",
     "bathrooms": "Baños",
     "sqrMeters": "Superficie",
+    "type": "Tipo",
     "zone": "Zona",
     "terrace": "Terraza",
     "garden": "Jardín",
@@ -162,12 +163,17 @@
       "cities": "Ciudades",
       "zones": "Barrios"
     },
+    "filtersModal": {
+      "title": "Filtros"
+    },
     "messages": {
       "resultsInfo": "Mostrando {{pageSize}} de {{resultsCount}} resultados",
       "noResults": "No se encontraron resultados"
     },
     "actions": {
-      "loadMore": "Cargar más"
+      "loadMore": "Cargar más",
+      "applyFilters": "Aplicar filtros",
+      "clearFilters": "Restablecer"
     }
   },
   "subscriptionStatus": {
@@ -206,6 +212,8 @@
     "no": "No",
     "with": "Con",
     "without": "Sin",
+    "lessThan": "o menos",
+    "greaterThan": "o más",
     "mailchimpSubscription": {
       "error": "Hubo un error en el proceso de suscripción. Por favor inténtelo de nuevo"
     }

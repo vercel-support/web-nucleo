@@ -37,6 +37,7 @@
     "roomsShort": "Rooms",
     "bathrooms": "Bathrooms",
     "sqrMeters": "Surface",
+    "type": "Type",
     "zone": "Area",
     "terrace": "Terrace",
     "garden": "Garden",
@@ -162,12 +163,17 @@
       "cities": "Cities",
       "zones": "Zones"
     },
+    "filtersModal": {
+      "title": "Filters"
+    },
     "messages": {
       "resultsInfo": "Showing {{pageSize}} of {{resultsCount}} results",
       "noResults": "No results found"
     },
     "actions": {
-      "loadMore": "Load more"
+      "loadMore": "Load more",
+      "applyFilters": "Apply filters",
+      "clearFilters": "Clear all"
     }
   },
   "subscriptionStatus": {
@@ -206,6 +212,8 @@
     "no": "No",
     "with": "With",
     "without": "Without",
+    "lessThan": "or less",
+    "greaterThan": "or more",
     "mailchimpSubscription": {
       "error": "There was an error in the subscription process. Please try again"
     }

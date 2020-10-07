@@ -38,6 +38,19 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
   .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
     border-top-left-radius: calc(${(props) => props.height} / 2);
     border-bottom-left-radius: calc(${(props) => props.height} / 2);
+    padding-left: 11px;
+    padding-right: 11px;
+    @media ${(props) => props.theme.breakpoints.xs} {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+
+  .ant-input-affix-wrapper > input.ant-input {
+    padding-left: 8px;
+    @media ${(props) => props.theme.breakpoints.xs} {
+      font-size: 14px;
+    }
   }
 
   .ant-input-search-button {
@@ -51,7 +64,7 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
   .ant-input-search-enter-button
     + .ant-input-group-addon
     .ant-input-search-button {
-    padding: 0 8px 0 0;
+    padding: 0 6px 0 0;
     border-top-right-radius: calc(${(props) => props.height} / 2);
     border-bottom-right-radius: calc(${(props) => props.height} / 2);
   }
@@ -68,13 +81,29 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
 
 const FiltersSuffix = styled.div`
   border-left: 1px solid ${(props) => props.theme.colors.grey};
-  padding-left: 8px;
+  padding-left: 11px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    padding-left: 8px;
+  }
+`;
+
+const FiltersButton = styled(Button)`
+  @media ${(props) => props.theme.breakpoints.xs} {
+    height: 24px;
+    padding: 0px 7px;
+  }
 `;
 
 const FiltersIcon = styled.img`
   height: 16px;
   width: 16px;
   color: ${(props) => props.theme.colors.primary};
+`;
+
+const FiltersText = styled.span`
+  @media ${(props) => props.theme.breakpoints.xs} {
+    display: none !important;
+  }
 `;
 
 const computeOptionsByType = (searchOptions: ISearchOption[], type: number) => {
@@ -174,12 +203,14 @@ const SearchBar = ({
           suffix={
             onFiltersButtonClick ? (
               <FiltersSuffix
-                onMouseDown={(e) => e.stopPropagation()}
-                onClick={() => {
+                onMouseUp={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  autoCompleteRef.current.blur();
                   onFiltersButtonClick();
                 }}
               >
-                <Button
+                <FiltersButton
                   type="text"
                   icon={
                     <FiltersIcon
@@ -188,8 +219,10 @@ const SearchBar = ({
                     />
                   }
                 >
-                  {i18n.t('search.searchBar.filters')}
-                </Button>
+                  <FiltersText>
+                    {i18n.t('search.searchBar.filters')}
+                  </FiltersText>
+                </FiltersButton>
               </FiltersSuffix>
             ) : null
           }
