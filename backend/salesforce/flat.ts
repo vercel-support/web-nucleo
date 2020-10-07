@@ -177,5 +177,5 @@ export default class Flat extends IFlat {
 }
 
 (async () => {
-    await Flat.getFlats();
+  await Flat.getFlats();
 })();
