@@ -6,7 +6,7 @@ import { Row, Col, Button } from 'antd';
 
 import { MailchimpStatus } from '../../common/model/mailchimp/enums/mailchimpStatus.enum';
 import useI18n from '../../common/hooks/useI18n';
-import { GA_TRACKING_ID } from '../../libs/gtag';
+import { GA_SOCIALMEDIA_TRACKING_ID } from '../../libs/gtag';
 import { Header, Footer } from '../../components/shared';
 
 interface StaticProps {
@@ -102,9 +102,9 @@ const FlatDetailPage = ({ status }: Props): JSX.Element => {
   const i18n = useI18n();
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') {
+    if (GA_SOCIALMEDIA_TRACKING_ID) {
       window.gtag('event', 'conversion', {
-        send_to: `${GA_TRACKING_ID}/XM8fCMOE7uABENTdlJ8C`,
+        send_to: `${GA_SOCIALMEDIA_TRACKING_ID}/XM8fCMOE7uABENTdlJ8C`,
       });
     }
   }, []);
