@@ -4,6 +4,7 @@ import { IFlat } from '../model/flat.model';
 import { ISearchOption } from '../model/searchOption.model';
 import { IFilter } from '../model/filter.model';
 import { SearchOptionType } from '../model/enums/searchOptionType.enum';
+import { canonizeFlatType } from '../helpers/flatType.utils';
 
 export const computeResults = (
   flats: IFlat[],
@@ -36,7 +37,7 @@ export const computeResults = (
   if (filter) {
     if (Array.isArray(filter.types)) {
       results = results.filter((result) =>
-        filter.types.some((type) => result.type === type)
+        filter.types.some((type) => canonizeFlatType(result.type) === type)
       );
     }
     if (typeof filter.priceMin === 'number') {
