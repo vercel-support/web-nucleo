@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Row, Col, Modal, Form, Slider, Checkbox, Button } from 'antd';
 
@@ -24,7 +25,6 @@ const typesOptions = enumToArray<typeof FlatType>(
 );
 const priceMin = 30000;
 const priceMax = 200000;
-const priceDefaultValue: [number, number] = [priceMin, priceMax];
 const roomsDefaultValue: string[] = [];
 const roomsOptions = ['1', '2', '3', '4', '+4'];
 const bathroomsDefaultValue: string[] = [];
@@ -58,9 +58,31 @@ const FiltersModal: React.FC<Props> = ({
   onOk,
   onCancel,
 }): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
 
   const [form] = Form.useForm();
+
+  const computeInitialState = () => {
+    const rooms = (router.query.rooms as string[]) || roomsDefaultValue;
+    if (router.query.roomsMin) {
+      rooms.push(roomsOptions[roomsOptions.length - 1]);
+    }
+    const bathrooms =
+      (router.query.bathrooms as string[]) || bathroomsDefaultValue;
+    if (router.query.bathroomsMin) {
+      rooms.push(bathroomsOptions[bathroomsOptions.length - 1]);
+    }
+    return {
+      types: (router.query.types as string[]) || typesDefaultValue,
+      price: [
+        router.query.priceMin ? +router.query.priceMin : priceMin,
+        router.query.priceMax ? +router.query.priceMax : priceMax,
+      ],
+      rooms,
+      bathrooms,
+    };
+  };
 
   const generateFilter = (): IFilter => {
     const filter: IFilter = {};
@@ -125,12 +147,7 @@ const FiltersModal: React.FC<Props> = ({
         form={form}
         layout="vertical"
         name="filters"
-        initialValues={{
-          types: typesDefaultValue,
-          price: priceDefaultValue,
-          rooms: roomsDefaultValue,
-          bathrooms: bathroomsDefaultValue,
-        }}
+        initialValues={computeInitialState()}
       >
         <Form.Item name="types" label={i18n.t('flat.type')}>
           <FullWidthCheckboxGroup>
