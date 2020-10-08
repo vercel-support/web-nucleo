@@ -57,26 +57,30 @@ export const computeResults = (
       );
     }
     if (Array.isArray(filter.rooms)) {
-      results = results.filter((result) =>
-        filter.rooms.some((r) =>
-          result.rooms === r || typeof filter.roomsMin === 'number'
-            ? result.rooms >= filter.roomsMin
-            : false
-        )
-      );
+      results = results.filter((result) => {
+        if (
+          typeof filter.roomsMin === 'number' &&
+          result.rooms >= filter.roomsMin
+        ) {
+          return true;
+        }
+        return filter.rooms.some((r) => result.rooms === r);
+      });
     } else {
       if (typeof filter.roomsMin === 'number') {
         results = results.filter((result) => result.rooms >= filter.roomsMin);
       }
     }
     if (Array.isArray(filter.bathrooms)) {
-      results = results.filter((result) =>
-        filter.bathrooms.some((r) =>
-          result.bathrooms === r || typeof filter.bathroomsMin === 'number'
-            ? result.bathrooms >= filter.bathroomsMin
-            : false
-        )
-      );
+      results = results.filter((result) => {
+        if (
+          typeof filter.bathroomsMin === 'number' &&
+          result.bathrooms >= filter.bathroomsMin
+        ) {
+          return true;
+        }
+        return filter.bathrooms.some((r) => result.bathrooms === r);
+      });
     } else {
       if (typeof filter.bathroomsMin === 'number') {
         results = results.filter(

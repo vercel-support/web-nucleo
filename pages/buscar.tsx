@@ -178,7 +178,6 @@ const BuscarPage = ({
 
   const updateFilter = (filter: IFilter) => {
     const query = searchService.generateQueryFromFilter(filter);
-    console.log(query);
     router.push(
       {
         pathname: router.pathname,
