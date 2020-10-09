@@ -2,6 +2,27 @@ import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary
 import { IFlat } from '../../common/model/flat.model';
 import { getSalesforceClient } from './index';
 import { asyncMemoize } from '../helpers';
+import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
+
+const googleMapsClient = new GoogleMapsClient();
+
+async function getCoordinatesFromAddress(
+  address: string,
+  zone: string,
+  city: string
+) {
+  try {
+    const result = await googleMapsClient.geocode({
+      params: {
+        key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+        address: `${address} ${zone} ${city}`,
+      },
+    });
+    return result.data.results[0].geometry.location;
+  } catch {
+    return null;
+  }
+}
 
 function isnull(value) {
   return value === undefined || value === null;
@@ -53,6 +74,8 @@ export default class Flat extends IFlat {
   public hasTerrace: boolean;
   public hasBasement: boolean;
   public stage: string;
+  public approximateLongitude: number;
+  public approximateLatitude: number;
 
   public yearConstruction?: number;
   public yearReform?: number;
@@ -127,6 +150,13 @@ export default class Flat extends IFlat {
       return null;
     }
 
+    const coords = await getCoordinatesFromAddress(address, zone, city);
+    if (isnull(coords)) {
+      return null;
+    }
+
+    const { lat, lng } = coords;
+
     return Flat.fromDict({
       id,
       pictureUrls,
@@ -148,6 +178,8 @@ export default class Flat extends IFlat {
       hasBasement,
       yearConstruction,
       yearReform,
+      approximateLatitude: lat,
+      approximateLongitude: lng,
     });
   }
 

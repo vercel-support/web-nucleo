@@ -12,6 +12,7 @@ type Props = {
   theme: DefaultTheme;
   className?: string;
   cardBackgroundColor?: string;
+  onMouseEnter?: any;
 };
 
 const StyledAnchor = styled.a`
@@ -111,11 +112,12 @@ const ResultCard = ({
   theme,
   className,
   cardBackgroundColor = 'default',
+  onMouseEnter = undefined,
 }: Props): JSX.Element => {
   const i18n = useI18n();
 
   return (
-    <div className={className}>
+    <div className={className} onMouseEnter={onMouseEnter}>
       <Link key={flat.id} href={`/pisos/${flat.id}`} passHref>
         <StyledAnchor>
           <Row>

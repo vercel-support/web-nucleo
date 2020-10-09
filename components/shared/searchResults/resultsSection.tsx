@@ -7,22 +7,44 @@ type Props = {
   flats: IFlat[];
   className?: string;
   cardBackgroundColor?: string;
+  focusedCardBackgroundColor?: string;
+  onFlatHover?: (flat: IFlat, index: number) => void;
+  focusedFlatIndex?: number;
+  parentRef?: any;
 };
 
 const ResultsSection = ({
   flats,
   className,
   cardBackgroundColor,
+  focusedCardBackgroundColor = undefined,
+  focusedFlatIndex = undefined,
+  onFlatHover = undefined,
+  parentRef = undefined,
 }: Props): JSX.Element => {
+  let focusedCardBackgroundColor_ = focusedCardBackgroundColor;
+  if (focusedCardBackgroundColor == undefined) {
+    focusedCardBackgroundColor_ = cardBackgroundColor;
+  }
   return (
-    <div className={className}>
-      {flats.map((flat) => (
-        <ResultCard
-          key={flat.id}
-          flat={flat}
-          cardBackgroundColor={cardBackgroundColor}
-        />
-      ))}
+    <div className={className} ref={parentRef}>
+      {flats.map((flat, i) => {
+        const isFocused = i == focusedFlatIndex;
+        return (
+          <ResultCard
+            key={flat.id}
+            flat={flat}
+            cardBackgroundColor={
+              isFocused ? focusedCardBackgroundColor_ : cardBackgroundColor
+            }
+            onMouseEnter={() => {
+              if (onFlatHover != undefined) {
+                onFlatHover(flat, i);
+              }
+            }}
+          />
+        );
+      })}
     </div>
   );
 };

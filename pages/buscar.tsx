@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ import useSearchService, {
   computeSearchOptions,
 } from '../common/hooks/searchService';
 import Flat from '../backend/salesforce/flat';
-import { Title, FiltersModal } from '../components/search';
+import { Title, FiltersModal, SearchMap } from '../components/search';
 import {
   Header,
   Footer,
@@ -57,12 +57,11 @@ const Content = styled.main`
   }
 `;
 
-// TODO: change left to 0 and right to props.theme.grid.getGridColumns(4, -1)
 const SearchBarSection = styled.div`
   position: absolute;
   top: 0;
-  left: ${(props) => props.theme.grid.getGridColumns(4, -1)};
-  right: ${(props) => props.theme.grid.getGridColumns(4, -1)};
+  left: 0;
+  right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
   padding-top: ${searchBarSectionPaddingTop};
   padding-bottom: ${searchBarSectionPaddingBottom};
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
@@ -87,7 +86,7 @@ const SearchBarSection = styled.div`
   }
 `;
 
-/* const MapSection = styled.div`
+const MapSection = styled.div`
   background-color: grey;
   position: absolute;
   top: 0;
@@ -102,16 +101,15 @@ const SearchBarSection = styled.div`
   &.${headerOutOfScreenClass} {
     position: fixed;
   }
-`; */
+`;
 
-// TODO: change margin-left to 0 and margin-right to props.theme.grid.getGridColumns(4, -1)
 const ScrollableSection = styled.div`
   margin-top: calc(
     ${searchBarHeight} + ${searchBarSectionPaddingTop} +
       ${searchBarSectionPaddingBottom}
   );
-  margin-left: ${(props) => props.theme.grid.getGridColumns(4, -1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(4, -1)};
+  margin-left: 0;
+  margin-right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-left: 0;
     margin-right: 0;
@@ -157,10 +155,28 @@ const BuscarPage = ({
   const i18n = useI18n();
   const searchService = useSearchService();
 
+  const resultsSectionRef = useRef();
   const [currentResults, setCurrentResults] = useState([] as IFlat[]);
+  const [focusedFlatIndex, setFocusedFlat] = useState(undefined);
   const [q, setQ] = useState('');
   const [autoCompleteValue, setAutoCompleteValue] = useState(q);
   const [filtersModalVisible, setFiltersModalVisible] = useState(false);
+
+  const setFocusedFlatFromMap = (index: number) => {
+    setFocusedFlat(index);
+    if (
+      resultsSectionRef &&
+      resultsSectionRef.current &&
+      // @ts-ignore
+      resultsSectionRef.current.children
+    ) {
+      // @ts-ignore
+      const focusedEl = resultsSectionRef.current.children[index];
+      focusedEl.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  };
 
   const updateQ = (newQ: string) => {
     router.push(
@@ -337,14 +353,27 @@ const BuscarPage = ({
             }}
           />
         </SearchBarSection>
-        {/* <MapSection id={mapSectionId}>
-          <div>TODO: map</div>
-        </MapSection> */}
+        <MapSection id={mapSectionId}>
+          <SearchMap
+            flats={currentResults}
+            focusedFlatIndex={focusedFlatIndex}
+            setFocusedFlat={setFocusedFlatFromMap}
+          />
+        </MapSection>
         <ScrollableSection>
           {currentResults.length > 0 && (
             <Title openSearch={searchService.isOpenSearch()} query={q} />
           )}
-          <ResultsSection flats={currentResults} />
+          <ResultsSection
+            flats={currentResults}
+            onFlatHover={(flat, index) => {
+              setFocusedFlat(index);
+            }}
+            focusedFlatIndex={focusedFlatIndex}
+            focusedCardBackgroundColor="#f2f2f2"
+            cardBackgroundColor="white"
+            parentRef={resultsSectionRef}
+          />
           <ResultsInfoSection pageSize={searchService.getPageSize()}>
             <Row justify="center">
               <Col>

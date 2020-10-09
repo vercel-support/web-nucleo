@@ -42,6 +42,7 @@ const MyMapComponent = withScriptjs(
               onClick={() => {
                 setSelectedOffice(i);
               }}
+              zIndex={selectedOfficeIndex == i ? 100 : 0}
             />
           );
         })}
