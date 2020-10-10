@@ -23,6 +23,7 @@ const MyMapComponent = withScriptjs(
           lat: flats[focusedFlatIndex || 0].approximateLatitude,
           lng: flats[focusedFlatIndex || 0].approximateLongitude,
         }}
+        options={{ fullscreenControl: false, scrollwheel: true }}
       >
         {flats.map((flat, i) => {
           const iconUrl =
