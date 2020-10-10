@@ -174,7 +174,7 @@ const BuscarPage = ({
       const focusedEl = resultsSectionRef.current.children[index];
       focusedEl.scrollIntoView({
         behavior: 'smooth',
-        block: 'center'
+        block: 'center',
       });
     }
   };
