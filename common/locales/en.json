@@ -157,6 +157,10 @@
       "open": "Search results of: \"{{query}}\"",
       "closed": "Flats in {{query}}"
     },
+    "subtitle": {
+      "filters": "{{resultsCount}} results with the selected filters",
+      "noFilters": "{{resultsCount}} results"
+    },
     "searchBar": {
       "placeholder": "City, zone or address",
       "filters": "Filters",

@@ -146,7 +146,7 @@
       "title": "Nuestras oficinas"
     },
     "flats": {
-      "title": "Casas gestionadas",
+      "title": "Viviendas gestionadas",
       "showmore": "Mostrar más"
     }
   },
@@ -156,6 +156,10 @@
     "title": {
       "open": "Resultados de la búsqueda: \"{{query}}\"",
       "closed": "Viviendas en {{query}}"
+    },
+    "subtitle": {
+      "filters": "{{resultsCount}} resultados con los filtros seleccionados",
+      "noFilters": "{{resultsCount}} resultados"
     },
     "searchBar": {
       "placeholder": "Ciudad, barrio o dirección",

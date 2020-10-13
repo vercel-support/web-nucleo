@@ -349,7 +349,12 @@ const BuscarPage = ({
         </MapSection>
         <ScrollableSection>
           {currentResults.length > 0 && (
-            <Title openSearch={searchService.isOpenSearch()} query={q} />
+            <Title
+              openSearch={searchService.isOpenSearch()}
+              query={q}
+              hasFilters={Object.keys(router.query).length > 1}
+              resultsCount={searchService.getResultsCount()}
+            />
           )}
           <ResultsSection
             flats={currentResults}

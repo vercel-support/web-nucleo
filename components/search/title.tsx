@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 import useI18n from '../../common/hooks/useI18n';
@@ -5,24 +6,38 @@ import useI18n from '../../common/hooks/useI18n';
 type Props = {
   openSearch: boolean;
   query: string;
+  hasFilters: boolean;
+  resultsCount: number;
   className?: string;
 };
 
-const Text = styled.h2`
+const MainText = styled.h2`
   ${(props) => props.theme.font.h2}
   color: ${(props) => props.theme.colors.secondary};
+  margin-bottom: 1rem;
 `;
 
-const Title = ({ openSearch, query, className }: Props): JSX.Element => {
+const Title: React.FC<Props> = ({
+  openSearch,
+  query,
+  hasFilters,
+  resultsCount,
+  className,
+}): JSX.Element => {
   const i18n = useI18n();
 
   return (
     <div className={className}>
-      <Text>
+      <MainText>
         {openSearch
           ? i18n.t('search.title.open', { query })
           : i18n.t('search.title.closed', { query })}
-      </Text>
+      </MainText>
+      <div>
+        {hasFilters
+          ? i18n.t('search.subtitle.filters', { resultsCount })
+          : i18n.t('search.subtitle.noFilters', { resultsCount })}
+      </div>
     </div>
   );
 };

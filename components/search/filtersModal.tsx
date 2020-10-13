@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Row, Col, Modal, Form, Slider, Checkbox, Button } from 'antd';
@@ -63,21 +63,26 @@ const FiltersModal: React.FC<Props> = ({
 
   const [form] = Form.useForm();
 
-  const computeInitialState = () => {
-    const rooms = (router.query.rooms as string[]) || roomsDefaultValue;
+  const computeFormState = () => {
+    const rooms =
+      (router.query.rooms as string[]) || form.getFieldValue('rooms');
     if (router.query.roomsMin) {
       rooms.push(roomsOptions[roomsOptions.length - 1]);
     }
     const bathrooms =
-      (router.query.bathrooms as string[]) || bathroomsDefaultValue;
+      (router.query.bathrooms as string[]) || form.getFieldValue('bathrooms');
     if (router.query.bathroomsMin) {
       rooms.push(bathroomsOptions[bathroomsOptions.length - 1]);
     }
     return {
-      types: (router.query.types as string[]) || typesDefaultValue,
+      types: (router.query.types as string[]) || form.getFieldValue('types'),
       price: [
-        router.query.priceMin ? +router.query.priceMin : priceMin,
-        router.query.priceMax ? +router.query.priceMax : priceMax,
+        router.query.priceMin
+          ? +router.query.priceMin
+          : form.getFieldValue('price')[0],
+        router.query.priceMax
+          ? +router.query.priceMax
+          : form.getFieldValue('price')[1],
       ],
       rooms,
       bathrooms,
@@ -118,6 +123,12 @@ const FiltersModal: React.FC<Props> = ({
     form.resetFields();
   };
 
+  useEffect(() => {
+    if (visible) {
+      setTimeout(() => form.setFieldsValue(computeFormState()));
+    }
+  }, [visible]);
+
   return (
     <StyledModal
       title={i18n.t('search.filtersModal.title')}
@@ -147,7 +158,12 @@ const FiltersModal: React.FC<Props> = ({
         form={form}
         layout="vertical"
         name="filters"
-        initialValues={computeInitialState()}
+        initialValues={{
+          types: typesDefaultValue,
+          price: [priceMin, priceMax],
+          rooms: roomsDefaultValue,
+          bathrooms: bathroomsDefaultValue,
+        }}
       >
         <Form.Item name="types" label={i18n.t('flat.type')}>
           <FullWidthCheckboxGroup>
