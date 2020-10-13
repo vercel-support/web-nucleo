@@ -61,7 +61,11 @@ const MapDiv = styled.div`
   max-height: 100vh;
 `;
 
-const SearchMap = ({ flats, focusedFlatIndex, setFocusedFlat }: Props) => {
+const SearchMap: React.FC<Props> = ({
+  flats,
+  focusedFlatIndex,
+  setFocusedFlat,
+}) => {
   const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
   if (flats.length <= 0) {
     return null;

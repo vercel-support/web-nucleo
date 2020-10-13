@@ -88,18 +88,14 @@ const SearchBarSection = styled.div`
 
 const MapSection = styled.div`
   background-color: grey;
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: ${(props) => props.theme.headerHeight};
   bottom: 0;
   left: ${(props) => props.theme.grid.getGridColumns(14, -1)};
   right: 0;
   z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdd} {
     display: none;
-  }
-
-  &.${headerOutOfScreenClass} {
-    position: fixed;
   }
 `;
 
@@ -155,7 +151,7 @@ const BuscarPage = ({
   const i18n = useI18n();
   const searchService = useSearchService();
 
-  const resultsSectionRef = useRef();
+  const resultsSectionRef = useRef(null);
   const [currentResults, setCurrentResults] = useState([] as IFlat[]);
   const [focusedFlatIndex, setFocusedFlat] = useState(undefined);
   const [q, setQ] = useState('');
@@ -164,13 +160,7 @@ const BuscarPage = ({
 
   const setFocusedFlatFromMap = (index: number) => {
     setFocusedFlat(index);
-    if (
-      resultsSectionRef &&
-      resultsSectionRef.current &&
-      // @ts-ignore
-      resultsSectionRef.current.children
-    ) {
-      // @ts-ignore
+    if (resultsSectionRef.current && resultsSectionRef.current.children) {
       const focusedEl = resultsSectionRef.current.children[index];
       focusedEl.scrollIntoView({
         behavior: 'smooth',
@@ -208,6 +198,59 @@ const BuscarPage = ({
     );
   };
 
+  const handleScroll = (headerHeight: number, footerHeight: number) => {
+    const layoutElement = document.getElementById(layoutId);
+
+    const searchBarSectionElement = document.getElementById(searchBarSectionId);
+    if (searchBarSectionElement) {
+      if (
+        !searchBarSectionElement.className.includes(headerOutOfScreenClass) &&
+        window.scrollY >= headerHeight
+      ) {
+        searchBarSectionElement.className =
+          searchBarSectionElement.className + ' ' + headerOutOfScreenClass;
+      }
+      if (
+        searchBarSectionElement.className.includes(headerOutOfScreenClass) &&
+        window.scrollY < headerHeight
+      ) {
+        searchBarSectionElement.className = searchBarSectionElement.className.replace(
+          headerOutOfScreenClass,
+          ''
+        );
+      }
+    }
+
+    const mapSectionElement = document.getElementById(mapSectionId);
+    if (layoutElement && mapSectionElement) {
+      const ammountOfHeaderVisible = headerHeight - window.scrollY;
+      if (ammountOfHeaderVisible > 0) {
+        mapSectionElement.style.setProperty(
+          'top',
+          `${ammountOfHeaderVisible}px`
+        );
+      }
+      if (ammountOfHeaderVisible <= 0) {
+        mapSectionElement.style.setProperty('top', '0');
+      }
+
+      const ammountOfFooterVisible =
+        window.scrollY +
+        window.innerHeight +
+        footerHeight -
+        layoutElement.clientHeight;
+      if (ammountOfFooterVisible > 0) {
+        mapSectionElement.style.setProperty(
+          'bottom',
+          `${ammountOfFooterVisible}px`
+        );
+      }
+      if (ammountOfFooterVisible <= 0) {
+        mapSectionElement.style.setProperty('bottom', '0');
+      }
+    }
+  };
+
   useEffect(() => {
     searchService.init(
       JSON.parse(serializedFlats),
@@ -220,71 +263,14 @@ const BuscarPage = ({
     const headerHeight = +theme.headerHeight.replace('px', '');
     const footerHeight = +theme.footerHeight.replace('px', '');
 
-    // TODO: debounce
-    const handleScroll = () => {
-      const layoutElement = document.getElementById(layoutId);
+    window.addEventListener('scroll', () =>
+      handleScroll(headerHeight, footerHeight)
+    );
 
-      const searchBarSectionElement = document.getElementById(
-        searchBarSectionId
+    return () =>
+      window.removeEventListener('scroll', () =>
+        handleScroll(headerHeight, footerHeight)
       );
-      if (searchBarSectionElement) {
-        if (
-          !searchBarSectionElement.className.includes(headerOutOfScreenClass) &&
-          window.scrollY >= headerHeight
-        ) {
-          searchBarSectionElement.className =
-            searchBarSectionElement.className + ' ' + headerOutOfScreenClass;
-        }
-        if (
-          searchBarSectionElement.className.includes(headerOutOfScreenClass) &&
-          window.scrollY < headerHeight
-        ) {
-          searchBarSectionElement.className = searchBarSectionElement.className.replace(
-            headerOutOfScreenClass,
-            ''
-          );
-        }
-      }
-
-      const mapSectionElement = document.getElementById(mapSectionId);
-      if (layoutElement && mapSectionElement) {
-        if (
-          !mapSectionElement.className.includes(headerOutOfScreenClass) &&
-          window.scrollY >= headerHeight
-        ) {
-          mapSectionElement.className =
-            mapSectionElement.className + ' ' + headerOutOfScreenClass;
-        }
-        if (
-          mapSectionElement.className.includes(headerOutOfScreenClass) &&
-          window.scrollY < headerHeight
-        ) {
-          mapSectionElement.className = mapSectionElement.className.replace(
-            headerOutOfScreenClass,
-            ''
-          );
-        }
-
-        const ammountOfFooterVisible =
-          window.scrollY +
-          window.innerHeight +
-          footerHeight -
-          layoutElement.clientHeight;
-        if (ammountOfFooterVisible > 0) {
-          mapSectionElement.style.setProperty(
-            'bottom',
-            `${ammountOfFooterVisible}px`
-          );
-        }
-        if (ammountOfFooterVisible <= 0) {
-          mapSectionElement.style.setProperty('bottom', '0');
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -397,7 +383,15 @@ const BuscarPage = ({
                 >
                   <LoadMoreButton
                     type="primary"
-                    onClick={() => searchService.incrementPageSize()}
+                    onClick={() => {
+                      searchService.incrementPageSize();
+                      setTimeout(() =>
+                        handleScroll(
+                          +theme.headerHeight.replace('px', ''),
+                          +theme.footerHeight.replace('px', '')
+                        )
+                      );
+                    }}
                   >
                     <span>{i18n.t('search.actions.loadMore')}</span>
                   </LoadMoreButton>
