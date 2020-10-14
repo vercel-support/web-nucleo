@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from 'antd';
 import { SearchBar } from '../../components/shared';
 import { ISearchOption } from '../../common/model/searchOption.model';
@@ -220,8 +220,10 @@ const SearchBarContainer = styled.div<{ open: boolean }>`
   @media ${(props) => props.theme.breakpoints.mdu} {
     width: ${(props) => (props.open ? '100%' : '1%')};
     transition: width 0.4s ease-out;
+    margin-top: -2px;
+    margin-left: 4px;
   }
-  margin-top: -2px;
+  margin-top: 0;
   z-index: 150;
 `;
 
@@ -264,7 +266,12 @@ const Hero = ({
 }: Props): JSX.Element => {
   const i18n = useI18n();
   const [openTextBar, setOpenTextBar] = useState(false);
-  const isMdu = useMediaQuery({ query: theme.breakpoints.mdu });
+  const isMdu = !useMediaQuery({ query: theme.breakpoints.smd });
+
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   return (
     <Background>
@@ -278,48 +285,50 @@ const Hero = ({
         <Divider />
         <Subtitle>{i18n.t('home.hero-subtitle')}</Subtitle>
       </Title>
-      <FloatingArea>
-        <div
-          onFocus={() => {
-            setOpenTextBar(true);
-          }}
-          onBlur={() => {
-            setOpenTextBar(false);
-          }}
-        >
-          <SearchBarContainer open={openTextBar}>
-            <SearchBar
-              height="48px"
-              value={autoCompleteValue}
-              options={autoCompleteOptions}
-              onValueChange={onAutoCompleteValueChange}
-              buttonBackgroundColor={theme.colors.secondary}
-              inputPadding={isMdu ? '220px' : '14px'}
-              onSearch={(value) => {
-                if (!value) {
-                  return;
-                }
-                onSearch(value);
-              }}
-              onSelect={(option) => {
-                onSearch(option.text);
-              }}
-            />
-          </SearchBarContainer>
-          <BuyYourHouseComponent openTextBar={openTextBar}>
-            <ActionButton themeColor="secondary">
-              {i18n.t('home.comprar')}
-            </ActionButton>
-          </BuyYourHouseComponent>
-        </div>
-        <SellYourHouseComponent>
-          <Link href="/vender-casa" passHref>
-            <ActionButton themeColor="primary">
-              {i18n.t('home.vender')}
-            </ActionButton>
-          </Link>
-        </SellYourHouseComponent>
-      </FloatingArea>
+      {isMounted ? (
+          <FloatingArea>
+          <div
+            onFocus={() => {
+              setOpenTextBar(true);
+            }}
+            onBlur={() => {
+              setOpenTextBar(false);
+            }}
+          >
+            <SearchBarContainer open={openTextBar}>
+              <SearchBar
+                height={isMdu ? '48px' : '44px'}
+                value={autoCompleteValue}
+                options={autoCompleteOptions}
+                onValueChange={onAutoCompleteValueChange}
+                buttonBackgroundColor={theme.colors.secondary}
+                inputPadding={isMdu ? '220px' : '14px'}
+                onSearch={(value) => {
+                  if (!value) {
+                    return;
+                  }
+                  onSearch(value);
+                }}
+                onSelect={(option) => {
+                  onSearch(option.text);
+                }}
+              />
+            </SearchBarContainer>
+            <BuyYourHouseComponent openTextBar={openTextBar}>
+              <ActionButton themeColor="secondary">
+                {i18n.t('home.comprar')}
+              </ActionButton>
+            </BuyYourHouseComponent>
+          </div>
+          <SellYourHouseComponent>
+            <Link href="/vender-casa" passHref>
+              <ActionButton themeColor="primary">
+                {i18n.t('home.vender')}
+              </ActionButton>
+            </Link>
+          </SellYourHouseComponent>
+        </FloatingArea>
+      ): null}
     </Background>
   );
 };
