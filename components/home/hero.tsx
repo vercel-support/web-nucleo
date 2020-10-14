@@ -1,8 +1,18 @@
-import Link from 'next/link';
+import React from 'react';
+/* import Link from 'next/link'; */
 import styled from 'styled-components';
-import { Button } from 'antd';
+/* import { Button } from 'antd'; */
 
+import { ISearchOption } from '../../common/model/searchOption.model';
 import useI18n from '../../common/hooks/useI18n';
+import { SearchBar } from '../../components/shared';
+
+type Props = {
+  autoCompleteValue: string;
+  autoCompleteOptions: ISearchOption[];
+  onAutoCompleteValueChange: (value: string) => void;
+  onSearch: (value: string) => void;
+};
 
 const Background = styled.div`
   background-image: ${(props) =>
@@ -16,8 +26,8 @@ const Background = styled.div`
 
   position: relative;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
 `;
 
 const Title = styled.div`
@@ -27,18 +37,29 @@ const Title = styled.div`
     margin-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
     margin-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   }
-  width: 100%;
-  margin-top: 50px;
-  margin-bottom: 8px;
+
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    flex: 1;
+  }
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    background-color: ${(props) => props.theme.colors.grey};
+    border-radius: 25px;
+    opacity: 0.8;
+    padding: 30px;
+    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.15);
+  }
 `;
 
-const TitleParagraph = styled.p<{ themeColor: string }>`
+const TitleParagraph = styled.h1<{ themeColor: string }>`
   margin-top: 0;
   margin-bottom: 0;
   letter-spacing: 0em;
   color: ${(props) => props.theme.colors[props.themeColor]};
 
   ${(props) => props.theme.font.h1}
+  @media ${(props) => props.theme.breakpoints.smd} {
+    font-size: 26px;
+  }
 `;
 
 const Divider = styled.hr`
@@ -50,9 +71,13 @@ const Divider = styled.hr`
   border: 1px solid ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.borderRadius};
+  @media ${(props) => props.theme.breakpoints.smd} {
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
 `;
 
-const Subtitle = styled.h1`
+const Subtitle = styled.h2`
   font-weight: bold;
   font-size: 24px;
 
@@ -68,7 +93,7 @@ const Subtitle = styled.h1`
     max-width: ${(props) => props.theme.grid.getGridColumns(14, 0)};
   }
   @media ${(props) => props.theme.breakpoints.sm} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(14, 0)};
+    max-width: ${(props) => props.theme.grid.getGridColumns(18, 0)};
   }
   @media ${(props) => props.theme.breakpoints.xs} {
     max-width: ${(props) => props.theme.grid.getGridColumns(18, 0)};
@@ -79,7 +104,7 @@ const Subtitle = styled.h1`
   ${(props) => props.theme.font.p1}
 `;
 
-const ActionButtons = styled.div`
+const FloatingSection = styled.div`
   position: absolute;
   margin: auto auto;
   bottom: 0;
@@ -87,33 +112,28 @@ const ActionButtons = styled.div`
   right: 0;
 
   z-index: 99;
-  display: flex;
-  justify-content: center;
 
   -ms-transform: translateY(50%);
   transform: translateY(50%);
 
   @media ${(props) => props.theme.breakpoints.xs} {
-    width: ${(props) => props.theme.grid.getGridColumns(18, 0)};
+    width: ${(props) => props.theme.grid.getGridColumns(20, 0)};
   }
   @media ${(props) => props.theme.breakpoints.sm} {
-    width: ${(props) => props.theme.grid.getGridColumns(16, 0)};
+    width: ${(props) => props.theme.grid.getGridColumns(18, 0)};
   }
   @media ${(props) => props.theme.breakpoints.md} {
-    width: ${(props) => props.theme.grid.getGridColumns(13, 0)};
+    width: ${(props) => props.theme.grid.getGridColumns(16, 0)};
   }
   @media ${(props) => props.theme.breakpoints.lg} {
-    width: ${(props) => props.theme.grid.getGridColumns(13, 0)};
+    width: ${(props) => props.theme.grid.getGridColumns(14, 0)};
   }
-  @media ${(props) => props.theme.breakpoints.xl} {
-    width: ${(props) => props.theme.grid.getGridColumns(11, 0)};
-  }
-  @media ${(props) => props.theme.breakpoints.xxl} {
-    width: ${(props) => props.theme.grid.getGridColumns(10, 0)};
+  @media ${(props) => props.theme.breakpoints.xlu} {
+    width: ${(props) => props.theme.grid.getGridColumns(12, 0)};
   }
 `;
 
-const ActionButton = styled(Button)`
+/* const ActionButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,9 +171,14 @@ const ActionButton = styled(Button)`
   @media ${(props) => props.theme.breakpoints.xxl} {
     height: 70px;
   }
-`;
+`; */
 
-const Hero = (): JSX.Element => {
+const Hero: React.FC<Props> = ({
+  autoCompleteValue,
+  autoCompleteOptions,
+  onAutoCompleteValueChange,
+  onSearch,
+}) => {
   const i18n = useI18n();
 
   return (
@@ -168,11 +193,23 @@ const Hero = (): JSX.Element => {
         <Divider />
         <Subtitle>{i18n.t('home.hero-subtitle')}</Subtitle>
       </Title>
-      <ActionButtons>
-        <Link href="/vender-casa" passHref>
-          <ActionButton>{i18n.t('home.vender')}</ActionButton>
-        </Link>
-      </ActionButtons>
+      <FloatingSection>
+        <SearchBar
+          height="48px"
+          value={autoCompleteValue}
+          options={autoCompleteOptions}
+          onValueChange={onAutoCompleteValueChange}
+          onSearch={(value) => {
+            if (!value) {
+              return;
+            }
+            onSearch(value);
+          }}
+          onSelect={(option) => {
+            onSearch(option.text);
+          }}
+        />
+      </FloatingSection>
     </Background>
   );
 };

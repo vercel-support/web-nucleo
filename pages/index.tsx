@@ -15,12 +15,7 @@ import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
 import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
-import {
-  Header,
-  Footer,
-  SearchBar,
-  FlatsDisplayPlaceholder,
-} from '../components/shared';
+import { Header, Footer, FlatsDisplayPlaceholder } from '../components/shared';
 
 interface StaticProps {
   serializedFlats: string;
@@ -57,17 +52,6 @@ const Layout = styled.div`
 const Content = styled.main`
   position: relative;
   flex: auto;
-`;
-
-const SearchBarSection = styled.div`
-  margin-top: 80px;
-  margin-bottom: 48px;
-  margin-left: ${(props) => props.theme.grid.getGridColumns(4, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(4, 1)};
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-    margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  }
 `;
 
 export const Home = ({
@@ -128,24 +112,14 @@ export const Home = ({
       <Header />
 
       <Content>
-        <Hero />
-        <SearchBarSection>
-          <SearchBar
-            height="48px"
-            value={autoCompleteValue}
-            options={searchService.getSearchOptions(autoCompleteValue)}
-            onValueChange={setAutoCompleteValue}
-            onSearch={(value) => {
-              if (!value) {
-                return;
-              }
-              onSearch(value);
-            }}
-            onSelect={(option) => {
-              onSearch(option.text);
-            }}
-          />
-        </SearchBarSection>
+        <Hero
+          autoCompleteValue={autoCompleteValue}
+          autoCompleteOptions={searchService.getSearchOptions(
+            autoCompleteValue
+          )}
+          onAutoCompleteValueChange={setAutoCompleteValue}
+          onSearch={onSearch}
+        />
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={flats}
