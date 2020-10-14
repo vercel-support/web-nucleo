@@ -268,10 +268,10 @@ const Hero = ({
   const [openTextBar, setOpenTextBar] = useState(false);
   const isMdu = !useMediaQuery({ query: theme.breakpoints.smd });
 
-  const [isMounted, setIsMounted] = useState(false)
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   return (
     <Background>
@@ -286,7 +286,7 @@ const Hero = ({
         <Subtitle>{i18n.t('home.hero-subtitle')}</Subtitle>
       </Title>
       {isMounted ? (
-          <FloatingArea>
+        <FloatingArea>
           <div
             onFocus={() => {
               setOpenTextBar(true);
@@ -328,7 +328,7 @@ const Hero = ({
             </Link>
           </SellYourHouseComponent>
         </FloatingArea>
-      ): null}
+      ) : null}
     </Background>
   );
 };
