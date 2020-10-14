@@ -21,6 +21,7 @@
     "hero-title-2": "Inmobiliaria Núcleo",
     "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
     "vender": "Sell your house",
+    "comprar": "Buy your house",
     "section-flats-title": "Properties in Alicante",
     "enviar": "Send",
     "email": "E-mail address",
@@ -162,7 +163,7 @@
       "noFilters": "{{resultsCount}} results"
     },
     "searchBar": {
-      "placeholder": "Search flats for sale",
+      "placeholder": "City, zone or address",
       "filters": "Filters",
       "cities": "Cities",
       "zones": "Zones"

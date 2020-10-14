@@ -21,6 +21,7 @@
     "hero-title-2": "Inmobiliaria Núcleo",
     "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
     "vender": "Vender casa",
+    "comprar": "Comprar casa",
     "section-flats-title": "Viviendas en Alicante",
     "enviar": "Enviar",
     "email": "Correo electrónico",
@@ -162,7 +163,7 @@
       "noFilters": "{{resultsCount}} resultados"
     },
     "searchBar": {
-      "placeholder": "Buscar viviendas en venta",
+      "placeholder": "Ciudad, barrio o dirección",
       "filters": "Filtros",
       "cities": "Ciudades",
       "zones": "Barrios"

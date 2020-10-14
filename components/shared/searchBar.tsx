@@ -15,9 +15,21 @@ type Props = {
   onSelect: (option: ISearchOption) => void;
   onFiltersButtonClick?: () => void;
   className?: string;
+  buttonBackgroundColor?: string;
+  buttonColor?: string;
+  inputPadding?: string;
 };
 
-const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
+const StyledAutoComplete = styled(AutoComplete)<{
+  height: string;
+  buttonBackgroundColor: string;
+  buttonColor: string;
+  inputPadding: string;
+}>`
+  .ant-input {
+    padding-left: ${(props) => props.inputPadding} !important;
+    font-size: 15px !important;
+  }
   .ant-input-affix-wrapper {
     border-color: #d9d9d9;
     &:focus,
@@ -25,6 +37,10 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
       border-color: #d9d9d9;
       box-shadow: none;
     }
+  }
+
+  .ant-input-group-wrapper {
+    overflow: hidden !important;
   }
 
   .ant-input-affix-wrapper-focused {
@@ -66,6 +82,10 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
     border-left-width: 0;
   }
 
+  .ant-input-group-addon {
+    border-radius: 50% !important;
+  }
+
   .ant-input-search-enter-button
     + .ant-input-group-addon
     .ant-input-search-button {
@@ -75,8 +95,9 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
   }
 
   .anticon-search {
-    background-color: ${(props) => props.theme.colors.primary};
-    color: white;
+    background-color: ${(props) => props.buttonBackgroundColor};
+    color: ${(props) => props.buttonColor};
+
     padding: 10px;
     height: 36px;
     width: 36px;
@@ -146,6 +167,9 @@ const SearchBar = ({
   onSearch,
   onSelect,
   onFiltersButtonClick,
+  buttonBackgroundColor = '#f94f28',
+  buttonColor = 'white',
+  inputPadding = '14px',
   className,
 }: Props): JSX.Element => {
   const i18n = useI18n();
@@ -174,10 +198,13 @@ const SearchBar = ({
     <div className={className}>
       <StyledAutoComplete
         dropdownClassName="search-dropdown"
+        buttonBackgroundColor={buttonBackgroundColor}
+        buttonColor={buttonColor}
         value={value}
         open={open}
         options={autoCompleteOptions}
         height={height}
+        inputPadding={inputPadding}
         style={{ width: '100%' }}
         ref={autoCompleteRef}
         onSearch={(newValue) => {
