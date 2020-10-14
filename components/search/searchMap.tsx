@@ -18,7 +18,7 @@ const MyMapComponent = withScriptjs(
   withGoogleMap(({ flats, setFocusedFlat, focusedFlatIndex }: Props) => {
     const focusedIndex = focusedFlatIndex || 0;
     if (flats.length <= focusedIndex) {
-        return null;
+      return null;
     }
     return (
       <GoogleMap
