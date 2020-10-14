@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   withScriptjs,
   withGoogleMap,
@@ -5,6 +6,7 @@ import {
   Marker,
 } from 'react-google-maps';
 import styled from 'styled-components';
+
 import { IOffice } from '../../common/model/office.model';
 
 type Props = {
@@ -64,11 +66,11 @@ const MapDiv = styled.div`
   margin-right: 4px;
 `;
 
-const OfficeMap = ({
+const OfficeMap: React.FC<Props> = ({
   offices,
   selectedOfficeIndex,
   setSelectedOffice,
-}: Props) => {
+}) => {
   const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
   return (
     <MyMapComponent

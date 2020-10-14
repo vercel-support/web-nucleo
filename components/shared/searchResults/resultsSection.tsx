@@ -50,10 +50,10 @@ const ResultsSection = ({
 };
 
 export const ResultsSectionTwoColumns = styled(ResultsSection)`
-  @media ${(props) => props.theme.breakpoints.lgu} {
+  @media ${(props) => props.theme.breakpoints.xlu} {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 16px;
+    grid-gap: 32px;
     grid-template-rows: repeat(
       ${(props) => Math.ceil(props.flats.length / 2)},
       1fr
@@ -61,6 +61,10 @@ export const ResultsSectionTwoColumns = styled(ResultsSection)`
   }
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+  @media ${(props) => props.theme.breakpoints.lg} {
+    padding-left: ${(props) => props.theme.grid.getGridColumns(3, 1)};
+    padding-right: ${(props) => props.theme.grid.getGridColumns(3, 1)};
+  }
   @media ${(props) => props.theme.breakpoints.md} {
     padding-left: ${(props) => props.theme.grid.getGridColumns(4, 1)};
     padding-right: ${(props) => props.theme.grid.getGridColumns(4, 1)};

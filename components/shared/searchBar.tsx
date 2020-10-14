@@ -53,6 +53,11 @@ const StyledAutoComplete = styled(AutoComplete)<{ height: string }>`
     }
   }
 
+  .ant-input-group-addon:last-child {
+    border-top-right-radius: calc(${(props) => props.height} / 2);
+    border-bottom-right-radius: calc(${(props) => props.height} / 2);
+  }
+
   .ant-input-search-button {
     height: ${(props) => props.height};
     background-color: white;

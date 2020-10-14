@@ -162,7 +162,7 @@
       "noFilters": "{{resultsCount}} results"
     },
     "searchBar": {
-      "placeholder": "City, zone or address",
+      "placeholder": "Search flats for sale",
       "filters": "Filters",
       "cities": "Cities",
       "zones": "Zones"

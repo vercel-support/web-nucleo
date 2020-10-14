@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { Row, Col, Button } from 'antd';
+
 import { IFlat } from '../../common/model/flat.model';
 import useI18n from '../../common/hooks/useI18n';
 import { ResultsSectionTwoColumns } from '../../components/shared';
@@ -48,24 +50,13 @@ const Gradient = styled.div`
 
 const ShowMore = styled.div`
   position: absolute;
-  width: 100%;
-  text-align: center;
   bottom: 10vh;
   left: 0;
-  cursor: pointer;
-  ${(props) => props.theme.font.p1}
-  font-family: ${(props) => props.theme.font.family};
-  font-style: ${(props) => props.theme.font.family};
-  line-height: 100%;
-  font-weight: 500;
+  right: 0;
+`;
 
-  font-size: 38px;
-  @media ${(props) => props.theme.breakpoints.sm} {
-    font-size: 32px;
-  }
-  @media ${(props) => props.theme.breakpoints.xs} {
-    font-size: 26px;
-  }
+const ShowMoreButton = styled(Button)`
+  width: 100%;
 `;
 
 const OfficeFlatsSection = ({ flats, className }: Props): JSX.Element => {
@@ -82,12 +73,26 @@ const OfficeFlatsSection = ({ flats, className }: Props): JSX.Element => {
       />
       {showAllFlats ? null : (
         <Gradient>
-          <ShowMore
-            onClick={() => {
-              setShowAllFlats(true);
-            }}
-          >
-            {i18n.t('contact.flats.showmore')}
+          <ShowMore>
+            <Row justify="center">
+              <Col
+                xs={{ span: 20 }}
+                sm={{ span: 14 }}
+                md={{ span: 10 }}
+                lg={{ span: 7 }}
+                xl={{ span: 5 }}
+                xxl={{ span: 3 }}
+              >
+                <ShowMoreButton
+                  type="primary"
+                  onClick={() => {
+                    setShowAllFlats(true);
+                  }}
+                >
+                  <span>{i18n.t('contact.flats.showmore')}</span>
+                </ShowMoreButton>
+              </Col>
+            </Row>
           </ShowMore>
         </Gradient>
       )}

@@ -37,9 +37,8 @@ const SecondaryButton = styled(Button)`
   &:hover,
   &:focus,
   &:active {
-    background: ${(props) => props.theme.colors.secondary};
-    border-color: ${(props) => props.theme.colors.secondary};
-    opacity: 0.8;
+    background: ${(props) => props.theme.colors.secondary}cb;
+    border-color: ${(props) => props.theme.colors.secondary}cb;
   }
 `;
 

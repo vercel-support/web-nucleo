@@ -73,7 +73,7 @@ const ContactFormSection = ({ offices, className }: Props): JSX.Element => {
 export default styled(ContactFormSection)`
   margin-top: 64px;
   background-color: white;
-  padding-top: 96px;
-  padding-bottom: 54px;
+  padding-top: 56px;
+  padding-bottom: 48px;
   overflow: hidden;
 `;

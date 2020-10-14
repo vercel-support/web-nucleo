@@ -97,6 +97,9 @@ const MapSection = styled.div`
   @media ${(props) => props.theme.breakpoints.mdd} {
     display: none;
   }
+  &.no-results {
+    display: none;
+  }
 `;
 
 const ScrollableSection = styled.div`
@@ -340,7 +343,10 @@ const BuscarPage = ({
             }}
           />
         </SearchBarSection>
-        <MapSection id={mapSectionId}>
+        <MapSection
+          id={mapSectionId}
+          className={searchService.getResultsCount() === 0 ? 'no-results' : ''}
+        >
           <SearchMap
             flats={currentResults}
             focusedFlatIndex={focusedFlatIndex}

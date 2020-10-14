@@ -162,7 +162,7 @@
       "noFilters": "{{resultsCount}} resultados"
     },
     "searchBar": {
-      "placeholder": "Ciudad, barrio o dirección",
+      "placeholder": "Buscar viviendas en venta",
       "filters": "Filtros",
       "cities": "Ciudades",
       "zones": "Barrios"
