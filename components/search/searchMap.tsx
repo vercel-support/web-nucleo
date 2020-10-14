@@ -16,12 +16,16 @@ type Props = {
 
 const MyMapComponent = withScriptjs(
   withGoogleMap(({ flats, setFocusedFlat, focusedFlatIndex }: Props) => {
+    const focusedIndex = focusedFlatIndex || 0;
+    if (flats.length <= focusedIndex) {
+        return null;
+    }
     return (
       <GoogleMap
         defaultZoom={15}
         defaultCenter={{
-          lat: flats[focusedFlatIndex || 0].approximateLatitude,
-          lng: flats[focusedFlatIndex || 0].approximateLongitude,
+          lat: flats[focusedIndex].approximateLatitude,
+          lng: flats[focusedIndex].approximateLongitude,
         }}
         options={{ fullscreenControl: false, scrollwheel: true }}
       >
