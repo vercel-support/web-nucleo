@@ -145,7 +145,7 @@ const SellYourHouseComponent = styled.div`
   position: absolute;
   top: 0;
   left: 66.67%;
-  right: 0;
+  right: 1px;
   z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdu} {
     min-width: 220px;
@@ -267,7 +267,7 @@ const Hero = ({
                 options={autoCompleteOptions}
                 onValueChange={onAutoCompleteValueChange}
                 buttonBackgroundColor={theme.colors.secondary}
-                inputPadding={isMdu ? '220px' : undefined}
+                inputPadding={isMdu ? 'calc(max(220px, 36%))' : undefined}
                 ref={autoCompleteRef}
                 onSearch={(value) => {
                   if (!value) {

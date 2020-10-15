@@ -31,17 +31,6 @@ const LgUpHiddenCol = styled(Col)`
   }
 `;
 
-const SecondaryButton = styled(Button)`
-  background: ${(props) => props.theme.colors.secondary};
-  border-color: ${(props) => props.theme.colors.secondary};
-  &:hover,
-  &:focus,
-  &:active {
-    background: ${(props) => props.theme.colors.secondary}cb;
-    border-color: ${(props) => props.theme.colors.secondary}cb;
-  }
-`;
-
 const HeaderComp = styled.header<{ alwaysShown: boolean; dropShadow: boolean }>`
   position: absolute;
   top: 0;
@@ -154,9 +143,7 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
         </MdDownHiddenCol>
         <MdDownHiddenCol>
           <Link href="/vender-casa" passHref>
-            <SecondaryButton type="primary">
-              {i18n.t('header.sellHouse')}
-            </SecondaryButton>
+            <Button type="primary">{i18n.t('header.sellHouse')}</Button>
           </Link>
         </MdDownHiddenCol>
         <MdDownHiddenCol>
