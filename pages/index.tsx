@@ -109,7 +109,7 @@ export const Home = ({
           />
         )}
       </Head>
-      <Header />
+      <Header hideSellHouseButton={true} />
 
       <Content>
         <Hero
