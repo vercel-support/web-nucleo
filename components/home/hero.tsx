@@ -168,6 +168,7 @@ const BuyYourHouseComponent = styled.div<{ openTextBar: boolean }>`
   @media ${(props) => props.theme.breakpoints.smd} {
     right: ${(props) => (props.openTextBar ? '100%' : '0')};
     transition: right 0.4s ease-out;
+    -webkit-transition: right 0.4s ease-out;
     overflow: hidden;
   }
 `;
@@ -181,6 +182,7 @@ const SearchBarContainer = styled.div<{ open: boolean }>`
   @media ${(props) => props.theme.breakpoints.mdu} {
     right: ${(props) => (props.open ? '0' : '100%')};
     transition: right 0.4s ease-out;
+    -webkit-transition: right 0.4s ease-out;
     margin-top: -2px;
   }
 `;
