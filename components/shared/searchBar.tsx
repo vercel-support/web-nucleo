@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Input, AutoComplete, Button } from 'antd';
 
 import { ISearchOption } from '../../common/model/searchOption.model';
@@ -18,6 +18,7 @@ type Props = {
   buttonBackgroundColor?: string;
   buttonColor?: string;
   inputPadding?: string;
+  theme: DefaultTheme;
 };
 
 const StyledAutoComplete = styled(AutoComplete)<{
@@ -26,10 +27,6 @@ const StyledAutoComplete = styled(AutoComplete)<{
   buttonColor: string;
   inputPadding: string;
 }>`
-  .ant-input {
-    padding-left: ${(props) => props.inputPadding} !important;
-    font-size: 15px !important;
-  }
   .ant-input-affix-wrapper {
     border-color: #d9d9d9;
     &:focus,
@@ -63,10 +60,8 @@ const StyledAutoComplete = styled(AutoComplete)<{
   }
 
   .ant-input-affix-wrapper > input.ant-input {
-    padding-left: 8px;
-    @media ${(props) => props.theme.breakpoints.xs} {
-      font-size: 14px;
-    }
+    padding-left: ${(props) => props.inputPadding};
+    font-size: 15px;
   }
 
   .ant-input-group-addon:last-child {
@@ -80,10 +75,6 @@ const StyledAutoComplete = styled(AutoComplete)<{
     padding: 8px;
     border-color: #d9d9d9;
     border-left-width: 0;
-  }
-
-  .ant-input-group-addon {
-    border-radius: 50% !important;
   }
 
   .ant-input-search-enter-button
@@ -167,10 +158,11 @@ const SearchBar = ({
   onSearch,
   onSelect,
   onFiltersButtonClick,
-  buttonBackgroundColor = '#f94f28',
+  buttonBackgroundColor,
   buttonColor = 'white',
   inputPadding = '14px',
   className,
+  theme,
 }: Props): JSX.Element => {
   const i18n = useI18n();
 
@@ -198,7 +190,7 @@ const SearchBar = ({
     <div className={className}>
       <StyledAutoComplete
         dropdownClassName="search-dropdown"
-        buttonBackgroundColor={buttonBackgroundColor}
+        buttonBackgroundColor={buttonBackgroundColor || theme.colors.primary}
         buttonColor={buttonColor}
         value={value}
         open={open}
@@ -273,4 +265,4 @@ const SearchBar = ({
   );
 };
 
-export default SearchBar;
+export default withTheme(SearchBar);
