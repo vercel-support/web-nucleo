@@ -258,6 +258,12 @@ const Hero = ({
                 setTimeout(() => autoCompleteRef.current.focus(), 100);
               }
             }}
+            onClick={() => {
+              setOpenTextBar(true);
+              if (autoCompleteRef.current) {
+                setTimeout(() => autoCompleteRef.current.focus(), 100);
+              }
+            }}
             onBlur={() => {
               setOpenTextBar(false);
             }}
