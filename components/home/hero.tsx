@@ -141,7 +141,7 @@ const FloatingArea = styled.div`
   }
 `;
 
-const SellYourHouseComponent = styled.div`
+const SellYourHouseComponent = styled.div<{ openTextBar: boolean }>`
   position: absolute;
   top: 0;
   left: 66.67%;
@@ -149,6 +149,9 @@ const SellYourHouseComponent = styled.div`
   z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdu} {
     min-width: 220px;
+    transform: ${(props) => (props.openTextBar ? 'translateX(0)' : 'translateX(-80px)')};
+    transition: transform 0.4s ease-out;
+    -webkit-transition: transform 0.4s ease-out;
   }
   @media ${(props) => props.theme.breakpoints.smd} {
     top: 56px;
@@ -164,6 +167,9 @@ const BuyYourHouseComponent = styled.div<{ openTextBar: boolean }>`
   z-index: 200;
   @media ${(props) => props.theme.breakpoints.mdu} {
     min-width: 220px;
+    transform: ${(props) => (props.openTextBar ? 'translateX(0)' : 'translateX(80px)')};
+    transition: transform 0.4s ease-out;
+    -webkit-transition: transform 0.4s ease-out;
   }
   @media ${(props) => props.theme.breakpoints.smd} {
     right: ${(props) => (props.openTextBar ? '100%' : '0')};
@@ -181,9 +187,10 @@ const SearchBarContainer = styled.div<{ open: boolean }>`
   z-index: 150;
   @media ${(props) => props.theme.breakpoints.mdu} {
     right: ${(props) => (props.open ? '0' : '100%')};
-    transition: right 0.4s ease-out;
-    -webkit-transition: right 0.4s ease-out;
+    transition: right 0.4s ease-out, transform 0.4s ease-out;
+    -webkit-transition: right 0.4s ease-out, transform 0.4s ease-out;
     margin-top: -2px;
+    transform: ${(props) => (props.open ? 'translateX(0)' : 'translateX(80px)')};
   }
 `;
 
@@ -294,7 +301,7 @@ const Hero = ({
               </ActionButton>
             </BuyYourHouseComponent>
           </div>
-          <SellYourHouseComponent>
+          <SellYourHouseComponent openTextBar={openTextBar}>
             <Link href="/vender-casa" passHref>
               <ActionButton themeColor="primary">
                 {i18n.t('home.vender')}
