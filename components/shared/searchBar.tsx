@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Input, AutoComplete, Button } from 'antd';
 
@@ -150,119 +150,125 @@ const renderItem = (title: string, count: number) => {
   };
 };
 
-const SearchBar = ({
-  height,
-  value,
-  options,
-  onValueChange,
-  onSearch,
-  onSelect,
-  onFiltersButtonClick,
-  buttonBackgroundColor,
-  buttonColor = 'white',
-  inputPadding = '14px',
-  className,
-  theme,
-}: Props): JSX.Element => {
-  const i18n = useI18n();
+const SearchBar = React.forwardRef<any, Props>(
+  (
+    {
+      height,
+      value,
+      options,
+      onValueChange,
+      onSearch,
+      onSelect,
+      onFiltersButtonClick,
+      buttonBackgroundColor,
+      buttonColor = 'white',
+      inputPadding = '14px',
+      className,
+      theme,
+    },
+    ref
+  ) => {
+    const i18n = useI18n();
 
-  const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
-  const autoCompleteRef = useRef(null);
+    const autoCompleteRef =
+      (ref as React.MutableRefObject<any>) || useRef(null);
 
-  const citiesOptions = computeOptionsByType(options, SearchOptionType.CITY);
-  const zonesOptions = computeOptionsByType(options, SearchOptionType.ZONE);
-  const autoCompleteOptions = [];
-  if (citiesOptions.length) {
-    autoCompleteOptions.push({
-      label: renderTitle(i18n.t('search.searchBar.cities')),
-      options: citiesOptions,
-    });
-  }
-  if (zonesOptions.length) {
-    autoCompleteOptions.push({
-      label: renderTitle(i18n.t('search.searchBar.zones')),
-      options: zonesOptions,
-    });
-  }
+    const citiesOptions = computeOptionsByType(options, SearchOptionType.CITY);
+    const zonesOptions = computeOptionsByType(options, SearchOptionType.ZONE);
+    const autoCompleteOptions = [];
+    if (citiesOptions.length) {
+      autoCompleteOptions.push({
+        label: renderTitle(i18n.t('search.searchBar.cities')),
+        options: citiesOptions,
+      });
+    }
+    if (zonesOptions.length) {
+      autoCompleteOptions.push({
+        label: renderTitle(i18n.t('search.searchBar.zones')),
+        options: zonesOptions,
+      });
+    }
 
-  return (
-    <div className={className}>
-      <StyledAutoComplete
-        dropdownClassName="search-dropdown"
-        buttonBackgroundColor={buttonBackgroundColor || theme.colors.primary}
-        buttonColor={buttonColor}
-        value={value}
-        open={open}
-        options={autoCompleteOptions}
-        height={height}
-        inputPadding={inputPadding}
-        style={{ width: '100%' }}
-        ref={autoCompleteRef}
-        onSearch={(newValue) => {
-          setOpen(!!newValue);
-          onValueChange(newValue);
-        }}
-        onSelect={(autoCompleteOption) => {
-          const selectedOption = options.find(
-            (o) => o.text === autoCompleteOption
-          );
-          if (selectedOption) {
-            onSelect(selectedOption);
-          }
-          setOpen(false);
-          setTimeout(() => autoCompleteRef.current.blur());
-        }}
-        onFocus={() => {
-          setOpen(!!value);
-        }}
-        onBlur={() => {
-          setOpen(false);
-        }}
-      >
-        <Input.Search
-          size="large"
-          placeholder={i18n.t('search.searchBar.placeholder')}
-          allowClear={true}
-          suffix={
-            onFiltersButtonClick ? (
-              <FiltersSuffix
-                onMouseUp={(e) => e.stopPropagation()}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  autoCompleteRef.current.blur();
-                  onFiltersButtonClick();
-                }}
-              >
-                <FiltersButton
-                  type="text"
-                  icon={
-                    <FiltersIcon
-                      className="anticon"
-                      src={'/images/filters.svg'}
-                    />
-                  }
-                >
-                  <FiltersText>
-                    {i18n.t('search.searchBar.filters')}
-                  </FiltersText>
-                </FiltersButton>
-              </FiltersSuffix>
-            ) : null
-          }
-          enterButton
+    return (
+      <div className={className}>
+        <StyledAutoComplete
+          dropdownClassName="search-dropdown"
+          buttonBackgroundColor={buttonBackgroundColor || theme.colors.primary}
+          buttonColor={buttonColor}
+          value={value}
+          open={open}
+          options={autoCompleteOptions}
+          height={height}
+          inputPadding={inputPadding}
+          style={{ width: '100%' }}
+          ref={autoCompleteRef}
           onSearch={(newValue) => {
-            setOpen(false);
+            setOpen(!!newValue);
             onValueChange(newValue);
-            onSearch(newValue);
-            if (newValue) {
-              setTimeout(() => autoCompleteRef.current.blur());
-            }
           }}
-        />
-      </StyledAutoComplete>
-    </div>
-  );
-};
+          onSelect={(autoCompleteOption) => {
+            const selectedOption = options.find(
+              (o) => o.text === autoCompleteOption
+            );
+            if (selectedOption) {
+              onSelect(selectedOption);
+            }
+            setOpen(false);
+            setTimeout(() => autoCompleteRef.current.blur());
+          }}
+          onFocus={() => {
+            setOpen(!!value);
+          }}
+          onBlur={() => {
+            setOpen(false);
+          }}
+        >
+          <Input.Search
+            size="large"
+            placeholder={i18n.t('search.searchBar.placeholder')}
+            allowClear={true}
+            suffix={
+              onFiltersButtonClick ? (
+                <FiltersSuffix
+                  onMouseUp={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    autoCompleteRef.current.blur();
+                    onFiltersButtonClick();
+                  }}
+                >
+                  <FiltersButton
+                    type="text"
+                    icon={
+                      <FiltersIcon
+                        className="anticon"
+                        src={'/images/filters.svg'}
+                      />
+                    }
+                  >
+                    <FiltersText>
+                      {i18n.t('search.searchBar.filters')}
+                    </FiltersText>
+                  </FiltersButton>
+                </FiltersSuffix>
+              ) : null
+            }
+            enterButton
+            onSearch={(newValue) => {
+              setOpen(false);
+              onValueChange(newValue);
+              onSearch(newValue);
+              if (newValue) {
+                setTimeout(() => autoCompleteRef.current.blur());
+              }
+            }}
+          />
+        </StyledAutoComplete>
+      </div>
+    );
+  }
+);
 
 export default withTheme(SearchBar);

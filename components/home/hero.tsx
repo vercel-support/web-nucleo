@@ -1,12 +1,12 @@
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { useState, useEffect } from 'react';
-import { Button } from 'antd';
-import { SearchBar } from '../../components/shared';
-import { ISearchOption } from '../../common/model/searchOption.model';
 import { useMediaQuery } from 'react-responsive';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
+import { Button } from 'antd';
 
+import { ISearchOption } from '../../common/model/searchOption.model';
 import useI18n from '../../common/hooks/useI18n';
+import { SearchBar } from '../../components/shared';
 
 type Props = {
   autoCompleteValue: string;
@@ -109,107 +109,67 @@ const Subtitle = styled.h1`
 `;
 
 const FloatingArea = styled.div`
-  z-index: 99;
   position: relative;
-  @media ${(props) => props.theme.breakpoints.xs} {
-    width: calc(${(props) => props.theme.grid.getGridColumns(20, 0)} + 8px);
-    flex-direction: column;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    width: ${(props) => props.theme.grid.getGridColumns(20, 0)};
     margin-top: 32px;
-    margin-bottom: 0;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
   }
-  @media ${(props) => props.theme.breakpoints.sm} {
-    width: calc(${(props) => props.theme.grid.getGridColumns(20, 0)} + 8px);
-    flex-direction: column;
-    margin-top: 32px;
-    margin-bottom: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
+  @media ${(props) => props.theme.breakpoints.mdu} {
+    min-width: 660px;
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    margin: auto auto;
+    height: 44px;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
   @media ${(props) => props.theme.breakpoints.md} {
     width: ${(props) => props.theme.grid.getGridColumns(16, 0)};
-    -ms-transform: translateY(50%);
-    transform: translateY(50%);
-    position: absolute;
-    margin: auto auto;
-    height: 44px;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
   @media ${(props) => props.theme.breakpoints.lg} {
     width: ${(props) => props.theme.grid.getGridColumns(13, 0)};
-    -ms-transform: translateY(50%);
-    transform: translateY(50%);
-    position: absolute;
-    margin: auto auto;
-    height: 44px;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
   @media ${(props) => props.theme.breakpoints.xl} {
     width: ${(props) => props.theme.grid.getGridColumns(11, 0)};
-    -ms-transform: translateY(50%);
-    transform: translateY(50%);
-    position: absolute;
-    margin: auto auto;
-    height: 44px;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
   @media ${(props) => props.theme.breakpoints.xxl} {
     width: ${(props) => props.theme.grid.getGridColumns(10, 0)};
-    -ms-transform: translateY(50%);
-    transform: translateY(50%);
-    position: absolute;
-    margin: auto auto;
-    height: 44px;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
 `;
 
 const SellYourHouseComponent = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 66.67%;
+  right: 0;
+  z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdu} {
-    position: absolute;
-    top: 0;
-    right: 0;
     min-width: 220px;
   }
   @media ${(props) => props.theme.breakpoints.smd} {
-    margin-top: 8px;
+    top: 56px;
+    left: 0;
   }
-  z-index: 100;
 `;
 
 const BuyYourHouseComponent = styled.div<{ openTextBar: boolean }>`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 66.67%;
+  z-index: 200;
   @media ${(props) => props.theme.breakpoints.mdu} {
-    position: absolute;
-    left: 0;
-    top: 0;
     min-width: 220px;
   }
   @media ${(props) => props.theme.breakpoints.smd} {
-    width: ${(props) => (props.openTextBar ? '0' : '100%')};
-    transition: width 0.4s ease-out;
+    right: ${(props) => (props.openTextBar ? '100%' : '0')};
+    transition: right 0.4s ease-out;
     overflow: hidden;
   }
-
-  z-index: 200;
 `;
 
 const SearchBarContainer = styled.div<{ open: boolean }>`
@@ -217,14 +177,12 @@ const SearchBarContainer = styled.div<{ open: boolean }>`
   left: 0;
   top: 0;
   right: 0;
-  @media ${(props) => props.theme.breakpoints.mdu} {
-    width: ${(props) => (props.open ? '100%' : '1%')};
-    transition: width 0.4s ease-out;
-    margin-top: -2px;
-    margin-left: 4px;
-  }
-  margin-top: 0;
   z-index: 150;
+  @media ${(props) => props.theme.breakpoints.mdu} {
+    right: ${(props) => (props.open ? '0' : '100%')};
+    transition: right 0.4s ease-out;
+    margin-top: -2px;
+  }
 `;
 
 const ActionButton = styled(Button)<{ themeColor: string }>`
@@ -265,10 +223,14 @@ const Hero = ({
   theme,
 }: Props): JSX.Element => {
   const i18n = useI18n();
-  const [openTextBar, setOpenTextBar] = useState(false);
+
   const isMdu = !useMediaQuery({ query: theme.breakpoints.smd });
 
+  const autoCompleteRef = useRef(null);
+
+  const [openTextBar, setOpenTextBar] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -285,11 +247,14 @@ const Hero = ({
         <Divider />
         <Subtitle>{i18n.t('home.hero-subtitle')}</Subtitle>
       </Title>
-      {isMounted ? (
+      {isMounted && (
         <FloatingArea>
           <div
             onFocus={() => {
               setOpenTextBar(true);
+              if (autoCompleteRef.current) {
+                setTimeout(() => autoCompleteRef.current.focus(), 100);
+              }
             }}
             onBlur={() => {
               setOpenTextBar(false);
@@ -302,7 +267,8 @@ const Hero = ({
                 options={autoCompleteOptions}
                 onValueChange={onAutoCompleteValueChange}
                 buttonBackgroundColor={theme.colors.secondary}
-                inputPadding={isMdu ? '220px' : '14px'}
+                inputPadding={isMdu ? '220px' : undefined}
+                ref={autoCompleteRef}
                 onSearch={(value) => {
                   if (!value) {
                     return;
@@ -328,7 +294,7 @@ const Hero = ({
             </Link>
           </SellYourHouseComponent>
         </FloatingArea>
-      ) : null}
+      )}
     </Background>
   );
 };
