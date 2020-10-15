@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 
@@ -13,6 +14,7 @@ import {
   deserializeMultiple,
   deserializeSingle,
 } from '../../common/helpers/serialization';
+import * as flatTypeUtils from '../../common/helpers/flatType.utils';
 import Flat from '../../backend/salesforce/flat';
 import {
   ImageCarousel,
@@ -69,6 +71,10 @@ const DescriptionSection = styled.div`
     `max(${props.theme.grid.getGridColumns(2, 1)}, 40px)`};
 `;
 
+const DescriptionRow = styled(Row)`
+  margin-bottom: 0 !important;
+`;
+
 const FeaturesCardContainer = styled.div`
   margin-top: 0;
   @media ${(props) => props.theme.breakpoints.lgu} {
@@ -94,6 +100,7 @@ const FlatsDisplay = dynamic(
 );
 
 const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
   const [isGalleryVisible, setIsGalleryVisible] = useState(false);
@@ -105,7 +112,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
   const deserializedFlat = deserializeSingle(flat, IFlat);
 
   const onBuyButtonClicked = (contact: IContact) => {
-    mailchimpService.subscribe(contact, i18n);
+    mailchimpService.subscribe(contact, router, i18n);
   };
 
   return (
@@ -115,7 +122,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
           {i18n.t('flatDetail.title', {
-            type: i18n.t(`flatTypes.${deserializedFlat.type}`),
+            type: i18n.t(flatTypeUtils.getFlatTypeLabel(deserializedFlat.type)),
             city: deserializedFlat.city,
             zone: deserializedFlat.zone,
           })}
@@ -162,7 +169,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
           <Summary flat={deserializedFlat} />
         </SummarySection>
         <DescriptionSection>
-          <Row gutter={[80, 48]}>
+          <DescriptionRow gutter={[80, 48]}>
             <Col xs={24} lg={14} xl={15}>
               <Description flat={deserializedFlat} />
             </Col>
@@ -185,7 +192,7 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
                 </RequestInfoSection>
               </FeaturesCardContainer>
             </Col>
-          </Row>
+          </DescriptionRow>
         </DescriptionSection>
         <FlatsDisplayContainer>
           <FlatsDisplay

@@ -18,6 +18,9 @@ export class IFlat {
   hasTerrace: boolean;
   hasBasement: boolean;
 
+  approximateLongitude: number;
+  approximateLatitude: number;
+
   yearConstruction?: number;
   yearReform?: number;
 }

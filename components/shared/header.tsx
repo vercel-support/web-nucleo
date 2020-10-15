@@ -9,6 +9,7 @@ import LanguageSelector from './languageSelector';
 type Props = {
   alwaysShown?: boolean;
   dropShadow?: boolean;
+  hideSellHouseButton?: boolean;
 };
 
 const MenuButtons = styled(Row)`
@@ -37,9 +38,8 @@ const SecondaryButton = styled(Button)`
   &:hover,
   &:focus,
   &:active {
-    background: ${(props) => props.theme.colors.secondary};
-    border-color: ${(props) => props.theme.colors.secondary};
-    opacity: 0.8;
+    background: ${(props) => props.theme.colors.secondary}cb;
+    border-color: ${(props) => props.theme.colors.secondary}cb;
   }
 `;
 
@@ -86,7 +86,11 @@ const StyledLink = styled.a<{ active: boolean }>`
   font-weight: ${(props) => (props.active ? 500 : 400)};
 `;
 
-const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
+const Header = ({
+  alwaysShown,
+  dropShadow,
+  hideSellHouseButton,
+}: Props): JSX.Element => {
   const i18n = useI18n();
 
   const hamburgerMenu = (
@@ -153,13 +157,15 @@ const Header = ({ alwaysShown, dropShadow }: Props): JSX.Element => {
             <Button type="text">{i18n.t('header.contact')}</Button>
           </Link>
         </MdDownHiddenCol>
-        <MdDownHiddenCol>
-          <Link href="/vender-casa" passHref>
-            <SecondaryButton type="primary">
-              {i18n.t('header.sellHouse')}
-            </SecondaryButton>
-          </Link>
-        </MdDownHiddenCol>
+        {hideSellHouseButton !== true && (
+          <MdDownHiddenCol>
+            <Link href="/vender-casa" passHref>
+              <SecondaryButton type="primary">
+                {i18n.t('header.sellHouse')}
+              </SecondaryButton>
+            </Link>
+          </MdDownHiddenCol>
+        )}
         <MdDownHiddenCol>
           <LanguageSelector />
         </MdDownHiddenCol>

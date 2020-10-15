@@ -11,6 +11,7 @@ const generateSitemap = async (flatsIds: string[]) => {
     '!pages/_app.tsx',
     '!pages/_document.tsx',
     '!pages/generate-sitemap.tsx',
+    '!pages/buscar.tsx',
     '!pages/pisos/**',
   ]);
 

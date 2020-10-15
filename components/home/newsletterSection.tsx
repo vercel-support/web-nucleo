@@ -61,11 +61,6 @@ const SectionTitle = styled.h2`
 `;
 
 const StyledForm = styled(Form)`
-  & .ant-form-item-label {
-    position: absolute;
-    opacity: 0;
-  }
-
   width: ${(props) => props.theme.grid.getGridColumns(7, 1)};
   @media ${(props) => props.theme.breakpoints.lg} {
     width: ${(props) => props.theme.grid.getGridColumns(9, 1)};
@@ -107,21 +102,17 @@ const NewsletterSection = ({
 
   return (
     <Banner>
-      <SectionTitle>{i18n.t('newsletter-title')}</SectionTitle>
+      <SectionTitle>{i18n.t('home.newsletter-title')}</SectionTitle>
       <Divider />
       <StyledForm
         validateMessages={validateMessages}
         form={form}
         onFinish={(values) => onSubscribeButtonClicked(values.email)}
       >
-        <Form.Item
-          name="email"
-          label={i18n.t('home.newsletter-input-label')}
-          rules={[{ required: true, type: 'email' }]}
-        >
+        <Form.Item name="email" rules={[{ required: true, type: 'email' }]}>
           <Input.Search
-            enterButton={i18n.t('enviar')}
-            placeholder={i18n.t('email')}
+            enterButton={i18n.t('home.enviar')}
+            placeholder={i18n.t('home.email')}
             onClick={() => form.submit()}
           />
         </Form.Item>

@@ -1,11 +1,16 @@
+import { useState, useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
 import useI18n from '../common/hooks/useI18n';
+import useSearchService, {
+  computeSearchOptions,
+} from '../common/hooks/searchService';
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
@@ -13,7 +18,8 @@ import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
 import { Header, Footer, FlatsDisplayPlaceholder } from '../components/shared';
 
 interface StaticProps {
-  flats: string;
+  serializedFlats: string;
+  serializedSearchOptions: string;
 }
 
 type Props = StaticProps;
@@ -48,15 +54,33 @@ const Content = styled.main`
   flex: auto;
 `;
 
-export const Home = ({ flats }: Props): JSX.Element => {
+export const Home = ({
+  serializedFlats,
+  serializedSearchOptions,
+}: Props): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
-  const deserializedFlats = deserializeMultiple(flats, IFlat);
+  const flats = deserializeMultiple(serializedFlats, IFlat);
 
   const onSubscribeButtonClicked = (email: string) => {
     const contact: IContact = { EMAIL: email };
-    mailchimpService.subscribe(contact, i18n);
+    mailchimpService.subscribe(contact, router, i18n);
+  };
+
+  const searchService = useSearchService();
+  const [autoCompleteValue, setAutoCompleteValue] = useState('');
+
+  useEffect(() => {
+    searchService.init([], JSON.parse(serializedSearchOptions));
+  }, []);
+
+  const onSearch = (q: string) => {
+    router.push({
+      pathname: '/buscar',
+      query: { q },
+    });
   };
 
   return (
@@ -64,7 +88,7 @@ export const Home = ({ flats }: Props): JSX.Element => {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{i18n.t('title')}</title>
+        <title>{i18n.t('home.title')}</title>
         <meta name="description" content={i18n.t('home.description')} />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
@@ -85,14 +109,21 @@ export const Home = ({ flats }: Props): JSX.Element => {
           />
         )}
       </Head>
-      <Header />
+      <Header hideSellHouseButton={true} />
 
       <Content>
-        <Hero />
+        <Hero
+          autoCompleteValue={autoCompleteValue}
+          autoCompleteOptions={searchService.getSearchOptions(
+            autoCompleteValue
+          )}
+          onAutoCompleteValueChange={setAutoCompleteValue}
+          onSearch={onSearch}
+        />
         <FlatsDisplayContainer>
           <FlatsDisplay
-            flats={deserializedFlats}
-            title={i18n.t('section-flats-title')}
+            flats={flats}
+            title={i18n.t('home.section-flats-title')}
           />
         </FlatsDisplayContainer>
         <BlogShowcase />
@@ -110,9 +141,12 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const flats = await Flat.getFlats();
   const serializedFlats = Flat.serialize(flats);
 
+  const searchOptions = computeSearchOptions(flats);
+
   return {
     props: {
-      flats: serializedFlats,
+      serializedFlats,
+      serializedSearchOptions: JSON.stringify(searchOptions),
     },
   };
 };

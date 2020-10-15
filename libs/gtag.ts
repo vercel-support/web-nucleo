@@ -1,4 +1,6 @@
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_ANALYTICS_ID;
+export const GA_SOCIALMEDIA_TRACKING_ID =
+  process.env.NEXT_PUBLIC_ANALYTICS_ID_SOCIALMEDIA;
 
 type GoogleAnalyticsEvent = {
   action: string;

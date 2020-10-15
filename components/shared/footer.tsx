@@ -64,14 +64,14 @@ const Footer = ({ className }: Props) => {
   const dropdownMenu = (
     <StyledMenu>
       <Menu.Item key="0">
-        <StyledLink>{i18n.t('aviso-legal')}</StyledLink>
+        <StyledLink>{i18n.t('footer.aviso-legal')}</StyledLink>
       </Menu.Item>
       <Menu.Item key="1">
-        <StyledLink>{i18n.t('politica-datos')}</StyledLink>
+        <StyledLink>{i18n.t('footer.politica-datos')}</StyledLink>
       </Menu.Item>
       <Menu.Item key="2">
         <Link href="/legal/cookies" passHref>
-          <StyledLink>{i18n.t('politica-cookies')}</StyledLink>
+          <StyledLink>{i18n.t('footer.politica-cookies')}</StyledLink>
         </Link>
       </Menu.Item>
     </StyledMenu>
@@ -85,16 +85,20 @@ const Footer = ({ className }: Props) => {
       <DropdownContainer>
         <Dropdown overlay={dropdownMenu} trigger={['click']}>
           <Button type="text" onClick={(e) => e.preventDefault()}>
-            {i18n.t('nucleo-sl')} <DownOutlined />
+            {i18n.t('footer.nucleo-sl')} <DownOutlined />
           </Button>
         </Dropdown>
       </DropdownContainer>
       <MenuButtons>
-        <NucleoLabel>{i18n.t('nucleo-sl')}</NucleoLabel>
-        <StyledButton type="text">{i18n.t('aviso-legal')}</StyledButton>
-        <StyledButton type="text">{i18n.t('politica-datos')}</StyledButton>
+        <NucleoLabel>{i18n.t('footer.nucleo-sl')}</NucleoLabel>
+        <StyledButton type="text">{i18n.t('footer.aviso-legal')}</StyledButton>
+        <StyledButton type="text">
+          {i18n.t('footer.politica-datos')}
+        </StyledButton>
         <Link href="/legal/cookies" passHref>
-          <StyledButton type="text">{i18n.t('politica-cookies')}</StyledButton>
+          <StyledButton type="text">
+            {i18n.t('footer.politica-cookies')}
+          </StyledButton>
         </Link>
       </MenuButtons>
     </footer>

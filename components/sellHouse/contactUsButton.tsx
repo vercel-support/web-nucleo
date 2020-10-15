@@ -16,6 +16,9 @@ const ContactUsButton = ({ onClick, className }: Props): JSX.Element => {
       <Col xs={20} md={10} lg={8} xl={6}>
         <Button
           className={className}
+          htmlType="button"
+          type="primary"
+          size="large"
           onClick={(e) => {
             (e.target as HTMLButtonElement).blur();
             onClick();
@@ -29,12 +32,7 @@ const ContactUsButton = ({ onClick, className }: Props): JSX.Element => {
 };
 
 export default styled(ContactUsButton)`
-  height: 56px;
   width: 100%;
   font-weight: 500;
-  font-size: 18px;
-  color: white;
-  background-color: ${(props) => props.theme.colors.primary};
-  border-color: ${(props) => props.theme.colors.primary};
-  border-radius: 50px;
+  border-radius: 20px;
 `;

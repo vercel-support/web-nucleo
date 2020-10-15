@@ -1,52 +1,53 @@
 {
-	"header": {
+  "langCode": "es",
+  "header": {
     "logoAlt": "Gestión inmobiliaria alicante",
     "sellHouse": "Vender casa",
     "aboutUs": "Quiénes somos",
     "contact": "Contacto",
     "language": "Español",
     "hamburgerLanguage": "Idioma"
-	},
-	"langCode": "es",
-  "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",
-	"home": {
-		"description": "Compra-Venta de viviendas en Alicante. Encuentre inmuebles al mejor precio. Visite Inmobiliaria Núcleo y conozca nuestra oferta de casas en venta en Alicante.",
-    "newsletter-input-label": "introduzca su correo para suscribirse a la newsletter"
-},
-  "hero-title-1": "Bienvenido a",
-  "hero-title-2": "Inmobiliaria Núcleo",
-  "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
-  "comprar": "Comprar",
-  "vender": "Vender casa",
-  "section-flats-title": "Viviendas en Alicante",
-  "enviar": "Enviar",
-  "email": "Correo electrónico",
-  "newsletter-title": "Suscríbase a nuestro boletín",
-  "blog-showcase-title": "Conozca las tendencias del mercado inmobiliario",
-  "blog-showcase-subtitle": "¡Sea el primero en conocer todas las novedades, los mejores rincones de Alicante y mucho más!",
-  "habitaciones": "habitaciones",
-  "nucleo-sl": "© 2020 Núcleo S.L.",
-  "aviso-legal": "Aviso legal",
-  "politica-datos": "Protección de datos",
-  "politica-cookies": "Política de cookies",
+  },
+  "footer": {
+    "nucleo-sl": "© 2020 Núcleo S.L.",
+    "aviso-legal": "Aviso legal",
+    "politica-datos": "Protección de datos",
+    "politica-cookies": "Política de cookies"
+  },
+  "home": {
+    "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",
+    "description": "Compra-Venta de viviendas en Alicante. Encuentre inmuebles al mejor precio. Visite Inmobiliaria Núcleo y conozca nuestra oferta de casas en venta en Alicante.",
+    "hero-title-1": "Bienvenido a",
+    "hero-title-2": "Inmobiliaria Núcleo",
+    "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
+    "vender": "Vender casa",
+    "comprar": "Comprar casa",
+    "section-flats-title": "Viviendas en Alicante",
+    "enviar": "Enviar",
+    "email": "Correo electrónico",
+    "blog-showcase-title": "Conozca las tendencias del mercado inmobiliario",
+    "blog-showcase-subtitle": "¡Sea el primero en conocer todas las novedades, los mejores rincones de Alicante y mucho más!",
+    "newsletter-title": "Suscríbase a nuestra newsletter"
+  },
   "flat": {
-    "name": "Casa en venta en Centro Histórico · Alicante",
-    "address": "Av. del Mar Nr. 11",
+    "title": "{{type}} en {{address}}",
     "description": "Descripción del inmueble",
-    "yearConstruction": "Año de construcción",
-    "yearReform": "Año de reforma",
+    "yearConstruction": "Año",
     "price": "Precio",
     "rooms": "Habitaciones",
+    "roomsShort": "Habs.",
     "bathrooms": "Baños",
     "sqrMeters": "Superficie",
     "type": "Tipo",
     "zone": "Zona",
+    "terrace": "Terraza",
+    "garden": "Jardín",
+    "elevator": "Ascensor",
     "pictures": "Fotos"
   },
   "flatDetail": {
     "title": "{{type}} en venta en {{zone}}, {{city}}. - Inmobiliaria Núcleo",
     "description": "{{type}} en venta por {{price}}€. {{rooms}} dormitorio/s, {{bathrooms}} baño/s, {{sqrMeters}} metros cuadrados en {{zone}}, {{city}}",
-    "imageCarouselTitle": "{{type}} en {{address}}",
     "messages": {
       "recommendedFlats": "También le puede interesar"
     },
@@ -55,19 +56,6 @@
       "requestInfo": "Me interesa este inmueble"
     }
   },
-  "calefaccion": "Calefacción",
-  "aireAcondicionado": "A/C",
-  "terraza": "Terraza",
-  "orientacion": "Orientación",
-  "jardin": "Jardín",
-  "ascensor": "Ascensor",
-  "anio_construccion": "Año construcción",
-  "yes": "Sí",
-  "no": "No",
-  "south": "Sur",
-  "north": "Norte",
-  "west": "Oeste",
-  "east": "Este",
   "contactForm": {
     "titleSell": "¿Quieres vender un inmueble?",
     "titleBuy": "¿Quieres comprar un inmueble?",
@@ -79,8 +67,8 @@
     "subject": "Asunto",
     "send": "Enviar",
     "cancel": "Cancelar",
-    "validateEmail": "El correo electrónico introducido es inválido.",
-    "validateRequired": "Por favor, rellene este campo."
+    "validateEmail": "El correo electrónico introducido es inválido",
+    "validateRequired": "Por favor, rellene este campo"
   },
   "cookies": {
     "text": "Utilizamos cookies propias y de terceros para evaluar el uso que se hace de la web y la actividad general de la misma. Si usted continúa navegando, consideramos que acepta su uso.",
@@ -92,7 +80,7 @@
       "ok": "Aceptar",
       "moreInfo": "Más información"
     }
- },
+  },
   "sellHouse": {
     "metaTitle": "Vender casa en Alicante | Inmobiliaria Núcleo",
     "metaDescription": "Venta de viviendas en Alicante. Visite Inmobiliaria Núcleo y conozca cómo vender casa en Alicante al mejor precio.",
@@ -121,17 +109,17 @@
       }
     },
     "houseValue": {
-      "title": "Conozca el valor de su inmueble", 
+      "title": "Conozca el valor de su inmueble",
       "subtitle": "Servicio gratuito de valoración de su vivienda",
       "description": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada barrio.<br><br>Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender su vivienda.<br><br>Y lo mejor, todo ello sin compromiso y de forma totalmente gratuita."
     },
     "idealBuyer": {
-      "title": "Encontramos al comprador ideal", 
+      "title": "Encontramos al comprador ideal",
       "subtitle": "Plan de marketing totalmente personalizado",
       "description": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la máxima visibilidad<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a sus intereses."
     },
     "adjustNeeds": {
-      "title": "Nos ajustamos a sus necesidades", 
+      "title": "Nos ajustamos a sus necesidades",
       "subtitle": "Gestión integral, de principio a fin",
       "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de la firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados de atenderle."
     }
@@ -156,25 +144,82 @@
       "send": "Enviar"
     },
     "offices": {
-      "title": "Oficinas"
+      "title": "Nuestras oficinas"
+    },
+    "flats": {
+      "title": "Viviendas gestionadas",
+      "showmore": "Mostrar más"
     }
   },
-  "flatTypes": {
-    "Piso": "Piso",
-    "Casa": "Casa",
-    "Casa Rural": "Casa Rural",
-    "Box/Plaza de garaje": "Plaza de garaje",
-    "Terrenos": "Terreno",
-    "Comercial": "Comercio",
-    "Ático": "Ático",
-    "Edificio": "Edificio",
-    "Trastero": "Trastero"
+  "search": {
+    "metaTitle": "Búsqueda de viviendas en Alicante | Inmobiliaria Núcleo",
+    "metaDescription": "Búsqueda de viviendas en Alicante al mejor precio a través de Inmobiliaria Núcleo",
+    "title": {
+      "open": "Resultados de la búsqueda: \"{{query}}\"",
+      "closed": "Viviendas en {{query}}"
+    },
+    "subtitle": {
+      "filters": "{{resultsCount}} resultados con los filtros seleccionados",
+      "noFilters": "{{resultsCount}} resultados"
+    },
+    "searchBar": {
+      "placeholder": "Ciudad, barrio o dirección",
+      "filters": "Filtros",
+      "cities": "Ciudades",
+      "zones": "Barrios"
+    },
+    "filtersModal": {
+      "title": "Filtros"
+    },
+    "messages": {
+      "resultsInfo": "Mostrando {{pageSize}} de {{resultsCount}} resultados",
+      "noResults": "No se encontraron resultados"
+    },
+    "actions": {
+      "loadMore": "Cargar más",
+      "applyFilters": "Aplicar filtros",
+      "clearFilters": "Restablecer"
+    }
+  },
+  "subscriptionStatus": {
+    "metaTitle": "Estado de la subscripción | Inmobiliaria Núcleo",
+    "metaDescription": "Estado de la subscripción | Inmobiliaria Núcleo",
+    "title": {
+      "subscribed": "Gracias por suscribirte a nuestra newsletter",
+      "pending": "Revise su correo para completar la suscripción"
+    },
+    "subtitle": {
+      "subscribed": "Hemos recibido correctamente sus datos. Pronto nos pondremos en contacto con usted",
+      "pending": "Necesitamos su aprobación para obtener los datos introducidos y ponernos en contacto con usted"
+    },
+    "messages": {
+      "visitBlog": "Puede estar al tanto de todas nuestras novedades visitando nuestro blog"
+    },
+    "actions": {
+      "visitBlog": "Blog de Inmobiliaria Núcleo"
+    }
+  },
+  "enums": {
+    "flatType": {
+      "PISO": "Piso",
+      "CASA": "Casa",
+      "CASA_RURAL": "Casa Rural",
+      "BOX/PLAZA_DE_GARAJE": "Plaza de garaje",
+      "TERRENOS": "Terreno",
+      "COMERCIAL": "Comercio",
+      "ÁTICO": "Ático",
+      "EDIFICIO": "Edificio",
+      "TRASTERO": "Trastero"
+    }
   },
   "messages": {
+    "yes": "Sí",
+    "no": "No",
+    "with": "Con",
+    "without": "Sin",
+    "lessThan": "o menos",
+    "greaterThan": "o más",
     "mailchimpSubscription": {
-      "subscribed": "Gracias por suscribirte a nuestra newsletter",
-      "unsubscribed": "Su suscripción ha sido cancelada",
-      "pending": "Revise su correo para completar la suscripción",
       "error": "Hubo un error en el proceso de suscripción. Por favor inténtelo de nuevo"
     }
   }

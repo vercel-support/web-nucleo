@@ -13,19 +13,19 @@ const FeaturesCardRow = styled(Row)`
   margin-bottom: 0 !important;
 `;
 
-const RoomsCol = styled(Col)`
+const FeatureOneCol = styled(Col)`
   border-bottom: 1px solid ${(props) => props.theme.colors.grey};
 `;
 
-const BathroomsCol = styled(Col)`
+const FeatureTwoCol = styled(Col)`
   border-bottom: 1px solid ${(props) => props.theme.colors.grey};
 `;
 
-const ElevatorCol = styled(Col)`
+const FeatureThreeCol = styled(Col)`
   border-bottom: 1px solid ${(props) => props.theme.colors.grey};
 `;
 
-const GardenCol = styled(Col)`
+const FeatureFourCol = styled(Col)`
   border-bottom: 1px solid ${(props) => props.theme.colors.grey};
   @media ${(props) => props.theme.breakpoints.sm} {
     border-bottom-width: 0;
@@ -35,11 +35,11 @@ const GardenCol = styled(Col)`
   }
 `;
 
-const TerraceCol = styled(Col)`
+const FeatureFiveCol = styled(Col)`
   border-bottom-width: 0;
 `;
 
-const YearConstructionCol = styled(Col)`
+const FeatureSixCol = styled(Col)`
   border-bottom-width: 0;
 `;
 
@@ -65,37 +65,37 @@ const FeaturesCard = ({ flat, className }: Props): JSX.Element => {
   return (
     <div className={className}>
       <FeaturesCardRow gutter={[16, 32]}>
-        <RoomsCol xs={12} sm={8} lg={12}>
+        <FeatureOneCol xs={12} sm={8} lg={12}>
           <FeatureTitle>{i18n.t('flat.rooms')}</FeatureTitle>
           <FeatureInfo>{flat.rooms}</FeatureInfo>
-        </RoomsCol>
-        <BathroomsCol xs={12} sm={8} lg={12}>
+        </FeatureOneCol>
+        <FeatureTwoCol xs={12} sm={8} lg={12}>
           <FeatureTitle>{i18n.t('flat.bathrooms')}</FeatureTitle>
           <FeatureInfo>{flat.bathrooms}</FeatureInfo>
-        </BathroomsCol>
-        <ElevatorCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{i18n.t('ascensor')}</FeatureTitle>
+        </FeatureTwoCol>
+        <FeatureThreeCol xs={12} sm={8} lg={12}>
+          <FeatureTitle>{i18n.t('flat.elevator')}</FeatureTitle>
           <FeatureInfo>
-            {flat.hasElevator ? i18n.t('yes') : i18n.t('no')}
+            {flat.hasElevator ? i18n.t('messages.yes') : i18n.t('messages.no')}
           </FeatureInfo>
-        </ElevatorCol>
-        <GardenCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{i18n.t('jardin')}</FeatureTitle>
+        </FeatureThreeCol>
+        <FeatureFourCol xs={12} sm={8} lg={12}>
+          <FeatureTitle>{i18n.t('flat.garden')}</FeatureTitle>
           <FeatureInfo>
-            {flat.hasGarden ? i18n.t('yes') : i18n.t('no')}
+            {flat.hasGarden ? i18n.t('messages.yes') : i18n.t('messages.no')}
           </FeatureInfo>
-        </GardenCol>
-        <TerraceCol xs={12} sm={8} lg={12}>
-          <FeatureTitle>{i18n.t('terraza')}</FeatureTitle>
+        </FeatureFourCol>
+        <FeatureFiveCol xs={12} sm={8} lg={12}>
+          <FeatureTitle>{i18n.t('flat.terrace')}</FeatureTitle>
           <FeatureInfo>
-            {flat.hasTerrace ? i18n.t('yes') : i18n.t('no')}
+            {flat.hasTerrace ? i18n.t('messages.yes') : i18n.t('messages.no')}
           </FeatureInfo>
-        </TerraceCol>
-        {flat.yearConstruction !== undefined ? (
-          <YearConstructionCol xs={12} sm={8} lg={12}>
-            <FeatureTitle>{i18n.t('anio_construccion')}</FeatureTitle>
+        </FeatureFiveCol>
+        {flat.yearConstruction ? (
+          <FeatureSixCol xs={12} sm={8} lg={12}>
+            <FeatureTitle>{i18n.t('flat.yearConstruction')}</FeatureTitle>
             <FeatureInfo>{flat.yearConstruction}</FeatureInfo>
-          </YearConstructionCol>
+          </FeatureSixCol>
         ) : null}
       </FeaturesCardRow>
     </div>
@@ -106,6 +106,6 @@ export default styled(FeaturesCard)`
   -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
-  border-radius: 30px;
+  border-radius: 32px;
   padding: 2rem;
 `;

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3005",
     "dev-real": "USE_REAL_DATA=true next dev -p 3005",
-    "build": "next build",
+    "build": "next build && rm -r .next/temp",
     "start": "cross-env NODE_ENV=production next start -p 3005",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write **/*.{js,ts,tsx}",
@@ -18,14 +18,18 @@
     }
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.13",
     "@sentry/react": "^5.23.0",
     "@sentry/tracing": "^5.23.0",
+    "@types/googlemaps": "^3.39.13",
     "axios": "^0.19.2",
     "blueimp-md5": "^2.17.0",
     "globby": "^11.0.1",
     "imagemin-svgo": "^8.0.0",
     "next": "^9.5.0",
+    "react-google-maps": "^9.4.5",
     "react-scroll": "^1.8.1",
+    "react-swipeable": "^5.5.1",
     "sharp": "^0.25.4"
   },
   "devDependencies": {

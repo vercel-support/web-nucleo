@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import * as Scroll from 'react-scroll';
 
@@ -37,10 +38,16 @@ const WhySellWithUsSection = styled.div`
   margin-top: 3rem;
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-top: 2rem;
+  }
 `;
 
 const ContactUsSection = styled.div`
   margin-top: 3rem;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-top: 2rem;
+  }
   &.smd-only {
     @media ${(props) => props.theme.breakpoints.mdu} {
       display: none;
@@ -53,11 +60,12 @@ const Separator = styled.div`
 `;
 
 const VenderCasaPage = (): JSX.Element => {
+  const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
   const onSendButtonClicked = (contact: IContact) => {
-    mailchimpService.subscribe(contact, i18n);
+    mailchimpService.subscribe(contact, router, i18n);
   };
 
   const onContactUsButtonClicked = () => {

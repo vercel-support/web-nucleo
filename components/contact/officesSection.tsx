@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import { Row, Col } from 'antd';
-
+import OfficeSelector from './officeSelector';
+import OfficeDisplay from './officeDisplay';
 import { IOffice } from '../../common/model/office.model';
 import useI18n from '../../common/hooks/useI18n';
-import { OfficeDetail } from '.';
 
 type Props = {
   offices: IOffice[];
@@ -34,46 +34,46 @@ const Divider = styled.div`
   margin-right: auto;
 `;
 
-const Card = styled.div`
-  border-radius: ${(props) => props.theme.borderRadius};
-  background-color: #ffffff;
-  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+const OfficeDetailsContainer = styled.div`
+  text-align: center;
+  ${(props) => props.theme.font.p1}
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  padding: 64px;
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    padding: 40px;
-  }
-  @media ${(props) => props.theme.breakpoints.xs} {
-    padding: 32px;
-  }
-`;
-
-const CardRow = styled(Row)`
-  margin-bottom: 0 !important;
 `;
 
 const ContactFormSection = ({ offices, className }: Props): JSX.Element => {
   const i18n = useI18n();
-
+  const [selectedOfficeIndex, setSelectedOffice] = useState(0);
+  const selectedOffice = offices[selectedOfficeIndex];
   return (
     <div className={className}>
       <Title>{i18n.t('contact.offices.title')}</Title>
       <Divider />
-      <Card>
-        <CardRow gutter={[24, 32]}>
-          {offices.map((office) => (
-            <Col key={office.id} xs={24} xl={12}>
-              <OfficeDetail office={office} />
-            </Col>
-          ))}
-        </CardRow>
-      </Card>
+      <OfficeSelector
+        offices={offices}
+        selectedOfficeIndex={selectedOfficeIndex}
+        setSelectedOffice={setSelectedOffice}
+      />
+      <OfficeDisplay
+        offices={offices}
+        selectedOfficeIndex={selectedOfficeIndex}
+        setSelectedOffice={setSelectedOffice}
+      />
+      <OfficeDetailsContainer>
+        <span style={{ fontWeight: 500 }}>{selectedOffice.name}: </span>
+        <span>{selectedOffice.address} </span>
+        <span>{selectedOffice.postalCode} </span>
+        <span>{selectedOffice.city} </span>
+        <span>{selectedOffice.phone}</span>
+      </OfficeDetailsContainer>
     </div>
   );
 };
 
 export default styled(ContactFormSection)`
   margin-top: 64px;
-  margin-bottom: 64px;
+  background-color: white;
+  padding-top: 56px;
+  padding-bottom: 48px;
+  overflow: hidden;
 `;

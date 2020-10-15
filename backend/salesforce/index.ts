@@ -1,6 +1,6 @@
 import { Connection } from 'jsforce';
 import { retry } from 'async-retry-decorator';
-import { memoize, binaryToBase64ImageSrc } from '../../common/helpers';
+import { binaryToBase64ImageSrc } from '../../common/helpers';
 import { processImage } from '../images';
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
 import { join } from 'path';
@@ -51,7 +51,6 @@ export class Salesforce {
     return await axios(requestConfig);
   }
 
-  @memoize
   async fetchAttachedImages(entityId: string): Promise<string[]> {
     const basePath = `${process.cwd()}/public`;
     const innerPath = '/gen/';
@@ -127,7 +126,6 @@ export class Salesforce {
     return urls;
   }
 
-  @memoize
   async fetchBase64ImageSource(
     url: string,
     objectName: string,
@@ -148,7 +146,6 @@ export class Salesforce {
     return binaryToBase64ImageSrc(res.data);
   }
 
-  @memoize
   async fetchAllObjectInstances(
     objectName: string,
     fields: string[]

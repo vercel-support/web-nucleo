@@ -1,5 +1,6 @@
 export interface IOffice {
   id: string;
+  shortName: string;
   name: string;
   address: string;
   postalCode: string;
@@ -7,4 +8,6 @@ export interface IOffice {
   country: string;
   phone: string;
   imageUrl: string;
+  lat: number;
+  long: number;
 }
