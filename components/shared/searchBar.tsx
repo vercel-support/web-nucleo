@@ -36,10 +36,6 @@ const StyledAutoComplete = styled(AutoComplete)<{
     }
   }
 
-  .ant-input-group-wrapper {
-    overflow: hidden !important;
-  }
-
   .ant-input-affix-wrapper-focused {
     box-shadow: none;
   }

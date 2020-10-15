@@ -149,7 +149,8 @@ const SellYourHouseComponent = styled.div<{ openTextBar: boolean }>`
   z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdu} {
     min-width: 220px;
-    transform: ${(props) => (props.openTextBar ? 'translateX(0)' : 'translateX(-80px)')};
+    transform: ${(props) =>
+      props.openTextBar ? 'translateX(0)' : 'translateX(-80px)'};
     transition: transform 0.4s ease-out;
     -webkit-transition: transform 0.4s ease-out;
   }
@@ -167,7 +168,8 @@ const BuyYourHouseComponent = styled.div<{ openTextBar: boolean }>`
   z-index: 200;
   @media ${(props) => props.theme.breakpoints.mdu} {
     min-width: 220px;
-    transform: ${(props) => (props.openTextBar ? 'translateX(0)' : 'translateX(80px)')};
+    transform: ${(props) =>
+      props.openTextBar ? 'translateX(0)' : 'translateX(80px)'};
     transition: transform 0.4s ease-out;
     -webkit-transition: transform 0.4s ease-out;
   }
@@ -190,7 +192,8 @@ const SearchBarContainer = styled.div<{ open: boolean }>`
     transition: right 0.4s ease-out, transform 0.4s ease-out;
     -webkit-transition: right 0.4s ease-out, transform 0.4s ease-out;
     margin-top: -2px;
-    transform: ${(props) => (props.open ? 'translateX(0)' : 'translateX(80px)')};
+    transform: ${(props) =>
+      props.open ? 'translateX(0)' : 'translateX(80px)'};
   }
 `;
 
@@ -282,7 +285,9 @@ const Hero = ({
                 options={autoCompleteOptions}
                 onValueChange={onAutoCompleteValueChange}
                 buttonBackgroundColor={theme.colors.secondary}
-                inputPadding={isMdu ? 'calc(max(220px, 36%))' : undefined}
+                inputPadding={
+                  isMdu && openTextBar ? 'calc(max(220px, 36%))' : undefined
+                }
                 ref={autoCompleteRef}
                 onSearch={(value) => {
                   if (!value) {
