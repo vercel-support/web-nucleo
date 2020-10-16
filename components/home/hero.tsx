@@ -217,9 +217,11 @@ const ActionButton = styled(Button)<{ themeColor: string }>`
     border-color: ${(props) => props.theme.colors[props.themeColor]};
     color: ${(props) => props.theme.colors[props.themeColor]};
   }
-  &:focus {
+  &:focus,
+  &:active {
+    color: white;
+    background-color: ${(props) => props.theme.colors[props.themeColor]};
     border-color: ${(props) => props.theme.colors[props.themeColor]};
-    color: ${(props) => props.theme.colors[props.themeColor]};
   }
   border-radius: 40px;
   height: 44px;
@@ -262,20 +264,18 @@ const Hero = ({
       {isMounted && (
         <FloatingArea>
           <div
-            onFocus={() => {
-              setOpenTextBar(true);
-              if (autoCompleteRef.current) {
-                setTimeout(() => autoCompleteRef.current.focus(), 100);
-              }
-            }}
             onClick={() => {
-              setOpenTextBar(true);
-              if (autoCompleteRef.current) {
-                setTimeout(() => autoCompleteRef.current.focus(), 100);
+              if (!openTextBar) {
+                if (autoCompleteRef.current) {
+                  autoCompleteRef.current.focus();
+                }
+                setTimeout(() => setOpenTextBar(true), 100);
               }
             }}
             onBlur={() => {
-              setOpenTextBar(false);
+              if (openTextBar) {
+                setTimeout(() => setOpenTextBar(false), 100);
+              }
             }}
           >
             <SearchBarContainer open={openTextBar}>

@@ -17,6 +17,15 @@ const MainText = styled.h2`
   margin-bottom: 1rem;
 `;
 
+const SecondaryText = styled.div`
+  font-size: 14px;
+  line-height: 18px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    font-size: 12px;
+    line-height: 16px;
+  }
+`;
+
 const Title: React.FC<Props> = ({
   openSearch,
   query,
@@ -33,11 +42,11 @@ const Title: React.FC<Props> = ({
           ? i18n.t('search.title.open', { query })
           : i18n.t('search.title.closed', { query })}
       </MainText>
-      <div>
+      <SecondaryText>
         {hasFilters
           ? i18n.t('search.subtitle.filters', { resultsCount })
           : i18n.t('search.subtitle.noFilters', { resultsCount })}
-      </div>
+      </SecondaryText>
     </div>
   );
 };
