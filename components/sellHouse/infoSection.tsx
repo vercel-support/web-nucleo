@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 
@@ -74,14 +75,20 @@ const Description = styled.div`
   }
 `;
 
-const InfoSection = ({
+const InfoSection: React.FC<Props> = ({
   imageUrl,
   left,
   title,
   subtitle,
   description,
   className,
-}: Props): JSX.Element => {
+}) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <Background imageUrl={imageUrl} left={left} className={className}>
       <Content left={left}>
@@ -90,11 +97,14 @@ const InfoSection = ({
             <Title>{title}</Title>
             <Divider />
             <Subtitle>{subtitle}</Subtitle>
-            <Description
-              dangerouslySetInnerHTML={{
-                __html: description,
-              }}
-            />
+            {isMounted && (
+              <Description
+                id={new Date() + ''}
+                dangerouslySetInnerHTML={{
+                  __html: description,
+                }}
+              />
+            )}
           </Col>
         </Row>
       </Content>
