@@ -279,9 +279,8 @@ class SearchService implements ISearchService {
 
   private updateResults(): void {
     if (this.setCurrentResults) {
-      this.setCurrentResults(
-        this.results.sort((a, b) => a.price - b.price).slice(0, this.pageSize)
-      );
+      const sortedResults = [...this.results].sort((a, b) => a.price - b.price);
+      this.setCurrentResults(sortedResults.slice(0, this.pageSize));
     }
   }
 
