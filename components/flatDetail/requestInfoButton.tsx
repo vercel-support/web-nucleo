@@ -25,8 +25,7 @@ const RequestInfoButton = ({
         htmlType="button"
         type="primary"
         size="large"
-        onClick={(e) => {
-          (e.target as HTMLButtonElement).blur();
+        onClick={() => {
           setModalVisible(true);
         }}
       >
