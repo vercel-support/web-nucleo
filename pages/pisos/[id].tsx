@@ -16,6 +16,8 @@ import {
 } from '../../common/helpers/serialization';
 import * as flatTypeUtils from '../../common/helpers/flatType.utils';
 import Flat from '../../backend/salesforce/flat';
+import { getNearFlats } from '../../backend/recommendations';
+
 import {
   ImageCarousel,
   Summary,
@@ -229,12 +231,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
   const flats = await Flat.getFlats();
   const flatIndex = flats.findIndex((f) => f.id === params.id);
   const flat = flats[flatIndex];
-  const recommendedFlats = [
-    flats[(flatIndex + 1) % flats.length],
-    flats[(flatIndex + 2) % flats.length],
-    flats[(flatIndex + 3) % flats.length],
-    flats[(flatIndex + 4) % flats.length],
-  ];
+  const recommendedFlats = getNearFlats(flats, flatIndex, 4);
+
   const serializedFlat = JSON.stringify(flat);
   const serializedRecommendedFlats = JSON.stringify(recommendedFlats);
 
