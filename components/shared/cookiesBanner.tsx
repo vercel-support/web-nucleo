@@ -63,7 +63,7 @@ export default styled(CookiesBanner)`
   right: 0;
   bottom: 0;
   padding: 2rem;
-  z-index: 101;
+  z-index: 500;
   background-color: rgba(0, 0, 0, 0.85);
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};

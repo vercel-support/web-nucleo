@@ -137,6 +137,16 @@ const ResultsInfoSection = styled.div<{ pageSize: number }>`
   }
 `;
 
+const ResultsInfoText = styled.div`
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    font-size: 12px;
+    line-height: 16px;
+  }
+`;
+
 const LoadMoreButtonRow = styled(Row)`
   margin-top: 24px;
 `;
@@ -373,16 +383,14 @@ const BuscarPage = ({
             parentRef={resultsSectionRef}
           />
           <ResultsInfoSection pageSize={searchService.getPageSize()}>
-            <Row justify="center">
-              <Col>
-                {searchService.getPageSize() > 0
-                  ? i18n.t('search.messages.resultsInfo', {
-                      pageSize: searchService.getPageSize(),
-                      resultsCount: searchService.getResultsCount(),
-                    })
-                  : i18n.t('search.messages.noResults')}
-              </Col>
-            </Row>
+            <ResultsInfoText>
+              {searchService.getPageSize() > 0
+                ? i18n.t('search.messages.resultsInfo', {
+                    pageSize: searchService.getPageSize(),
+                    resultsCount: searchService.getResultsCount(),
+                  })
+                : i18n.t('search.messages.noResults')}
+            </ResultsInfoText>
             {searchService.getPageSize() < searchService.getResultsCount() && (
               <LoadMoreButtonRow justify="center">
                 <Col

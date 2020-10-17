@@ -30,7 +30,7 @@
     "newsletter-title": "Subscribe to our newsletter"
   },
   "flat": {
-    "imageCarouselTitle": "{{type}} in {{address}}",
+    "title": "{{type}} in {{address}}",
     "description": "Property description",
     "yearConstruction": "Year",
     "price": "Price",
