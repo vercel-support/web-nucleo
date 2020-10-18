@@ -185,7 +185,16 @@ const ResultCard = ({
                   <Row align={'middle'}>
                     <Col span={14}>
                       <StyledTag color={theme.colors.secondary}>
-                        {`${flat.zone} (${flat.city})`}
+                        <Link
+                          href={{
+                            pathname: '/buscar',
+                            query: {
+                              q: flat.zone,
+                            },
+                          }}
+                        >
+                          <a>{`${flat.zone} (${flat.city})`}</a>
+                        </Link>
                       </StyledTag>
                     </Col>
                     <Col span={10}>
