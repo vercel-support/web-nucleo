@@ -4,6 +4,7 @@ import { IFlat } from '../model/flat.model';
 import { ISearchOption } from '../model/searchOption.model';
 import { IFilter } from '../model/filter.model';
 import { SearchOptionType } from '../model/enums/searchOptionType.enum';
+import { FlatOrderBy } from '../model/enums/flatOrderBy.enum';
 import { canonizeFlatType } from '../helpers/flatType.utils';
 
 export const computeResults = (
@@ -170,6 +171,8 @@ interface ISearchService {
   isOpenSearch(): boolean;
   getPageSize(): number;
   incrementPageSize(): void;
+  getOrderBy(): string;
+  setOrderBy(orderBy: string): void;
   generateQueryFromFilter(filter: IFilter): NodeJS.Dict<string | string[]>;
 }
 
@@ -181,9 +184,11 @@ class SearchService implements ISearchService {
   private setCurrentResults: Dispatch<SetStateAction<IFlat[]>>;
 
   private pageSize: number;
+  private orderBy: string;
 
   private readonly INITIAL_PAGE_SIZE = 10;
   private readonly PAGE_SIZE_INCREMENT_SIZE = 5;
+  private readonly INITIAL_ORDER_BY = FlatOrderBy.PRICE_DESC;
 
   init(
     flats: IFlat[],
@@ -195,6 +200,7 @@ class SearchService implements ISearchService {
     this.setCurrentResults = setCurrentResults;
 
     this.computePageSizeDependingOnResultsCount(this.INITIAL_PAGE_SIZE);
+    this.orderBy = this.INITIAL_ORDER_BY;
     this.updateResults();
   }
 
@@ -251,6 +257,15 @@ class SearchService implements ISearchService {
     this.updateResults();
   }
 
+  getOrderBy(): string {
+    return this.orderBy;
+  }
+
+  setOrderBy(orderBy: string): void {
+    this.orderBy = orderBy;
+    this.updateResults();
+  }
+
   generateQueryFromFilter(filter: IFilter): NodeJS.Dict<string | string[]> {
     const query: NodeJS.Dict<string | string[]> = {};
     if (Array.isArray(filter.types) && filter.types.length) {
@@ -279,7 +294,11 @@ class SearchService implements ISearchService {
 
   private updateResults(): void {
     if (this.setCurrentResults) {
-      const sortedResults = [...this.results].sort((a, b) => a.price - b.price);
+      const sortedResults = [...this.results].sort((a, b) =>
+        this.orderBy === FlatOrderBy.PRICE_ASC
+          ? a.price - b.price
+          : b.price - a.price
+      );
       this.setCurrentResults(sortedResults.slice(0, this.pageSize));
     }
   }

@@ -159,8 +159,8 @@
       "closed": "Viviendas en {{query}}"
     },
     "subtitle": {
-      "filters": "{{resultsCount}} resultados con los filtros seleccionados",
-      "noFilters": "{{resultsCount}} resultados"
+      "singular": "{{resultsCount}} resultado",
+      "plural": "{{resultsCount}} resultados"
     },
     "searchBar": {
       "placeholder": "Ciudad, barrio o dirección",
@@ -210,6 +210,10 @@
       "ÁTICO": "Ático",
       "EDIFICIO": "Edificio",
       "TRASTERO": "Trastero"
+    },
+    "flatOrderBy": {
+      "price asc": "precio ascendente",
+      "price desc": "precio descendente"
     }
   },
   "messages": {

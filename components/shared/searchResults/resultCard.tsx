@@ -189,7 +189,7 @@ const ResultCard = ({
                           href={{
                             pathname: '/buscar',
                             query: {
-                              q: flat.zone,
+                              q: `${flat.zone} (${flat.city})`,
                             },
                           }}
                         >

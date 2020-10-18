@@ -351,6 +351,7 @@ const BuscarPage = ({
             onFiltersButtonClick={() => {
               setFiltersModalVisible(true);
             }}
+            hasFilters={Object.keys(router.query).length > 1}
           />
         </SearchBarSection>
         <MapSection
@@ -368,8 +369,9 @@ const BuscarPage = ({
             <Title
               openSearch={searchService.isOpenSearch()}
               query={q}
-              hasFilters={Object.keys(router.query).length > 1}
               resultsCount={searchService.getResultsCount()}
+              orderBy={searchService.getOrderBy()}
+              onOrderByChange={(orderBy) => searchService.setOrderBy(orderBy)}
             />
           )}
           <ResultsSection

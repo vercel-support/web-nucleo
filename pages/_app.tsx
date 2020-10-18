@@ -105,7 +105,13 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .ant-dropdown-menu,
+  .ant-select-dropdown {
+    border-radius: 0;
+  }
+
   .ant-message,
+  .ant-dropdown-menu,
   .ant-select-dropdown {
     font-family: ${(props) => props.theme.font.family};
     font-style: ${(props) => props.theme.font.style};

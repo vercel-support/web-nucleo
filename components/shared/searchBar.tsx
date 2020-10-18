@@ -15,6 +15,7 @@ type Props = {
   onSelect: (option: ISearchOption) => void;
   onFiltersButtonClick?: () => void;
   className?: string;
+  hasFilters?: boolean;
   buttonBackgroundColor?: string;
   buttonColor?: string;
   inputPadding?: string;

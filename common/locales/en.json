@@ -159,8 +159,8 @@
       "closed": "Flats in {{query}}"
     },
     "subtitle": {
-      "filters": "{{resultsCount}} results with the selected filters",
-      "noFilters": "{{resultsCount}} results"
+      "singular": "{{resultsCount}} result",
+      "plural": "{{resultsCount}} results"
     },
     "searchBar": {
       "placeholder": "City, zone or address",
@@ -210,6 +210,10 @@
       "ÁTICO": "Loft",
       "EDIFICIO": "Building",
       "TRASTERO": "Storage"
+    },
+    "flatOrderBy": {
+      "price asc": "price ascending",
+      "price desc": "price descending"
     }
   },
   "messages": {
