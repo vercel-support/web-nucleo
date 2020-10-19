@@ -92,7 +92,9 @@ const FiltersModal: React.FC<Props> = ({
   const generateFilter = (): IFilter => {
     const filter: IFilter = {};
     if (form.getFieldValue('types')) {
-      filter.types = form.getFieldValue('types');
+      filter.types = Array.isArray(form.getFieldValue('types'))
+        ? form.getFieldValue('types')
+        : [form.getFieldValue('types')];
     }
     if (form.getFieldValue('price')) {
       const priceValue: [number, number] = form.getFieldValue('price');
@@ -100,14 +102,20 @@ const FiltersModal: React.FC<Props> = ({
       filter.priceMax = priceValue[1] === priceMax ? undefined : priceValue[1];
     }
     if (form.getFieldValue('rooms')) {
-      const roomsValue: string[] = form.getFieldValue('rooms');
+      const roomsValue: string[] = Array.isArray(form.getFieldValue('rooms'))
+        ? form.getFieldValue('rooms')
+        : [form.getFieldValue('rooms')];
       filter.rooms = roomsValue.filter((v) => v !== '+4').map((v) => +v);
       filter.rooms = filter.rooms.length === 0 ? undefined : filter.rooms;
       filter.roomsMin =
         roomsValue.filter((v) => v === '+4').length === 0 ? undefined : 5;
     }
     if (form.getFieldValue('bathrooms')) {
-      const bathroomsValue: string[] = form.getFieldValue('bathrooms');
+      const bathroomsValue: string[] = Array.isArray(
+        form.getFieldValue('bathrooms')
+      )
+        ? form.getFieldValue('bathrooms')
+        : [form.getFieldValue('bathrooms')];
       filter.bathrooms = bathroomsValue
         .filter((v) => v !== '+3')
         .map((v) => +v);
