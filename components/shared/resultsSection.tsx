@@ -1,48 +1,54 @@
 import styled from 'styled-components';
 
-import { IFlat } from '../../../common/model/flat.model';
-import ResultCard from './resultCard';
+import { IFlat } from '../../common/model/flat.model';
+import FlatCard from './flatCard';
 
 type Props = {
   flats: IFlat[];
-  className?: string;
   cardBackgroundColor?: string;
   focusedCardBackgroundColor?: string;
-  onFlatHover?: (flat: IFlat, index: number) => void;
   focusedFlatIndex?: number;
   parentRef?: any;
+  onFlatHover?: (flat: IFlat, index: number) => void;
+  className?: string;
 };
+
+const CardContainer = styled.div`
+  margin-bottom: 32px;
+`;
 
 const ResultsSection = ({
   flats,
   className,
   cardBackgroundColor,
-  focusedCardBackgroundColor = undefined,
-  focusedFlatIndex = undefined,
-  onFlatHover = undefined,
-  parentRef = undefined,
+  focusedCardBackgroundColor,
+  focusedFlatIndex,
+  onFlatHover,
+  parentRef,
 }: Props): JSX.Element => {
   let focusedCardBackgroundColor_ = focusedCardBackgroundColor;
-  if (focusedCardBackgroundColor == undefined) {
+  if (!focusedCardBackgroundColor) {
     focusedCardBackgroundColor_ = cardBackgroundColor;
   }
   return (
     <div className={className} ref={parentRef}>
       {flats.map((flat, i) => {
-        const isFocused = i == focusedFlatIndex;
+        const isFocused = i === focusedFlatIndex;
         return (
-          <ResultCard
-            key={flat.id}
-            flat={flat}
-            cardBackgroundColor={
-              isFocused ? focusedCardBackgroundColor_ : cardBackgroundColor
-            }
-            onMouseEnter={() => {
-              if (onFlatHover != undefined) {
-                onFlatHover(flat, i);
+          <CardContainer key={flat.id}>
+            <FlatCard
+              flat={flat}
+              cardBackgroundColor={
+                isFocused ? focusedCardBackgroundColor_ : cardBackgroundColor
               }
-            }}
-          />
+              useCarousel={true}
+              onMouseEnter={() => {
+                if (onFlatHover) {
+                  onFlatHover(flat, i);
+                }
+              }}
+            />
+          </CardContainer>
         );
       })}
     </div>

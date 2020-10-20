@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
@@ -26,11 +25,7 @@ import {
   RequestInfoButton,
   Gallery,
 } from '../../components/flatDetail';
-import {
-  Header,
-  Footer,
-  FlatsDisplayPlaceholder,
-} from '../../components/shared';
+import { Header, Footer, FlatsDisplay } from '../../components/shared';
 
 interface StaticProps {
   flat: string;
@@ -87,19 +82,6 @@ const FeaturesCardContainer = styled.div`
 const RequestInfoSection = styled.div`
   margin-top: 2rem;
 `;
-
-const FlatsDisplayContainer = styled.div`
-  padding-top: 3rem;
-  padding-bottom: 1rem;
-`;
-
-const FlatsDisplay = dynamic(
-  () => import('../../components/shared/flatsDisplay/flatsDisplay'),
-  {
-    ssr: false,
-    loading: () => <FlatsDisplayPlaceholder />,
-  }
-);
 
 const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
   const router = useRouter();
@@ -196,13 +178,10 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
             </Col>
           </DescriptionRow>
         </DescriptionSection>
-        <FlatsDisplayContainer>
-          <FlatsDisplay
-            flats={deserializedRecommendedFlats}
-            title={i18n.t('flatDetail.messages.recommendedFlats')}
-            arrows={false}
-          />
-        </FlatsDisplayContainer>
+        <FlatsDisplay
+          flats={deserializedRecommendedFlats}
+          title={i18n.t('flatDetail.messages.recommendedFlats')}
+        />
         <Gallery
           flat={deserializedFlat}
           visible={isGalleryVisible}

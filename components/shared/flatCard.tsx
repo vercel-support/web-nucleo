@@ -1,18 +1,20 @@
 import Link from 'next/link';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Row, Col, Tag } from 'antd';
+import { Row, Col, Tag, Carousel } from 'antd';
 
-import { IFlat } from '../../../common/model/flat.model';
-import useI18n from '../../../common/hooks/useI18n';
-import { formatCurrency } from '../../../common/helpers';
-import * as flatTypeUtils from '../../../common/helpers/flatType.utils';
+import { IFlat } from '../../common/model/flat.model';
+import useI18n from '../../common/hooks/useI18n';
+import { formatCurrency } from '../../common/helpers';
+import * as flatTypeUtils from '../../common/helpers/flatType.utils';
 
 type Props = {
   flat: IFlat;
-  theme: DefaultTheme;
-  className?: string;
   cardBackgroundColor?: string;
-  onMouseEnter?: any;
+  forceVerticalMode?: boolean;
+  useCarousel?: boolean;
+  onMouseEnter?: () => void;
+  className?: string;
+  theme: DefaultTheme;
 };
 
 const StyledAnchor = styled.a`
@@ -20,21 +22,55 @@ const StyledAnchor = styled.a`
   &:hover {
     color: inherit;
   }
+
+  .ant-carousel {
+    line-height: 0;
+    height: 100%;
+
+    & > .slick-slider {
+      height: 100%;
+
+      & > .slick-list {
+        height: 100%;
+
+        & > .slick-track {
+          height: 100%;
+
+          & > .slick-slide {
+            height: 100%;
+
+            & > div {
+              height: 100%;
+
+              & > div {
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 `;
 
-const ImageCol = styled(Col)<{ imageUrl: string }>`
+const Image = styled.div<{ imageUrl: string; forceVerticalMode: boolean }>`
   border-top-left-radius: ${(props) => props.theme.borderRadius};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url(${(props) => props.imageUrl});
+  height: ${(props) => (props.forceVerticalMode ? '24vh' : '100%')};
+  min-height: ${(props) => (props.forceVerticalMode ? '200px' : 'unset')};
+  max-height: ${(props) => (props.forceVerticalMode ? '300px' : 'unset')};
   @media ${(props) => props.theme.breakpoints.lgu} {
-    border-top-right-radius: 0;
-    border-bottom-left-radius: ${(props) => props.theme.borderRadius};
+    border-top-right-radius: ${(props) =>
+      props.forceVerticalMode ? props.theme.borderRadius : '0'};
+    border-bottom-left-radius: ${(props) =>
+      props.forceVerticalMode ? '0' : props.theme.borderRadius};
   }
   @media ${(props) => props.theme.breakpoints.mdd} {
     height: 24vh;
-    min-height: 220px;
+    min-height: 200px;
     max-height: 300px;
     border-top-right-radius: ${(props) => props.theme.borderRadius};
     border-bottom-left-radius: 0;
@@ -71,7 +107,8 @@ const FeatureAtTopCol = styled(Col)`
   border-bottom: 1px solid ${(props) => props.theme.colors.grey};
 `;
 
-const FeatureAtBottomCol = styled(Col)`
+const FeatureAtBottomCol = styled(Col)<{ forceVerticalMode: boolean }>`
+  display: ${(props) => (props.forceVerticalMode ? 'none' : 'block')};
   @media ${(props) => props.theme.breakpoints.mdd} {
     display: none;
   }
@@ -93,6 +130,7 @@ const StyledTag = styled(Tag)`
   font-weight: 500;
   font-size: 14px;
   line-height: 32px;
+  cursor: pointer;
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -107,22 +145,47 @@ const PriceText = styled.div`
   color: ${(props) => props.theme.colors.secondary};
 `;
 
-const ResultCard = ({
+const FlatCard = ({
   flat,
-  theme,
-  className,
   cardBackgroundColor = 'default',
-  onMouseEnter = undefined,
+  forceVerticalMode = false,
+  useCarousel = false,
+  onMouseEnter,
+  className,
+  theme,
 }: Props): JSX.Element => {
   const i18n = useI18n();
 
   return (
     <div className={className} onMouseEnter={onMouseEnter}>
-      <Link key={flat.id} href={`/pisos/${flat.id}`} passHref>
+      <Link href={`/pisos/${flat.id}`} passHref>
         <StyledAnchor>
           <Row>
-            <ImageCol xs={24} lg={8} imageUrl={flat.pictureUrls[0]} />
-            <Col xs={24} lg={16}>
+            <Col xs={24} lg={forceVerticalMode ? 24 : 8}>
+              {useCarousel ? (
+                <Carousel
+                  dots={false}
+                  draggable={true}
+                  lazyLoad={'ondemand'}
+                  arrows={true}
+                >
+                  {flat.pictureUrls.map((url) => (
+                    <div key={url}>
+                      <Image
+                        imageUrl={url}
+                        forceVerticalMode={forceVerticalMode}
+                      />
+                    </div>
+                  ))}
+                </Carousel>
+              ) : (
+                <Image
+                  imageUrl={flat.pictureUrls[0]}
+                  forceVerticalMode={forceVerticalMode}
+                />
+              )}
+            </Col>
+            <Col xs={24} lg={forceVerticalMode ? 24 : 16}>
               <InfoContainer cardBackgroundColor={cardBackgroundColor}>
                 <Title>
                   {i18n.t('flat.title', {
@@ -133,20 +196,20 @@ const ResultCard = ({
                 <FeaturesCardRow
                   gutter={[
                     16,
-                    { xs: 32, sm: 24, md: 24, lg: 32, xl: 32, xxl: 32 },
+                    { xs: 32, sm: 24, lg: forceVerticalMode ? 32 : 16 },
                   ]}
                 >
-                  <FeatureAtTopCol span={8}>
+                  <FeatureAtTopCol span={forceVerticalMode ? 12 : 8}>
                     <FeatureInfo>{`${flat.rooms} ${i18n
                       .t('flat.roomsShort')
                       .toLowerCase()}`}</FeatureInfo>
                   </FeatureAtTopCol>
-                  <FeatureAtTopCol span={8}>
+                  <FeatureAtTopCol span={forceVerticalMode ? 12 : 8}>
                     <FeatureInfo>{`${flat.bathrooms} ${i18n
                       .t('flat.bathrooms')
                       .toLowerCase()}`}</FeatureInfo>
                   </FeatureAtTopCol>
-                  <FeatureAtTopCol span={8}>
+                  <FeatureAtTopCol span={forceVerticalMode ? 0 : 8}>
                     <FeatureInfo>
                       {`${
                         flat.hasElevator
@@ -155,7 +218,10 @@ const ResultCard = ({
                       } ${i18n.t('flat.elevator').toLowerCase()}`}
                     </FeatureInfo>
                   </FeatureAtTopCol>
-                  <FeatureAtBottomCol span={8}>
+                  <FeatureAtBottomCol
+                    span={8}
+                    forceVerticalMode={forceVerticalMode}
+                  >
                     <FeatureInfo>
                       {`${
                         flat.hasGarden
@@ -164,7 +230,10 @@ const ResultCard = ({
                       } ${i18n.t('flat.garden').toLowerCase()}`}
                     </FeatureInfo>
                   </FeatureAtBottomCol>
-                  <FeatureAtBottomCol span={8}>
+                  <FeatureAtBottomCol
+                    span={8}
+                    forceVerticalMode={forceVerticalMode}
+                  >
                     <FeatureInfo>
                       {`${
                         flat.hasTerrace
@@ -174,7 +243,10 @@ const ResultCard = ({
                     </FeatureInfo>
                   </FeatureAtBottomCol>
                   {flat.yearConstruction ? (
-                    <FeatureAtBottomCol span={8}>
+                    <FeatureAtBottomCol
+                      span={8}
+                      forceVerticalMode={forceVerticalMode}
+                    >
                       <FeatureInfo>{`${i18n.t('flat.yearConstruction')} ${
                         flat.yearConstruction
                       }`}</FeatureInfo>
@@ -184,18 +256,19 @@ const ResultCard = ({
                 <BottomInfoSection>
                   <Row align={'middle'}>
                     <Col span={14}>
-                      <StyledTag color={theme.colors.secondary}>
-                        <Link
-                          href={{
-                            pathname: '/buscar',
-                            query: {
-                              q: `${flat.zone} (${flat.city})`,
-                            },
-                          }}
-                        >
-                          <a>{`${flat.zone} (${flat.city})`}</a>
-                        </Link>
-                      </StyledTag>
+                      <Link
+                        href={{
+                          pathname: '/buscar',
+                          query: {
+                            q: `${flat.zone} (${flat.city})`,
+                          },
+                        }}
+                        passHref
+                      >
+                        <StyledTag color={theme.colors.secondary}>
+                          {`${flat.zone} (${flat.city})`}
+                        </StyledTag>
+                      </Link>
                     </Col>
                     <Col span={10}>
                       <PriceText>
@@ -213,11 +286,11 @@ const ResultCard = ({
   );
 };
 
-export default withTheme(styled(ResultCard)`
+export default withTheme(styled(FlatCard)`
+  background-color: white;
   -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => props.theme.borderRadius};
-  margin-bottom: 32px;
   overflow: hidden;
 `);

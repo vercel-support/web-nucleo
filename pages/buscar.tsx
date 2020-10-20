@@ -380,7 +380,7 @@ const BuscarPage = ({
               setFocusedFlat(index);
             }}
             focusedFlatIndex={focusedFlatIndex}
-            focusedCardBackgroundColor="#f2f2f2"
+            focusedCardBackgroundColor="#f8f8f8"
             cardBackgroundColor="white"
             parentRef={resultsSectionRef}
           />

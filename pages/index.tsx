@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -15,7 +14,7 @@ import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
 import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
-import { Header, Footer, FlatsDisplayPlaceholder } from '../components/shared';
+import { Header, Footer, FlatsDisplay } from '../components/shared';
 
 interface StaticProps {
   serializedFlats: string;
@@ -26,17 +25,7 @@ type Props = StaticProps;
 
 const FlatsDisplayContainer = styled.div`
   background-color: ${(props) => props.theme.colors.grey};
-  padding-top: 100px;
-  padding-bottom: 70px;
 `;
-
-const FlatsDisplay = dynamic(
-  () => import('../components/shared/flatsDisplay/flatsDisplay'),
-  {
-    ssr: false,
-    loading: () => <FlatsDisplayPlaceholder />,
-  }
-);
 
 const Layout = styled.div`
   display: flex;
@@ -124,6 +113,7 @@ export const Home = ({
           <FlatsDisplay
             flats={flats}
             title={i18n.t('home.section-flats-title')}
+            arrows={true}
           />
         </FlatsDisplayContainer>
         <BlogShowcase />
