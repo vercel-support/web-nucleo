@@ -43,7 +43,7 @@ const webpackObj = withOptimizedImages(
   })
 );
 
-webpackObj['rewrites'] =   async function() {
+webpackObj['rewrites'] = async function() {
   return [
     {
       source: '/blog',
@@ -52,4 +52,5 @@ webpackObj['rewrites'] =   async function() {
   ]
 }
 
-return webpackObj;
+console.log(webpackObj);
+module.exports = webpackObj;
