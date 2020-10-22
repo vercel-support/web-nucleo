@@ -40,5 +40,6 @@ module.exports = withOptimizedImages(
       }
       return config;
     },
+    trailingSlash: false,
   })
 );

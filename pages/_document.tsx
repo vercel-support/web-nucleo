@@ -8,7 +8,7 @@ import Document, {
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-import { GA_TRACKING_ID } from '../libs/gtag';
+import { GA_TRACKING_ID, GA_SOCIALMEDIA_TRACKING_ID } from '../libs/gtag';
 import { defaultLanguage } from '../libs/i18n';
 
 type Props = DocumentInitialProps;
@@ -59,6 +59,12 @@ export default class MyDocument extends Document<Props> {
             gtag('config', '${GA_TRACKING_ID}', {
               page_path: window.location.pathname,
             });
+
+            ${
+              GA_SOCIALMEDIA_TRACKING_ID
+                ? `gtag('config', '${GA_SOCIALMEDIA_TRACKING_ID}');`
+                : ''
+            }
           `,
             }}
           />
