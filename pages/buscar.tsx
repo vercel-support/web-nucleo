@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Row, Col, Button } from 'antd';
+import { useMediaQuery } from 'react-responsive';
 
 import { IFlat } from '../common/model/flat.model';
 import { IFilter } from '../common/model/filter.model';
@@ -31,7 +32,9 @@ type Props = StaticProps & {
 
 const layoutId = 'buscarLayoutId';
 const searchBarSectionId = 'buscarSearchBarSection';
+const scrollableSectionId = 'buscarScrollableSection';
 const mapSectionId = 'buscarMapSection';
+const footerSectionId = 'buscarFooterSection';
 const headerOutOfScreenClass = 'header-out-of-screen';
 const searchBarSectionPaddingTop = '16px';
 const searchBarSectionPaddingBottom = '32px';
@@ -52,6 +55,26 @@ const Content = styled.main`
   position: relative;
   flex: auto;
   margin-top: ${(props) => props.theme.headerHeight};
+
+  &.no-results {
+    #${mapSectionId} {
+      display: none;
+    }
+
+    #${scrollableSectionId} {
+      margin-top: calc(
+        ${searchBarHeight} + ${searchBarSectionPaddingTop} +
+          ${searchBarSectionPaddingBottom}
+      );
+      padding: 0;
+      border-radius: 0;
+    }
+
+    #${footerSectionId} {
+      bottom: 0;
+    }
+  }
+
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-top: 0;
   }
@@ -93,12 +116,12 @@ const MapSection = styled.div`
   bottom: 0;
   left: ${(props) => props.theme.grid.getGridColumns(14, -1)};
   right: 0;
-  z-index: 100;
+  z-index: -1;
   @media ${(props) => props.theme.breakpoints.mdd} {
-    display: none;
-  }
-  &.no-results {
-    display: none;
+    bottom: unset;
+    height: ${(props) =>
+      `calc(100vh - ${searchBarHeight} - ${searchBarSectionPaddingTop} - ${searchBarSectionPaddingBottom} - ${props.theme.footerHeight})`};
+    left: 0;
   }
 `;
 
@@ -109,9 +132,18 @@ const ScrollableSection = styled.div`
   );
   margin-left: 0;
   margin-right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
+  background-color: white;
   @media ${(props) => props.theme.breakpoints.mdd} {
-    margin-left: 0;
-    margin-right: 0;
+    position: absolute;
+    top: ${(props) =>
+      `calc(100vh - ${props.theme.headerHeight} - ${props.theme.footerHeight} - 56px)`};
+    left: 0;
+    right: 0;
+    margin: 0;
+    margin-bottom: ${(props) => props.theme.footerHeight};
+    padding-top: 40px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
   }
 `;
 
@@ -155,6 +187,15 @@ const LoadMoreButton = styled(Button)`
   width: 100%;
 `;
 
+const FooterSection = styled.div`
+  width: 100%;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    position: fixed;
+    bottom: -${(props) => props.theme.footerHeight};
+    z-index: 1;
+  }
+`;
+
 const BuscarPage = ({
   serializedFlats,
   serializedSearchOptions,
@@ -165,6 +206,9 @@ const BuscarPage = ({
   const searchService = useSearchService();
 
   const resultsSectionRef = useRef(null);
+
+  const isMdd = useMediaQuery({ query: theme.breakpoints.mdd });
+
   const [currentResults, setCurrentResults] = useState([] as IFlat[]);
   const [focusedFlatIndex, setFocusedFlat] = useState(undefined);
   const [q, setQ] = useState('');
@@ -247,19 +291,44 @@ const BuscarPage = ({
         mapSectionElement.style.setProperty('top', '0');
       }
 
-      const ammountOfFooterVisible =
-        window.scrollY +
-        window.innerHeight +
-        footerHeight -
-        layoutElement.clientHeight;
-      if (ammountOfFooterVisible > 0) {
-        mapSectionElement.style.setProperty(
-          'bottom',
-          `${ammountOfFooterVisible}px`
-        );
+      if (!isMdd) {
+        const ammountOfFooterVisible =
+          window.scrollY +
+          window.innerHeight +
+          footerHeight -
+          layoutElement.clientHeight;
+        if (ammountOfFooterVisible > 0) {
+          mapSectionElement.style.setProperty(
+            'bottom',
+            `${ammountOfFooterVisible}px`
+          );
+        }
+        if (ammountOfFooterVisible <= 0) {
+          mapSectionElement.style.setProperty('bottom', '0');
+        }
       }
-      if (ammountOfFooterVisible <= 0) {
-        mapSectionElement.style.setProperty('bottom', '0');
+    }
+
+    const scrollableSectionElement = document.getElementById(
+      scrollableSectionId
+    );
+    const footerSectionElement = document.getElementById(footerSectionId);
+    if (scrollableSectionElement && footerSectionElement) {
+      if (isMdd) {
+        const ammountOfScrollableSectionBelowBottom =
+          scrollableSectionElement.clientHeight - 56 - window.scrollY;
+        if (ammountOfScrollableSectionBelowBottom >= 0) {
+          footerSectionElement.style.setProperty(
+            'bottom',
+            `-${ammountOfScrollableSectionBelowBottom}px`
+          );
+        }
+        if (ammountOfScrollableSectionBelowBottom < 0) {
+          footerSectionElement.style.setProperty(
+            'bottom',
+            `-${footerHeight}px`
+          );
+        }
       }
     }
   };
@@ -332,7 +401,9 @@ const BuscarPage = ({
       </Head>
       <Header />
 
-      <Content>
+      <Content
+        className={searchService.getResultsCount() === 0 ? 'no-results' : ''}
+      >
         <SearchBarSection id={searchBarSectionId}>
           <SearchBar
             height={searchBarHeight}
@@ -354,17 +425,14 @@ const BuscarPage = ({
             hasFilters={Object.keys(router.query).length > 1}
           />
         </SearchBarSection>
-        <MapSection
-          id={mapSectionId}
-          className={searchService.getResultsCount() === 0 ? 'no-results' : ''}
-        >
+        <MapSection id={mapSectionId}>
           <SearchMap
             flats={currentResults}
             focusedFlatIndex={focusedFlatIndex}
             setFocusedFlat={setFocusedFlatFromMap}
           />
         </MapSection>
-        <ScrollableSection>
+        <ScrollableSection id={scrollableSectionId}>
           {currentResults.length > 0 && (
             <Title
               openSearch={searchService.isOpenSearch()}
@@ -434,7 +502,9 @@ const BuscarPage = ({
         />
       </Content>
 
-      <Footer />
+      <FooterSection id={footerSectionId}>
+        <Footer />
+      </FooterSection>
     </Layout>
   );
 };
