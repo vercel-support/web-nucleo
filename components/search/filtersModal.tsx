@@ -16,6 +16,8 @@ type Props = {
   onCancel: () => void;
 };
 
+const modalHeaderHeight = '55px';
+const modalFooterHeight = '65px';
 const typesDefaultValue = [];
 const typesOptions = enumToArray<typeof FlatType>(
   FlatType,
@@ -30,14 +32,28 @@ const roomsOptions = ['1', '2', '3', '4', '+4'];
 const bathroomsDefaultValue: string[] = [];
 const bathroomsOptions = ['1', '2', '3', '+3'];
 
-// TODO: make .ant-modal-footer padding styles global
 const StyledModal = styled(Modal)`
-  font-family: ${(props) => props.theme.font.family};
-  font-style: ${(props) => props.theme.font.style};
+  .ant-modal-header {
+    height: ${modalHeaderHeight};
+  }
+  .ant-modal-footer {
+    height: ${modalFooterHeight};
+  }
 
-  & .ant-modal-footer {
-    padding-bottom: 14px;
-    padding-top: 14px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    max-width: 100vw;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+
+    .ant-modal-content {
+      border-radius: 0;
+    }
+
+    .ant-modal-body {
+      height: calc(100vh - ${modalHeaderHeight} - ${modalFooterHeight});
+      overflow-y: scroll;
+    }
   }
 `;
 

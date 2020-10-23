@@ -1,10 +1,10 @@
 import { DefaultTheme } from 'styled-components';
 
-const xsMax = 575;
-const smMax = 767;
-const mdMax = 991;
-const lgMax = 1199;
-const xlMax = 1599;
+export const xsMax = 575;
+export const smMax = 767;
+export const mdMax = 991;
+export const lgMax = 1199;
+export const xlMax = 1599;
 
 const gridColumns = 24;
 

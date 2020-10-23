@@ -43,7 +43,7 @@ const OfficeDetailsContainer = styled.div`
 
 const ContactFormSection = ({ offices, className }: Props): JSX.Element => {
   const i18n = useI18n();
-  const [selectedOfficeIndex, setSelectedOffice] = useState(0);
+  const [selectedOfficeIndex, setSelectedOffice] = useState(2);
   const selectedOffice = offices[selectedOfficeIndex];
   return (
     <div className={className}>

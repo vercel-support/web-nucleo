@@ -46,9 +46,8 @@ const Title = styled.div`
   }
 
   @media ${(props) => props.theme.breakpoints.smd} {
-    background-color: ${(props) => props.theme.colors.grey};
+    background-color: rgba(242, 242, 242, 0.8);
     border-radius: 25px;
-    opacity: 0.8;
     padding: 30px;
     box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.15);
   }

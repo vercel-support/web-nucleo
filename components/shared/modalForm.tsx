@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { Modal, Form } from 'antd';
 
 import { IContact } from '../../common/model/mailchimp/contact.model';
@@ -12,16 +11,6 @@ type Props = {
   onCancel: () => void;
 };
 
-const StyledModal = styled(Modal)`
-  font-family: ${(props) => props.theme.font.family};
-  font-style: ${(props) => props.theme.font.style};
-
-  & .ant-modal-footer {
-    padding-bottom: 14px;
-    padding-top: 14px;
-  }
-`;
-
 const ModalForm = ({
   isSellerMode,
   visible,
@@ -33,7 +22,7 @@ const ModalForm = ({
   const [form] = Form.useForm();
 
   return (
-    <StyledModal
+    <Modal
       title={
         isSellerMode
           ? i18n.t('contactForm.titleSell')
@@ -49,7 +38,7 @@ const ModalForm = ({
       cancelText={i18n.t('contactForm.cancel')}
     >
       <ContactForm form={form} onFinish={onOk} showAddress={isSellerMode} />
-    </StyledModal>
+    </Modal>
   );
 };
 

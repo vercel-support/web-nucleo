@@ -13,6 +13,7 @@ const generateSitemap = async (flatsIds: string[]) => {
     '!pages/generate-sitemap.tsx',
     '!pages/buscar.tsx',
     '!pages/pisos/**',
+    '!pages/estado-suscripcion/**',
   ]);
 
   return `<?xml version="1.0" encoding="UTF-8"?>
