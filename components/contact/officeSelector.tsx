@@ -94,8 +94,6 @@ const OfficeSelector = ({
   const [containerRef, setContainerRef] = useState(undefined);
   const parentRef = useRef<HTMLDivElement>();
   const [offset, setOffset] = useState(0);
-  const [baseOffset_, setBaseOffset] = useState(0);
-  let baseOffset = baseOffset_;
 
   const config = {
     delta: 2, // min distance(px) before a swipe starts
