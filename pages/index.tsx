@@ -13,7 +13,12 @@ import useSearchService, {
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
-import { BlogShowcase, Hero, NewsletterSection, ZonesDisplay } from '../components/home';
+import {
+  BlogShowcase,
+  Hero,
+  NewsletterSection,
+  ZonesDisplay,
+} from '../components/home';
 import { Header, Footer, FlatsDisplay } from '../components/shared';
 
 interface StaticProps {
