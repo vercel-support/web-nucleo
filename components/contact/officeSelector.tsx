@@ -1,16 +1,17 @@
 import { IOffice } from '../../common/model/office.model';
-import styled from 'styled-components';
-import { Swipeable } from 'react-swipeable';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { useState, useRef } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 type Props = {
   offices: IOffice[];
   selectedOfficeIndex: number;
   setSelectedOffice: (officeIndex: number) => void;
   className?: string;
+  theme: DefaultTheme;
 };
 
-const ButtonsContainer = styled(Swipeable)`
+const ButtonsContainer = styled.div`
   display: inline-flex;
   position: relative;
   flex-direction: row;
@@ -18,6 +19,7 @@ const ButtonsContainer = styled(Swipeable)`
   align-items: center;
   ${(props) => props.theme.font.p1}
   margin-bottom: 8px;
+  transition: transform 0.3s ease-out;
 `;
 
 const OfficeButton = styled.p<{ isSelected: boolean }>`
@@ -64,18 +66,22 @@ const MenuDivider = styled(
     offices,
     selectedOfficeIndex,
     className,
+    showOrangeLine,
   }: {
     offices: IOffice[];
     selectedOfficeIndex: number;
     className?: string;
+    showOrangeLine: boolean;
   }): JSX.Element => {
     return (
       <div className={className}>
         <GreyLine />
-        <OrangeLine
-          nOffices={offices.length}
-          selectedOfficeIndex={selectedOfficeIndex}
-        />
+        {showOrangeLine ? (
+          <OrangeLine
+            nOffices={offices.length}
+            selectedOfficeIndex={selectedOfficeIndex}
+          />
+        ) : null}
       </div>
     );
   }
@@ -90,22 +96,17 @@ const OfficeSelector = ({
   selectedOfficeIndex,
   setSelectedOffice,
   className,
+  theme,
 }: Props): JSX.Element => {
   const [containerRef, setContainerRef] = useState(undefined);
   const parentRef = useRef<HTMLDivElement>();
+  const buttonRef = useRef<HTMLDivElement>();
   const [offset, setOffset] = useState(0);
-
-  const config = {
-    delta: 2, // min distance(px) before a swipe starts
-    preventDefaultTouchmoveEvent: true, // preventDefault on touchmove
-    trackTouch: true, // track touch input
-    trackMouse: true, // track mouse input
-    rotationAngle: 0, // set a rotation angle
-  };
+  const isLgDown = useMediaQuery({ query: theme.breakpoints.lgd });
 
   const handleOfficeClick = (index) => {
-    if (containerRef && process.browser && window) {
-      const buttonWidth = 194;
+    if (isLgDown && buttonRef && containerRef && process.browser && window) {
+      const buttonWidth = buttonRef.current.getBoundingClientRect().width;
       const parentStyle = window.getComputedStyle(parentRef.current);
       const leftMargin = parseInt(parentStyle.getPropertyValue('margin-left'));
       const screenWidth =
@@ -115,20 +116,24 @@ const OfficeSelector = ({
       setOffset(newOffset);
     }
   };
-
+  let offsetPost = offset;
+  if (!isLgDown) {
+    offsetPost = 0;
+  }
   return (
     <div className={className} ref={parentRef}>
       <ButtonsContainer
-        innerRef={(element) => {
+        ref={(element) => {
           setContainerRef(element);
         }}
-        style={{ transform: `translateX(${offset}px)` }}
-        {...config}
+        style={{ transform: `translateX(${offsetPost}px)` }}
       >
         {offices.map((office, index) => {
           let isSelected = false;
+          let btnRef = null;
           if (index == selectedOfficeIndex) {
             isSelected = true;
+            btnRef = buttonRef;
           }
           return (
             <OfficeButton
@@ -138,6 +143,7 @@ const OfficeSelector = ({
                 setSelectedOffice(index);
                 handleOfficeClick(index);
               }}
+              ref={btnRef}
             >
               {office.shortName}
             </OfficeButton>
@@ -146,14 +152,15 @@ const OfficeSelector = ({
         <MenuDivider
           offices={offices}
           selectedOfficeIndex={selectedOfficeIndex}
+          showOrangeLine={!isLgDown}
         />
       </ButtonsContainer>
     </div>
   );
 };
 
-export default styled(OfficeSelector)`
+export default withTheme(styled(OfficeSelector)`
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-bottom: 20px;
-`;
+`);
