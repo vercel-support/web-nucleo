@@ -6,7 +6,6 @@ import { xlMax } from '../../common/themes/default';
 
 const xxlMax = 1999;
 
-
 const TangramStar = styled.div`
   position: absolute;
   @media ${(props) => props.theme.breakpoints.xxl} {
@@ -109,7 +108,6 @@ const Background = styled.div`
   padding-right: ${(props) => props.theme.grid.getGridColumns(9)};
   padding-top: 30px;
   padding-bottom: 30px;
-
 
   min-height: 500px;
   @media (min-width: ${xxlMax + 1}px) {

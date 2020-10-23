@@ -6,7 +6,6 @@ import { xlMax } from '../../common/themes/default';
 
 const xxlMax = 1999;
 
-
 const TangramHeart = styled.div`
   position: absolute;
   left: ${(props) => props.theme.grid.getGridColumns(2)};
