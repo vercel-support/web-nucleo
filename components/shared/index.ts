@@ -6,7 +6,4 @@ export { default as ModalForm } from './modalForm';
 export { default as ContactForm } from './contactForm';
 export { default as SearchBar } from './searchBar';
 export { default as FlatsDisplay } from './flatsDisplay';
-export {
-  default as ResultsSection,
-  ResultsSectionTwoColumns,
-} from './resultsSection';
+export { default as ResultsSection } from './resultsSection';
