@@ -2,7 +2,7 @@ import fs from 'fs';
 import stream from 'stream';
 import sharp from 'sharp';
 
-const MAX_WIDTH = 1800;
+const MAX_WIDTH = 1000;
 const QUALITY = 60;
 const JPEG_PROGRESSIVE = true;
 
