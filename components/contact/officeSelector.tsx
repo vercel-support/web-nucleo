@@ -105,39 +105,18 @@ const OfficeSelector = ({
     rotationAngle: 0, // set a rotation angle
   };
 
-  const handleMove = (eventData) => {
-    if (containerRef && process.browser && window) {
-      if (eventData.first) {
-        setBaseOffset(offset);
-        baseOffset = offset;
-      }
-      const newOffset = baseOffset + eventData.deltaX;
-      const screenWidth =
-        window.innerWidth || document.documentElement.clientWidth;
-      const parentStyle = window.getComputedStyle(parentRef.current);
-      const totalMargins =
-        parseInt(parentStyle.getPropertyValue('margin-left')) +
-        parseInt(parentStyle.getPropertyValue('margin-right'));
-      const containerWidth = containerRef.getBoundingClientRect().width;
-      if (
-        newOffset >= 0 &&
-        newOffset <= containerWidth + totalMargins - screenWidth
-      ) {
-        setOffset(newOffset);
-      }
-    }
-  };
-
   const handleOfficeClick = (index) => {
     if (containerRef && process.browser && window) {
-        const buttonWidth = 194;
-        const parentStyle = window.getComputedStyle(parentRef.current);
-        const leftMargin = parseInt(parentStyle.getPropertyValue('margin-left'));
-        const screenWidth = window.innerWidth || document.documentElement.clientWidth;
-        const newOffset = -buttonWidth * index - leftMargin + screenWidth/2 - buttonWidth/2;
-        setOffset(newOffset);
+      const buttonWidth = 194;
+      const parentStyle = window.getComputedStyle(parentRef.current);
+      const leftMargin = parseInt(parentStyle.getPropertyValue('margin-left'));
+      const screenWidth =
+        window.innerWidth || document.documentElement.clientWidth;
+      const newOffset =
+        -buttonWidth * index - leftMargin + screenWidth / 2 - buttonWidth / 2;
+      setOffset(newOffset);
     }
-  }
+  };
 
   return (
     <div className={className} ref={parentRef}>
