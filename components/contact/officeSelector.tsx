@@ -1,6 +1,6 @@
 import { IOffice } from '../../common/model/office.model';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 type Props = {
@@ -27,7 +27,7 @@ const OfficeButton = styled.p<{ isSelected: boolean }>`
   min-width: 194px;
 
   text-align: center;
-  font-weight: ${(props) => (props.isSelected ? '500' : 'inherit')};
+  font-weight: ${(props) => (props.isSelected ? '600' : 'inherit')};
   cursor: pointer;
 `;
 
@@ -39,6 +39,10 @@ const GreyLine = styled.div`
   background-color: ${(props) => props.theme.colors.grey};
   border-radius: ${(props) => props.theme.borderRadius};
   width: 100%;
+  @media ${(props) => props.theme.breakpoints.lgd} {
+    width: 500%;
+    margin-left: -250%;
+  }
 `;
 
 const OrangeLine = styled.div<{
@@ -91,6 +95,17 @@ const MenuDivider = styled(
   width: 100%;
 `;
 
+const Gradient = styled.div<{ right?: boolean }>`
+  background: linear-gradient(to ${props => props.right ? 'right' : 'left'}, rgba(255, 255, 255, 0) 10.94%, #FFFFFF 79.69%);
+  position: absolute;
+  left: ${props => props.right ? 'inherit' : 0};
+  right: ${props => props.right ? 0 : 'inherit'};
+  top: 0;
+  height: 100%;
+  width: 30%;
+  pointer-events: none;
+`;
+
 const OfficeSelector = ({
   offices,
   selectedOfficeIndex,
@@ -104,11 +119,15 @@ const OfficeSelector = ({
   const [offset, setOffset] = useState(0);
   const isLgDown = useMediaQuery({ query: theme.breakpoints.lgd });
 
+  useEffect(() => {
+    handleOfficeClick(selectedOfficeIndex)
+  });
+
   const handleOfficeClick = (index) => {
     if (isLgDown && buttonRef && containerRef && process.browser && window) {
       const buttonWidth = buttonRef.current.getBoundingClientRect().width;
       const parentStyle = window.getComputedStyle(parentRef.current);
-      const leftMargin = parseInt(parentStyle.getPropertyValue('margin-left'));
+      const leftMargin = parseInt(parentStyle.getPropertyValue('padding-left'));
       const screenWidth =
         window.innerWidth || document.documentElement.clientWidth;
       const newOffset =
@@ -155,12 +174,15 @@ const OfficeSelector = ({
           showOrangeLine={!isLgDown}
         />
       </ButtonsContainer>
+      {isLgDown ? <Gradient /> : null}
+      {isLgDown ? <Gradient right /> : null}
     </div>
   );
 };
 
 export default withTheme(styled(OfficeSelector)`
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-bottom: 20px;
+  position: relative;
 `);
