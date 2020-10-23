@@ -53,7 +53,7 @@ const Container = styled.div`
   @media ${(props) => props.theme.breakpoints.xs} {
     background-color: rgba(242, 242, 242, 0.8);
     border-radius: 25px;
-    padding: 30px;
+    padding: 45px;
     box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.15);
   }
 `;

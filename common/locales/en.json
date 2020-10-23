@@ -19,15 +19,15 @@
     "description": "Find houses for sale in Alicante, Spain. Flats, Apartments, Chalets. Inmobiliaria Núcleo helps you choose between the best properties in Alicante. Visit Us!",
     "hero-title-1": "Welcome to",
     "hero-title-2": "Inmobiliaria Núcleo",
-    "hero-subtitle": "We advise you either with the sale or with the purchase of real estate in Alicante.",
+    "hero-subtitle": "We advise you either with the sale or with the purchase of real estate\u00A0in\u00A0Alicante.",
     "vender": "Sell your house",
     "comprar": "Buy your house",
     "section-flats-title": "Properties in Alicante",
     "enviar": "Send",
     "email": "E-mail address",
-    "blog-showcase-title": "Latest trends in the house market",
-    "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and much more!",
-    "newsletter-title": "Subscribe to our newsletter"
+    "blog-showcase-title": "Latest trends in the house\u00A0market",
+    "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and\u00A0much\u00A0more!",
+    "newsletter-title": "Subscribe to our\u00A0newsletter"
   },
   "flat": {
     "title": "{{type}} in {{address}}",
@@ -71,7 +71,7 @@
     "validateRequired": "Please, fill in this field"
   },
   "cookies": {
-    "text": "This site uses profiling cookies to track users. If you continue browsing, we consider you accept it.",
+    "text": "This site uses profiling cookies to track users. If you continue browsing, we consider you\u00A0accept\u00A0it.",
     "detail": {
       "title": "Cookies policy",
       "description": "Cookies policy"
@@ -86,8 +86,8 @@
     "metaDescription": "Sell your Alicante properties for the best price thanks to Inmobiliaria Núcleo",
     "form": {
       "title": "Sell house fast with us",
-      "subtitle": "Please, fill in the following form to get in touch with the Núcleo team",
-      "subtitle2": "Free valuation without commitment",
+      "subtitle": "Please, fill in the following form to get in touch with the\u00A0Núcleo\u00A0team",
+      "subtitle2": "Free valuation without\u00A0commitment",
       "send": "Send",
       "contactUs": "Contact us"
     },
@@ -96,51 +96,51 @@
       "properties": {
         "professional": {
           "title": "Professionalism",
-          "description": "We offer you a complete and personalized service from the beginning to the end of the sales process"
+          "description": "We offer you a complete and personalized service from the beginning to the end of the\u00A0sales\u00A0process"
         },
         "fast": {
           "title": "Speed",
-          "description": "We have a powerful database shared between our offices and more than 30 advisers working to sell your home."
+          "description": "We have a powerful database shared between our offices and more than 30 advisers working to sell\u00A0your\u00A0home."
         },
         "experience": {
           "title": "Experience",
-          "description": "After more than 10 years working in Alicante, our team knows the local real estate market perfectly"
+          "description": "After more than 10 years working in Alicante, our team knows the local real estate market\u00A0perfectly"
         }
       }
     },
     "houseValue": {
-      "title": "Know the value of your property",
-      "subtitle": "Free home appraisal service",
-      "description": "Thanks to our extensive experience in the local real estate market, we know the real sales prices of each neighborhood.<br><br>In addition, we have the most advanced software in real estate management, which allows us to propose the right price to sell your home.<br><br>All of this without obligation and completely free of charge."
+      "title": "Know the value of your\u00A0property",
+      "subtitle": "Free home appraisal\u00A0service",
+      "description": "Thanks to our extensive experience in the local real estate market, we know the real sales prices of each\u00A0neighborhood.<br><br>In addition, we have the most advanced software in real estate management, which allows us to propose the right price to sell\u00A0your\u00A0home.<br><br>All of this without obligation and completely free\u00A0of\u00A0charge."
     },
     "idealBuyer": {
-      "title": "We find the ideal buyer",
-      "subtitle": "Fully personalized marketing plan",
-      "description": "We have virtual reality cameras. This way users will visit your property like never before.<br><br> We will also promote your property in our offices as well as in our monthly magazine to give it maximum visibility.<br><br>We carry out an analysis of all the possible buyers profiles to find the ones that best suit your interests."
+      "title": "We find the ideal\u00A0buyer",
+      "subtitle": "Fully personalized marketing\u00A0plan",
+      "description": "We have virtual reality cameras. This way users will visit your property like\u00A0never\u00A0before.<br><br> We will also promote your property in our offices as well as in our monthly magazine to give it maximum\u00A0visibility.<br><br>We carry out an analysis of all the possible buyers profiles to find the ones that best suit your\u00A0interests."
     },
     "adjustNeeds": {
-      "title": "We adjust to your needs",
-      "subtitle": "Integral management, from start to finish",
-      "description": "We do a photographic report (2D and 3D) and we take care of the release of the ads on all the media, both online and offline.<br><br>We take care of all the documentation procedures and accompany you to the notary at the time of signing.<br><br>During the entire process, if you have any questions, you just have to pick up the phone and our advisors will be happy to assist you."
+      "title": "We adjust to your\u00A0needs",
+      "subtitle": "Integral management, from start to\u00A0finish",
+      "description": "We do a photographic report (2D and 3D) and we take care of the release of the ads on all the media, both online\u00A0and\u00A0offline.<br><br>We take care of all the documentation procedures and accompany you to the notary at the time\u00A0of\u00A0signing.<br><br>During the entire process, if you have any questions, you just have to pick up the phone and our advisors will be happy to\u00A0assist\u00A0you."
     }
   },
   "aboutUs": {
     "title": "About us | Inmobiliaria Núcleo",
-    "description": "Real estate in Alicante with more than 10 years of experience. We help you to sell your property or to find the best houses for sale in Alicante",
+    "description": "Real estate in Alicante with more than 10 years of experience. We help you to sell your property or to find the best houses for sale\u00A0in\u00A0Alicante",
     "section-1-title": "About us",
-    "section-1-text": "Inmobiliaria Núcleo is a network of real estate agencies in Alicante with more than 10 years of experience in the sector.<br><br>Currently, Núcleo has 5 offices spread throughout the geography of the province of Alicante.<br><br>Our team has that young spirit with grace and initiative at the forefront of technology and at the same time has great training and experience in the real estate market.",
+    "section-1-text": "Inmobiliaria Núcleo is a network of real estate agencies in Alicante with more than 10 years of experience in the sector.<br><br>Currently, Núcleo has 5 offices spread throughout the geography of the province of Alicante.<br><br>Our team has that young spirit with grace and initiative at the forefront of technology and at the same time has great training and experience in the real\u00A0estate\u00A0market.",
     "section-2-title": "Where we come from?",
-    "section-2-text": "Formed by professionals from the real estate and technology sectors who have more than 10 years of experience. Our strategic point of view has always been oriented towards evolution and growth, towards the continuous adaptation that technology offers us.<br><br>Over time, we have left behind the traditional vision that we consider to be stagnant of real estate services, to focus on progressing and looking to the future.",
+    "section-2-text": "Formed by professionals from the real estate and technology sectors who have more than 10 years of experience. Our strategic point of view has always been oriented towards evolution and growth, towards the continuous adaptation that technology offers us.<br><br>Over time, we have left behind the traditional vision that we consider to be stagnant of real estate services, to focus on progressing and looking to\u00A0the\u00A0future.",
     "section-3-title": "Where we go",
-    "section-3-text": "Honesty, integrity and professionalism are the three words that have characterized us throughout our journey. Our future projection has an evolutionary sense. We maintain our essence and personality, while we adapt pro-actively to the needs of the market.<br><br>To achieve our objectives, we surround ourselves with the best professionals in the different fields of interest that our clients need. This way, we offer the best solutions and complete advice, from start to finish, for those who trust."
+    "section-3-text": "Honesty, integrity and professionalism are the three words that have characterized us throughout our journey. Our future projection has an evolutionary sense. We maintain our essence and personality, while we adapt pro-actively to the needs of the market.<br><br>To achieve our objectives, we surround ourselves with the best professionals in the different fields of interest that our clients need. This way, we offer the best solutions and complete advice, from start to finish, for those\u00A0who\u00A0trust."
   },
   "contact": {
     "metaTitle": "Contact | Inmobiliaria Núcleo",
     "metaDescription": "Alicante Real Estate Inmobiliaria Núcleo contact information",
     "form": {
       "title": "Contact us",
-      "subtitle": "Please, fill in the following form to get in touch with the Núcleo team",
-      "subtitle2": "Call us at (+34) 965 999 554",
+      "subtitle": "Please, fill in the following form to get in touch with the\u00A0Núcleo\u00A0team",
+      "subtitle2": "Call us at (+34)\u00A0965\u00A0999\u00A0554",
       "send": "Send"
     },
     "offices": {
@@ -189,11 +189,11 @@
       "pending": "Check your email to complete your subscription"
     },
     "subtitle": {
-      "subscribed": "We have correctly received your data. We will get in touch with you soon",
-      "pending": "We need your approval in order to get your submitted data and get in touch with you"
+      "subscribed": "We have correctly received your data. We will get in touch with\u00A0you\u00A0soon",
+      "pending": "We need your approval in order to get your submitted data and get in touch\u00A0with\u00A0you"
     },
     "messages": {
-      "visitBlog": "You can read all our news visiting our blog"
+      "visitBlog": "You can read all our news visiting\u00A0our\u00A0blog"
     },
     "actions": {
       "visitBlog": "Inmobiliaria Núcleo Blog"
@@ -224,7 +224,7 @@
     "lessThan": "or less",
     "greaterThan": "or more",
     "mailchimpSubscription": {
-      "error": "There was an error in the subscription process. Please try again"
+      "error": "There was an error in the subscription process. Please\u00A0try\u00A0again"
     }
   }
 }
