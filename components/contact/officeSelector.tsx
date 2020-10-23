@@ -22,10 +22,7 @@ const ButtonsContainer = styled(Swipeable)`
 
 const OfficeButton = styled.p<{ isSelected: boolean }>`
   width: ${(props) => props.theme.grid.getGridColumns(4, 0)};
-  min-width: 120px;
-  @media ${(props) => props.theme.breakpoints.mdu} {
-    min-width: 140px;
-  }
+  min-width: 194px;
 
   text-align: center;
   font-weight: ${(props) => (props.isSelected ? '500' : 'inherit')};
@@ -131,14 +128,24 @@ const OfficeSelector = ({
     }
   };
 
+  const handleOfficeClick = (index) => {
+    if (containerRef && process.browser && window) {
+        const buttonWidth = 194;
+        const parentStyle = window.getComputedStyle(parentRef.current);
+        const leftMargin = parseInt(parentStyle.getPropertyValue('margin-left'));
+        const screenWidth = window.innerWidth || document.documentElement.clientWidth;
+        const newOffset = -buttonWidth * index - leftMargin + screenWidth/2 - buttonWidth/2;
+        setOffset(newOffset);
+    }
+  }
+
   return (
     <div className={className} ref={parentRef}>
       <ButtonsContainer
         innerRef={(element) => {
           setContainerRef(element);
         }}
-        style={{ transform: `translateX(${-offset}px)` }}
-        onSwiping={handleMove}
+        style={{ transform: `translateX(${offset}px)` }}
         {...config}
       >
         {offices.map((office, index) => {
@@ -152,6 +159,7 @@ const OfficeSelector = ({
               isSelected={isSelected}
               onClick={() => {
                 setSelectedOffice(index);
+                handleOfficeClick(index);
               }}
             >
               {office.shortName}
