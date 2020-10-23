@@ -96,10 +96,14 @@ const MenuDivider = styled(
 `;
 
 const Gradient = styled.div<{ right?: boolean }>`
-  background: linear-gradient(to ${props => props.right ? 'right' : 'left'}, rgba(255, 255, 255, 0) 10.94%, #FFFFFF 79.69%);
+  background: linear-gradient(
+    to ${(props) => (props.right ? 'right' : 'left')},
+    rgba(255, 255, 255, 0) 10.94%,
+    #ffffff 79.69%
+  );
   position: absolute;
-  left: ${props => props.right ? 'inherit' : 0};
-  right: ${props => props.right ? 0 : 'inherit'};
+  left: ${(props) => (props.right ? 'inherit' : 0)};
+  right: ${(props) => (props.right ? 0 : 'inherit')};
   top: 0;
   height: 100%;
   width: 30%;
@@ -120,7 +124,7 @@ const OfficeSelector = ({
   const isLgDown = useMediaQuery({ query: theme.breakpoints.lgd });
 
   useEffect(() => {
-    handleOfficeClick(selectedOfficeIndex)
+    handleOfficeClick(selectedOfficeIndex);
   });
 
   const handleOfficeClick = (index) => {
