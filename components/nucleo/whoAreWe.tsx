@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 import useI18n from '../../common/hooks/useI18n';
 import TextSection from './textSection';
+import { xlMax } from '../../common/themes/default';
+
+const xxlMax = 1999;
+
 
 const TangramStar = styled.div`
   position: absolute;
@@ -106,8 +110,14 @@ const Background = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
 
-  min-height: 500px;
 
+  min-height: 500px;
+  @media (min-width: ${xxlMax + 1}px) {
+    min-height: 700px;
+  }
+  @media (min-width: ${xlMax + 1}px) and (max-width: ${xxlMax}px) {
+    min-height: 500px;
+  }
   @media ${(props) => props.theme.breakpoints.sm} {
     min-height: 400px;
   }

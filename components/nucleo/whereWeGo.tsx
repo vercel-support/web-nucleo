@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 import useI18n from '../../common/hooks/useI18n';
 import TextSection from './textSection';
+import { xlMax } from '../../common/themes/default';
+
+const xxlMax = 1999;
 
 const TangramHouse = styled.div`
   position: absolute;
@@ -55,8 +58,10 @@ const Background = styled.div`
   padding-bottom: 48px;
 
   overflow: hidden;
-
-  @media ${(props) => props.theme.breakpoints.xxl} {
+  @media (min-width: ${xxlMax + 1}px) {
+    min-height: 700px;
+  }
+  @media (min-width: ${xlMax + 1}px) and (max-width: ${xxlMax}px) {
     min-height: 500px;
   }
   @media ${(props) => props.theme.breakpoints.xld} {
