@@ -42,8 +42,8 @@ const offices: IOffice[] = [
   },
   {
     id: '4',
-    shortName: 'Sant Joan',
-    name: 'Sant Joan',
+    shortName: "Sant Joan d'Alacant",
+    name: "Sant Joan d'Alacant",
     address: 'C/ Tomas Capelo, 8',
     postalCode: '03550',
     city: "Sant Joan d'Alacant",
