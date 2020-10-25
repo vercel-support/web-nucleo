@@ -111,7 +111,7 @@ const MapSection = styled.div`
   bottom: 0;
   left: ${(props) => props.theme.grid.getGridColumns(14, -1)};
   right: 0;
-  z-index: -1;
+  z-index: 10;
   @media ${(props) => props.theme.breakpoints.mdd} {
     bottom: unset;
     height: ${(props) =>
@@ -130,6 +130,7 @@ const TransparentMddSection = styled.div`
 `;
 
 const ScrollableSection = styled.div`
+  position: relative;
   margin-top: calc(
     ${searchBarHeight} + ${searchBarSectionPaddingTop} +
       ${searchBarSectionPaddingBottom}
@@ -137,6 +138,7 @@ const ScrollableSection = styled.div`
   margin-left: 0;
   margin-right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
   background-color: white;
+  z-index: 20;
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin: 0;
     padding-top: 40px;
@@ -308,6 +310,10 @@ const BuscarPage = ({
   }, []);
 
   useEffect(() => {
+    if (isMdd) {
+      window.scrollTo({ top: window.innerHeight / 2 });
+    }
+
     const headerHeight = +theme.headerHeight.replace('px', '');
     const footerHeight = +theme.footerHeight.replace('px', '');
 
