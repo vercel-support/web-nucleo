@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 import { Row, Col, Button } from 'antd';
+import { EnvironmentFilled } from '@ant-design/icons';
 
 import { IFlat } from '../common/model/flat.model';
 import { IFilter } from '../common/model/filter.model';
@@ -32,8 +33,11 @@ type Props = StaticProps & {
 
 const layoutId = 'buscarLayoutId';
 const searchBarSectionId = 'buscarSearchBarSection';
-const scrollableSectionId = 'buscarScrollableSection';
 const mapSectionId = 'buscarMapSection';
+const showMapButtonSectionId = 'buscarShowMapButtonSection';
+const transparentMddSectionId = 'buscarTransparentMddSection';
+const scrollableSectionId = 'buscarScrollableSection';
+const resultsInfoSectionId = 'buscarResultsInfoSection';
 const headerOutOfScreenClass = 'header-out-of-screen';
 const searchBarSectionPaddingTop = '16px';
 const searchBarSectionPaddingBottom = '32px';
@@ -68,10 +72,28 @@ const Content = styled.main`
       padding: 0;
       border-radius: 0;
     }
+
+    #${resultsInfoSectionId} {
+      height: ${(props) => `calc(
+        100vh - ${props.theme.headerHeight} -
+          ${props.theme.footerHeight} - ${searchBarSectionPaddingTop} -
+          ${searchBarSectionPaddingBottom} - ${searchBarHeight}
+      )`};
+      margin-top: 0;
+    }
   }
 
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-top: 0;
+
+    &.no-results {
+      #${resultsInfoSectionId} {
+        height: ${(props) => `calc(
+          100vh - ${props.theme.footerHeight} - ${searchBarSectionPaddingTop} -
+            ${searchBarSectionPaddingBottom} - ${searchBarHeight}
+        )`};
+      }
+    }
   }
 `;
 
@@ -85,13 +107,6 @@ const SearchBarSection = styled.div`
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   z-index: 100;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.75) 75%,
-    rgba(255, 255, 255, 0) 100%
-  );
   @media ${(props) => props.theme.breakpoints.mdd} {
     left: 0;
     right: 0;
@@ -113,16 +128,27 @@ const MapSection = styled.div`
   right: 0;
   z-index: 10;
   @media ${(props) => props.theme.breakpoints.mdd} {
+    top: 0;
     bottom: unset;
-    height: ${(props) =>
-      `calc(100vh - ${searchBarHeight} - ${searchBarSectionPaddingTop} - ${searchBarSectionPaddingBottom} - ${props.theme.footerHeight})`};
+    height: ${(props) => `calc(100vh - ${props.theme.footerHeight} - 16px)`};
     left: 0;
   }
 `;
 
+const ShowMapButtonSection = styled.div`
+  position: fixed;
+  left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  bottom: 32px;
+  z-index: 100;
+`;
+
+const ShowMapButtonRow = styled(Row)`
+  width: 100%;
+`;
+
 const TransparentMddSection = styled.div`
-  height: ${(props) =>
-    `calc(100vh - ${props.theme.headerHeight} - ${props.theme.footerHeight} - 56px)`};
+  height: ${(props) => `calc(100vh - ${props.theme.footerHeight} - 56px)`};
   pointer-events: none;
   @media ${(props) => props.theme.breakpoints.lgu} {
     display: none;
@@ -147,16 +173,8 @@ const ScrollableSection = styled.div`
   }
 `;
 
-const ResultsInfoSection = styled.div<{ pageSize: number }>`
-  height: ${(props) =>
-    props.pageSize > 0
-      ? 'unset'
-      : `calc(
-    100vh - ${props.theme.headerHeight} -
-      ${props.theme.footerHeight} - ${searchBarSectionPaddingTop} -
-      ${searchBarSectionPaddingBottom} - ${searchBarHeight}
-  )`};
-  margin-bottom: ${(props) => (props.pageSize > 0 ? '16px' : '0')};
+const ResultsInfoSection = styled.div`
+  margin-bottom: 16px;
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   @media ${(props) => props.theme.breakpoints.md} {
@@ -246,20 +264,28 @@ const BuscarPage = ({
     );
   };
 
+  const showMap = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleScroll = (headerHeight: number, footerHeight: number) => {
     const layoutElement = document.getElementById(layoutId);
+    const transparentMddSectionElement = document.getElementById(
+      transparentMddSectionId
+    );
 
     const searchBarSectionElement = document.getElementById(searchBarSectionId);
     if (searchBarSectionElement) {
       if (
         !searchBarSectionElement.className.includes(headerOutOfScreenClass) &&
-        window.scrollY >= headerHeight
+        (isMdd || window.scrollY >= headerHeight)
       ) {
         searchBarSectionElement.className =
           searchBarSectionElement.className + ' ' + headerOutOfScreenClass;
       }
       if (
         searchBarSectionElement.className.includes(headerOutOfScreenClass) &&
+        !isMdd &&
         window.scrollY < headerHeight
       ) {
         searchBarSectionElement.className = searchBarSectionElement.className.replace(
@@ -267,10 +293,20 @@ const BuscarPage = ({
           ''
         );
       }
+      if (transparentMddSectionElement) {
+        searchBarSectionElement.style.setProperty(
+          'background',
+          `${
+            isMdd && window.scrollY <= transparentMddSectionElement.clientHeight
+              ? 'transparent'
+              : 'linear-gradient( 180deg,rgba(255,255,255,0.95) 0%,rgba(255,255,255,0.75) 75%,rgba(255,255,255,0) 100% )'
+          }`
+        );
+      }
     }
 
     const mapSectionElement = document.getElementById(mapSectionId);
-    if (layoutElement && mapSectionElement) {
+    if (!isMdd && layoutElement && mapSectionElement) {
       const ammountOfHeaderVisible = headerHeight - window.scrollY;
       if (ammountOfHeaderVisible > 0) {
         mapSectionElement.style.setProperty(
@@ -282,22 +318,34 @@ const BuscarPage = ({
         mapSectionElement.style.setProperty('top', '0');
       }
 
-      if (!isMdd) {
-        const ammountOfFooterVisible =
-          window.scrollY +
-          window.innerHeight +
-          footerHeight -
-          layoutElement.clientHeight;
-        if (ammountOfFooterVisible > 0) {
-          mapSectionElement.style.setProperty(
-            'bottom',
-            `${ammountOfFooterVisible}px`
-          );
-        }
-        if (ammountOfFooterVisible <= 0) {
-          mapSectionElement.style.setProperty('bottom', '0');
-        }
+      const ammountOfFooterVisible =
+        window.scrollY +
+        window.innerHeight +
+        footerHeight -
+        layoutElement.clientHeight;
+      if (ammountOfFooterVisible > 0) {
+        mapSectionElement.style.setProperty(
+          'bottom',
+          `${ammountOfFooterVisible}px`
+        );
       }
+      if (ammountOfFooterVisible <= 0) {
+        mapSectionElement.style.setProperty('bottom', '0');
+      }
+    }
+
+    const showMapButtonSectionElement = document.getElementById(
+      showMapButtonSectionId
+    );
+    if (transparentMddSectionElement && showMapButtonSectionElement) {
+      showMapButtonSectionElement.style.setProperty(
+        'display',
+        `${
+          isMdd && window.scrollY > transparentMddSectionElement.clientHeight
+            ? 'block'
+            : 'none'
+        }`
+      );
     }
   };
 
@@ -371,7 +419,7 @@ const BuscarPage = ({
           />
         )}
       </Head>
-      <Header />
+      {!isMdd && <Header />}
 
       <Content
         className={searchService.getResultsCount() === 0 ? 'no-results' : ''}
@@ -404,7 +452,20 @@ const BuscarPage = ({
             setFocusedFlat={setFocusedFlatFromMap}
           />
         </MapSection>
-        <TransparentMddSection />
+        <ShowMapButtonSection id={showMapButtonSectionId}>
+          <ShowMapButtonRow justify="end">
+            <Col>
+              <Button
+                type="primary"
+                icon={<EnvironmentFilled />}
+                onClick={showMap}
+              >
+                {i18n.t('search.actions.showMap')}
+              </Button>
+            </Col>
+          </ShowMapButtonRow>
+        </ShowMapButtonSection>
+        <TransparentMddSection id={transparentMddSectionId} />
         <ScrollableSection id={scrollableSectionId}>
           {currentResults.length > 0 && (
             <Title
@@ -425,7 +486,7 @@ const BuscarPage = ({
             cardBackgroundColor="white"
             parentRef={resultsSectionRef}
           />
-          <ResultsInfoSection pageSize={searchService.getPageSize()}>
+          <ResultsInfoSection id={resultsInfoSectionId}>
             <ResultsInfoText>
               {searchService.getPageSize() > 0
                 ? i18n.t('search.messages.resultsInfo', {

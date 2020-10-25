@@ -176,6 +176,7 @@
       "noResults": "No se encontraron resultados"
     },
     "actions": {
+      "showMap": "Mapa",
       "loadMore": "Cargar más",
       "applyFilters": "Aplicar filtros",
       "clearFilters": "Restablecer"

@@ -176,6 +176,7 @@
       "noResults": "No results found"
     },
     "actions": {
+      "showMap": "Map",
       "loadMore": "Load more",
       "applyFilters": "Apply filters",
       "clearFilters": "Clear all"
