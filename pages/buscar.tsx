@@ -3,8 +3,8 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Row, Col, Button } from 'antd';
 import { useMediaQuery } from 'react-responsive';
+import { Row, Col, Button } from 'antd';
 
 import { IFlat } from '../common/model/flat.model';
 import { IFilter } from '../common/model/filter.model';
@@ -34,7 +34,6 @@ const layoutId = 'buscarLayoutId';
 const searchBarSectionId = 'buscarSearchBarSection';
 const scrollableSectionId = 'buscarScrollableSection';
 const mapSectionId = 'buscarMapSection';
-const footerSectionId = 'buscarFooterSection';
 const headerOutOfScreenClass = 'header-out-of-screen';
 const searchBarSectionPaddingTop = '16px';
 const searchBarSectionPaddingBottom = '32px';
@@ -68,10 +67,6 @@ const Content = styled.main`
       );
       padding: 0;
       border-radius: 0;
-    }
-
-    #${footerSectionId} {
-      bottom: 0;
     }
   }
 
@@ -125,6 +120,15 @@ const MapSection = styled.div`
   }
 `;
 
+const TransparentMddSection = styled.div`
+  height: ${(props) =>
+    `calc(100vh - ${props.theme.headerHeight} - ${props.theme.footerHeight} - 56px)`};
+  pointer-events: none;
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    display: none;
+  }
+`;
+
 const ScrollableSection = styled.div`
   margin-top: calc(
     ${searchBarHeight} + ${searchBarSectionPaddingTop} +
@@ -134,13 +138,7 @@ const ScrollableSection = styled.div`
   margin-right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
   background-color: white;
   @media ${(props) => props.theme.breakpoints.mdd} {
-    position: absolute;
-    top: ${(props) =>
-      `calc(100vh - ${props.theme.headerHeight} - ${props.theme.footerHeight} - 56px)`};
-    left: 0;
-    right: 0;
     margin: 0;
-    margin-bottom: ${(props) => props.theme.footerHeight};
     padding-top: 40px;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
@@ -185,15 +183,6 @@ const LoadMoreButtonRow = styled(Row)`
 
 const LoadMoreButton = styled(Button)`
   width: 100%;
-`;
-
-const FooterSection = styled.div`
-  width: 100%;
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    position: fixed;
-    bottom: -${(props) => props.theme.footerHeight};
-    z-index: 1;
-  }
 `;
 
 const BuscarPage = ({
@@ -308,29 +297,6 @@ const BuscarPage = ({
         }
       }
     }
-
-    const scrollableSectionElement = document.getElementById(
-      scrollableSectionId
-    );
-    const footerSectionElement = document.getElementById(footerSectionId);
-    if (scrollableSectionElement && footerSectionElement) {
-      if (isMdd) {
-        const ammountOfScrollableSectionBelowBottom =
-          scrollableSectionElement.clientHeight - 56 - window.scrollY;
-        if (ammountOfScrollableSectionBelowBottom >= 0) {
-          footerSectionElement.style.setProperty(
-            'bottom',
-            `-${ammountOfScrollableSectionBelowBottom}px`
-          );
-        }
-        if (ammountOfScrollableSectionBelowBottom < 0) {
-          footerSectionElement.style.setProperty(
-            'bottom',
-            `-${footerHeight}px`
-          );
-        }
-      }
-    }
   };
 
   useEffect(() => {
@@ -432,6 +398,7 @@ const BuscarPage = ({
             setFocusedFlat={setFocusedFlatFromMap}
           />
         </MapSection>
+        <TransparentMddSection />
         <ScrollableSection id={scrollableSectionId}>
           {currentResults.length > 0 && (
             <Title
@@ -502,9 +469,7 @@ const BuscarPage = ({
         />
       </Content>
 
-      <FooterSection id={footerSectionId}>
-        <Footer />
-      </FooterSection>
+      <Footer />
     </Layout>
   );
 };
