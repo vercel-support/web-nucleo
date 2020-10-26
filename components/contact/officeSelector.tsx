@@ -24,11 +24,17 @@ const ButtonsContainer = styled.div`
 
 const OfficeButton = styled.p<{ isSelected: boolean }>`
   width: ${(props) => props.theme.grid.getGridColumns(4, 0)};
-  min-width: 194px;
+  min-width: 192px;
 
   text-align: center;
   font-weight: ${(props) => (props.isSelected ? '600' : 'inherit')};
   cursor: pointer;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    min-width: 176px;
+  }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    min-width: 144px;
+  }
 `;
 
 const GreyLine = styled.div`
