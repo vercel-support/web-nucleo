@@ -6,10 +6,6 @@ import useI18n from '../../common/hooks/useI18n';
 
 type Props = { themeColor?: string };
 
-const StyledMenu = styled(Menu)`
-  border-radius: 0;
-`;
-
 const StyledLink = styled.a`
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
@@ -19,7 +15,7 @@ const LanguageSelector = (): JSX.Element => {
   const i18n = useI18n();
 
   const menu = (
-    <StyledMenu>
+    <Menu>
       <Menu.Item
         key="0"
         onClick={() => {
@@ -36,7 +32,7 @@ const LanguageSelector = (): JSX.Element => {
       >
         <StyledLink>English</StyledLink>
       </Menu.Item>
-    </StyledMenu>
+    </Menu>
   );
 
   return (

@@ -13,16 +13,19 @@ const OfficeImage = styled.div<{ src: string }>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  height: 380px;
+  min-height: 380px;
   flex: 1;
 
   border-radius: ${(props) => props.theme.borderRadius};
   min-width: 341px;
+  margin-left: 4px;
+  margin-right: 4px;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    margin-top: 20px;
+  }
   @media ${(props) => props.theme.breakpoints.xs} {
     min-width: 250px;
   }
-
-  margin: 8px;
 `;
 
 const OfficeDisplay = ({
@@ -47,11 +50,15 @@ const OfficeDisplay = ({
 export default styled(OfficeDisplay)`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   margin-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   margin-top: 48px;
   margin-bottom: 48px;
+
+  @media ${(props) => props.theme.breakpoints.smd} {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;

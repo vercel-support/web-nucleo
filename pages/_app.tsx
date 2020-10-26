@@ -105,8 +105,15 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  .ant-message,
+  .ant-dropdown-menu,
   .ant-select-dropdown {
+    border-radius: 0;
+  }
+
+  .ant-message,
+  .ant-dropdown-menu,
+  .ant-select-dropdown,
+  .ant-modal {
     font-family: ${(props) => props.theme.font.family};
     font-style: ${(props) => props.theme.font.style};
   }
@@ -120,6 +127,11 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-checkbox-inner {
     border-radius: 0;
+  }
+
+  .ant-modal-footer {
+    padding-bottom: 16px;
+    padding-top: 16px;
   }
 `;
 

@@ -15,6 +15,7 @@ type Props = {
   onSelect: (option: ISearchOption) => void;
   onFiltersButtonClick?: () => void;
   className?: string;
+  hasFilters?: boolean;
   buttonBackgroundColor?: string;
   buttonColor?: string;
   inputPadding?: string;
@@ -212,7 +213,11 @@ const SearchBar = React.forwardRef<any, Props>(
               onSelect(selectedOption);
             }
             setOpen(false);
-            setTimeout(() => autoCompleteRef.current.blur());
+            setTimeout(() => {
+              if (autoCompleteRef.current) {
+                autoCompleteRef.current.blur();
+              }
+            });
           }}
           onFocus={() => {
             setOpen(!!value);
@@ -231,7 +236,9 @@ const SearchBar = React.forwardRef<any, Props>(
                   onMouseUp={(e) => e.stopPropagation()}
                   onClick={(e) => {
                     e.stopPropagation();
-                    autoCompleteRef.current.blur();
+                    if (autoCompleteRef.current) {
+                      autoCompleteRef.current.blur();
+                    }
                     onFiltersButtonClick();
                   }}
                 >
@@ -257,7 +264,11 @@ const SearchBar = React.forwardRef<any, Props>(
               onValueChange(newValue);
               onSearch(newValue);
               if (newValue) {
-                setTimeout(() => autoCompleteRef.current.blur());
+                setTimeout(() => {
+                  if (autoCompleteRef.current) {
+                    autoCompleteRef.current.blur();
+                  }
+                });
               }
             }}
           />

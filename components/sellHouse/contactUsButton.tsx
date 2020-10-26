@@ -19,8 +19,7 @@ const ContactUsButton = ({ onClick, className }: Props): JSX.Element => {
           htmlType="button"
           type="primary"
           size="large"
-          onClick={(e) => {
-            (e.target as HTMLButtonElement).blur();
+          onClick={() => {
             onClick();
           }}
         >

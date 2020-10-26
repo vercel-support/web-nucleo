@@ -19,14 +19,14 @@
     "description": "Compra-Venta de viviendas en Alicante. Encuentre inmuebles al mejor precio. Visite Inmobiliaria Núcleo y conozca nuestra oferta de casas en venta en Alicante.",
     "hero-title-1": "Bienvenido a",
     "hero-title-2": "Inmobiliaria Núcleo",
-    "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles en Alicante.",
+    "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles\u00A0en\u00A0Alicante.",
     "vender": "Vender casa",
     "comprar": "Comprar casa",
     "section-flats-title": "Viviendas en Alicante",
     "enviar": "Enviar",
     "email": "Correo electrónico",
-    "blog-showcase-title": "Conozca las tendencias del mercado inmobiliario",
-    "blog-showcase-subtitle": "¡Sea el primero en conocer todas las novedades, los mejores rincones de Alicante y mucho más!",
+    "blog-showcase-title": "Conozca las tendencias del mercado\u00A0inmobiliario",
+    "blog-showcase-subtitle": "¡Sea el primero en conocer todas las novedades, los mejores rincones de Alicante\u00A0y\u00A0mucho\u00A0más!",
     "newsletter-title": "Suscríbase a nuestra newsletter"
   },
   "flat": {
@@ -71,7 +71,7 @@
     "validateRequired": "Por favor, rellene este campo"
   },
   "cookies": {
-    "text": "Utilizamos cookies propias y de terceros para evaluar el uso que se hace de la web y la actividad general de la misma. Si usted continúa navegando, consideramos que acepta su uso.",
+    "text": "Utilizamos cookies propias y de terceros para evaluar el uso que se hace de la web y la actividad general de la misma. Si usted continúa navegando, consideramos que\u00A0acepta\u00A0su\u00A0uso.",
     "detail": {
       "title": "Política de cookies",
       "description": "Política de cookies"
@@ -86,8 +86,8 @@
     "metaDescription": "Venta de viviendas en Alicante. Visite Inmobiliaria Núcleo y conozca cómo vender casa en Alicante al mejor precio.",
     "form": {
       "title": "Venda su inmueble con nosotros",
-      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
-      "subtitle2": "Valoración gratuita y sin compromiso",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo\u00A0de\u00A0Núcleo",
+      "subtitle2": "Valoración gratuita y sin\u00A0compromiso",
       "send": "Enviar",
       "contactUs": "Contacte con nosotros"
     },
@@ -96,51 +96,51 @@
       "properties": {
         "professional": {
           "title": "Profesionalidad",
-          "description": "Desde Núcleo le ofrecemos un servicio completo y personalizado desde el inicio hasta el final del proceso de venta"
+          "description": "Desde Núcleo le ofrecemos un servicio completo y personalizado desde el inicio hasta el final del proceso\u00A0de\u00A0venta"
         },
         "fast": {
           "title": "Rapidez",
-          "description": "Contamos con una potente base de datos compartida entre nuestras oficinas y más de 30 asesores trabajando para vender su vivienda"
+          "description": "Contamos con una potente base de datos compartida entre nuestras oficinas y más de 30 asesores trabajando para vender\u00A0su\u00A0vivienda"
         },
         "experience": {
           "title": "Experiencia",
-          "description": "Tras más de 10 años trabajando en la provincia de Alicante, nuestro equipo conoce a la perfección el mercado inmobiliario local"
+          "description": "Tras más de 10 años trabajando en la provincia de Alicante, nuestro equipo conoce a la perfección el mercado\u00A0inmobiliario\u00A0local"
         }
       }
     },
     "houseValue": {
-      "title": "Conozca el valor de su inmueble",
-      "subtitle": "Servicio gratuito de valoración de su vivienda",
-      "description": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada barrio.<br><br>Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender su vivienda.<br><br>Y lo mejor, todo ello sin compromiso y de forma totalmente gratuita."
+      "title": "Conozca el valor de su\u00A0inmueble",
+      "subtitle": "Servicio gratuito de valoración de\u00A0su\u00A0vivienda",
+      "description": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada\u00A0barrio.<br><br>Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender\u00A0su\u00A0vivienda.<br><br>Y lo mejor, todo ello sin compromiso y de forma totalmente\u00A0gratuita."
     },
     "idealBuyer": {
-      "title": "Encontramos al comprador ideal",
-      "subtitle": "Plan de marketing totalmente personalizado",
-      "description": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la máxima visibilidad<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a sus intereses."
+      "title": "Encontramos al comprador\u00A0ideal",
+      "subtitle": "Plan de marketing totalmente\u00A0personalizado",
+      "description": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como\u00A0internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la\u00A0máxima\u00A0visibilidad<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a\u00A0sus\u00A0intereses."
     },
     "adjustNeeds": {
-      "title": "Nos ajustamos a sus necesidades",
-      "subtitle": "Gestión integral, de principio a fin",
-      "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de la firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados de atenderle."
+      "title": "Nos ajustamos a sus\u00A0necesidades",
+      "subtitle": "Gestión integral, de principio\u00A0a\u00A0fin",
+      "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como\u00A0offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de\u00A0la\u00A0firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados\u00A0de\u00A0atenderle."
     }
   },
   "aboutUs": {
     "title": "¿Quiénes somos? | Inmobiliaria Núcleo",
-    "description": "Inmobiliaria en Alicante con más de 10 años de experiencia. Le ayudamos a comprar-vender casa en Alicante de la forma más profesional",
+    "description": "Inmobiliaria en Alicante con más de 10 años de experiencia. Le ayudamos a comprar-vender casa en Alicante de la forma\u00A0más\u00A0profesional",
     "section-1-title": "¿Quiénes somos?",
-    "section-1-text": "Inmobiliaria Núcleo es una red de inmobiliarias en Alicante con más de 10 años de experiencia en el sector.<br><br>Actualmente, Núcleo cuenta con 5 oficinas repartidas por toda la geografía de la provincia de Alicante.<br><br>Nuestro equipo tiene ese espíritu joven con garbo e iniciativa a la vanguardia de la tecnología, pero que a la vez cuenta con una gran formación y experiencia en el mercado inmobiliario.",
+    "section-1-text": "Inmobiliaria Núcleo es una red de inmobiliarias en Alicante con más de 10 años de experiencia en\u00A0el\u00A0sector.<br><br>Actualmente, Núcleo cuenta con 5 oficinas repartidas por toda la geografía de la provincia de Alicante.<br><br>Nuestro equipo tiene ese espíritu joven con garbo e iniciativa a la vanguardia de la tecnología, pero que a la vez cuenta con una gran formación y experiencia en el mercado\u00A0inmobiliario.",
     "section-2-title": "¿De dónde venimos?",
-    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico que llevan detrás más de 10 años de experiencia. Nuestro punto de vista estratégico siempre ha estado orientado hacia la evolución y el crecimiento, hacia la continua adaptación que nos ofrece la tecnología.<br><br>Con el tiempo, hemos dejado atrás la visión tradicional que consideramos estancada de los servicios de sector inmobiliario, para basarnos en progresar y mirar hacia el futuro.",
+    "section-2-text": "Formada por profesionales de los sectores inmobiliario y tecnológico que llevan detrás más de 10 años de experiencia. Nuestro punto de vista estratégico siempre ha estado orientado hacia la evolución y el crecimiento, hacia la continua adaptación que nos ofrece\u00A0la\u00A0tecnología.<br><br>Con el tiempo, hemos dejado atrás la visión tradicional que consideramos estancada de los servicios de sector inmobiliario, para basarnos en progresar y mirar hacia\u00A0el\u00A0futuro.",
     "section-3-title": "¿A dónde vamos?",
-    "section-3-text": "Honestidad, integridad y profesionalismo, son las tres palabras que nos ha caracterizado a lo largo de nuestro recorrido. Nuestra proyección de futuro tiene un sentido evolutivo. Mantenemos nuestra esencia y personalidad, a la vez que nos adaptamos de forma pro-activa a las necesidades del mercado.<br><br>Para conseguir nuestros objetivos, nos rodeamos de los mejores profesionales con experiencia en los distintos campos de interés que necesitan nuestros clientes. De esta forma, ofrecemos las mejores soluciones y un asesoramiento completo, de principio a fin, a quienes confían en nosotros para trabajar."
+    "section-3-text": "Honestidad, integridad y profesionalismo, son las tres palabras que nos ha caracterizado a lo largo de nuestro recorrido. Nuestra proyección de futuro tiene un sentido evolutivo. Mantenemos nuestra esencia y personalidad, a la vez que nos adaptamos de forma pro-activa a las necesidades\u00A0del\u00A0mercado.<br><br>Para conseguir nuestros objetivos, nos rodeamos de los mejores profesionales con experiencia en los distintos campos de interés que necesitan nuestros clientes. De esta forma, ofrecemos las mejores soluciones y un asesoramiento completo, de principio a fin, a quienes confían en nosotros para\u00A0trabajar."
   },
   "contact": {
     "metaTitle": "Contacto | Inmobiliaria Núcleo",
-    "metaDescription": "Toda la información de las oficinas inmobiliarias en Alicante de Núcleo",
+    "metaDescription": "Toda la información de las oficinas inmobiliarias en Alicante\u00A0de\u00A0Núcleo",
     "form": {
       "title": "Contacte con nosotros",
-      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo de Núcleo",
-      "subtitle2": "Llámenos al (+34) 965 999 554",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo\u00A0de\u00A0Núcleo",
+      "subtitle2": "Llámenos al (+34)\u00A0965\u00A0999\u00A0554",
       "send": "Enviar"
     },
     "offices": {
@@ -159,8 +159,8 @@
       "closed": "Viviendas en {{query}}"
     },
     "subtitle": {
-      "filters": "{{resultsCount}} resultados con los filtros seleccionados",
-      "noFilters": "{{resultsCount}} resultados"
+      "singular": "{{resultsCount}} resultado",
+      "plural": "{{resultsCount}} resultados"
     },
     "searchBar": {
       "placeholder": "Ciudad, barrio o dirección",
@@ -172,7 +172,7 @@
       "title": "Filtros"
     },
     "messages": {
-      "resultsInfo": "Mostrando {{pageSize}} de {{resultsCount}} resultados",
+      "resultsInfo": "Mostrando {{pageSize}} de {{resultsCount}}\u00A0resultados",
       "noResults": "No se encontraron resultados"
     },
     "actions": {
@@ -189,11 +189,11 @@
       "pending": "Revise su correo para completar la suscripción"
     },
     "subtitle": {
-      "subscribed": "Hemos recibido correctamente sus datos. Pronto nos pondremos en contacto con usted",
-      "pending": "Necesitamos su aprobación para obtener los datos introducidos y ponernos en contacto con usted"
+      "subscribed": "Hemos recibido correctamente sus datos. Pronto nos pondremos en contacto\u00A0con\u00A0usted",
+      "pending": "Necesitamos su aprobación para obtener los datos introducidos y ponernos en contacto\u00A0con\u00A0usted"
     },
     "messages": {
-      "visitBlog": "Puede estar al tanto de todas nuestras novedades visitando nuestro blog"
+      "visitBlog": "Puede estar al tanto de todas nuestras novedades visitando\u00A0nuestro\u00A0blog"
     },
     "actions": {
       "visitBlog": "Blog de Inmobiliaria Núcleo"
@@ -210,6 +210,10 @@
       "ÁTICO": "Ático",
       "EDIFICIO": "Edificio",
       "TRASTERO": "Trastero"
+    },
+    "flatOrderBy": {
+      "price asc": "precio ascendente",
+      "price desc": "precio descendente"
     }
   },
   "messages": {
@@ -220,7 +224,7 @@
     "lessThan": "o menos",
     "greaterThan": "o más",
     "mailchimpSubscription": {
-      "error": "Hubo un error en el proceso de suscripción. Por favor inténtelo de nuevo"
+      "error": "Hubo un error en el proceso de suscripción. Por favor inténtelo\u00A0de\u00A0nuevo"
     }
   }
 }

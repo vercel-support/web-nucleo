@@ -33,10 +33,6 @@ const MenuButtons = styled.div`
   }
 `;
 
-const StyledMenu = styled(Menu)`
-  border-radius: 0;
-`;
-
 const StyledLink = styled.a`
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
@@ -62,7 +58,7 @@ const Footer = ({ className }: Props) => {
   const i18n = useI18n();
 
   const dropdownMenu = (
-    <StyledMenu>
+    <Menu>
       <Menu.Item key="0">
         <StyledLink>{i18n.t('footer.aviso-legal')}</StyledLink>
       </Menu.Item>
@@ -74,7 +70,7 @@ const Footer = ({ className }: Props) => {
           <StyledLink>{i18n.t('footer.politica-cookies')}</StyledLink>
         </Link>
       </Menu.Item>
-    </StyledMenu>
+    </Menu>
   );
 
   return (

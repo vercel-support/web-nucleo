@@ -6,6 +6,12 @@ const Banner = styled.div`
   height: 40vh;
   min-height: 260px;
 
+  background-image: url(${require('../../public/images/tangram_blog.png')}),
+    url(${require('../../public/images/banner_blog.png')});
+  background-size: 100% 100%, auto 100%;
+  background-position: center center, right center;
+  background-repeat: no-repeat;
+
   @media ${(props) => props.theme.breakpoints.lg} {
     min-height: 0;
     height: 260px;
@@ -15,18 +21,12 @@ const Banner = styled.div`
     min-height: 240px;
   }
 
-  @media ${(props) => props.theme.breakpoints.smd} {
+  @media ${(props) => props.theme.breakpoints.xs} {
     min-height: 0;
-    height: 220px;
+    background-image: url(${require('../../public/images/banner_blog.png')});
+    background-size: auto 100%;
+    background-position: right center;
   }
-
-  background-image: url(${require('../../public/images/tangram_blog.png')}),
-    url(${require('../../public/images/banner_blog.png')});
-
-  background-size: 100% 100%, auto 100%;
-
-  background-position: center center, right center;
-  background-repeat: no-repeat;
 
   display: flex;
   flex-direction: column;
@@ -39,13 +39,27 @@ const Banner = styled.div`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    background-color: rgba(242, 242, 242, 0.8);
+    border-radius: 25px;
+    padding: 45px;
+    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.15);
+  }
+`;
+
 const SectionTitle = styled.h2`
   max-width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
   @media ${(props) => props.theme.breakpoints.sm} {
     max-width: ${(props) => props.theme.grid.getGridColumns(13, 1)};
   }
   @media ${(props) => props.theme.breakpoints.xs} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
+    max-width: inherit;
   }
 
   color: ${(props) => props.theme.colors.secondary};
@@ -59,7 +73,7 @@ const SectionSubtitle = styled.h3`
     max-width: ${(props) => props.theme.grid.getGridColumns(11, 1)};
   }
   @media ${(props) => props.theme.breakpoints.xs} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
+    max-width: inherit;
   }
   color: ${(props) => props.theme.colors.secondary};
 
@@ -83,9 +97,13 @@ const BlogShowcase = (): JSX.Element => {
 
   return (
     <Banner>
-      <SectionTitle>{i18n.t('home.blog-showcase-title')}</SectionTitle>
-      <Divider />
-      <SectionSubtitle>{i18n.t('home.blog-showcase-subtitle')}</SectionSubtitle>
+      <Container>
+        <SectionTitle>{i18n.t('home.blog-showcase-title')}</SectionTitle>
+        <Divider />
+        <SectionSubtitle>
+          {i18n.t('home.blog-showcase-subtitle')}
+        </SectionSubtitle>
+      </Container>
     </Banner>
   );
 };

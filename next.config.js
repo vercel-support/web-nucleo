@@ -9,7 +9,7 @@ const themeVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './assets/antd-custom.less'), 'utf8')
 );
 
-module.exports = withOptimizedImages(
+const webpackObj = withOptimizedImages(
   withLess({
     lessLoaderOptions: {
       javascriptEnabled: true,
@@ -42,3 +42,15 @@ module.exports = withOptimizedImages(
     },
   })
 );
+
+webpackObj['rewrites'] = async function() {
+  return [
+    {
+      source: '/blog',
+      destination: 'https://blog.inmobiliarianucleo.com/index.php',
+    },
+  ]
+}
+
+console.log(webpackObj);
+module.exports = webpackObj;

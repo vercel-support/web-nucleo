@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Modal, Carousel } from 'antd';
 
@@ -11,12 +11,36 @@ type Props = {
   onCancel: () => void;
 };
 
-const StyledModal = styled(Modal)`
-  font-family: ${(props) => props.theme.font.family};
-  font-style: ${(props) => props.theme.font.style};
+const modalHeaderHeight = '55px';
+const modalFooterHeight = '65px';
 
-  & .ant-modal-footer {
-    padding: 24px 16px;
+const StyledModal = styled(Modal)`
+  width: 88%;
+
+  .ant-modal-header {
+    height: ${modalHeaderHeight};
+  }
+  .ant-modal-footer {
+    height: ${modalFooterHeight};
+    padding: 23px 24px;
+    position: relative;
+    text-align: center;
+  }
+
+  @media ${(props) => props.theme.breakpoints.xs} {
+    max-width: 100vw;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+
+    .ant-modal-content {
+      border-radius: 0;
+    }
+
+    .ant-modal-body {
+      height: calc(100vh - ${modalHeaderHeight} - ${modalFooterHeight});
+      overflow-y: scroll;
+    }
   }
 `;
 
@@ -30,64 +54,65 @@ const FlatImage = styled.div<{ url: string; imageHeight: string }>`
   width: 100%;
 `;
 
-const PrevArrow = styled.div`
-  &:before {
-    display: none;
-  }
-  width: 40px !important;
-  height: 40px !important;
-  background-image: url(/images/prev_black.svg) !important;
-  left: ${(props) => props.theme.grid.getGridColumns(1, 1)} !important;
-  bottom: -56px;
-  top: unset !important;
-  z-index: 1;
+const Arrow = styled.div<{ left?: boolean }>`
+  position: absolute;
+  top: 50%;
+  left: ${(props) => (props.left ? '24px' : 'inherit')};
+  right: ${(props) => (!props.left ? '24px' : 'inherit')};
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-image: url(${(props) =>
+    props.left
+      ? require('../../public/images/prev_black.svg')
+      : require('../../public/images/next_black.svg')});
+  cursor: pointer;
 `;
 
-const NextArrow = styled.div`
-  &:before {
-    display: none;
-  }
-  width: 40px !important;
-  height: 40px !important;
-  background-image: url(/images/next_black.svg) !important;
-  right: ${(props) => props.theme.grid.getGridColumns(1, 1)} !important;
-  bottom: -56px;
-  top: unset !important;
-  z-index: 1;
-`;
-
-const Footer = styled.div`
-  text-align: center;
-`;
-
-const Gallery = ({ flat, visible, onCancel }: Props): JSX.Element => {
+const Gallery: React.FC<Props> = ({ flat, visible, onCancel }): JSX.Element => {
   const i18n = useI18n();
+
+  const carouselRef = useRef(null);
+
   const [carouselCurrentIndex, setCarouselCurrentIndex] = useState(0);
+
+  const prev = () => {
+    if (carouselRef.current) {
+      carouselRef.current.prev();
+    }
+  };
+
+  const next = () => {
+    if (carouselRef.current) {
+      carouselRef.current.next();
+    }
+  };
 
   return (
     <StyledModal
       title={i18n.t('flat.pictures')}
       visible={visible}
       footer={
-        <Footer>{`${carouselCurrentIndex + 1} / ${
-          flat.pictureUrls.length
-        }`}</Footer>
+        <Fragment>
+          <Arrow left={true} onClick={prev} />
+          <span>{`${carouselCurrentIndex + 1} / ${
+            flat.pictureUrls.length
+          }`}</span>
+          <Arrow left={false} onClick={next} />
+        </Fragment>
       }
       centered
-      width={'88%'}
       bodyStyle={{ padding: 0 }}
       onCancel={onCancel}
     >
       <Carousel
-        arrows={true}
         dots={false}
-        prevArrow={<PrevArrow />}
-        nextArrow={<NextArrow />}
         lazyLoad={'progressive'}
         beforeChange={(_previousIndex, currentIndex) =>
           setCarouselCurrentIndex(currentIndex)
         }
         afterChange={(currentIndex) => setCarouselCurrentIndex(currentIndex)}
+        ref={carouselRef}
       >
         {flat.pictureUrls.map((url) => (
           <FlatImage imageHeight={'72vh'} key={url} url={url} />

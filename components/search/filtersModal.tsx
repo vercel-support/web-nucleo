@@ -16,6 +16,8 @@ type Props = {
   onCancel: () => void;
 };
 
+const modalHeaderHeight = '55px';
+const modalFooterHeight = '65px';
 const typesDefaultValue = [];
 const typesOptions = enumToArray<typeof FlatType>(
   FlatType,
@@ -30,14 +32,28 @@ const roomsOptions = ['1', '2', '3', '4', '+4'];
 const bathroomsDefaultValue: string[] = [];
 const bathroomsOptions = ['1', '2', '3', '+3'];
 
-// TODO: make .ant-modal-footer padding styles global
 const StyledModal = styled(Modal)`
-  font-family: ${(props) => props.theme.font.family};
-  font-style: ${(props) => props.theme.font.style};
+  .ant-modal-header {
+    height: ${modalHeaderHeight};
+  }
+  .ant-modal-footer {
+    height: ${modalFooterHeight};
+  }
 
-  & .ant-modal-footer {
-    padding-bottom: 14px;
-    padding-top: 14px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    max-width: 100vw;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+
+    .ant-modal-content {
+      border-radius: 0;
+    }
+
+    .ant-modal-body {
+      height: calc(100vh - ${modalHeaderHeight} - ${modalFooterHeight});
+      overflow-y: scroll;
+    }
   }
 `;
 
@@ -64,18 +80,29 @@ const FiltersModal: React.FC<Props> = ({
   const [form] = Form.useForm();
 
   const computeFormState = () => {
-    const rooms =
-      (router.query.rooms as string[]) || form.getFieldValue('rooms');
+    const rooms = router.query.rooms
+      ? Array.isArray(router.query.rooms)
+        ? router.query.rooms
+        : [router.query.rooms]
+      : form.getFieldValue('rooms');
     if (router.query.roomsMin) {
       rooms.push(roomsOptions[roomsOptions.length - 1]);
     }
-    const bathrooms =
-      (router.query.bathrooms as string[]) || form.getFieldValue('bathrooms');
+    const bathrooms = router.query.bathrooms
+      ? Array.isArray(router.query.bathrooms)
+        ? router.query.bathrooms
+        : [router.query.bathrooms]
+      : form.getFieldValue('bathrooms');
     if (router.query.bathroomsMin) {
-      rooms.push(bathroomsOptions[bathroomsOptions.length - 1]);
+      bathrooms.push(bathroomsOptions[bathroomsOptions.length - 1]);
     }
+    const types = router.query.types
+      ? Array.isArray(router.query.types)
+        ? router.query.types
+        : [router.query.types]
+      : form.getFieldValue('types');
     return {
-      types: (router.query.types as string[]) || form.getFieldValue('types'),
+      types,
       price: [
         router.query.priceMin
           ? +router.query.priceMin

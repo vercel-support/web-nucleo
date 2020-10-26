@@ -74,12 +74,6 @@ const HeaderComp = styled.header<{ alwaysShown: boolean; dropShadow: boolean }>`
     props.dropShadow ? '0px 3px 25px rgba(0, 0, 0, 0.15)' : 'inherit'};
 `;
 
-const StyledMenu = styled(Menu)`
-  border-radius: 0;
-  font-family: ${(props) => props.theme.font.family};
-  font-style: ${(props) => props.theme.font.style};
-`;
-
 const StyledLink = styled.a<{ active: boolean }>`
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
@@ -94,7 +88,7 @@ const Header = ({
   const i18n = useI18n();
 
   const hamburgerMenu = (
-    <StyledMenu>
+    <Menu>
       <Menu.Item key="1">
         <Link href="/vender-casa">
           <a>{i18n.t('header.sellHouse')}</a>
@@ -133,7 +127,7 @@ const Header = ({
           <StyledLink active={i18n.activeLocale === 'en'}>English</StyledLink>
         </Menu.Item>
       </Menu.SubMenu>
-    </StyledMenu>
+    </Menu>
   );
 
   return (

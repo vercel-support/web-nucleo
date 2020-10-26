@@ -4,7 +4,7 @@ import { Row, Col, Button } from 'antd';
 
 import { IFlat } from '../../common/model/flat.model';
 import useI18n from '../../common/hooks/useI18n';
-import { ResultsSectionTwoColumns } from '../../components/shared';
+import { ResultsSection } from '../../components/shared';
 
 type Props = {
   flats: IFlat[];
@@ -67,8 +67,9 @@ const OfficeFlatsSection = ({ flats, className }: Props): JSX.Element => {
     <div className={className}>
       <Title>{i18n.t('contact.flats.title')}</Title>
       <Divider />
-      <ResultsSectionTwoColumns
+      <ResultsSection
         flats={flatsToShow}
+        xlSpan={12}
         cardBackgroundColor="white"
       />
       {showAllFlats ? null : (
