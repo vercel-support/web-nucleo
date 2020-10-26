@@ -79,7 +79,7 @@ const Content = styled.main`
           ${props.theme.footerHeight} - ${searchBarSectionPaddingTop} -
           ${searchBarSectionPaddingBottom} - ${searchBarHeight}
       )`};
-      margin-top: 0;
+      margin: 0;
     }
   }
 
@@ -141,6 +141,7 @@ const ShowMapButtonSection = styled.div`
   right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   bottom: 32px;
   z-index: 100;
+  display: none;
 `;
 
 const ShowMapButtonRow = styled(Row)`
@@ -358,10 +359,6 @@ const BuscarPage = ({
   }, []);
 
   useEffect(() => {
-    if (isMdd) {
-      window.scrollTo({ top: window.innerHeight / 2 });
-    }
-
     const headerHeight = +theme.headerHeight.replace('px', '');
     const footerHeight = +theme.footerHeight.replace('px', '');
 
