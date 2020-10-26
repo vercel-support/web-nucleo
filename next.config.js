@@ -47,7 +47,7 @@ webpackObj['rewrites'] = async function() {
   return [
     {
       source: '/blog',
-      destination: 'https://blog.inmobiliarianucleo.com/index.php',
+      destination: 'https://news.ycombinator.com/',
     },
   ]
 }
