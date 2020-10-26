@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Link from 'next/link';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { Input, AutoComplete, Button } from 'antd';
 
@@ -13,12 +14,13 @@ type Props = {
   onValueChange: (value: string) => void;
   onSearch: (query: string) => void;
   onSelect: (option: ISearchOption) => void;
-  onFiltersButtonClick?: () => void;
-  className?: string;
   hasFilters?: boolean;
+  backButton?: boolean;
   buttonBackgroundColor?: string;
   buttonColor?: string;
   inputPadding?: string;
+  className?: string;
+  onFiltersButtonClick?: () => void;
   theme: DefaultTheme;
 };
 
@@ -58,7 +60,7 @@ const StyledAutoComplete = styled(AutoComplete)<{
 
   .ant-input-affix-wrapper > input.ant-input {
     padding-left: ${(props) => props.inputPadding};
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .ant-input-group-addon:last-child {
@@ -91,6 +93,12 @@ const StyledAutoComplete = styled(AutoComplete)<{
     width: 36px;
     border-radius: 24px;
   }
+`;
+
+const BackButton = styled.img`
+  height: 12px;
+  width: 12px;
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const FiltersSuffix = styled.div`
@@ -156,10 +164,11 @@ const SearchBar = React.forwardRef<any, Props>(
       onValueChange,
       onSearch,
       onSelect,
-      onFiltersButtonClick,
+      backButton,
       buttonBackgroundColor,
       buttonColor = 'white',
       inputPadding = '14px',
+      onFiltersButtonClick,
       className,
       theme,
     },
@@ -230,6 +239,21 @@ const SearchBar = React.forwardRef<any, Props>(
             size="large"
             placeholder={i18n.t('search.searchBar.placeholder')}
             allowClear={true}
+            prefix={
+              backButton ? (
+                <Link href="/" passHref>
+                  <Button
+                    type="text"
+                    icon={
+                      <BackButton
+                        className="anticon"
+                        src={'/images/back_no_circle.svg'}
+                      />
+                    }
+                  />
+                </Link>
+              ) : null
+            }
             suffix={
               onFiltersButtonClick ? (
                 <FiltersSuffix

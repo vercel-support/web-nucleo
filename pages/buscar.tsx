@@ -440,6 +440,8 @@ const BuscarPage = ({
               setFiltersModalVisible(true);
             }}
             hasFilters={Object.keys(router.query).length > 1}
+            backButton={isMdd}
+            inputPadding={isMdd ? '0' : undefined}
           />
         </SearchBarSection>
         <MapSection id={mapSectionId}>
