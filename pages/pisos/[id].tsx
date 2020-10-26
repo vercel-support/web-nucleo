@@ -210,7 +210,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
   const flats = await Flat.getFlats();
   const flatIndex = flats.findIndex((f) => f.id === params.id);
   const flat = flats[flatIndex];
-  const recommendedFlats = getNearFlats(flats, flatIndex, 4);
+  const recommendedFlats = getNearFlats(flats, flatIndex, 3);
 
   const serializedFlat = JSON.stringify(flat);
   const serializedRecommendedFlats = JSON.stringify(recommendedFlats);
