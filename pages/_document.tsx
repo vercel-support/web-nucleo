@@ -49,6 +49,12 @@ export default class MyDocument extends Document<Props> {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           />
+          {GA_SOCIALMEDIA_TRACKING_ID && (
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_SOCIALMEDIA_TRACKING_ID}`}
+            />
+          )}
           <script
             dangerouslySetInnerHTML={{
               __html: `
