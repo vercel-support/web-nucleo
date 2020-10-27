@@ -2,26 +2,10 @@ import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary
 import { IFlat } from '../../common/model/flat.model';
 import { getSalesforceClient } from './index';
 import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
+import { retry } from 'async-retry-decorator';
 
 const googleMapsClient = new GoogleMapsClient();
 
-async function getCoordinatesFromAddress(
-  address: string,
-  zone: string,
-  city: string
-) {
-  try {
-    const result = await googleMapsClient.geocode({
-      params: {
-        key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-        address: `${address} ${zone} ${city}`,
-      },
-    });
-    return result.data.results[0].geometry.location;
-  } catch {
-    return null;
-  }
-}
 
 function isnull(value) {
   return value === undefined || value === null;
@@ -149,7 +133,7 @@ export default class Flat extends IFlat {
       return null;
     }
 
-    const coords = await getCoordinatesFromAddress(address, zone, city);
+    const coords = await Flat.getCoordinatesFromAddress(address, zone, city);
     if (isnull(coords)) {
       return null;
     }
@@ -201,5 +185,25 @@ export default class Flat extends IFlat {
       records.map((record) => Flat.fromRecord(record))
     );
     return flats.filter((flat) => flat !== null);
+  }
+
+  @retry({
+    retries: 5,
+    onRetry: (error, attempt) => {
+      console.log(`Retry getCoordinatesFromAddress (${attempt}) on error`, error.message);
+    },
+  })
+  static async getCoordinatesFromAddress(
+    address: string,
+    zone: string,
+    city: string
+  ) {
+    const result = await googleMapsClient.geocode({
+      params: {
+        key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+        address: `${address} ${zone} ${city}`,
+      },
+    });
+    return result.data.results[0].geometry.location;
   }
 }
