@@ -173,12 +173,18 @@ const BuscarPage = ({
 
   const setFocusedFlatFromMap = (index: number) => {
     setFocusedFlat(index);
-    if (resultsSectionRef.current && resultsSectionRef.current.children) {
-      const focusedEl = resultsSectionRef.current.children[index];
-      focusedEl.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
+    if (
+      resultsSectionRef.current &&
+      resultsSectionRef.current.firstChild &&
+      resultsSectionRef.current.firstChild.children
+    ) {
+      const focusedEl = resultsSectionRef.current.firstChild.children[index];
+      if (focusedEl) {
+        focusedEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }
     }
   };
 
