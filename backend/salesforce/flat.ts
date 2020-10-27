@@ -1,7 +1,6 @@
 import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
 import { IFlat } from '../../common/model/flat.model';
 import { getSalesforceClient } from './index';
-import { asyncMemoize } from '../helpers';
 import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
 
 const googleMapsClient = new GoogleMapsClient();
@@ -183,7 +182,6 @@ export default class Flat extends IFlat {
     });
   }
 
-  @asyncMemoize
   static async getFlats(): Promise<Flat[]> {
     if (
       process.env.NODE_ENV == 'development' &&
