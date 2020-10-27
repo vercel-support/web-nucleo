@@ -6,7 +6,6 @@ import { retry } from 'async-retry-decorator';
 
 const googleMapsClient = new GoogleMapsClient();
 
-
 function isnull(value) {
   return value === undefined || value === null;
 }
@@ -190,7 +189,10 @@ export default class Flat extends IFlat {
   @retry({
     retries: 5,
     onRetry: (error, attempt) => {
-      console.log(`Retry getCoordinatesFromAddress (${attempt}) on error`, error.message);
+      console.log(
+        `Retry getCoordinatesFromAddress (${attempt}) on error`,
+        error.message
+      );
     },
   })
   static async getCoordinatesFromAddress(
