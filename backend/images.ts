@@ -2,8 +2,8 @@ import fs from 'fs';
 import stream from 'stream';
 import sharp from 'sharp';
 
-const MAX_WIDTH = 800;
-const QUALITY = 58;
+const MAX_WIDTH = 1200;
+const QUALITY = 60;
 const JPEG_PROGRESSIVE = true;
 
 const optimizeImage = async (data: Buffer): Promise<Buffer> => {
