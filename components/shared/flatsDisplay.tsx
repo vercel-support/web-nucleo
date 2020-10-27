@@ -144,7 +144,7 @@ const FlatsDisplay: React.FC<Props> = ({
             {flatPages.map((flatPage, i) => (
               <div key={`page_${i}`}>
                 <FlatPage>
-                  <FlatPageRow gutter={[32, 32]}>
+                  <FlatPageRow gutter={[32, 32]} justify="center">
                     {flatPage.map((flat) => (
                       <Col key={flat.id} xs={24} xl={8} xxl={6}>
                         <FlatCard

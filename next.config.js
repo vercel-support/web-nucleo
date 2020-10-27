@@ -47,7 +47,7 @@ webpackObj['rewrites'] = async function() {
   return [
     {
       source: '/blog',
-      destination: 'https://blog.inmobiliarianucleo.com/index.php',
+      destination: 'http://167.99.198.94',
     },
   ]
 }
