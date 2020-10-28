@@ -46,8 +46,8 @@ const webpackObj = withOptimizedImages(
 webpackObj['rewrites'] = async function() {
   return [
     {
-      source: '/blog',
-      destination: 'http://167.99.198.94',
+      source: '/blog/:path*',
+      destination: 'http://167.99.198.94/:path*',
     },
   ]
 }
