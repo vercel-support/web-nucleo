@@ -14,7 +14,12 @@ import useSearchService, {
   computeSearchOptions,
 } from '../common/hooks/searchService';
 import Flat from '../backend/salesforce/flat';
-import { Title, FiltersModal, SearchMap } from '../components/search';
+import {
+  Title,
+  FiltersModal,
+  SearchMap,
+  MiniFlatCard,
+} from '../components/search';
 import {
   Header,
   Footer,
@@ -108,10 +113,7 @@ const SearchBarSection = styled.div`
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdd} {
-    left: 0;
     right: 0;
-    padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-    padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   }
 
   &.${headerOutOfScreenClass} {
@@ -130,8 +132,22 @@ const MapSection = styled.div`
   @media ${(props) => props.theme.breakpoints.mdd} {
     top: 0;
     bottom: unset;
-    height: ${(props) => `calc(100vh - ${props.theme.footerHeight} - 16px)`};
+    height: calc(100vh - 40px);
     left: 0;
+  }
+`;
+
+const MiniFlatCardsSection = styled.div`
+  position: absolute;
+  bottom: 64px;
+  left: ${(props) => props.theme.grid.getGridColumns(4, 1)};
+  right: ${(props) => props.theme.grid.getGridColumns(4, 1)};
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    display: none;
+  }
+  @media ${(props) => props.theme.breakpoints.xs} {
+    left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
+    right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   }
 `;
 
@@ -149,7 +165,7 @@ const ShowMapButtonRow = styled(Row)`
 `;
 
 const TransparentMddSection = styled.div`
-  height: ${(props) => `calc(100vh - ${props.theme.footerHeight} - 56px)`};
+  height: calc(100vh - 80px);
   pointer-events: none;
   @media ${(props) => props.theme.breakpoints.lgu} {
     display: none;
@@ -220,25 +236,25 @@ const BuscarPage = ({
   const isMdd = useMediaQuery({ query: theme.breakpoints.mdd });
 
   const [currentResults, setCurrentResults] = useState([] as IFlat[]);
-  const [focusedFlatIndex, setFocusedFlat] = useState(undefined);
+  const [focusedFlatIndex, setFocusedFlatIndex] = useState(0);
   const [q, setQ] = useState('');
   const [autoCompleteValue, setAutoCompleteValue] = useState(q);
   const [filtersModalVisible, setFiltersModalVisible] = useState(false);
 
-  const setFocusedFlatFromMap = (index: number) => {
-    setFocusedFlat(index);
+  const setFocusedFlatIndexFromMap = (index: number) => {
+    setFocusedFlatIndex(index);
     if (
+      !isMdd &&
       resultsSectionRef.current &&
       resultsSectionRef.current.firstChild &&
-      resultsSectionRef.current.firstChild.children
+      resultsSectionRef.current.firstChild.children &&
+      resultsSectionRef.current.firstChild.children.length > index
     ) {
       const focusedEl = resultsSectionRef.current.firstChild.children[index];
-      if (focusedEl) {
-        focusedEl.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }
+      focusedEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
     }
   };
 
@@ -454,8 +470,13 @@ const BuscarPage = ({
           <SearchMap
             flats={currentResults}
             focusedFlatIndex={focusedFlatIndex}
-            setFocusedFlat={setFocusedFlatFromMap}
+            onMarkerClick={setFocusedFlatIndexFromMap}
           />
+          {currentResults.length > 0 && (
+            <MiniFlatCardsSection>
+              <MiniFlatCard flat={currentResults[focusedFlatIndex]} />
+            </MiniFlatCardsSection>
+          )}
         </MapSection>
         <ShowMapButtonSection id={showMapButtonSectionId}>
           <ShowMapButtonRow justify="end">
@@ -483,13 +504,13 @@ const BuscarPage = ({
           )}
           <ResultsSection
             flats={currentResults}
-            onFlatHover={(flat, index) => {
-              setFocusedFlat(index);
-            }}
             focusedFlatIndex={focusedFlatIndex}
             focusedCardBackgroundColor="#f8f8f8"
             cardBackgroundColor="white"
             parentRef={resultsSectionRef}
+            onFlatHover={(_flat, index) => {
+              setFocusedFlatIndex(index);
+            }}
           />
           <ResultsInfoSection id={resultsInfoSectionId}>
             <ResultsInfoText>

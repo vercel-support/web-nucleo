@@ -4,30 +4,40 @@ import {
   GoogleMap,
   Marker,
 } from 'react-google-maps';
-import styled from 'styled-components';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
+import { useMediaQuery } from 'react-responsive';
+
 import { IFlat } from '../../common/model/flat.model';
 
 type Props = {
   flats: IFlat[];
-  focusedFlatIndex?: number;
-  setFocusedFlat: (flatIndex: number) => void;
-  className?: string;
+  focusedFlatIndex: number;
+  onMarkerClick: (flatIndex: number) => void;
+  theme: DefaultTheme;
 };
 
 const MyMapComponent = withScriptjs(
-  withGoogleMap(({ flats, setFocusedFlat, focusedFlatIndex }: Props) => {
-    const focusedIndex = focusedFlatIndex || 0;
-    if (flats.length <= focusedIndex) {
+  withGoogleMap(({ flats, focusedFlatIndex, onMarkerClick, theme }: Props) => {
+    const isMdd = useMediaQuery({ query: theme.breakpoints.mdd });
+
+    if (flats.length === 0) {
       return null;
     }
+
     return (
       <GoogleMap
         defaultZoom={15}
         defaultCenter={{
-          lat: flats[focusedIndex].approximateLatitude,
-          lng: flats[focusedIndex].approximateLongitude,
+          lat: flats[focusedFlatIndex].approximateLatitude,
+          lng: flats[focusedFlatIndex].approximateLongitude,
         }}
-        options={{ fullscreenControl: false, scrollwheel: true }}
+        options={{
+          fullscreenControl: false,
+          gestureHandling: isMdd ? 'greedy' : 'cooperative',
+          mapTypeControl: false,
+          streetViewControl: false,
+          zoomControl: !isMdd,
+        }}
       >
         {flats.map((flat, i) => {
           const iconUrl =
@@ -48,7 +58,7 @@ const MyMapComponent = withScriptjs(
                 },
               }}
               onClick={() => {
-                setFocusedFlat(i);
+                onMarkerClick(i);
               }}
               zIndex={focusedFlatIndex == i ? 100 : 0}
             />
@@ -68,17 +78,21 @@ const MapDiv = styled.div`
 const SearchMap: React.FC<Props> = ({
   flats,
   focusedFlatIndex,
-  setFocusedFlat,
+  onMarkerClick,
+  theme,
 }) => {
   const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
+
   if (flats.length <= 0) {
     return null;
   }
+
   return (
     <MyMapComponent
       focusedFlatIndex={focusedFlatIndex}
       flats={flats}
-      setFocusedFlat={setFocusedFlat}
+      onMarkerClick={onMarkerClick}
+      theme={theme}
       googleMapURL={mapUrl}
       loadingElement={<MapDiv />}
       containerElement={<MapDiv />}
@@ -87,4 +101,4 @@ const SearchMap: React.FC<Props> = ({
   );
 };
 
-export default SearchMap;
+export default withTheme(SearchMap);
