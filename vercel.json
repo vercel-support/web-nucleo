@@ -4,5 +4,5 @@
       "excludeFiles": "{public,.next,pages,images,_next,gen}/**"
     }
   },
-  "trailingSlash": true
+  "trailingSlash": false
 }
