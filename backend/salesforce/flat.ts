@@ -187,7 +187,7 @@ export default class Flat extends IFlat {
   }
 
   @retry({
-    retries: 5,
+    retries: 10,
     onRetry: (error, attempt) => {
       console.log(
         `Retry getCoordinatesFromAddress (${attempt}) on error`,
