@@ -106,7 +106,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .ant-dropdown-menu,
-  .ant-select-dropdown {
+  .ant-select-dropdown:not(.search-dropdown) {
     border-radius: 0;
   }
 

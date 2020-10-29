@@ -90,7 +90,6 @@ const Title = styled.div`
   font-weight: 500;
   font-size: 18px;
   line-height: 32px;
-  height: 32px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -99,7 +98,11 @@ const Title = styled.div`
   }
 `;
 
-const FeaturesCardRow = styled(Row)`
+const FeaturesSection = styled.div`
+  margin-top: 16px;
+`;
+
+const FeaturesRow = styled(Row)`
   margin-bottom: -16px !important;
 `;
 
@@ -115,7 +118,6 @@ const FeatureAtBottomCol = styled(Col)<{ forceVerticalMode: boolean }>`
 `;
 
 const FeatureInfo = styled.div`
-  margin-top: 1rem;
   font-size: 14px;
   @media ${(props) => props.theme.breakpoints.xs} {
     font-size: 12px;
@@ -193,66 +195,67 @@ const FlatCard = ({
                     address: flat.address,
                   })}
                 </Title>
-                <FeaturesCardRow
-                  gutter={[
-                    16,
-                    { xs: 32, sm: 24, lg: forceVerticalMode ? 32 : 16 },
-                  ]}
-                >
-                  <FeatureAtTopCol span={forceVerticalMode ? 12 : 8}>
-                    <FeatureInfo>{`${flat.rooms} ${i18n
-                      .t('flat.roomsShort')
-                      .toLowerCase()}`}</FeatureInfo>
-                  </FeatureAtTopCol>
-                  <FeatureAtTopCol span={forceVerticalMode ? 12 : 8}>
-                    <FeatureInfo>{`${flat.bathrooms} ${i18n
-                      .t('flat.bathrooms')
-                      .toLowerCase()}`}</FeatureInfo>
-                  </FeatureAtTopCol>
-                  <FeatureAtTopCol span={forceVerticalMode ? 0 : 8}>
-                    <FeatureInfo>
-                      {`${
-                        flat.hasElevator
-                          ? i18n.t('messages.with')
-                          : i18n.t('messages.without')
-                      } ${i18n.t('flat.elevator').toLowerCase()}`}
-                    </FeatureInfo>
-                  </FeatureAtTopCol>
-                  <FeatureAtBottomCol
-                    span={8}
-                    forceVerticalMode={forceVerticalMode}
-                  >
-                    <FeatureInfo>
-                      {`${
-                        flat.hasGarden
-                          ? i18n.t('messages.with')
-                          : i18n.t('messages.without')
-                      } ${i18n.t('flat.garden').toLowerCase()}`}
-                    </FeatureInfo>
-                  </FeatureAtBottomCol>
-                  <FeatureAtBottomCol
-                    span={8}
-                    forceVerticalMode={forceVerticalMode}
-                  >
-                    <FeatureInfo>
-                      {`${
-                        flat.hasTerrace
-                          ? i18n.t('messages.with')
-                          : i18n.t('messages.without')
-                      } ${i18n.t('flat.terrace').toLowerCase()}`}
-                    </FeatureInfo>
-                  </FeatureAtBottomCol>
-                  {flat.yearConstruction ? (
+                <FeaturesSection>
+                  <FeaturesRow gutter={[16, 32]}>
+                    <FeatureAtTopCol span={forceVerticalMode ? 12 : 8}>
+                      <FeatureInfo>{`${flat.rooms} ${i18n
+                        .t('flat.roomsShort')
+                        .toLowerCase()}`}</FeatureInfo>
+                    </FeatureAtTopCol>
+                    <FeatureAtTopCol span={forceVerticalMode ? 12 : 8}>
+                      <FeatureInfo>{`${flat.bathrooms} ${i18n
+                        .t('flat.bathrooms')
+                        .toLowerCase()}`}</FeatureInfo>
+                    </FeatureAtTopCol>
+                    <FeatureAtTopCol span={forceVerticalMode ? 0 : 8}>
+                      <FeatureInfo>
+                        {flat.sqrMeters} m
+                        <sup
+                          css={`
+                            vertical-align: top;
+                            font-size: 0.6em;
+                          `}
+                        >
+                          2
+                        </sup>
+                      </FeatureInfo>
+                    </FeatureAtTopCol>
                     <FeatureAtBottomCol
                       span={8}
                       forceVerticalMode={forceVerticalMode}
                     >
-                      <FeatureInfo>{`${i18n.t('flat.yearConstruction')} ${
-                        flat.yearConstruction
-                      }`}</FeatureInfo>
+                      <FeatureInfo>
+                        {`${
+                          flat.hasElevator
+                            ? i18n.t('messages.with')
+                            : i18n.t('messages.without')
+                        } ${i18n.t('flat.elevator').toLowerCase()}`}
+                      </FeatureInfo>
                     </FeatureAtBottomCol>
-                  ) : null}
-                </FeaturesCardRow>
+                    <FeatureAtBottomCol
+                      span={8}
+                      forceVerticalMode={forceVerticalMode}
+                    >
+                      <FeatureInfo>
+                        {`${
+                          flat.hasTerrace
+                            ? i18n.t('messages.with')
+                            : i18n.t('messages.without')
+                        } ${i18n.t('flat.terrace').toLowerCase()}`}
+                      </FeatureInfo>
+                    </FeatureAtBottomCol>
+                    {flat.yearConstruction ? (
+                      <FeatureAtBottomCol
+                        span={8}
+                        forceVerticalMode={forceVerticalMode}
+                      >
+                        <FeatureInfo>{`${i18n.t('flat.yearConstruction')} ${
+                          flat.yearConstruction
+                        }`}</FeatureInfo>
+                      </FeatureAtBottomCol>
+                    ) : null}
+                  </FeaturesRow>
+                </FeaturesSection>
                 <BottomInfoSection>
                   <Row align={'middle'}>
                     <Col span={14}>

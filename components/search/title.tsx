@@ -18,6 +18,21 @@ const MainText = styled.h2`
   ${(props) => props.theme.font.h2}
   color: ${(props) => props.theme.colors.secondary};
   margin-bottom: 1rem;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    text-align: center;
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-20px);
+      width: 40px;
+      height: 4px;
+      border-radius: 4px;
+      background-color: rgba(32, 32, 32, 0.2);
+    }
+  }
 `;
 
 const StyledRow = styled(Row)`
@@ -84,6 +99,7 @@ const Title: React.FC<Props> = ({
 };
 
 export default styled(Title)`
+  position: relative;
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   margin-bottom: 2rem;

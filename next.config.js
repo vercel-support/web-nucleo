@@ -46,6 +46,10 @@ const webpackObj = withOptimizedImages(
 webpackObj['rewrites'] = async function() {
   return [
     {
+      source: '/blog/wp-admin',
+      destination: 'https://blog.inmobiliarianucleo.com/wp-admin/index.php',
+    },
+    {
       source: '/blog/:path*',
       destination: 'https://blog.inmobiliarianucleo.com/:path*',
     },
