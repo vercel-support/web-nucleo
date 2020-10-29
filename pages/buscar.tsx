@@ -132,7 +132,7 @@ const MapSection = styled.div`
   @media ${(props) => props.theme.breakpoints.mdd} {
     top: 0;
     bottom: unset;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 80px);
     left: 0;
   }
 `;
@@ -165,7 +165,7 @@ const ShowMapButtonRow = styled(Row)`
 `;
 
 const TransparentMddSection = styled.div`
-  height: calc(100vh - 80px);
+  height: calc(100vh - 120px);
   pointer-events: none;
   @media ${(props) => props.theme.breakpoints.lgu} {
     display: none;

@@ -118,4 +118,5 @@ const MiniFlatCard: React.FC<Props> = ({ flat, className }) => {
 export default styled(MiniFlatCard)`
   background-color: white;
   border-radius: ${(props) => props.theme.borderRadius};
+  box-shadow: rgba(0, 0, 0, 0.28) 0px 8px 28px;
 `;
