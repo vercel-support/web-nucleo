@@ -191,7 +191,7 @@ const ScrollableSection = styled.div`
 `;
 
 const ResultsInfoSection = styled.div`
-  margin-bottom: 16px;
+  padding-bottom: 16px;
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   @media ${(props) => props.theme.breakpoints.md} {
