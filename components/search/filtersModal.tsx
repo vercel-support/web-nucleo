@@ -19,12 +19,7 @@ type Props = {
 const modalHeaderHeight = '55px';
 const modalFooterHeight = '65px';
 const typesDefaultValue = [];
-const typesOptions = enumToArray<typeof FlatType>(
-  FlatType,
-  'string',
-  'label',
-  'value'
-);
+const typesOptions = enumToArray(FlatType, 'string', 'label', 'value');
 const priceMin = 30000;
 const priceMax = 200000;
 const roomsDefaultValue: string[] = [];

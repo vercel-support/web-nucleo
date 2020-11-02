@@ -116,10 +116,14 @@ const FiltersButton = styled(Button)`
   }
 `;
 
-const FiltersIcon = styled.img`
-  height: 16px;
-  width: 16px;
-  color: ${(props) => props.theme.colors.primary};
+const FiltersIcon = styled.span<{ hasFilters: boolean }>`
+  height: 15px;
+  width: 18.4px;
+  mask-image: url(/images/filters.svg);
+  background-color: ${(props) =>
+    props.hasFilters
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary};
 `;
 
 const FiltersText = styled.span`
@@ -164,7 +168,8 @@ const SearchBar = React.forwardRef<any, Props>(
       onValueChange,
       onSearch,
       onSelect,
-      backButton,
+      hasFilters = false,
+      backButton = false,
       buttonBackgroundColor,
       buttonColor = 'white',
       inputPadding = '14px',
@@ -271,7 +276,7 @@ const SearchBar = React.forwardRef<any, Props>(
                     icon={
                       <FiltersIcon
                         className="anticon"
-                        src={'/images/filters.svg'}
+                        hasFilters={hasFilters}
                       />
                     }
                   >
