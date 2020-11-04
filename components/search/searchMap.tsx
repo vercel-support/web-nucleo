@@ -33,7 +33,7 @@ const MyMapComponent = withScriptjs(
         }}
         options={{
           fullscreenControl: false,
-          gestureHandling: isMdd ? 'greedy' : 'cooperative',
+          gestureHandling: 'greedy',
           mapTypeControl: false,
           streetViewControl: false,
           zoomControl: !isMdd,

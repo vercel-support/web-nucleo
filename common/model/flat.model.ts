@@ -9,6 +9,7 @@ export class IFlat {
   zone: string;
   address: string;
   city: string;
+  county: string;
   description_ES: string;
   description_EN: string;
   showInWebsite: boolean;

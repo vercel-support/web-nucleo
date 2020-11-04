@@ -9,6 +9,26 @@ const googleMapsClient = new GoogleMapsClient();
 function isnull(value) {
   return value === undefined || value === null;
 }
+
+function capitalize(str) {
+  const words = str.split(' ');
+  return words
+    .map((word) => {
+      const subwords = word.split("'");
+      return subwords
+        .map((subword) => {
+          if (subword.length > 2) {
+            return (
+              subword.charAt(0).toUpperCase() + subword.toLowerCase().slice(1)
+            );
+          }
+          return subword.toLowerCase();
+        })
+        .join("'");
+    })
+    .join(' ');
+}
+
 export default class Flat extends IFlat {
   public static fields = [
     'Id',
@@ -19,9 +39,9 @@ export default class Flat extends IFlat {
     'Ba_os__c',
     'M2_utiles__c',
     'Tipologia_inmueble__c',
-    'Localidad_Inmueble__c',
-    'Localidad__r.Nombre_de_la_Localidad__c',
-    'Provincia__c',
+    'Inmueble__r.Edificio__r.Provincia__c',
+    'Inmueble__r.Edificio__r.Localidad__c',
+    'Inmueble__r.Edificio__r.Barrio__c',
     'Descripci_n_Espa_ol__c',
     'Descripci_n_Ingl_s__c',
     'Mostrar_en_la_Web__c',
@@ -47,6 +67,7 @@ export default class Flat extends IFlat {
   public type: string;
   public zone: string;
   public city: string;
+  public county: string;
   public description_ES: string;
   public description_EN: string;
   public showInWebsite: boolean;
@@ -86,15 +107,22 @@ export default class Flat extends IFlat {
     const bathrooms = record['Ba_os__c'];
     const type = record['Tipologia_inmueble__c'];
     const sqrMeters = record['M2_utiles__c'];
-    let zone = record['Localidad_Inmueble__c'];
+
+    let city = null;
+    let zone = null;
+    let county = null;
+
     if (
-      isnull(zone) &&
-      'Localidad__r' in record &&
-      !isnull(record['Localidad__r'])
+      'Inmueble__r' in record &&
+      !isnull(record['Inmueble__r']) &&
+      'Edificio__r' in record['Inmueble__r'] &&
+      !isnull(record['Inmueble__r']['Edificio__r'])
     ) {
-      zone = record['Localidad__r']['Nombre_de_la_Localidad__c'];
+      county = record['Inmueble__r']['Edificio__r']['Provincia__c'];
+      city = record['Inmueble__r']['Edificio__r']['Localidad__c'];
+      zone = record['Inmueble__r']['Edificio__r']['Barrio__c'];
     }
-    const city = record['Provincia__c'] || 'Alicante';
+
     const description_ES = record['Descripci_n_Espa_ol__c'];
     const description_EN = record['Descripci_n_Ingl_s__c'];
     const showInWebsite = record['Mostrar_en_la_Web__c'];
@@ -122,6 +150,7 @@ export default class Flat extends IFlat {
       isnull(sqrMeters) ||
       isnull(zone) ||
       isnull(city) ||
+      isnull(county) ||
       isnull(bathrooms) ||
       isnull(description_ES) ||
       isnull(description_EN) ||
@@ -132,12 +161,20 @@ export default class Flat extends IFlat {
       return null;
     }
 
-    const coords = await Flat.getCoordinatesFromAddress(address, zone, city);
+    const coords = await Flat.getCoordinatesFromAddress(
+      address,
+      zone,
+      city,
+      county
+    );
     if (isnull(coords)) {
       return null;
     }
 
     const { lat, lng } = coords;
+    zone = capitalize(zone);
+    city = capitalize(city);
+    county = capitalize(county);
 
     return Flat.fromDict({
       id,
@@ -150,6 +187,7 @@ export default class Flat extends IFlat {
       sqrMeters,
       zone,
       city,
+      county,
       description_ES,
       description_EN,
       showInWebsite,
@@ -198,12 +236,13 @@ export default class Flat extends IFlat {
   static async getCoordinatesFromAddress(
     address: string,
     zone: string,
-    city: string
+    city: string,
+    county: string
   ) {
     const result = await googleMapsClient.geocode({
       params: {
         key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-        address: `${address} ${zone} ${city}`,
+        address: `${address} ${zone} ${city} ${county}`,
       },
     });
     return result.data.results[0].geometry.location;
