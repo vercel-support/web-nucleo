@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { useRef, useEffect, useState } from 'react';
 import { deserializeMultiple } from '../common/helpers/serialization';
 
 import { IOffice } from '../common/model/office.model';
@@ -24,6 +25,10 @@ interface StaticProps {
 }
 
 type Props = StaticProps;
+
+function isInteger(value) {
+  return /^\d+$/.test(value);
+}
 
 const Layout = styled.div`
   display: flex;
@@ -51,11 +56,34 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
   const flats = deserializeMultiple(serializedFlats, IFlat);
-
+  const officesSectionRef = useRef(null);
+  const [selectedOfficeIndex, setSelectedOffice] = useState(2);
+  const [isMounted, setIsMounted] = useState(false);
   const onSendButtonClicked = (contact: IContact) => {
     mailchimpService.subscribe(contact, router, i18n);
   };
 
+  useEffect(() => {
+    if (
+      router.query &&
+      'oficina' in router.query &&
+      isInteger(router.query['oficina']) &&
+      parseInt(router.query['oficina']) < offices.length
+    ) {
+      const newOfficeIndex = parseInt(router.query['oficina']);
+      setSelectedOffice(newOfficeIndex);
+      if (
+        officesSectionRef &&
+        'current' in officesSectionRef &&
+        officesSectionRef.current
+      ) {
+        officesSectionRef.current.scrollIntoView({
+          block: 'start',
+        });
+      }
+    }
+    setIsMounted(true);
+  }, [isMounted]);
   return (
     <Layout>
       <Head>
@@ -86,7 +114,12 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
 
       <Content>
         <ContactFormSection onSendButtonClicked={onSendButtonClicked} />
-        <OfficesSection offices={offices} />
+        <div ref={officesSectionRef}></div>
+        <OfficesSection
+          offices={offices}
+          selectedOfficeIndex={selectedOfficeIndex}
+          setSelectedOffice={setSelectedOffice}
+        />
         <OfficeFlatsSection flats={flats} />
       </Content>
 
