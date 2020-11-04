@@ -67,10 +67,10 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
     if (
       router.query &&
       'oficina' in router.query &&
-      isInteger(router.query['oficina']) &&
-      parseInt(router.query['oficina']) < offices.length
+      isInteger(router.query['oficina'] as string) &&
+      parseInt(router.query['oficina'] as string) < offices.length
     ) {
-      const newOfficeIndex = parseInt(router.query['oficina']);
+      const newOfficeIndex = parseInt(router.query['oficina'] as string);
       setSelectedOffice(newOfficeIndex);
       if (
         officesSectionRef &&
