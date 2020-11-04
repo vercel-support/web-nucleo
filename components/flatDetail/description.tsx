@@ -21,7 +21,7 @@ const Divider = styled.div`
   background-color: #e0e0e0;
 `;
 
-const Zone = styled.div`
+const Location = styled.div`
   font-weight: 600;
   font-size: 14px;
   line-height: 30px;
@@ -48,7 +48,7 @@ const Description = ({ flat }: Props): JSX.Element => {
     <Fragment>
       <Title>{i18n.t('flat.description')}</Title>
       <Divider />
-      <Zone>{`${i18n.t('flat.zone')}: ${flat.zone}`}</Zone>
+      <Location>{`${flat.zone}, ${flat.city}, ${flat.county}`}</Location>
       <Info dangerouslySetInnerHTML={{ __html: computeDescription() }} />
     </Fragment>
   );

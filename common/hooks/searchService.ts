@@ -186,8 +186,8 @@ class SearchService implements ISearchService {
   private pageSize: number;
   private orderBy: string;
 
-  private readonly INITIAL_PAGE_SIZE = 10;
-  private readonly PAGE_SIZE_INCREMENT_SIZE = 5;
+  private readonly INITIAL_PAGE_SIZE = 60;
+  private readonly PAGE_SIZE_INCREMENT_SIZE = 30;
   private readonly INITIAL_ORDER_BY = FlatOrderBy.PRICE_DESC;
 
   init(
