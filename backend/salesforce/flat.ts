@@ -241,7 +241,6 @@ export default class Flat extends IFlat {
     city: string,
     county: string
   ) {
-    console.log('CALLED getCoordinatesFromAddress');
     const result = await googleMapsClient.geocode({
       params: {
         key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
