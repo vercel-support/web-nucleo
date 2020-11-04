@@ -58,32 +58,30 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
   const flats = deserializeMultiple(serializedFlats, IFlat);
   const officesSectionRef = useRef(null);
   const [selectedOfficeIndex, setSelectedOffice] = useState(2);
-  const [isMounted, setIsMounted] = useState(false);
   const onSendButtonClicked = (contact: IContact) => {
     mailchimpService.subscribe(contact, router, i18n);
   };
 
   useEffect(() => {
+    const oficina = new URLSearchParams(window.location.search).get('oficina');
     if (
-      router.query &&
-      'oficina' in router.query &&
-      isInteger(router.query['oficina'] as string) &&
-      parseInt(router.query['oficina'] as string) < offices.length
+      oficina &&
+      isInteger(oficina as string) &&
+      parseInt(oficina as string) < offices.length
     ) {
-      const newOfficeIndex = parseInt(router.query['oficina'] as string);
+      const newOfficeIndex = parseInt(oficina as string);
       setSelectedOffice(newOfficeIndex);
       if (
         officesSectionRef &&
         'current' in officesSectionRef &&
         officesSectionRef.current
       ) {
-        officesSectionRef.current.scrollIntoView({
-          block: 'start',
+        setTimeout(() => {
+          officesSectionRef.current.scrollIntoView(true);
         });
       }
     }
-    setIsMounted(true);
-  }, [isMounted]);
+  }, []);
   return (
     <Layout>
       <Head>
