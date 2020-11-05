@@ -26,10 +26,6 @@ interface StaticProps {
 
 type Props = StaticProps;
 
-function isInteger(value) {
-  return /^\d+$/.test(value);
-}
-
 const Layout = styled.div`
   display: flex;
   flex: auto;
@@ -62,7 +58,6 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
     mailchimpService.subscribe(contact, router, i18n);
   };
 
-  
   const nameToIndex = {};
   const indexToName = {};
   for (let i = 0; i < offices.length; i++) {
@@ -74,10 +69,7 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
 
   useEffect(() => {
     const oficina = new URLSearchParams(window.location.search).get('office');
-    if (
-      oficina &&
-      oficina in nameToIndex
-    ) {
+    if (oficina && oficina in nameToIndex) {
       const newOfficeIndex = nameToIndex[oficina];
       setSelectedOffice(newOfficeIndex);
       if (
