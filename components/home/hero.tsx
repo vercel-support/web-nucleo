@@ -190,7 +190,6 @@ const SearchBarContainer = styled.div<{ open: boolean }>`
     right: ${(props) => (props.open ? '0' : '100%')};
     transition: right 0.4s ease-out, transform 0.4s ease-out;
     -webkit-transition: right 0.4s ease-out, transform 0.4s ease-out;
-    margin-top: -2px;
     transform: ${(props) =>
       props.open ? 'translateX(0)' : 'translateX(80px)'};
   }
@@ -222,8 +221,8 @@ const ActionButton = styled(Button)<{ themeColor: string }>`
     background-color: ${(props) => props.theme.colors[props.themeColor]};
     border-color: ${(props) => props.theme.colors[props.themeColor]};
   }
-  border-radius: 40px;
-  height: 44px;
+  border-radius: 24px;
+  height: 48px;
 
   padding: 0 30px;
 `;
@@ -247,6 +246,12 @@ const Hero = ({
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!openTextBar) {
+      onAutoCompleteValueChange('');
+    }
+  }, [openTextBar]);
 
   return (
     <Background>

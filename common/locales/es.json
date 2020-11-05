@@ -202,6 +202,11 @@
       "visitBlog": "Blog de Inmobiliaria Núcleo"
     }
   },
+  "flatCard": {
+    "messages": {
+      "searchInZone": "Buscar pisos en {{zoneFormatted}}"
+    }
+  },
   "enums": {
     "flatType": {
       "PISO": "Piso",

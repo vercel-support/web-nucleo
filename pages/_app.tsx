@@ -113,20 +113,21 @@ const GlobalStyle = createGlobalStyle`
   .ant-message,
   .ant-dropdown-menu,
   .ant-select-dropdown,
-  .ant-modal {
+  .ant-modal,
+  .ant-tooltip {
     font-family: ${(props) => props.theme.font.family};
     font-style: ${(props) => props.theme.font.style};
   }
 
-  .ant-tooltip-inner {
-    font-family: ${(props) => props.theme.font.family};
-    font-style: ${(props) => props.theme.font.style};
-    background-color: ${(props) => props.theme.colors.secondary};
-    font-size: 12px;
+  .ant-slider-tooltip {
+    .ant.tooltip-inner {
+      background-color: ${(props) => props.theme.colors.secondary};
+      font-size: 12px;
+    }
   }
 
   .ant-checkbox-inner {
-    border-radius: 0;
+    border-radius: 4px;
   }
 
   .ant-modal-footer {

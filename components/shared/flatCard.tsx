@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { Row, Col, Tag, Carousel } from 'antd';
+import { Row, Col, Tooltip, Tag, Carousel } from 'antd';
 
 import { IFlat } from '../../common/model/flat.model';
 import useI18n from '../../common/hooks/useI18n';
@@ -128,6 +128,12 @@ const BottomInfoSection = styled.div`
   margin-top: 32px;
 `;
 
+const StyledTooltip = styled(Tooltip)`
+  .ant-tooltip-inner {
+    background-color: ${(props) => props.theme.colors.secondary};
+  }
+`;
+
 const StyledTag = styled(Tag)`
   font-weight: 500;
   font-size: 14px;
@@ -157,6 +163,8 @@ const FlatCard = ({
   theme,
 }: Props): JSX.Element => {
   const i18n = useI18n();
+
+  const zoneFormatted = `${flat.zone} (${flat.city})`;
 
   return (
     <div className={className} onMouseEnter={onMouseEnter}>
@@ -268,9 +276,15 @@ const FlatCard = ({
                         }}
                         passHref
                       >
-                        <StyledTag color={theme.colors.secondary}>
-                          {`${flat.zone} (${flat.city})`}
-                        </StyledTag>
+                        <StyledTooltip
+                          title={i18n.t('flatCard.messages.searchInZone', {
+                            zoneFormatted,
+                          })}
+                        >
+                          <StyledTag color={theme.colors.secondary}>
+                            {zoneFormatted}
+                          </StyledTag>
+                        </StyledTooltip>
                       </Link>
                     </Col>
                     <Col span={10}>
