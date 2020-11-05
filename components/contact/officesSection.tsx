@@ -66,9 +66,11 @@ const ContactFormSection = ({
       />
       <OfficeDetailsContainer>
         <span style={{ fontWeight: 500 }}>{selectedOffice.name}: </span>
-        <span>{selectedOffice.address} </span>
-        <span>{selectedOffice.postalCode} </span>
-        <span>{selectedOffice.city} </span>
+        <a href={`https://maps.google.com/?q=${selectedOffice.lat},${selectedOffice.long}`}>
+          <span>{selectedOffice.address}</span>
+          <span> {selectedOffice.postalCode} </span>
+          <span>{selectedOffice.city} </span>
+        </a>
         <span>{selectedOffice.phone}</span>
       </OfficeDetailsContainer>
     </div>

@@ -62,14 +62,23 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
     mailchimpService.subscribe(contact, router, i18n);
   };
 
+  
+  const nameToIndex = {};
+  const indexToName = {};
+  for (let i = 0; i < offices.length; i++) {
+    const office = offices[i];
+    const nameEncoded = office.name.replace(/[^a-zA-Z0-9-_]/g, '');
+    nameToIndex[nameEncoded] = i;
+    indexToName[i] = nameEncoded;
+  }
+
   useEffect(() => {
     const oficina = new URLSearchParams(window.location.search).get('office');
     if (
       oficina &&
-      isInteger(oficina as string) &&
-      parseInt(oficina as string) < offices.length
+      oficina in nameToIndex
     ) {
-      const newOfficeIndex = parseInt(oficina as string);
+      const newOfficeIndex = nameToIndex[oficina];
       setSelectedOffice(newOfficeIndex);
       if (
         officesSectionRef &&
@@ -84,8 +93,9 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    const officeName = indexToName[selectedOfficeIndex];
     const url = new URL(String(window.location));
-    url.searchParams.set('office', String(selectedOfficeIndex));
+    url.searchParams.set('office', officeName);
     window.history.replaceState({}, '', url.toString());
   }, [selectedOfficeIndex]);
 
