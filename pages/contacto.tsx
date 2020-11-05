@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { useRef, useEffect, useState } from 'react';
 import { deserializeMultiple } from '../common/helpers/serialization';
 
 import { IOffice } from '../common/model/office.model';
@@ -17,6 +18,20 @@ import {
 import { Header, Footer } from '../components/shared';
 import { IFlat } from '../common/model/flat.model';
 import Flat from '../backend/salesforce/flat';
+
+function replaceAll(str, from, to) {
+  return str.split(from).join(to);
+}
+
+function removeAccents(input) {
+  let str = input;
+  str = replaceAll(str, 'á', 'a');
+  str = replaceAll(str, 'é', 'e');
+  str = replaceAll(str, 'í', 'i');
+  str = replaceAll(str, 'ó', 'o');
+  str = replaceAll(str, 'ú', 'u');
+  return str;
+}
 
 interface StaticProps {
   offices: IOffice[];
@@ -51,10 +66,47 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
   const flats = deserializeMultiple(serializedFlats, IFlat);
-
+  const officesSectionRef = useRef(null);
+  const [selectedOfficeIndex, setSelectedOffice] = useState(2);
   const onSendButtonClicked = (contact: IContact) => {
     mailchimpService.subscribe(contact, router, i18n);
   };
+
+  const nameToIndex = {};
+  const indexToName = {};
+  for (let i = 0; i < offices.length; i++) {
+    const office = offices[i];
+    const nameEncoded = removeAccents(office.name).replace(
+      /[^a-zA-Z0-9-_]/g,
+      ''
+    );
+    nameToIndex[nameEncoded] = i;
+    indexToName[i] = nameEncoded;
+  }
+
+  useEffect(() => {
+    const oficina = new URLSearchParams(window.location.search).get('office');
+    if (oficina && oficina in nameToIndex) {
+      const newOfficeIndex = nameToIndex[oficina];
+      setSelectedOffice(newOfficeIndex);
+      if (
+        officesSectionRef &&
+        'current' in officesSectionRef &&
+        officesSectionRef.current
+      ) {
+        setTimeout(() => {
+          officesSectionRef.current.scrollIntoView(true);
+        }, 50);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const officeName = indexToName[selectedOfficeIndex];
+    const url = new URL(String(window.location));
+    url.searchParams.set('office', officeName);
+    window.history.replaceState({}, '', url.toString());
+  }, [selectedOfficeIndex]);
 
   return (
     <Layout>
@@ -86,7 +138,12 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
 
       <Content>
         <ContactFormSection onSendButtonClicked={onSendButtonClicked} />
-        <OfficesSection offices={offices} />
+        <div ref={officesSectionRef}></div>
+        <OfficesSection
+          offices={offices}
+          selectedOfficeIndex={selectedOfficeIndex}
+          setSelectedOffice={setSelectedOffice}
+        />
         <OfficeFlatsSection flats={flats} />
       </Content>
 

@@ -202,6 +202,11 @@
       "visitBlog": "Inmobiliaria Núcleo Blog"
     }
   },
+  "flatCard": {
+    "messages": {
+      "searchInZone": "Search flats in {{zoneFormatted}}"
+    }
+  },
   "enums": {
     "flatType": {
       "PISO": "Flat",

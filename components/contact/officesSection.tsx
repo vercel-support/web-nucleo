@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import OfficeSelector from './officeSelector';
 import OfficeDisplay from './officeDisplay';
@@ -8,6 +7,8 @@ import useI18n from '../../common/hooks/useI18n';
 type Props = {
   offices: IOffice[];
   className?: string;
+  selectedOfficeIndex: number;
+  setSelectedOffice: (index: number) => void;
 };
 
 const Title = styled.h2`
@@ -41,9 +42,13 @@ const OfficeDetailsContainer = styled.div`
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
 `;
 
-const ContactFormSection = ({ offices, className }: Props): JSX.Element => {
+const ContactFormSection = ({
+  offices,
+  className,
+  selectedOfficeIndex,
+  setSelectedOffice,
+}: Props): JSX.Element => {
   const i18n = useI18n();
-  const [selectedOfficeIndex, setSelectedOffice] = useState(2);
   const selectedOffice = offices[selectedOfficeIndex];
   return (
     <div className={className}>
@@ -61,9 +66,11 @@ const ContactFormSection = ({ offices, className }: Props): JSX.Element => {
       />
       <OfficeDetailsContainer>
         <span style={{ fontWeight: 500 }}>{selectedOffice.name}: </span>
-        <span>{selectedOffice.address} </span>
-        <span>{selectedOffice.postalCode} </span>
-        <span>{selectedOffice.city} </span>
+        <a href={selectedOffice.mapUrl}>
+          <span>{selectedOffice.address}</span>
+          <span> {selectedOffice.postalCode} </span>
+          <span>{selectedOffice.city} </span>
+        </a>
         <span>{selectedOffice.phone}</span>
       </OfficeDetailsContainer>
     </div>

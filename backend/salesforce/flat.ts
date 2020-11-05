@@ -3,6 +3,7 @@ import { IFlat } from '../../common/model/flat.model';
 import { getSalesforceClient } from './index';
 import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
 import { retry } from 'async-retry-decorator';
+import { asyncMemoize } from '../helpers';
 
 const googleMapsClient = new GoogleMapsClient();
 
@@ -203,6 +204,7 @@ export default class Flat extends IFlat {
     });
   }
 
+  @asyncMemoize
   static async getFlats(): Promise<Flat[]> {
     if (
       process.env.NODE_ENV == 'development' &&

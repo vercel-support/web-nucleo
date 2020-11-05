@@ -10,4 +10,5 @@ export interface IOffice {
   imageUrl: string;
   lat: number;
   long: number;
+  mapUrl: string;
 }
