@@ -63,7 +63,7 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
   };
 
   useEffect(() => {
-    const oficina = new URLSearchParams(window.location.search).get('oficina');
+    const oficina = new URLSearchParams(window.location.search).get('office');
     if (
       oficina &&
       isInteger(oficina as string) &&
@@ -78,10 +78,17 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
       ) {
         setTimeout(() => {
           officesSectionRef.current.scrollIntoView(true);
-        });
+        }, 50);
       }
     }
   }, []);
+
+  useEffect(() => {
+    const url = new URL(String(window.location));
+    url.searchParams.set('office', String(selectedOfficeIndex));
+    window.history.replaceState({}, '', url.toString());
+  }, [selectedOfficeIndex]);
+
   return (
     <Layout>
       <Head>
