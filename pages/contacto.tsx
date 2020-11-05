@@ -76,7 +76,10 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
   const indexToName = {};
   for (let i = 0; i < offices.length; i++) {
     const office = offices[i];
-    const nameEncoded = removeAccents(office.name).replace(/[^a-zA-Z0-9-_]/g, '');
+    const nameEncoded = removeAccents(office.name).replace(
+      /[^a-zA-Z0-9-_]/g,
+      ''
+    );
     nameToIndex[nameEncoded] = i;
     indexToName[i] = nameEncoded;
   }
