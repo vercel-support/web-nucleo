@@ -113,17 +113,23 @@
     "houseValue": {
       "title": "Know the value of your\u00A0property",
       "subtitle": "Free home appraisal\u00A0service",
-      "description": "Thanks to our extensive experience in the local real estate market, we know the real sales prices of each\u00A0neighborhood.<br><br>In addition, we have the most advanced software in real estate management, which allows us to propose the right price to sell\u00A0your\u00A0home.<br><br>All of this without obligation and completely free\u00A0of\u00A0charge."
+      "description1": "Thanks to our extensive experience in the local real estate market, we know the real sales prices of each\u00A0neighborhood.",
+      "description2": "In addition, we have the most advanced software in real estate management, which allows us to propose the right price to sell\u00A0your\u00A0home.",
+      "description3": "All of this without obligation and completely free\u00A0of\u00A0charge."
     },
     "idealBuyer": {
       "title": "We find the ideal\u00A0buyer",
       "subtitle": "Fully personalized marketing\u00A0plan",
-      "description": "We have virtual reality cameras. This way users will visit your property like\u00A0never\u00A0before.<br><br> We will also promote your property in our offices as well as in our monthly magazine to give it maximum\u00A0visibility.<br><br>We carry out an analysis of all the possible buyers profiles to find the ones that best suit your\u00A0interests."
+      "description1": "We have virtual reality cameras. This way users will visit your property like\u00A0never\u00A0before.",
+      "description2": "We will also promote your property in our offices as well as in our monthly magazine to give it maximum\u00A0visibility.",
+      "description3": "We carry out an analysis of all the possible buyers profiles to find the ones that best suit your\u00A0interests."
     },
     "adjustNeeds": {
       "title": "We adjust to your\u00A0needs",
       "subtitle": "Integral management, from start to\u00A0finish",
-      "description": "We do a photographic report (2D and 3D) and we take care of the release of the ads on all the media, both online\u00A0and\u00A0offline.<br><br>We take care of all the documentation procedures and accompany you to the notary at the time\u00A0of\u00A0signing.<br><br>During the entire process, if you have any questions, you just have to pick up the phone and our advisors will be happy to\u00A0assist\u00A0you."
+      "description1": "We do a photographic report (2D and 3D) and we take care of the release of the ads on all the media, both online\u00A0and\u00A0offline.",
+      "description2": "We take care of all the documentation procedures and accompany you to the notary at the time\u00A0of\u00A0signing.",
+      "description3": "During the entire process, if you have any questions, you just have to pick up the phone and our advisors will be happy to\u00A0assist\u00A0you."
     }
   },
   "aboutUs": {

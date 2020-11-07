@@ -122,21 +122,27 @@ const VenderCasaPage = (): JSX.Element => {
           left={true}
           title={i18n.t('sellHouse.houseValue.title')}
           subtitle={i18n.t('sellHouse.houseValue.subtitle')}
-          description={i18n.t('sellHouse.houseValue.description')}
+          description1={i18n.t('sellHouse.houseValue.description1')}
+          description2={i18n.t('sellHouse.houseValue.description2')}
+          description3={i18n.t('sellHouse.houseValue.description3')}
         />
         <InfoSection
           imageUrl={'sell_house_ideal_buyer_background.png'}
           left={false}
           title={i18n.t('sellHouse.idealBuyer.title')}
           subtitle={i18n.t('sellHouse.idealBuyer.subtitle')}
-          description={i18n.t('sellHouse.idealBuyer.description')}
+          description1={i18n.t('sellHouse.idealBuyer.description1')}
+          description2={i18n.t('sellHouse.houseValue.description2')}
+          description3={i18n.t('sellHouse.houseValue.description3')}
         />
         <InfoSection
           imageUrl={'sell_house_adjust_needs_background.png'}
           left={true}
           title={i18n.t('sellHouse.adjustNeeds.title')}
           subtitle={i18n.t('sellHouse.adjustNeeds.subtitle')}
-          description={i18n.t('sellHouse.adjustNeeds.description')}
+          description1={i18n.t('sellHouse.adjustNeeds.description1')}
+          description2={i18n.t('sellHouse.houseValue.description2')}
+          description3={i18n.t('sellHouse.houseValue.description3')}
         />
         <ContactUsSection>
           <ContactUsButton onClick={onContactUsButtonClicked} />

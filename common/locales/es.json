@@ -113,17 +113,23 @@
     "houseValue": {
       "title": "Conozca el valor de su\u00A0inmueble",
       "subtitle": "Servicio gratuito de valoración de\u00A0su\u00A0vivienda",
-      "description": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada\u00A0barrio.<br><br>Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender\u00A0su\u00A0vivienda.<br><br>Y lo mejor, todo ello sin compromiso y de forma totalmente\u00A0gratuita."
+      "description1": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada\u00A0barrio.",
+      "description2": "Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender\u00A0su\u00A0vivienda.",
+      "description3": "Y lo mejor, todo ello sin compromiso y de forma totalmente\u00A0gratuita."
     },
     "idealBuyer": {
       "title": "Encontramos al comprador\u00A0ideal",
       "subtitle": "Plan de marketing totalmente\u00A0personalizado",
-      "description": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como\u00A0internacionales.<br><br>También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la\u00A0máxima\u00A0visibilidad<br><br>Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a\u00A0sus\u00A0intereses."
+      "description1": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como\u00A0internacionales.",
+      "description2": "También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la\u00A0máxima\u00A0visibilidad",
+      "description3": "Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a\u00A0sus\u00A0intereses."
     },
     "adjustNeeds": {
       "title": "Nos ajustamos a sus\u00A0necesidades",
       "subtitle": "Gestión integral, de principio\u00A0a\u00A0fin",
-      "description": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como\u00A0offline.<br><br>Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de\u00A0la\u00A0firma.<br><br>Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados\u00A0de\u00A0atenderle."
+      "description1": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como\u00A0offline.",
+      "description2": "Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de\u00A0la\u00A0firma.",
+      "description3": "Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados\u00A0de\u00A0atenderle."
     }
   },
   "aboutUs": {
