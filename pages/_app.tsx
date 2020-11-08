@@ -105,6 +105,14 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .text-primary {
+    color: ${(props) => props.theme.colors.primary} !important;
+  }
+
+  .font-weight-bold {
+    font-weight: 600 !important;
+  }
+
   .ant-dropdown-menu,
   .ant-select-dropdown:not(.search-dropdown) {
     border-radius: 0;

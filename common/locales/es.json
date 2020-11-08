@@ -19,7 +19,7 @@
     "description": "Compra-Venta de viviendas en Alicante. Encuentre inmuebles al mejor precio. Visite Inmobiliaria Núcleo y conozca nuestra oferta de casas en venta en Alicante.",
     "hero-title-1": "Bienvenido a",
     "hero-title-2": "Inmobiliaria Núcleo",
-    "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles\u00A0en\u00A0Alicante.",
+    "hero-subtitle": "Le asesoramos tanto con la venta como con la compra de inmuebles\u00A0en\u00A0<span class=\"text-primary\">Alicante</span>",
     "vender": "Vender casa",
     "comprar": "Comprar casa",
     "section-flats-title": "Viviendas en Alicante",
@@ -88,8 +88,7 @@
     "metaDescription": "Venta de viviendas en Alicante. Visite Inmobiliaria Núcleo y conozca cómo vender casa en Alicante al mejor precio.",
     "form": {
       "title": "Venda su inmueble con nosotros",
-      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo\u00A0de\u00A0Núcleo",
-      "subtitle2": "Valoración gratuita y sin\u00A0compromiso",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo\u00A0de\u00A0Núcleo<br><br><span class=\"font-weight-bold\">Valoración <span class=\"text-primary\">gratuita</span> y sin\u00A0compromiso</span>",
       "send": "Enviar",
       "contactUs": "Contacte con nosotros"
     },
@@ -112,21 +111,21 @@
     },
     "houseValue": {
       "title": "Conozca el valor de su\u00A0inmueble",
-      "subtitle": "Servicio gratuito de valoración de\u00A0su\u00A0vivienda",
+      "subtitle": "Servicio <span class=\"text-primary\">gratuito</span> de valoración de\u00A0su\u00A0vivienda",
       "description1": "Gracias a nuestra amplia experiencia en el sector inmobiliario local, conocemos los precios reales de venta de cada\u00A0barrio.",
       "description2": "Además, disponemos del software más avanzado en gestión inmobiliaria, lo que nos permite proponerle el precio adecuado para vender\u00A0su\u00A0vivienda.",
       "description3": "Y lo mejor, todo ello sin compromiso y de forma totalmente\u00A0gratuita."
     },
     "idealBuyer": {
       "title": "Encontramos al comprador\u00A0ideal",
-      "subtitle": "Plan de marketing totalmente\u00A0personalizado",
+      "subtitle": "<span class=\"text-primary\">Plan de marketing</span> totalmente\u00A0personalizado",
       "description1": "Contamos con cámaras de realidad virtual para que su vivienda luzca como nunca en los principales portales inmobiliarios, tanto nacionales como\u00A0internacionales.",
       "description2": "También promocionaremos su vivienda en nuestras oficinas y nuestra revista mensual para darle la\u00A0máxima\u00A0visibilidad",
       "description3": "Realizamos un análisis del perfil de todos los posibles compradores para encontrar los que más se ajustan a\u00A0sus\u00A0intereses."
     },
     "adjustNeeds": {
       "title": "Nos ajustamos a sus\u00A0necesidades",
-      "subtitle": "Gestión integral, de principio\u00A0a\u00A0fin",
+      "subtitle": "<span class=\"text-primary\">Gestión integral</span>, de principio\u00A0a\u00A0fin",
       "description1": "Realizamos un reportaje fotográfico (2D y 3D) y nos hacemos cargo de la publicación de los anuncios en todos los canales, tanto online como\u00A0offline.",
       "description2": "Nos encargamos de todas las gestiones de documentación y le acompañamos a la notaría en el momento de\u00A0la\u00A0firma.",
       "description3": "Durante todo el proceso, si tiene cualquier consulta solo tiene que descolgar el teléfono y nuestros asesores estarán encantados\u00A0de\u00A0atenderle."
@@ -147,8 +146,7 @@
     "metaDescription": "Toda la información de las oficinas inmobiliarias en Alicante\u00A0de\u00A0Núcleo",
     "form": {
       "title": "Contacte con nosotros",
-      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo\u00A0de\u00A0Núcleo",
-      "subtitle2": "Llámenos al (+34)\u00A0965\u00A0999\u00A0554",
+      "subtitle": "Por favor, rellene el siguiente formulario para ponerse en contacto con el equipo\u00A0de\u00A0Núcleo<br><br><span class=\"font-weight-bold\">Llámenos al <a href=\"tel:+34965999554\">(+34)\u00A0965\u00A0999\u00A0554</a></span>",
       "send": "Enviar"
     },
     "offices": {

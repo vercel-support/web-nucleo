@@ -263,7 +263,11 @@ const Hero = ({
           {i18n.t('home.hero-title-2')}
         </TitleParagraph>
         <Divider />
-        <Subtitle>{i18n.t('home.hero-subtitle')}</Subtitle>
+        <Subtitle
+          dangerouslySetInnerHTML={{
+            __html: i18n.t('home.hero-subtitle'),
+          }}
+        />
       </Title>
       {isMounted && (
         <FloatingArea>

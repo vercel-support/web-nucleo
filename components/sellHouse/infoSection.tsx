@@ -134,7 +134,11 @@ const InfoSection: React.FC<Props> = ({
           >
             <Title>{title}</Title>
             <Divider />
-            <Subtitle>{subtitle}</Subtitle>
+            <Subtitle
+              dangerouslySetInnerHTML={{
+                __html: subtitle,
+              }}
+            />
             {isMounted && (
               <Fragment>
                 <Description
