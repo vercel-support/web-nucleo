@@ -38,13 +38,15 @@ const Image = styled.div<{ imageUrl: string; left: boolean }>`
 `;
 
 const Content = styled.div<{ left: boolean }>`
-  min-height: calc((((100vw / 4) - 32px) * 2.62) * 0.4972);
+  min-height: calc(((100vw - 58px) / 2) * 0.96 * 0.4972);
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   text-align: ${(props) => (props.left ? 'left' : 'right')};
-  @media ${(props) => props.theme.breakpoints.xxl} {
-    min-height: calc((((100vw / 4) - 32px) * 2.02) * 0.4972);
-    padding-top: 32px;
+  @media ${(props) => props.theme.breakpoints.xl} {
+    min-height: calc(((100vw - 58px) / 3) * 1.89 * 0.4972);
+  }
+  @media ${(props) => props.theme.breakpoints.lg} {
+    min-height: calc(((132vw - 58px) / 2) * 0.95 * 0.4972);
   }
   @media ${(props) => props.theme.breakpoints.mdd} {
     min-height: unset;
@@ -76,11 +78,10 @@ const Subtitle = styled.div`
   line-height: 27px;
   font-weight: 600;
   margin-bottom: 16px;
-  @media ${(props) => props.theme.breakpoints.lg} {
+  @media ${(props) => props.theme.breakpoints.lgd} {
     font-size: 16px;
   }
   @media ${(props) => props.theme.breakpoints.smd} {
-    font-size: 18px;
     line-height: 22px;
   }
 `;
@@ -88,18 +89,20 @@ const Subtitle = styled.div`
 const Description = styled.div<{ left: boolean; paragraphIndex: number }>`
   font-size: 18px;
   line-height: 32px;
+  @media ${(props) => props.theme.breakpoints.xl} {
+    font-size: 16px;
+  }
   @media ${(props) => props.theme.breakpoints.lgu} {
     margin-right: ${(props) =>
       props.left ? `calc((${props.paragraphIndex} - 1) * 8vw)` : 'unset'};
     margin-left: ${(props) =>
       props.left ? 'unset' : `calc((${props.paragraphIndex} - 1) * 8vw)`};
   }
-  @media ${(props) => props.theme.breakpoints.lg} {
+  @media ${(props) => props.theme.breakpoints.lgd} {
     font-size: 14px;
     line-height: 26px;
   }
   @media ${(props) => props.theme.breakpoints.smd} {
-    font-size: 18px;
     line-height: 22px;
   }
 `;
@@ -129,7 +132,7 @@ const InfoSection: React.FC<Props> = ({
         <Row>
           <Col
             xs={24}
-            lg={{ span: 14, offset: left ? 0 : 10 }}
+            lg={{ span: 16, offset: left ? 0 : 8 }}
             xl={{ span: 12, offset: left ? 0 : 12 }}
           >
             <Title>{title}</Title>
