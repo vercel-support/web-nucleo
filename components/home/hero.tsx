@@ -278,6 +278,7 @@ const Hero = ({
               if (
                 !searchBarOpen &&
                 !searchBarOpening &&
+                !searchBarClosing &&
                 autoCompleteRef.current
               ) {
                 autoCompleteRef.current.focus();
@@ -289,7 +290,7 @@ const Hero = ({
               }
             }}
             onBlur={() => {
-              if (searchBarOpen && !searchBarClosing) {
+              if (searchBarOpen && !searchBarOpening && !searchBarClosing) {
                 setSearchBarClosing(true);
                 setTimeout(() => {
                   setSearchBarOpen(false);
