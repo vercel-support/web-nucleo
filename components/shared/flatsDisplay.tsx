@@ -46,10 +46,8 @@ const Arrow = styled.div<{ left?: boolean }>`
   transform: translateY(calc(-50% - 28px));
   width: 40px;
   height: 40px;
-  background-image: url(${(props) =>
-    props.left
-      ? require('../../public/images/prev_black.svg')
-      : require('../../public/images/next_black.svg')});
+  background-image: ${(props) =>
+    props.left ? 'url(/images/prev_black.svg)' : 'url(/images/next_black.svg)'};
   cursor: pointer;
   z-index: 1;
 `;
