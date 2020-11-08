@@ -106,14 +106,14 @@ const SearchBarSection = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
+  width: ${(props) => props.theme.grid.getGridColumns(14, -1)};
   padding-top: ${searchBarSectionPaddingTop};
   padding-bottom: ${searchBarSectionPaddingBottom};
   padding-left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(1, 1)};
   z-index: 100;
   @media ${(props) => props.theme.breakpoints.mdd} {
-    right: 0;
+    width: 100%;
   }
 
   &.${headerOutOfScreenClass} {
@@ -178,12 +178,12 @@ const ScrollableSection = styled.div`
     ${searchBarHeight} + ${searchBarSectionPaddingTop} +
       ${searchBarSectionPaddingBottom}
   );
-  margin-left: 0;
-  margin-right: ${(props) => props.theme.grid.getGridColumns(10, -1)};
+  width: ${(props) => props.theme.grid.getGridColumns(14, -1)};
   background-color: white;
   z-index: 20;
   @media ${(props) => props.theme.breakpoints.mdd} {
-    margin: 0;
+    margin-top: 0;
+    width: 100%;
     padding-top: 40px;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
