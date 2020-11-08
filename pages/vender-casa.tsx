@@ -132,8 +132,8 @@ const VenderCasaPage = (): JSX.Element => {
           title={i18n.t('sellHouse.idealBuyer.title')}
           subtitle={i18n.t('sellHouse.idealBuyer.subtitle')}
           description1={i18n.t('sellHouse.idealBuyer.description1')}
-          description2={i18n.t('sellHouse.houseValue.description2')}
-          description3={i18n.t('sellHouse.houseValue.description3')}
+          description2={i18n.t('sellHouse.idealBuyer.description2')}
+          description3={i18n.t('sellHouse.idealBuyer.description3')}
         />
         <InfoSection
           imageUrl={'sell_house_adjust_needs_background.png'}
@@ -141,8 +141,8 @@ const VenderCasaPage = (): JSX.Element => {
           title={i18n.t('sellHouse.adjustNeeds.title')}
           subtitle={i18n.t('sellHouse.adjustNeeds.subtitle')}
           description1={i18n.t('sellHouse.adjustNeeds.description1')}
-          description2={i18n.t('sellHouse.houseValue.description2')}
-          description3={i18n.t('sellHouse.houseValue.description3')}
+          description2={i18n.t('sellHouse.adjustNeeds.description2')}
+          description3={i18n.t('sellHouse.adjustNeeds.description3')}
         />
         <ContactUsSection>
           <ContactUsButton onClick={onContactUsButtonClicked} />
