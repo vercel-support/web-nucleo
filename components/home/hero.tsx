@@ -286,7 +286,7 @@ const Hero = ({
                 setTimeout(() => {
                   setSearchBarOpen(true);
                   setSearchBarOpening(false);
-                }, 200);
+                }, 300);
               }
             }}
             onBlur={() => {
@@ -295,7 +295,7 @@ const Hero = ({
                 setTimeout(() => {
                   setSearchBarOpen(false);
                   setSearchBarClosing(false);
-                }, 200);
+                }, 300);
               }
             }}
           >
