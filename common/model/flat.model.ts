@@ -1,4 +1,4 @@
-export class IFlat {
+export interface IFlat {
   id: string;
   pictureUrls: string[];
   price: number;
@@ -24,4 +24,6 @@ export class IFlat {
 
   yearConstruction?: number;
   yearReform?: number;
+
+  mapAreaId?: string;
 }

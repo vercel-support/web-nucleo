@@ -1,11 +1,16 @@
 import { Connection } from 'jsforce';
 import { retry } from 'async-retry-decorator';
-import { binaryToBase64ImageSrc } from '../../common/helpers';
-import { processImage } from '../images';
-import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
 import { join } from 'path';
 import fs from 'fs';
-import axios, { AxiosRequestConfig, Method, ResponseType } from 'axios';
+import axios, {
+  Method,
+  ResponseType,
+  AxiosResponse,
+  AxiosRequestConfig,
+} from 'axios';
+
+import { processImage } from '../images';
+import { binaryToBase64ImageSrc } from '../../common/helpers';
 
 export class Salesforce {
   private conn = new Connection();
@@ -39,7 +44,7 @@ export class Salesforce {
     relativeUrl: string,
     method: Method = 'GET',
     responseType: ResponseType = 'arraybuffer'
-  ) {
+  ): Promise<AxiosResponse<any>> {
     const requestConfig: AxiosRequestConfig = {
       method,
       url: `${this.conn._baseUrl()}${relativeUrl}`,
@@ -48,7 +53,7 @@ export class Salesforce {
       },
       responseType,
     };
-    return await axios(requestConfig);
+    return axios(requestConfig);
   }
 
   async fetchAttachedImages(entityId: string): Promise<string[]> {
@@ -149,7 +154,7 @@ export class Salesforce {
   async fetchAllObjectInstances(
     objectName: string,
     fields: string[]
-  ): Promise<IStringToAnyDictionary[]> {
+  ): Promise<Record<string, any>[]> {
     if (this.initialized == false) {
       throw Error('Initialize the salesforce client before using it.');
     }
