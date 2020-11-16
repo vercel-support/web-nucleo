@@ -35,7 +35,7 @@ const offices: IOffice[] = [
     id: '3',
     shortName: 'San Blas',
     name: 'San Blas',
-    address: 'C/ Bono Guarner, 381',
+    address: 'C/ Bono Guarner, 38',
     postalCode: '03005',
     city: 'Alicante',
     country: 'España',
