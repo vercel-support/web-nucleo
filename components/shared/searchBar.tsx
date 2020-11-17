@@ -252,7 +252,7 @@ const SearchBar = React.forwardRef<any, Props>(
                     icon={
                       <BackButton
                         className="anticon"
-                        src={'/images/back_no_circle.svg'}
+                        src={'/images/prev_no_circle.svg'}
                       />
                     }
                   />

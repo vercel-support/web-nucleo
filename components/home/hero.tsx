@@ -240,7 +240,9 @@ const Hero = ({
 
   const autoCompleteRef = useRef(null);
 
-  const [openTextBar, setOpenTextBar] = useState(false);
+  const [searchBarOpen, setSearchBarOpen] = useState(false);
+  const [searchBarOpening, setSearchBarOpening] = useState(false);
+  const [searchBarClosing, setSearchBarClosing] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -248,10 +250,10 @@ const Hero = ({
   }, []);
 
   useEffect(() => {
-    if (!openTextBar) {
+    if (!searchBarOpen) {
       onAutoCompleteValueChange('');
     }
-  }, [openTextBar]);
+  }, [searchBarOpen]);
 
   return (
     <Background>
@@ -263,26 +265,41 @@ const Hero = ({
           {i18n.t('home.hero-title-2')}
         </TitleParagraph>
         <Divider />
-        <Subtitle>{i18n.t('home.hero-subtitle')}</Subtitle>
+        <Subtitle
+          dangerouslySetInnerHTML={{
+            __html: i18n.t('home.hero-subtitle'),
+          }}
+        />
       </Title>
       {isMounted && (
         <FloatingArea>
           <div
             onClick={() => {
-              if (!openTextBar) {
-                if (autoCompleteRef.current) {
-                  autoCompleteRef.current.focus();
-                }
-                setTimeout(() => setOpenTextBar(true), 100);
+              if (
+                !searchBarOpen &&
+                !searchBarOpening &&
+                !searchBarClosing &&
+                autoCompleteRef.current
+              ) {
+                autoCompleteRef.current.focus();
+                setSearchBarOpening(true);
+                setTimeout(() => {
+                  setSearchBarOpen(true);
+                  setSearchBarOpening(false);
+                }, 300);
               }
             }}
             onBlur={() => {
-              if (openTextBar) {
-                setTimeout(() => setOpenTextBar(false), 100);
+              if (searchBarOpen && !searchBarOpening && !searchBarClosing) {
+                setSearchBarClosing(true);
+                setTimeout(() => {
+                  setSearchBarOpen(false);
+                  setSearchBarClosing(false);
+                }, 300);
               }
             }}
           >
-            <SearchBarContainer open={openTextBar}>
+            <SearchBarContainer open={searchBarOpen}>
               <SearchBar
                 height={isMdu ? '48px' : '44px'}
                 value={autoCompleteValue}
@@ -290,7 +307,7 @@ const Hero = ({
                 onValueChange={onAutoCompleteValueChange}
                 buttonBackgroundColor={theme.colors.secondary}
                 inputPadding={
-                  isMdu && openTextBar ? 'calc(max(220px, 36%))' : undefined
+                  isMdu && searchBarOpen ? 'calc(max(220px, 36%))' : undefined
                 }
                 ref={autoCompleteRef}
                 onSearch={(value) => {
@@ -304,13 +321,13 @@ const Hero = ({
                 }}
               />
             </SearchBarContainer>
-            <BuyYourHouseComponent openTextBar={openTextBar}>
+            <BuyYourHouseComponent openTextBar={searchBarOpen}>
               <ActionButton themeColor="secondary">
                 {i18n.t('home.comprar')}
               </ActionButton>
             </BuyYourHouseComponent>
           </div>
-          <SellYourHouseComponent openTextBar={openTextBar}>
+          <SellYourHouseComponent openTextBar={searchBarOpen}>
             <Link href="/vender-casa" passHref>
               <ActionButton themeColor="primary">
                 {i18n.t('home.vender')}

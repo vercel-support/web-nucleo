@@ -57,6 +57,9 @@ const PropertyDescription = styled.div`
   font-size: 18px;
   line-height: 32px;
   margin-top: 24px;
+  @media ${(props) => props.theme.breakpoints.lgd} {
+    font-size: 16px;
+  }
   @media ${(props) => props.theme.breakpoints.smd} {
     line-height: 22px;
   }

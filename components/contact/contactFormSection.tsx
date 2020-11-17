@@ -90,10 +90,11 @@ const ContactFormSection = ({ onSendButtonClicked }: Props): JSX.Element => {
           <Col xs={24} md={12}>
             <Title>{i18n.t('contact.form.title')}</Title>
             <Divider />
-            <Subtitle>{i18n.t('contact.form.subtitle')}</Subtitle>
-            <Subtitle style={{ marginTop: '16px' }}>
-              {i18n.t('contact.form.subtitle2')}
-            </Subtitle>
+            <Subtitle
+              dangerouslySetInnerHTML={{
+                __html: i18n.t('contact.form.subtitle'),
+              }}
+            />
           </Col>
           <Col xs={24} md={12}>
             <ContactForm

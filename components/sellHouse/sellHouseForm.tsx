@@ -69,11 +69,14 @@ const Divider = styled.div`
 const Subtitle = styled.div`
   color: ${(props) => props.theme.colors.secondary};
   font-size: 18px;
+  line-height: 27px;
+  font-weight: 500;
+  @media ${(props) => props.theme.breakpoints.lgd} {
+    line-height: 22px;
+  }
   @media ${(props) => props.theme.breakpoints.smd} {
     font-size: 14px;
   }
-  font-weight: 500;
-  line-height: 22px;
 `;
 
 const SellHouseForm = ({ onSendButtonClicked }: Props): JSX.Element => {
@@ -87,10 +90,11 @@ const SellHouseForm = ({ onSendButtonClicked }: Props): JSX.Element => {
           <Col xs={24} md={12}>
             <Title>{i18n.t('sellHouse.form.title')}</Title>
             <Divider />
-            <Subtitle>{i18n.t('sellHouse.form.subtitle')}</Subtitle>
-            <Subtitle style={{ marginTop: '16px' }}>
-              {i18n.t('sellHouse.form.subtitle2')}
-            </Subtitle>
+            <Subtitle
+              dangerouslySetInnerHTML={{
+                __html: i18n.t('sellHouse.form.subtitle'),
+              }}
+            />
           </Col>
           <Col xs={24} md={12}>
             <ContactForm
