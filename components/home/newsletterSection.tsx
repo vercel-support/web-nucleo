@@ -18,8 +18,8 @@ const Banner = styled.div`
   background-repeat: no-repeat;
 
   @media ${(props) => props.theme.breakpoints.lg} {
-    min-height: 0;
     height: 260px;
+    min-height: 0;
   }
 
   @media ${(props) => props.theme.breakpoints.md} {
@@ -27,6 +27,7 @@ const Banner = styled.div`
   }
 
   @media ${(props) => props.theme.breakpoints.xs} {
+    height: unset;
     min-height: 0;
     background-image: url(${require('../../public/images/banner_newsletter.png')});
     background-size: auto 100%;
@@ -51,10 +52,11 @@ const Container = styled.div`
   align-items: flex-end;
   width: 100%;
   @media ${(props) => props.theme.breakpoints.xs} {
-    background-color: rgba(242, 242, 242, 0.8);
-    border-radius: 25px;
-    padding: 45px;
-    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.15);
+    border-radius: ${(props) => props.theme.borderRadius};
+    background-color: #ffffff;
+    opacity: 0.9;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    padding: 32px;
   }
 `;
 

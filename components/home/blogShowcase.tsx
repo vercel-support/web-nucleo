@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import styled from 'styled-components';
+import { Button } from 'antd';
 
 import useI18n from '../../common/hooks/useI18n';
 
@@ -13,8 +15,8 @@ const Banner = styled.div`
   background-repeat: no-repeat;
 
   @media ${(props) => props.theme.breakpoints.lg} {
-    min-height: 0;
     height: 260px;
+    min-height: 0;
   }
 
   @media ${(props) => props.theme.breakpoints.md} {
@@ -22,6 +24,7 @@ const Banner = styled.div`
   }
 
   @media ${(props) => props.theme.breakpoints.xs} {
+    height: unset;
     min-height: 0;
     background-image: url(${require('../../public/images/banner_blog.png')});
     background-size: auto 100%;
@@ -46,10 +49,11 @@ const Container = styled.div`
   align-items: flex-start;
   width: 100%;
   @media ${(props) => props.theme.breakpoints.xs} {
-    background-color: rgba(242, 242, 242, 0.8);
-    border-radius: 25px;
-    padding: 45px;
-    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.15);
+    border-radius: ${(props) => props.theme.borderRadius};
+    background-color: #ffffff;
+    opacity: 0.9;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    padding: 32px;
   }
 `;
 
@@ -68,17 +72,17 @@ const SectionTitle = styled.h2`
 `;
 
 const SectionSubtitle = styled.h3`
+  ${(props) => props.theme.font.p1}
   max-width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
+  color: ${(props) => props.theme.colors.secondary};
+  line-height: 125%;
+  margin-bottom: 16px;
   @media ${(props) => props.theme.breakpoints.sm} {
     max-width: ${(props) => props.theme.grid.getGridColumns(11, 1)};
   }
   @media ${(props) => props.theme.breakpoints.xs} {
     max-width: inherit;
   }
-  color: ${(props) => props.theme.colors.secondary};
-
-  ${(props) => props.theme.font.p1}
-  line-height: 125%;
 `;
 
 const Divider = styled.hr`
@@ -103,6 +107,11 @@ const BlogShowcase = (): JSX.Element => {
         <SectionSubtitle>
           {i18n.t('home.blog-showcase-subtitle')}
         </SectionSubtitle>
+        <Link href="/blog" passHref>
+          <Button type="primary" htmlType="button">
+            {i18n.t('home.blog-button')}
+          </Button>
+        </Link>
       </Container>
     </Banner>
   );

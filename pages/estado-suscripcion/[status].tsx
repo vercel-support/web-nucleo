@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Row, Col, Button } from 'antd';
 
@@ -156,7 +157,7 @@ const FlatDetailPage = ({ status }: Props): JSX.Element => {
               </Subtitle>
               <VisitBlogRow justify="center">
                 <Col>
-                  <a href="http://blog.inmobiliarianucleo.com">
+                  <Link href="/blog" passHref>
                     <VisitBlogButton
                       type="primary"
                       htmlType="button"
@@ -164,7 +165,7 @@ const FlatDetailPage = ({ status }: Props): JSX.Element => {
                     >
                       {i18n.t('subscriptionStatus.actions.visitBlog')}
                     </VisitBlogButton>
-                  </a>
+                  </Link>
                 </Col>
               </VisitBlogRow>
             </Col>
