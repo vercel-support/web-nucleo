@@ -77,12 +77,12 @@
   "cookies": {
     "text": "Utilizamos cookies propias y de terceros para evaluar el uso que se hace de la web y la actividad general de la misma. Si usted continúa navegando, consideramos que\u00A0acepta\u00A0su\u00A0uso.",
     "detail": {
-      "title": "Política de cookies",
-      "description": "Política de cookies"
+      "metaTitle": "Política de cookies | Inmobiliaria Núcleo",
+      "metaDescription": "Política de cookies | Inmobiliaria Núcleo",
+      "title": "Política de cookies"
     },
     "actions": {
-      "ok": "Aceptar",
-      "moreInfo": "Más información"
+      "ok": "Aceptar"
     }
   },
   "sellHouse": {

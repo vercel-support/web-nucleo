@@ -43,7 +43,7 @@ const CookiesBanner = ({ className }: Props): JSX.Element => {
                 <Col xs={24} lg={12}>
                   <Link href="/legal/cookies" passHref>
                     <Button type={'default'} ghost>
-                      {i18n.t('cookies.actions.moreInfo')}
+                      {i18n.t('cookies.detail.title')}
                     </Button>
                   </Link>
                 </Col>

@@ -74,6 +74,11 @@ const HeaderComp = styled.header<{ alwaysShown: boolean; dropShadow: boolean }>`
     props.dropShadow ? '0px 3px 25px rgba(0, 0, 0, 0.15)' : 'inherit'};
 `;
 
+const Logo = styled.img`
+  height: 32px;
+  width: 130px;
+`;
+
 const StyledLink = styled.a<{ active: boolean }>`
   font-family: ${(props) => props.theme.font.family};
   font-style: ${(props) => props.theme.font.style};
@@ -134,7 +139,7 @@ const Header = ({
     <HeaderComp alwaysShown={!!alwaysShown} dropShadow={!!dropShadow}>
       <Link href="/">
         <a>
-          <img
+          <Logo
             alt={i18n.t('header.logoAlt')}
             src={require('../../public/images/LogoHeaderWeb.svg')}
           />

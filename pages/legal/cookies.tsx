@@ -49,10 +49,10 @@ const CookiesPage = (): JSX.Element => {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{i18n.t('cookies.detail.title')}</title>
+        <title>{i18n.t('cookies.detail.metaTitle')}</title>
         <meta
           name="description"
-          content={i18n.t('cookies.detail.description')}
+          content={i18n.t('cookies.detail.metaDescription')}
         />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />

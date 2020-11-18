@@ -77,12 +77,12 @@
   "cookies": {
     "text": "This site uses profiling cookies to track users. If you continue browsing, we consider you\u00A0accept\u00A0it.",
     "detail": {
-      "title": "Cookies policy",
-      "description": "Cookies policy"
+      "metaTitle": "Cookies policy | Inmobiliaria Núcleo",
+      "metaDescription": "Cookies policy | Inmobiliaria Núcleo",
+      "title": "Cookies policy"
     },
     "actions": {
-      "ok": "OK",
-      "moreInfo": "More information"
+      "ok": "OK"
     }
   },
   "sellHouse": {
