@@ -10,6 +10,7 @@
   },
   "footer": {
     "nucleo-sl": "© 2020 Núcleo S.L.",
+    "blog": "Noticias",
     "aviso-legal": "Aviso legal",
     "politica-datos": "Protección de datos",
     "politica-cookies": "Política de cookies"
@@ -27,6 +28,7 @@
     "email": "Correo electrónico",
     "blog-showcase-title": "Conozca las tendencias del mercado\u00A0inmobiliario",
     "blog-showcase-subtitle": "¡Sea el primero en conocer todas las novedades, los mejores rincones de Alicante\u00A0y\u00A0mucho\u00A0más!",
+    "blog-button": "Noticias",
     "newsletter-title": "Suscríbase a nuestra newsletter"
   },
   "flat": {
@@ -192,7 +194,7 @@
     "metaTitle": "Estado de la subscripción | Inmobiliaria Núcleo",
     "metaDescription": "Estado de la subscripción | Inmobiliaria Núcleo",
     "title": {
-      "subscribed": "Gracias por suscribirte a nuestra newsletter",
+      "subscribed": "Gracias por suscribirse a nuestra newsletter",
       "pending": "Revise su correo para completar la suscripción"
     },
     "subtitle": {

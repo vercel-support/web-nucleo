@@ -60,12 +60,17 @@ const Footer = ({ className }: Props) => {
   const dropdownMenu = (
     <Menu>
       <Menu.Item key="0">
-        <StyledLink>{i18n.t('footer.aviso-legal')}</StyledLink>
+        <Link href="/blog" passHref>
+          <StyledLink>{i18n.t('footer.blog')}</StyledLink>
+        </Link>
       </Menu.Item>
       <Menu.Item key="1">
-        <StyledLink>{i18n.t('footer.politica-datos')}</StyledLink>
+        <StyledLink>{i18n.t('footer.aviso-legal')}</StyledLink>
       </Menu.Item>
       <Menu.Item key="2">
+        <StyledLink>{i18n.t('footer.politica-datos')}</StyledLink>
+      </Menu.Item>
+      <Menu.Item key="3">
         <Link href="/legal/cookies" passHref>
           <StyledLink>{i18n.t('footer.politica-cookies')}</StyledLink>
         </Link>
@@ -87,6 +92,9 @@ const Footer = ({ className }: Props) => {
       </DropdownContainer>
       <MenuButtons>
         <NucleoLabel>{i18n.t('footer.nucleo-sl')}</NucleoLabel>
+        <Link href="/blog" passHref>
+          <StyledButton type="text">{i18n.t('footer.blog')}</StyledButton>
+        </Link>
         <StyledButton type="text">{i18n.t('footer.aviso-legal')}</StyledButton>
         <StyledButton type="text">
           {i18n.t('footer.politica-datos')}

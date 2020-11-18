@@ -10,6 +10,7 @@
   },
   "footer": {
     "nucleo-sl": "© 2020 Núcleo S.L.",
+    "blog": "News",
     "aviso-legal": "Legal warning",
     "politica-datos": "Data protection",
     "politica-cookies": "Cookies policy"
@@ -27,6 +28,7 @@
     "email": "E-mail address",
     "blog-showcase-title": "Latest trends in the house\u00A0market",
     "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and\u00A0much\u00A0more!",
+    "blog-button": "News",
     "newsletter-title": "Subscribe to our\u00A0newsletter"
   },
   "flat": {
