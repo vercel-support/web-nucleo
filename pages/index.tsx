@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
+import { IZone } from '../common/model/zone.model';
 import useI18n from '../common/hooks/useI18n';
 import useSearchService, {
   computeSearchOptions,
@@ -13,12 +14,13 @@ import useSearchService, {
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
-import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
+import { BlogShowcase, Hero, NewsletterSection, HierarchicalMap } from '../components/home';
 import { Header, Footer, FlatsDisplay } from '../components/shared';
 
 interface StaticProps {
   serializedFlats: string;
   serializedSearchOptions: string;
+  zones: IZone[];
 }
 
 type Props = StaticProps;
@@ -46,6 +48,7 @@ const Content = styled.main`
 export const Home = ({
   serializedFlats,
   serializedSearchOptions,
+  zones
 }: Props): JSX.Element => {
   const router = useRouter();
   const i18n = useI18n();
@@ -109,6 +112,7 @@ export const Home = ({
           onAutoCompleteValueChange={setAutoCompleteValue}
           onSearch={onSearch}
         />
+        <HierarchicalMap zones={zones} />
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={flats}
@@ -130,6 +134,8 @@ export const Home = ({
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const flats = await Flat.getFlats();
   const serializedFlats = Flat.serialize(flats);
+  
+  const zones = require('../public/fixtures/zones.json') as IZone[];
 
   const searchOptions = computeSearchOptions(flats);
 
@@ -137,6 +143,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
     props: {
       serializedFlats,
       serializedSearchOptions: JSON.stringify(searchOptions),
+      zones
     },
   };
 };
