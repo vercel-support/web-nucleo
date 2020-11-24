@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
+import { IZone } from '../common/model/zone.model';
 import useI18n from '../common/hooks/useI18n';
 import useSearchService, {
   computeSearchOptions,
@@ -13,12 +14,14 @@ import useSearchService, {
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
+import { computeZones } from '../backend/geo';
 import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
 import { Header, Footer, FlatsDisplay } from '../components/shared';
 
 interface StaticProps {
   serializedFlats: string;
   serializedSearchOptions: string;
+  zones: IZone[];
 }
 
 type Props = StaticProps;
@@ -133,10 +136,13 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
   const searchOptions = computeSearchOptions(flats);
 
+  const zones = computeZones(flats);
+
   return {
     props: {
       serializedFlats,
       serializedSearchOptions: JSON.stringify(searchOptions),
+      zones,
     },
   };
 };

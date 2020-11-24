@@ -1,9 +1,10 @@
 import * as d3 from 'd3-geo';
 
+import { IFlat } from '../../common/model/flat.model';
+import { IZone } from '../../common/model/zone.model';
+
 type Properties = {
-  objectId: number;
   name: string;
-  type: string;
   shapeLength: number;
   shapeArea: number;
 };
@@ -19,10 +20,25 @@ export const computeMapAreaId = (
 ): string => {
   for (const feature of geoData.features) {
     if (d3.geoContains(feature, [longitude, latitude])) {
-      return `${
-        feature.properties.type
-      }_${feature.properties.name.toLowerCase()}`;
+      return feature.properties.name;
     }
   }
   return null;
+};
+
+export const computeZones = (flats: IFlat[]): IZone[] => {
+  const zones: IZone[] = [];
+  for (const feature of geoData.features) {
+    const hasFlats = flats.some((flat) =>
+      d3.geoContains(feature, [
+        flat.approximateLongitude,
+        flat.approximateLatitude,
+      ])
+    );
+    zones.push({
+      url: feature.properties.name, // TODO
+      hasFlats,
+    });
+  }
+  return zones;
 };
