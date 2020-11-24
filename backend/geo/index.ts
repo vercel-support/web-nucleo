@@ -1,3 +1,4 @@
+import fs from 'fs';
 import * as d3 from 'd3-geo';
 
 import { IFlat } from '../../common/model/flat.model';
@@ -35,8 +36,14 @@ export const computeZones = (flats: IFlat[]): IZone[] => {
         flat.approximateLatitude,
       ])
     );
+    const homeMapImagesPath = `${process.cwd()}/public/images/home_map/`;
+    const url = fs.existsSync(
+      `${homeMapImagesPath}${feature.properties.name}.svg`
+    )
+      ? `/images/home_map/${feature.properties.name}.svg`
+      : null;
     zones.push({
-      url: feature.properties.name, // TODO
+      url,
       hasFlats,
     });
   }
