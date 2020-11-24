@@ -14,7 +14,12 @@ import useSearchService, {
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
-import { BlogShowcase, Hero, NewsletterSection, HierarchicalMap } from '../components/home';
+import {
+  BlogShowcase,
+  Hero,
+  NewsletterSection,
+  HierarchicalMap,
+} from '../components/home';
 import { Header, Footer, FlatsDisplay } from '../components/shared';
 
 interface StaticProps {
@@ -48,7 +53,7 @@ const Content = styled.main`
 export const Home = ({
   serializedFlats,
   serializedSearchOptions,
-  zones
+  zones,
 }: Props): JSX.Element => {
   const router = useRouter();
   const i18n = useI18n();
@@ -134,7 +139,7 @@ export const Home = ({
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const flats = await Flat.getFlats();
   const serializedFlats = Flat.serialize(flats);
-  
+
   const zones = require('../public/fixtures/zones.json') as IZone[];
 
   const searchOptions = computeSearchOptions(flats);
@@ -143,7 +148,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
     props: {
       serializedFlats,
       serializedSearchOptions: JSON.stringify(searchOptions),
-      zones
+      zones,
     },
   };
 };

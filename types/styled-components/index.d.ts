@@ -6,7 +6,7 @@ declare module 'styled-components' {
 
     animations: {
       show: string;
-    }
+    };
 
     colors: {
       primary: string;
