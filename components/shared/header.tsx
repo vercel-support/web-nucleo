@@ -4,7 +4,6 @@ import { Row, Col, Button, Dropdown, Menu } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
 import useI18n from '../../common/hooks/useI18n';
-import LanguageSelector from './languageSelector';
 
 type Props = {
   alwaysShown?: boolean;
@@ -109,6 +108,11 @@ const Header = ({
           <a>{i18n.t('header.contact')}</a>
         </Link>
       </Menu.Item>
+      <Menu.Item key="4">
+        <Link href="/blog">
+          <a>{i18n.t('header.blog')}</a>
+        </Link>
+      </Menu.Item>
       <Menu.Divider />
       <Menu.SubMenu
         key="sub1"
@@ -146,6 +150,15 @@ const Header = ({
         </a>
       </Link>
       <MenuButtons gutter={16} align="middle">
+        {!hideSellHouseButton && (
+          <MdDownHiddenCol>
+            <Link href="/vender-casa" passHref>
+              <SecondaryButton type="primary">
+                {i18n.t('header.sellHouse')}
+              </SecondaryButton>
+            </Link>
+          </MdDownHiddenCol>
+        )}
         <MdDownHiddenCol>
           <Link href="/nucleo" passHref>
             <Button type="text">{i18n.t('header.aboutUs')}</Button>
@@ -156,17 +169,10 @@ const Header = ({
             <Button type="text">{i18n.t('header.contact')}</Button>
           </Link>
         </MdDownHiddenCol>
-        {hideSellHouseButton !== true && (
-          <MdDownHiddenCol>
-            <Link href="/vender-casa" passHref>
-              <SecondaryButton type="primary">
-                {i18n.t('header.sellHouse')}
-              </SecondaryButton>
-            </Link>
-          </MdDownHiddenCol>
-        )}
         <MdDownHiddenCol>
-          <LanguageSelector />
+          <Link href="/blog" passHref>
+            <Button type="text">{i18n.t('header.blog')}</Button>
+          </Link>
         </MdDownHiddenCol>
         <LgUpHiddenCol>
           <Dropdown

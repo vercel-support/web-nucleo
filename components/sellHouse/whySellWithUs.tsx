@@ -11,13 +11,14 @@ const Title = styled.h2`
 `;
 
 const Divider = styled.div`
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
   width: 50%;
   @media ${(props) => props.theme.breakpoints.smd} {
     width: 100%;
   }
-  margin-top: 24px;
-  margin-bottom: 24px;
-  border-top: 1px solid #e0e0e0;
 `;
 
 const Property = styled.div`

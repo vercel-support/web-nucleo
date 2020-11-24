@@ -62,10 +62,8 @@ const SummarySection = styled.div`
 
 const DescriptionSection = styled.div`
   margin-top: 3rem;
-  margin-left: ${(props) =>
-    `max(${props.theme.grid.getGridColumns(2, 1)}, 40px)`};
-  margin-right: ${(props) =>
-    `max(${props.theme.grid.getGridColumns(2, 1)}, 40px)`};
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
 `;
 
 const DescriptionRow = styled(Row)`
@@ -75,7 +73,7 @@ const DescriptionRow = styled(Row)`
 const FeaturesCardContainer = styled.div`
   margin-top: 0;
   @media ${(props) => props.theme.breakpoints.lgu} {
-    margin-top: 34px;
+    margin-top: 50px;
   }
 `;
 

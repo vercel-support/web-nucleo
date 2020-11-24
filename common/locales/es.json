@@ -5,15 +5,17 @@
     "sellHouse": "Vender casa",
     "aboutUs": "Quiénes somos",
     "contact": "Contacto",
-    "language": "Español",
+    "blog": "Noticias",
     "hamburgerLanguage": "Idioma"
   },
   "footer": {
     "nucleo-sl": "© 2020 Núcleo S.L.",
-    "blog": "Noticias",
     "aviso-legal": "Aviso legal",
     "politica-datos": "Protección de datos",
     "politica-cookies": "Política de cookies"
+  },
+  "languageSelector": {
+    "language": "Español"
   },
   "home": {
     "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",

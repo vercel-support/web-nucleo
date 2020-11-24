@@ -13,19 +13,21 @@ type Props = {
   theme: DefaultTheme;
 };
 
-const Title = styled.div`
+const Title = styled.h2`
   position: absolute;
   left: ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  right: ${(props) => props.theme.grid.getGridColumns(12, 1)};
-  @media ${(props) => props.theme.breakpoints.smd} {
-    left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-    right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  }
+  width: ${(props) => props.theme.grid.getGridColumns(12, 1)};
   top: 24px;
-  font-weight: 600;
   font-size: 40px;
+  font-weight: 600;
   color: #ffffff;
   z-index: 1;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+    width: ${(props) => props.theme.grid.getGridColumns(20, 1)};
+    font-size: 32px;
+    font-weight: 500;
+  }
 `;
 
 const ShowAllPhotosButton = styled(Button)`
