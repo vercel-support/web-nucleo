@@ -70,7 +70,7 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
       setStateHistory([...stateHistory, currentMapId]);
     }
     return _setCurrentMapId(nextId);
-  }
+  };
 
   const pauseAnimation = () => {
     setAnimationEnabled(false);
@@ -82,7 +82,7 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
       setStateHistory(stateHistory.slice(0, -1));
       _setCurrentMapId(nextId);
     }
-  }
+  };
 
   const routeToSearch = (q: string) => {
     router.push({
@@ -133,7 +133,13 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
         phaseTwoStartPercentage={phaseTwoStartPercentage}
         animationDuration={animationDuration}
       >
-        {stateHistory.length > 0 ? <BackButton className="anticon" src={'/images/prev_no_circle.svg'} onClick={onBackButtonClicked} /> : null}
+        {stateHistory.length > 0 ? (
+          <BackButton
+            className="anticon"
+            src={'/images/prev_no_circle.svg'}
+            onClick={onBackButtonClicked}
+          />
+        ) : null}
         <SvgLoader width="600" height="600" path={zones[currentMapId].url}>
           <SvgProxy selector=".zone" onElementSelected={configureSVGZones} />
         </SvgLoader>
