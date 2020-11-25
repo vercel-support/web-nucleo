@@ -5,7 +5,7 @@ import { SvgLoader, SvgProxy } from 'react-svgmt';
 import { useRouter } from 'next/router';
 
 type Props = {
-  zones: IZone[];
+  zones: Record<string, IZone>;
   className?: string;
 };
 
@@ -124,6 +124,11 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
       });
     }
   };
+
+  if (!(currentMapId in zones)) {
+    setStateHistory([]);
+    _setCurrentMapId('0');
+  }
 
   return (
     <div className={className}>

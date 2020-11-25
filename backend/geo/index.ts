@@ -27,8 +27,8 @@ export const computeMapAreaId = (
   return null;
 };
 
-export const computeZones = (flats: IFlat[]): IZone[] => {
-  const zones: IZone[] = [];
+export const computeZones = (flats: IFlat[]): Record<string, IZone> => {
+  const zones: Record<string, IZone> = {};
   for (const feature of geoData.features) {
     const hasFlats = flats.some((flat) =>
       d3.geoContains(feature, [
@@ -42,10 +42,14 @@ export const computeZones = (flats: IFlat[]): IZone[] => {
     )
       ? `/images/home_map/${feature.properties.name}.svg`
       : null;
-    zones.push({
+    zones[feature.properties.name] = {
       url,
       hasFlats,
-    });
+    };
   }
+  zones['0'] = {
+    url: '/images/home_map/0.svg',
+    hasFlats: true,
+  };
   return zones;
 };

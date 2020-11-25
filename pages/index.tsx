@@ -14,7 +14,7 @@ import useSearchService, {
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
-// import { computeZones } from '../backend/geo';
+import { computeZones } from '../backend/geo';
 import {
   BlogShowcase,
   Hero,
@@ -26,7 +26,7 @@ import { Header, Footer, FlatsDisplay } from '../components/shared';
 interface StaticProps {
   serializedFlats: string;
   serializedSearchOptions: string;
-  zones: IZone[];
+  zones: Record<string, IZone>;
 }
 
 type Props = StaticProps;
@@ -141,8 +141,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const flats = await Flat.getFlats();
   const serializedFlats = Flat.serialize(flats);
 
-  // const zones = computeZones(flats);
-  const zones = require('../public/fixtures/zones.json') as IZone[];
+  const zones = computeZones(flats);
+  // const zones = require('../public/fixtures/zones.json') as IZone[];
 
   const searchOptions = computeSearchOptions(flats);
 
