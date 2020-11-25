@@ -2,16 +2,19 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { IZone } from '../../common/model/zone.model';
 import { SvgLoader, SvgProxy } from 'react-svgmt';
+import { useRouter } from 'next/router';
 
 type Props = {
   zones: IZone[];
+  className?: string;
 };
 
-const SVGContainer = styled.div<{
+const MapContainer = styled.div<{
   animationEnabled: boolean;
   phaseTwoStartPercentage: number;
   animationDuration: number;
 }>`
+  position: relative;
   & .text {
     pointer-events: none;
   }
@@ -44,14 +47,48 @@ const SVGContainer = styled.div<{
   }
 `;
 
-const HierarchicalMap = ({ zones }: Props): JSX.Element => {
-  const [currentMapId, setCurrentMapId] = useState('0');
+const BackButton = styled.img`
+  position: absolute;
+  cursor: pointer;
+  top: 100px;
+  left: 40px;
+  height: 18px;
+  width: 18px;
+  color: ${(props) => props.theme.colors.secondary};
+`;
+
+const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
+  const [currentMapId, _setCurrentMapId] = useState('0');
+  const [stateHistory, setStateHistory] = useState([]);
   const [animationEnabled, setAnimationEnabled] = useState(false);
   const phaseTwoStartPercentage = 35;
   const animationDuration = 500;
+  const router = useRouter();
+
+  const setCurrentMapId = (nextId) => {
+    if (nextId !== currentMapId) {
+      setStateHistory([...stateHistory, currentMapId]);
+    }
+    return _setCurrentMapId(nextId);
+  }
 
   const pauseAnimation = () => {
     setAnimationEnabled(false);
+  };
+
+  const onBackButtonClicked = () => {
+    if (stateHistory.length > 0) {
+      const nextId = stateHistory[stateHistory.length - 1];
+      setStateHistory(stateHistory.slice(0, -1));
+      _setCurrentMapId(nextId);
+    }
+  }
+
+  const routeToSearch = (q: string) => {
+    router.push({
+      pathname: '/buscar',
+      query: { q },
+    });
   };
 
   const configureSVGZones = (svgElements: SVGGeometryElement[]) => {
@@ -74,16 +111,13 @@ const HierarchicalMap = ({ zones }: Props): JSX.Element => {
       }
 
       svgElement.addEventListener('click', () => {
-        console.log(elementId);
-        console.log(zone);
-
         if (zone.url && zone.hasFlats) {
           setAnimationEnabled(true);
           setTimeout(() => {
             setCurrentMapId(elementId);
           }, (animationDuration * phaseTwoStartPercentage) / 100);
         } else if (zone.hasFlats) {
-          console.log('TODO: redirect to search with the current map id set');
+          routeToSearch(elementId);
         } else {
           console.log('Zone selected has no flats');
         }
@@ -92,17 +126,24 @@ const HierarchicalMap = ({ zones }: Props): JSX.Element => {
   };
 
   return (
-    <SVGContainer
-      animationEnabled={animationEnabled}
-      onAnimationEnd={pauseAnimation}
-      phaseTwoStartPercentage={phaseTwoStartPercentage}
-      animationDuration={animationDuration}
-    >
-      <SvgLoader width="600" height="600" path={zones[currentMapId].url}>
-        <SvgProxy selector=".zone" onElementSelected={configureSVGZones} />
-      </SvgLoader>
-    </SVGContainer>
+    <div className={className}>
+      <MapContainer
+        animationEnabled={animationEnabled}
+        onAnimationEnd={pauseAnimation}
+        phaseTwoStartPercentage={phaseTwoStartPercentage}
+        animationDuration={animationDuration}
+      >
+        {stateHistory.length > 0 ? <BackButton className="anticon" src={'/images/prev_no_circle.svg'} onClick={onBackButtonClicked} /> : null}
+        <SvgLoader width="600" height="600" path={zones[currentMapId].url}>
+          <SvgProxy selector=".zone" onElementSelected={configureSVGZones} />
+        </SvgLoader>
+      </MapContainer>
+    </div>
   );
 };
 
-export default HierarchicalMap;
+export default styled(HierarchicalMap)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
