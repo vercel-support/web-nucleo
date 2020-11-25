@@ -1,4 +1,4 @@
 export interface IZone {
-  url?: string;
+  url: string;
   hasFlats: boolean;
 }

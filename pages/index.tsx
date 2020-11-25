@@ -14,6 +14,7 @@ import useSearchService, {
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
+import { computeZones } from '../backend/geo';
 import {
   BlogShowcase,
   Hero,
@@ -59,7 +60,7 @@ export const Home = ({
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
-  const flats = deserializeMultiple(serializedFlats, IFlat);
+  const flats = deserializeMultiple<IFlat>(serializedFlats);
 
   const onSubscribeButtonClicked = (email: string) => {
     const contact: IContact = { EMAIL: email };
@@ -143,6 +144,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const zones = require('../public/fixtures/zones.json') as IZone[];
 
   const searchOptions = computeSearchOptions(flats);
+
+  const zones = computeZones(flats);
 
   return {
     props: {

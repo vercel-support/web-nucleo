@@ -56,5 +56,4 @@ webpackObj['rewrites'] = async function() {
   ]
 }
 
-console.log(webpackObj);
 module.exports = webpackObj;

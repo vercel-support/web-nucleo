@@ -1,17 +1,21 @@
-import { IStringToAnyDictionary } from '../../common/model/stringToAnyDictionary.model';
-import { IFlat } from '../../common/model/flat.model';
-import { getSalesforceClient } from './index';
-import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
 import { retry } from 'async-retry-decorator';
+import {
+  Client as GoogleMapsClient,
+  LatLngLiteral,
+} from '@googlemaps/google-maps-services-js';
+
+import { IFlat } from '../../common/model/flat.model';
+import { getSalesforceClient } from '.';
+import { computeMapAreaId } from '../geo';
 import { asyncMemoize } from '../helpers';
 
 const googleMapsClient = new GoogleMapsClient();
 
-function isnull(value) {
-  return value === undefined || value === null;
+function isNullOrUndefined(value: any): boolean {
+  return value === null || value === undefined;
 }
 
-function capitalize(str) {
+function capitalize(str: string): string {
   const words = str.split(' ');
   return words
     .map((word) => {
@@ -30,7 +34,7 @@ function capitalize(str) {
     .join(' ');
 }
 
-export default class Flat extends IFlat {
+export default class Flat {
   public static fields = [
     'Id',
     'Name',
@@ -57,49 +61,21 @@ export default class Flat extends IFlat {
   ];
   public static objectName = 'Opportunity';
 
-  public id: string;
-  public pictureUrls: string[];
-
-  public address: string;
-  public price: number;
-  public rooms: number;
-  public bathrooms: number;
-  public sqrMeters: number;
-  public type: string;
-  public zone: string;
-  public city: string;
-  public county: string;
-  public description_ES: string;
-  public description_EN: string;
-  public showInWebsite: boolean;
-  public hasElevator: boolean;
-  public hasGarden: boolean;
-  public hasBalcony: boolean;
-  public hasTerrace: boolean;
-  public hasBasement: boolean;
-  public stage: string;
-  public approximateLongitude: number;
-  public approximateLatitude: number;
-
-  public yearConstruction?: number;
-  public yearReform?: number;
-
   static async preprocessPictures(entityId: string): Promise<string[]> {
     const sfClient = await getSalesforceClient();
 
     return sfClient.fetchAttachedImages(entityId);
   }
 
-  static fromDict(obj: IStringToAnyDictionary): Flat {
-    const flat = Object.create(Flat.prototype);
-    return Object.assign(flat, obj);
+  static fromDict(obj: Record<string, any>): IFlat {
+    return { ...obj } as IFlat;
   }
 
   static serialize(flats: IFlat | IFlat[]): string {
     return JSON.stringify(flats);
   }
 
-  static async fromRecord(record: IStringToAnyDictionary): Promise<Flat> {
+  static async fromRecord(record: Record<string, any>): Promise<IFlat> {
     const id = record['Id'];
     const pictureUrls = await Flat.preprocessPictures(record['Id']);
     const price = record['Precio_Web__c'];
@@ -115,9 +91,9 @@ export default class Flat extends IFlat {
 
     if (
       'Inmueble__r' in record &&
-      !isnull(record['Inmueble__r']) &&
+      !isNullOrUndefined(record['Inmueble__r']) &&
       'Edificio__r' in record['Inmueble__r'] &&
-      !isnull(record['Inmueble__r']['Edificio__r'])
+      !isNullOrUndefined(record['Inmueble__r']['Edificio__r'])
     ) {
       county = record['Inmueble__r']['Edificio__r']['Provincia__c'];
       city = record['Inmueble__r']['Edificio__r']['Localidad__c'];
@@ -140,22 +116,22 @@ export default class Flat extends IFlat {
 
     // TODO do proper validation using typescript class, directly in 'fromDict'
     if (
-      isnull(id) ||
-      isnull(pictureUrls) ||
-      isnull(address) ||
+      isNullOrUndefined(id) ||
+      isNullOrUndefined(pictureUrls) ||
+      isNullOrUndefined(address) ||
       pictureUrls.length <= 0 ||
-      isnull(price) ||
-      isnull(rooms) ||
-      isnull(type) ||
-      isnull(stage) ||
-      isnull(sqrMeters) ||
-      isnull(zone) ||
-      isnull(city) ||
-      isnull(county) ||
-      isnull(bathrooms) ||
-      isnull(description_ES) ||
-      isnull(description_EN) ||
-      isnull(showInWebsite) ||
+      isNullOrUndefined(price) ||
+      isNullOrUndefined(rooms) ||
+      isNullOrUndefined(type) ||
+      isNullOrUndefined(stage) ||
+      isNullOrUndefined(sqrMeters) ||
+      isNullOrUndefined(zone) ||
+      isNullOrUndefined(city) ||
+      isNullOrUndefined(county) ||
+      isNullOrUndefined(bathrooms) ||
+      isNullOrUndefined(description_ES) ||
+      isNullOrUndefined(description_EN) ||
+      isNullOrUndefined(showInWebsite) ||
       showInWebsite == false ||
       stage != 'Activo'
     ) {
@@ -168,11 +144,15 @@ export default class Flat extends IFlat {
       city,
       county
     );
-    if (isnull(coords)) {
+    if (isNullOrUndefined(coords)) {
       return null;
     }
 
-    const { lat, lng } = coords;
+    const { lat: approximateLatitude, lng: approximateLongitude } = coords;
+
+    const mapAreaId =
+      computeMapAreaId(approximateLongitude, approximateLatitude) || undefined;
+
     zone = capitalize(zone);
     city = capitalize(city);
     county = capitalize(county);
@@ -197,21 +177,35 @@ export default class Flat extends IFlat {
       hasBalcony,
       hasTerrace,
       hasBasement,
+      approximateLatitude,
+      approximateLongitude,
       yearConstruction,
       yearReform,
-      approximateLatitude: lat,
-      approximateLongitude: lng,
+      mapAreaId,
     });
   }
 
   @asyncMemoize
-  static async getFlats(): Promise<Flat[]> {
+  static async getFlats(): Promise<IFlat[]> {
     if (
       process.env.NODE_ENV == 'development' &&
-      !('USE_REAL_DATA' in process.env && process.env.USE_REAL_DATA == 'true')
+      !('USE_REAL_DATA' in process.env && process.env.USE_REAL_DATA === 'true')
     ) {
-      const flatsObjs = require('../../public/fixtures/flats.json');
-      return flatsObjs.map((flatJson) => Flat.fromDict(flatJson));
+      const mockFlatsRaw = require('../../public/fixtures/flats.json');
+      const mockFlats: IFlat[] = mockFlatsRaw.map(
+        (flatJson: Record<string, any>) => {
+          const mockFlat = Flat.fromDict(flatJson);
+          const mapAreaId = computeMapAreaId(
+            mockFlat.approximateLongitude,
+            mockFlat.approximateLatitude
+          );
+          if (mapAreaId) {
+            mockFlat.mapAreaId = mapAreaId;
+          }
+          return mockFlat;
+        }
+      );
+      return mockFlats;
     }
     const sfClient = await getSalesforceClient();
 
@@ -240,7 +234,7 @@ export default class Flat extends IFlat {
     zone: string,
     city: string,
     county: string
-  ) {
+  ): Promise<LatLngLiteral> {
     const result = await googleMapsClient.geocode({
       params: {
         key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
