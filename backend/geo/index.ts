@@ -4,6 +4,7 @@ import * as d3 from 'd3-geo';
 import { geoJsonFiles } from './data';
 import { IFlat } from '../../common/model/flat.model';
 import { IZone } from '../../common/model/zone.model';
+import { booleanPointInPolygon, point } from '@turf/turf';
 
 export const computeMapAreaId = (
   longitude: number,
@@ -14,7 +15,7 @@ export const computeMapAreaId = (
       if (
         geoJsonFiles.findIndex((f) => f.name === feature.properties.name) ===
           -1 &&
-        d3.geoContains(feature, [longitude, latitude])
+        booleanPointInPolygon(point([longitude, latitude]), feature.geometry)
       ) {
         return feature.properties.name;
       }
@@ -27,12 +28,13 @@ export const computeZones = (flats: IFlat[]): Record<string, IZone> => {
   const zones: Record<string, IZone> = {};
   for (const geoJsonFile of geoJsonFiles) {
     for (const feature of geoJsonFile.geoJson.features) {
-      const hasFlats = flats.some((flat) =>
-        d3.geoContains(feature, [
-          flat.approximateLongitude,
-          flat.approximateLatitude,
-        ])
+      const hasFlats = flats.some((flat) => {
+        return booleanPointInPolygon(
+          point([flat.approximateLongitude, flat.approximateLatitude]),
+          feature.geometry
+        )}
       );
+      console.log(hasFlats);
       const homeMapImagesPath = `${process.cwd()}/public/images/home_map/`;
       const url = fs.existsSync(
         `${homeMapImagesPath}${feature.properties.name}.svg`

@@ -116,6 +116,7 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
         const path = paths[i];
         if (zone.hasFlats) {
           path.style.fill = '#EF7048';
+          path.style.cursor = 'pointer';
         } else {
           path.style.fill = '#EF9981';
         }
