@@ -10,7 +10,7 @@
         "fill": "#555555",
         "fill-opacity": 0.5,
         "shape": "Polygon",
-        "name": "2_Busot / Aigues / Jijona",
+        "name": "2_Busot_|_Aigues_|_Jijona",
         "category": "default"
       },
       "geometry": {
@@ -159,7 +159,7 @@
         "fill": "#555555",
         "fill-opacity": 0.5,
         "shape": "Polygon",
-        "name": "2_El Campello",
+        "name": "2_El_Campello",
         "category": "default"
       },
       "geometry": {
@@ -224,7 +224,7 @@
         "fill": "#555555",
         "fill-opacity": 0.5,
         "shape": "Polygon",
-        "name": "2_San Vicente del Raspeig",
+        "name": "2_San_Vicente_del_Raspeig",
         "category": "default"
       },
       "geometry": {
@@ -347,7 +347,7 @@
         "fill": "#555555",
         "fill-opacity": 0.5,
         "shape": "Polygon",
-        "name": "2_Barriadas de Alicante",
+        "name": "2_Barriadas_de_Alicante",
         "category": "default"
       },
       "geometry": {
@@ -434,7 +434,7 @@
         "fill": "#555555",
         "fill-opacity": 0.5,
         "shape": "Polygon",
-        "name": "2_San Juan",
+        "name": "2_San_Juan",
         "category": "default"
       },
       "geometry": {

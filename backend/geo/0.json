@@ -5,7 +5,7 @@
       "type": "Feature",
       "properties": {
         "shape": "Polygon",
-        "name": "1_Baix Segura",
+        "name": "1_Baix_Segura",
         "category": "default"
       },
       "geometry": {
@@ -221,7 +221,7 @@
       "type": "Feature",
       "properties": {
         "shape": "Polygon",
-        "name": "1_Baix Binalopó",
+        "name": "1_Baix_Binalopó",
         "category": "default"
       },
       "geometry": {
@@ -312,7 +312,7 @@
       "type": "Feature",
       "properties": {
         "shape": "Polygon",
-        "name": "1_Marina Alta",
+        "name": "1_Marina_Alta",
         "category": "default"
       },
       "geometry": {
@@ -363,7 +363,7 @@
       "type": "Feature",
       "properties": {
         "shape": "Polygon",
-        "name": "1_Marina Baixa",
+        "name": "1_Marina_Baixa",
         "category": "default"
       },
       "geometry": {
@@ -544,7 +544,7 @@
       "type": "Feature",
       "properties": {
         "shape": "Polygon",
-        "name": "1_Alt Vinalopó",
+        "name": "1_Alt_Vinalopó",
         "category": "default"
       },
       "geometry": {
@@ -595,7 +595,7 @@
       "type": "Feature",
       "properties": {
         "shape": "Polygon",
-        "name": "Vinalopó Mitjà ",
+        "name": "1_Vinalopó_Mitjà",
         "category": "default"
       },
       "geometry": {
@@ -643,55 +643,6 @@
         ]
       },
       "id": "bddec65a-caf8-4d2f-8376-4377162b6069"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "shape": "Polygon",
-        "name": "Unnamed Layer",
-        "category": "default"
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [-360.742607, 38.54011],
-            [-360.774536, 38.534202],
-            [-360.854874, 38.498206],
-            [-360.913239, 38.462192],
-            [-360.944138, 38.460041],
-            [-360.97229, 38.470256],
-            [-360.981903, 38.493906],
-            [-360.995636, 38.501967],
-            [-361.013145, 38.4974],
-            [-361.032715, 38.476169],
-            [-361.073227, 38.446329],
-            [-361.090393, 38.431539],
-            [-361.09726, 38.396568],
-            [-361.09314, 38.375039],
-            [-361.08284, 38.357273],
-            [-361.057434, 38.345157],
-            [-361.025162, 38.337617],
-            [-360.990143, 38.321996],
-            [-360.98465, 38.30745],
-            [-360.971603, 38.291014],
-            [-360.967827, 38.275923],
-            [-360.967827, 38.256515],
-            [-360.891953, 38.262985],
-            [-360.810928, 38.29317],
-            [-360.736771, 38.300176],
-            [-360.681152, 38.341656],
-            [-360.685272, 38.35458],
-            [-360.65918, 38.421856],
-            [-360.62621, 38.486391],
-            [-360.651627, 38.478857],
-            [-360.683899, 38.482082],
-            [-360.716171, 38.503579],
-            [-360.742607, 38.54011]
-          ]
-        ]
-      },
-      "id": "edc366db-a319-44a0-9755-a2b6cd73b28d"
     }
   ]
 }
