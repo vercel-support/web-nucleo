@@ -3,6 +3,7 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  Polygon,
 } from 'react-google-maps';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
@@ -14,14 +15,33 @@ type Props = {
   focusedFlatIndex: number;
   onMarkerClick: (flatIndex: number) => void;
   theme: DefaultTheme;
+  highlightedCoordinates?: { lat: number, lng: number }[];
 };
 
 const MyMapComponent = withScriptjs(
-  withGoogleMap(({ flats, focusedFlatIndex, onMarkerClick, theme }: Props) => {
+  withGoogleMap(({ flats, focusedFlatIndex, onMarkerClick, theme, highlightedCoordinates }: Props) => {
     const isMdd = useMediaQuery({ query: theme.breakpoints.mdd });
 
     if (flats.length === 0) {
       return null;
+    }
+
+    const renderRegions = () => {
+      if (!highlightedCoordinates) {
+        return null;
+      }
+      return (
+        <Polygon
+          path={highlightedCoordinates}
+          options={{
+            strokeColor: '#EF7048',
+            strokeOpacity: 1,
+            strokeWeight: 1,
+            fillColor: '#EF9981',
+            fillOpacity: 0.2
+          }}
+        />
+      )
     }
 
     return (
@@ -39,6 +59,7 @@ const MyMapComponent = withScriptjs(
           zoomControl: !isMdd,
         }}
       >
+        {renderRegions()}
         {flats.map((flat, i) => {
           const iconUrl =
             focusedFlatIndex == i
@@ -80,6 +101,7 @@ const SearchMap: React.FC<Props> = ({
   focusedFlatIndex,
   onMarkerClick,
   theme,
+  highlightedCoordinates
 }) => {
   const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
@@ -97,6 +119,7 @@ const SearchMap: React.FC<Props> = ({
       loadingElement={<MapDiv />}
       containerElement={<MapDiv />}
       mapElement={<MapDiv />}
+      highlightedCoordinates={highlightedCoordinates}
     />
   );
 };

@@ -84,10 +84,13 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
     }
   };
 
-  const routeToSearch = (q: string) => {
+  const routeToSearch = (q: string, mapCoords?: { lat: number, lng: number }[]) => {
     router.push({
       pathname: '/buscar',
-      query: { q },
+      query: {
+        q,
+        mapCoords: JSON.stringify(mapCoords)
+      }
     });
   };
 
@@ -122,7 +125,7 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
             setCurrentMapId(elementId);
           }, (animationDuration * phaseTwoStartPercentage) / 100);
         } else if (zone.hasFlats) {
-          routeToSearch(elementId);
+          routeToSearch(elementId, zone.polygonCoordinates);
         } else {
           console.log('Zone selected has no flats');
         }

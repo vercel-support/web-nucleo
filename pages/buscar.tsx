@@ -406,6 +406,7 @@ const BuscarPage = ({
     searchService.computeResults(router.query);
   }, [router.query]);
 
+  const highlightedCoordinates = router.query.mapCoords ? JSON.parse(router.query.mapCoords as string) : undefined;
   return (
     <Layout id={layoutId}>
       <Head>
@@ -471,6 +472,7 @@ const BuscarPage = ({
             flats={currentResults}
             focusedFlatIndex={focusedFlatIndex}
             onMarkerClick={setFocusedFlatIndexFromMap}
+            highlightedCoordinates={highlightedCoordinates}
           />
           {currentResults.length > 0 && (
             <MiniFlatCardsSection>
