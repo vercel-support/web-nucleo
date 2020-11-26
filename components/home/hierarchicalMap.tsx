@@ -96,6 +96,11 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
       const elementId = svgElement.id;
       if (!(elementId in zones)) {
         console.log(`WARNING: ${elementId} missing from zones definition`);
+        const paths = svgElement.querySelectorAll('path');
+        for (let i = 0; i < paths.length; i++) {
+          const path = paths[i];
+          path.style.fill = '#EF9981';
+        }
         continue;
       }
 
