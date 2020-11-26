@@ -1,5 +1,4 @@
 import fs from 'fs';
-import * as d3 from 'd3-geo';
 
 import { geoJsonFiles } from './data';
 import { IFlat } from '../../common/model/flat.model';
@@ -32,8 +31,8 @@ export const computeZones = (flats: IFlat[]): Record<string, IZone> => {
         return booleanPointInPolygon(
           point([flat.approximateLongitude, flat.approximateLatitude]),
           feature.geometry
-        )}
-      );
+        );
+      });
       console.log(hasFlats);
       const homeMapImagesPath = `${process.cwd()}/public/images/home_map/`;
       const url = fs.existsSync(
