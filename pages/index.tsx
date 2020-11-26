@@ -142,7 +142,6 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const serializedFlats = Flat.serialize(flats);
 
   const zones = computeZones(flats);
-  // const zones = require('../public/fixtures/zones.json') as IZone[];
 
   const searchOptions = computeSearchOptions(flats);
 
