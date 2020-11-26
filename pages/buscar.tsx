@@ -406,7 +406,9 @@ const BuscarPage = ({
     searchService.computeResults(router.query);
   }, [router.query]);
 
-  const highlightedCoordinates = router.query.mapCoords ? JSON.parse(router.query.mapCoords as string) : undefined;
+  const highlightedCoordinates = router.query.mapCoords
+    ? JSON.parse(router.query.mapCoords as string)
+    : undefined;
   return (
     <Layout id={layoutId}>
       <Head>

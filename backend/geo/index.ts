@@ -40,12 +40,14 @@ export const computeZones = (flats: IFlat[]): Record<string, IZone> => {
         ? `/images/home_map/${feature.properties.name}.svg`
         : null;
 
-      const polygonCoordinates = feature.geometry.coordinates[0].map((a) => { return { lat: a[1], lng: a[0]}});
+      const polygonCoordinates = feature.geometry.coordinates[0].map((a) => {
+        return { lat: a[1], lng: a[0] };
+      });
 
       zones[feature.properties.name] = {
         url,
         hasFlats,
-        polygonCoordinates 
+        polygonCoordinates,
       };
     }
   }

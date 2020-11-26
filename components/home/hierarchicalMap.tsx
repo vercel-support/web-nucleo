@@ -84,13 +84,16 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
     }
   };
 
-  const routeToSearch = (q: string, mapCoords?: { lat: number, lng: number }[]) => {
+  const routeToSearch = (
+    q: string,
+    mapCoords?: { lat: number; lng: number }[]
+  ) => {
     router.push({
       pathname: '/buscar',
       query: {
         q,
-        mapCoords: JSON.stringify(mapCoords)
-      }
+        mapCoords: JSON.stringify(mapCoords),
+      },
     });
   };
 

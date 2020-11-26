@@ -5,7 +5,7 @@ type Properties = {
 };
 
 type GeoJsonContent = d3.ExtendedFeatureCollection<
-d3.ExtendedFeature<GeoJSON.Polygon, Properties>
+  d3.ExtendedFeature<GeoJSON.Polygon, Properties>
 >;
 
 type GeoJsonFile = {
@@ -16,7 +16,7 @@ type GeoJsonFile = {
 import zeroRaw from './0.json';
 const zero = zeroRaw as GeoJsonContent;
 
-import oneAlacantiRaw from "./1_Alacantí.json";
+import oneAlacantiRaw from './1_Alacantí.json';
 const oneAlacanti = oneAlacantiRaw as GeoJsonContent;
 
 export const geoJsonFiles: GeoJsonFile[] = [
@@ -25,7 +25,7 @@ export const geoJsonFiles: GeoJsonFile[] = [
     geoJson: zero,
   },
   {
-    name: "1_Alacantí",
+    name: '1_Alacantí',
     geoJson: oneAlacanti,
   },
 ];

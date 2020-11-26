@@ -1,5 +1,5 @@
 export interface IZone {
   url: string;
   hasFlats: boolean;
-  polygonCoordinates?: { lat: number, lng: number }[];
+  polygonCoordinates?: { lat: number; lng: number }[];
 }
