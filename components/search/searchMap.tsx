@@ -14,8 +14,8 @@ type Props = {
   flats: IFlat[];
   focusedFlatIndex: number;
   onMarkerClick: (flatIndex: number) => void;
-  theme: DefaultTheme;
   highlightedCoordinates?: { lat: number; lng: number }[];
+  theme: DefaultTheme;
 };
 
 const MyMapComponent = withScriptjs(
@@ -24,8 +24,8 @@ const MyMapComponent = withScriptjs(
       flats,
       focusedFlatIndex,
       onMarkerClick,
-      theme,
       highlightedCoordinates,
+      theme,
     }: Props) => {
       const isMdd = useMediaQuery({ query: theme.breakpoints.mdd });
 
@@ -108,8 +108,8 @@ const SearchMap: React.FC<Props> = ({
   flats,
   focusedFlatIndex,
   onMarkerClick,
-  theme,
   highlightedCoordinates,
+  theme,
 }) => {
   const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
@@ -119,15 +119,15 @@ const SearchMap: React.FC<Props> = ({
 
   return (
     <MyMapComponent
-      focusedFlatIndex={focusedFlatIndex}
       flats={flats}
+      focusedFlatIndex={focusedFlatIndex}
       onMarkerClick={onMarkerClick}
+      highlightedCoordinates={highlightedCoordinates}
       theme={theme}
       googleMapURL={mapUrl}
       loadingElement={<MapDiv />}
       containerElement={<MapDiv />}
       mapElement={<MapDiv />}
-      highlightedCoordinates={highlightedCoordinates}
     />
   );
 };

@@ -3,5 +3,5 @@ export const getFlatTypeLabel = (flatType: string): string => {
 };
 
 export const canonizeFlatType = (flatType: string): string => {
-  return flatType.replace(' ', '_').toUpperCase();
+  return flatType.replace(/ /g, '_').toUpperCase();
 };

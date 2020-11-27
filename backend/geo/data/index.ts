@@ -1,12 +1,10 @@
-import * as d3 from 'd3-geo';
+import { FeatureCollection, Polygon } from '@turf/helpers';
 
 type Properties = {
   name: string;
 };
 
-type GeoJsonContent = d3.ExtendedFeatureCollection<
-  d3.ExtendedFeature<GeoJSON.Polygon, Properties>
->;
+type GeoJsonContent = FeatureCollection<Polygon, Properties>;
 
 type GeoJsonFile = {
   name: string;

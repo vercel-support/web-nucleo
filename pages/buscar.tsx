@@ -15,6 +15,10 @@ import useSearchService, {
 } from '../common/hooks/searchService';
 import Flat from '../backend/salesforce/flat';
 import {
+  canonizeSearchQuery,
+  getTitleFromQuery,
+} from '../common/helpers/searchQuery.utils';
+import {
   Title,
   FiltersModal,
   SearchMap,
@@ -402,25 +406,24 @@ const BuscarPage = ({
     }
 
     setQ(auxQ);
-    setAutoCompleteValue(auxQ);
+    setAutoCompleteValue(canonizeSearchQuery(auxQ));
     searchService.computeResults(router.query);
   }, [router.query]);
 
   const highlightedCoordinates = router.query.mapCoords
     ? JSON.parse(router.query.mapCoords as string)
     : undefined;
+
   return (
     <Layout id={layoutId}>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>
-          {`${
-            searchService.isOpenSearch()
-              ? i18n.t('search.title.open', { query: q })
-              : i18n.t('search.title.closed', { query: q })
-          } | Inmobiliaria Núcleo`}
-        </title>
+        <title>{`${getTitleFromQuery(
+          q,
+          searchService.getSearchType(),
+          i18n
+        )} | Inmobiliaria Núcleo`}</title>
         <meta name="description" content={i18n.t('search.metaDescription')} />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
@@ -499,7 +502,7 @@ const BuscarPage = ({
         <ScrollableSection id={scrollableSectionId}>
           {currentResults.length > 0 && (
             <Title
-              openSearch={searchService.isOpenSearch()}
+              searchType={searchService.getSearchType()}
               query={q}
               resultsCount={searchService.getResultsCount()}
               orderBy={searchService.getOrderBy()}

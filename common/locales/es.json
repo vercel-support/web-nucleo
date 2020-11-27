@@ -163,8 +163,8 @@
     "metaTitle": "Búsqueda de viviendas en Alicante | Inmobiliaria Núcleo",
     "metaDescription": "Búsqueda de viviendas en Alicante al mejor precio a través de Inmobiliaria Núcleo",
     "title": {
-      "open": "Resultados de la búsqueda: \"{{query}}\"",
-      "closed": "Viviendas en {{query}}"
+      "closed": "Viviendas en {{query}}",
+      "open": "Resultados de la búsqueda: \"{{query}}\""
     },
     "subtitle": {
       "singular": "{{resultsCount}} resultado",

@@ -163,8 +163,8 @@
     "metaTitle": "Search for properties in Alicante | Inmobiliaria Núcleo",
     "metaDescription": "Search for properties in Alicante through Inmobiliaria Núcleo",
     "title": {
-      "open": "Search results of: \"{{query}}\"",
-      "closed": "Flats in {{query}}"
+      "closed": "Flats in {{query}}",
+      "open": "Search results of: \"{{query}}\""
     },
     "subtitle": {
       "singular": "{{resultsCount}} result",

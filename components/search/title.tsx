@@ -4,9 +4,10 @@ import { Row, Col, Select } from 'antd';
 
 import { FlatOrderBy } from '../../common/model/enums/flatOrderBy.enum';
 import useI18n from '../../common/hooks/useI18n';
+import { getTitleFromQuery } from '../../common/helpers/searchQuery.utils';
 
 type Props = {
-  openSearch: boolean;
+  searchType: number;
   query: string;
   resultsCount: number;
   orderBy: string;
@@ -54,7 +55,7 @@ const StyledRow = styled(Row)`
 `;
 
 const Title: React.FC<Props> = ({
-  openSearch,
+  searchType,
   query,
   resultsCount,
   orderBy,
@@ -65,11 +66,7 @@ const Title: React.FC<Props> = ({
 
   return (
     <div className={className}>
-      <MainText>
-        {openSearch
-          ? i18n.t('search.title.open', { query })
-          : i18n.t('search.title.closed', { query })}
-      </MainText>
+      <MainText>{getTitleFromQuery(query, searchType, i18n)}</MainText>
       <StyledRow align="middle" justify="space-between">
         <Col style={{ maxWidth: '66%' }}>
           <span>
