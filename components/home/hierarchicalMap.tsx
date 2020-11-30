@@ -76,10 +76,16 @@ const MapContainer = styled.div<{
   }
 `;
 
+const BreadcrumbComponent = styled(Breadcrumb)`
+  position: absolute;
+  top: 30px;
+  left: 40px;
+`;
+
 const BackButton = styled.img`
   position: absolute;
   cursor: pointer;
-  top: 100px;
+  top: calc(50% - 9px);
   left: 40px;
   height: 18px;
   width: 18px;
@@ -103,8 +109,8 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
   } else {
     breadcrumbStates = stateHistory;
   }
-  breadcrumbStates = breadcrumbStates.slice(1);
-  const breadcrumbStatesFormatted = breadcrumbStates.map(canonizeSearchQuery);
+  breadcrumbStates = [...breadcrumbStates.slice(1), ...['Hello', 'Mama']];
+  breadcrumbStates.reverse();
 
   useEffect(() => {
     setIsMounted(true);
@@ -201,14 +207,14 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
               onClick={onBackButtonClicked}
             />
           ) : null}
-          {breadcrumbStatesFormatted.length > 0 ? (
-            <Breadcrumb separator=">">
-              {breadcrumbStatesFormatted.map((state) => {
+          {(breadcrumbStates.length > 0) && isMdu ? (
+            <BreadcrumbComponent separator=">">
+              {breadcrumbStates.map((state) => {
                 return (
-                  <Breadcrumb.Item>{state}</Breadcrumb.Item>
+                  <Breadcrumb.Item>{canonizeSearchQuery(state)}</Breadcrumb.Item>
                 );
               })}
-            </Breadcrumb>
+            </BreadcrumbComponent>
           ) : null}
           <SvgLoader width={isMdu ? '600' : '100%'} path={zones[currentMapId].url}>
             <SvgProxy selector=".zone" onElementSelected={configureSVGZones} />
