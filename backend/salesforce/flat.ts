@@ -151,7 +151,8 @@ export default class Flat {
     const { lat: approximateLatitude, lng: approximateLongitude } = coords;
 
     const mapAreaId =
-      computeMapAreaId(approximateLongitude, approximateLatitude) || undefined;
+      (await computeMapAreaId(approximateLongitude, approximateLatitude)) ||
+      undefined;
 
     zone = capitalize(zone);
     city = capitalize(city);
@@ -192,10 +193,10 @@ export default class Flat {
       !('USE_REAL_DATA' in process.env && process.env.USE_REAL_DATA === 'true')
     ) {
       const mockFlatsRaw = require('../../public/fixtures/flats.json');
-      const mockFlats: IFlat[] = mockFlatsRaw.map(
-        (flatJson: Record<string, any>) => {
+      const mockFlats: IFlat[] = await Promise.all(
+        mockFlatsRaw.map(async (flatJson: Record<string, any>) => {
           const mockFlat = Flat.fromDict(flatJson);
-          const mapAreaId = computeMapAreaId(
+          const mapAreaId = await computeMapAreaId(
             mockFlat.approximateLongitude,
             mockFlat.approximateLatitude
           );
@@ -203,7 +204,7 @@ export default class Flat {
             mockFlat.mapAreaId = mapAreaId;
           }
           return mockFlat;
-        }
+        })
       );
       return mockFlats;
     }

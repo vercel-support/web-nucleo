@@ -589,7 +589,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
   const searchOptions = computeSearchOptions(flats);
 
-  const zones = computeZones(flats);
+  const zones = await computeZones(flats);
 
   return {
     props: {

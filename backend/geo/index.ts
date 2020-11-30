@@ -1,14 +1,47 @@
 import fs from 'fs';
+import { join } from 'path';
 import { booleanPointInPolygon, point } from '@turf/turf';
 
-import { geoJsonFiles } from './data';
 import { IFlat } from '../../common/model/flat.model';
 import { IZone } from '../../common/model/zone.model';
 
-export const computeMapAreaId = (
+import { FeatureCollection, Polygon } from '@turf/helpers';
+
+type Properties = {
+  name: string;
+};
+type GeoJsonContent = FeatureCollection<Polygon, Properties>;
+type GeoJsonFile = {
+  name: string;
+  geoJson: GeoJsonContent;
+};
+
+const loadGeoJsonFiles = async (): Promise<GeoJsonFile[]> => {
+  const basePath = `${process.cwd()}/public`;
+  const innerPath = '/geojson/';
+  const folder = join(basePath, innerPath);
+  const filenames = fs.readdirSync(folder);
+
+  const res = [];
+  for (const filename of filenames) {
+    const json = fs.readFileSync(join(folder, filename), 'utf8');
+    const obj = JSON.parse(json);
+    const geoJsonContent = { ...obj } as GeoJsonContent;
+    const geoJsonFile = {
+      name: filename.replace('.json', ''),
+      geoJson: geoJsonContent,
+    };
+    res.push(geoJsonFile);
+  }
+
+  return res;
+};
+
+export const computeMapAreaId = async (
   longitude: number,
   latitude: number
-): string => {
+): Promise<string> => {
+  const geoJsonFiles = await loadGeoJsonFiles();
   for (const geoJsonFile of geoJsonFiles) {
     for (const feature of geoJsonFile.geoJson.features) {
       if (
@@ -23,8 +56,11 @@ export const computeMapAreaId = (
   return null;
 };
 
-export const computeZones = (flats: IFlat[]): Record<string, IZone> => {
+export const computeZones = async (
+  flats: IFlat[]
+): Promise<Record<string, IZone>> => {
   const zones: Record<string, IZone> = {};
+  const geoJsonFiles = await loadGeoJsonFiles();
   for (const geoJsonFile of geoJsonFiles) {
     for (const feature of geoJsonFile.geoJson.features) {
       const homeMapImagesPath = `${process.cwd()}/public/images/home_map/`;

@@ -109,7 +109,7 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
   } else {
     breadcrumbStates = stateHistory;
   }
-  breadcrumbStates = [...breadcrumbStates.slice(1), ...['Hello', 'Mama']];
+  breadcrumbStates = breadcrumbStates.slice(1);
   breadcrumbStates.reverse();
 
   useEffect(() => {
@@ -194,33 +194,45 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
       <Title>{i18n.t('home.map.title')}</Title>
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {isMounted ? <MapContainer
-          animationEnabled={animationEnabled}
-          onAnimationEnd={pauseAnimation}
-          phaseTwoStartPercentage={phaseTwoStartPercentage}
-          animationDuration={animationDuration}
-        >
-          {stateHistory.length > 0 ? (
-            <BackButton
-              className="anticon"
-              src={'/images/prev_no_circle.svg'}
-              onClick={onBackButtonClicked}
-            />
-          ) : null}
-          {(breadcrumbStates.length > 0) && isMdu ? (
-            <BreadcrumbComponent separator=">">
-              {breadcrumbStates.map((state) => {
-                return (
-                  <Breadcrumb.Item>{canonizeSearchQuery(state)}</Breadcrumb.Item>
-                );
-              })}
-            </BreadcrumbComponent>
-          ) : null}
-          <SvgLoader width={isMdu ? '600' : '100%'} path={zones[currentMapId].url}>
-            <SvgProxy selector=".zone" onElementSelected={configureSVGZones} />
-          </SvgLoader>
-        </MapContainer> : <Placeholder />}
-        </div>
+        {isMounted ? (
+          <MapContainer
+            animationEnabled={animationEnabled}
+            onAnimationEnd={pauseAnimation}
+            phaseTwoStartPercentage={phaseTwoStartPercentage}
+            animationDuration={animationDuration}
+          >
+            {stateHistory.length > 0 ? (
+              <BackButton
+                className="anticon"
+                src={'/images/prev_no_circle.svg'}
+                onClick={onBackButtonClicked}
+              />
+            ) : null}
+            {breadcrumbStates.length > 0 && isMdu ? (
+              <BreadcrumbComponent separator=">">
+                {breadcrumbStates.map((state) => {
+                  return (
+                    <Breadcrumb.Item key={state}>
+                      {canonizeSearchQuery(state)}
+                    </Breadcrumb.Item>
+                  );
+                })}
+              </BreadcrumbComponent>
+            ) : null}
+            <SvgLoader
+              width={isMdu ? '600' : '100%'}
+              path={zones[currentMapId].url}
+            >
+              <SvgProxy
+                selector=".zone"
+                onElementSelected={configureSVGZones}
+              />
+            </SvgLoader>
+          </MapContainer>
+        ) : (
+          <Placeholder />
+        )}
+      </div>
     </div>
   );
 };
