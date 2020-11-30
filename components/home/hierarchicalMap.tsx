@@ -5,6 +5,8 @@ import { SvgLoader, SvgProxy } from 'react-svgmt';
 import { useRouter } from 'next/router';
 import useI18n from '../../common/hooks/useI18n';
 import { useMediaQuery } from 'react-responsive';
+import { canonizeSearchQuery } from '../../common/helpers/searchQuery.utils';
+import { Breadcrumb } from 'antd';
 
 type Props = {
   zones: Record<string, IZone>;
@@ -38,6 +40,9 @@ const MapContainer = styled.div<{
 }>`
   position: relative;
   display: inline-block;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    width: 100%;
+  }
 
   & .text {
     pointer-events: none;
@@ -91,6 +96,15 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
   const i18n = useI18n();
 
   const [isMounted, setIsMounted] = useState(false);
+
+  let breadcrumbStates;
+  if (!(currentMapId in stateHistory)) {
+    breadcrumbStates = [...stateHistory, currentMapId];
+  } else {
+    breadcrumbStates = stateHistory;
+  }
+  breadcrumbStates = breadcrumbStates.slice(1);
+  const breadcrumbStatesFormatted = breadcrumbStates.map(canonizeSearchQuery);
 
   useEffect(() => {
     setIsMounted(true);
@@ -186,6 +200,15 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
               src={'/images/prev_no_circle.svg'}
               onClick={onBackButtonClicked}
             />
+          ) : null}
+          {breadcrumbStatesFormatted.length > 0 ? (
+            <Breadcrumb separator=">">
+              {breadcrumbStatesFormatted.map((state) => {
+                return (
+                  <Breadcrumb.Item>{state}</Breadcrumb.Item>
+                );
+              })}
+            </Breadcrumb>
           ) : null}
           <SvgLoader width={isMdu ? '600' : '100%'} path={zones[currentMapId].url}>
             <SvgProxy selector=".zone" onElementSelected={configureSVGZones} />
