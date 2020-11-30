@@ -141,9 +141,9 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const flats = await Flat.getFlats();
   const serializedFlats = Flat.serialize(flats);
 
-  const zones = computeZones(flats);
-
   const searchOptions = computeSearchOptions(flats);
+
+  const zones = computeZones(flats);
 
   return {
     props: {

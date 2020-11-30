@@ -8,13 +8,16 @@ import { Row, Col, Button } from 'antd';
 import { EnvironmentFilled } from '@ant-design/icons';
 
 import { IFlat } from '../common/model/flat.model';
+import { IZone } from '../common/model/zone.model';
 import { IFilter } from '../common/model/filter.model';
 import useI18n from '../common/hooks/useI18n';
 import useSearchService, {
   computeSearchOptions,
 } from '../common/hooks/searchService';
 import Flat from '../backend/salesforce/flat';
+import { computeZones } from '../backend/geo';
 import {
+  isMapAreaQuery,
   canonizeSearchQuery,
   getTitleFromQuery,
 } from '../common/helpers/searchQuery.utils';
@@ -34,6 +37,7 @@ import {
 interface StaticProps {
   serializedFlats: string;
   serializedSearchOptions: string;
+  zones: Record<string, IZone>;
 }
 
 type Props = StaticProps & {
@@ -229,6 +233,7 @@ const LoadMoreButton = styled(Button)`
 const BuscarPage = ({
   serializedFlats,
   serializedSearchOptions,
+  zones,
   theme,
 }: Props): JSX.Element => {
   const router = useRouter();
@@ -243,6 +248,9 @@ const BuscarPage = ({
   const [focusedFlatIndex, setFocusedFlatIndex] = useState(0);
   const [q, setQ] = useState('');
   const [autoCompleteValue, setAutoCompleteValue] = useState(q);
+  const [highlightedCoordinates, setHighlightedCoordinates] = useState<
+    { lat: number; lng: number }[]
+  >([]);
   const [filtersModalVisible, setFiltersModalVisible] = useState(false);
 
   const setFocusedFlatIndexFromMap = (index: number) => {
@@ -408,11 +416,12 @@ const BuscarPage = ({
     setQ(auxQ);
     setAutoCompleteValue(canonizeSearchQuery(auxQ));
     searchService.computeResults(router.query);
-  }, [router.query]);
 
-  const highlightedCoordinates = router.query.mapCoords
-    ? JSON.parse(router.query.mapCoords as string)
-    : undefined;
+    const selectedZone = isMapAreaQuery(auxQ) ? zones[auxQ] : undefined;
+    setHighlightedCoordinates(
+      (selectedZone && selectedZone.polygonCoordinates) || []
+    );
+  }, [router.query]);
 
   return (
     <Layout id={layoutId}>
@@ -580,10 +589,13 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
   const searchOptions = computeSearchOptions(flats);
 
+  const zones = computeZones(flats);
+
   return {
     props: {
       serializedFlats,
       serializedSearchOptions: JSON.stringify(searchOptions),
+      zones,
     },
   };
 };

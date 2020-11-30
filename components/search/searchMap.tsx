@@ -13,8 +13,8 @@ import { IFlat } from '../../common/model/flat.model';
 type Props = {
   flats: IFlat[];
   focusedFlatIndex: number;
+  highlightedCoordinates: { lat: number; lng: number }[];
   onMarkerClick: (flatIndex: number) => void;
-  highlightedCoordinates?: { lat: number; lng: number }[];
   theme: DefaultTheme;
 };
 
@@ -23,8 +23,8 @@ const MyMapComponent = withScriptjs(
     ({
       flats,
       focusedFlatIndex,
-      onMarkerClick,
       highlightedCoordinates,
+      onMarkerClick,
       theme,
     }: Props) => {
       const isMdd = useMediaQuery({ query: theme.breakpoints.mdd });
@@ -34,7 +34,7 @@ const MyMapComponent = withScriptjs(
       }
 
       const renderRegions = () => {
-        if (!highlightedCoordinates) {
+        if (!highlightedCoordinates.length) {
           return null;
         }
         return (
