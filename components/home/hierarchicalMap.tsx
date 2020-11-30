@@ -1,13 +1,35 @@
-import styled from 'styled-components';
-import { useState } from 'react';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
+import { useState, useEffect } from 'react';
 import { IZone } from '../../common/model/zone.model';
 import { SvgLoader, SvgProxy } from 'react-svgmt';
 import { useRouter } from 'next/router';
+import useI18n from '../../common/hooks/useI18n';
+import { useMediaQuery } from 'react-responsive';
 
 type Props = {
   zones: Record<string, IZone>;
   className?: string;
+  theme: DefaultTheme;
 };
+
+const Title = styled.h2`
+  ${(props) => props.theme.font.h2}
+  color: ${(props) => props.theme.colors.secondary};
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+`;
+
+const Divider = styled.div`
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid #e0e0e0;
+`;
+
+const Placeholder = styled.div`
+  height: 600px;
+`;
 
 const MapContainer = styled.div<{
   animationEnabled: boolean;
@@ -15,6 +37,8 @@ const MapContainer = styled.div<{
   animationDuration: number;
 }>`
   position: relative;
+  display: inline-block;
+
   & .text {
     pointer-events: none;
   }
@@ -57,13 +81,22 @@ const BackButton = styled.img`
   color: ${(props) => props.theme.colors.secondary};
 `;
 
-const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
+const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
   const [currentMapId, _setCurrentMapId] = useState('0');
   const [stateHistory, setStateHistory] = useState([]);
   const [animationEnabled, setAnimationEnabled] = useState(false);
   const phaseTwoStartPercentage = 35;
   const animationDuration = 500;
   const router = useRouter();
+  const i18n = useI18n();
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const isMdu = !useMediaQuery({ query: theme.breakpoints.smd });
 
   const setCurrentMapId = (nextId) => {
     if (nextId !== currentMapId) {
@@ -138,29 +171,31 @@ const HierarchicalMap = ({ zones, className }: Props): JSX.Element => {
 
   return (
     <div className={className}>
-      <MapContainer
-        animationEnabled={animationEnabled}
-        onAnimationEnd={pauseAnimation}
-        phaseTwoStartPercentage={phaseTwoStartPercentage}
-        animationDuration={animationDuration}
-      >
-        {stateHistory.length > 0 ? (
-          <BackButton
-            className="anticon"
-            src={'/images/prev_no_circle.svg'}
-            onClick={onBackButtonClicked}
-          />
-        ) : null}
-        <SvgLoader width="600" height="600" path={zones[currentMapId].url}>
-          <SvgProxy selector=".zone" onElementSelected={configureSVGZones} />
-        </SvgLoader>
-      </MapContainer>
+      <Title>{i18n.t('home.map.title')}</Title>
+      <Divider />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {isMounted ? <MapContainer
+          animationEnabled={animationEnabled}
+          onAnimationEnd={pauseAnimation}
+          phaseTwoStartPercentage={phaseTwoStartPercentage}
+          animationDuration={animationDuration}
+        >
+          {stateHistory.length > 0 ? (
+            <BackButton
+              className="anticon"
+              src={'/images/prev_no_circle.svg'}
+              onClick={onBackButtonClicked}
+            />
+          ) : null}
+          <SvgLoader width={isMdu ? '600' : '100%'} path={zones[currentMapId].url}>
+            <SvgProxy selector=".zone" onElementSelected={configureSVGZones} />
+          </SvgLoader>
+        </MapContainer> : <Placeholder />}
+        </div>
     </div>
   );
 };
 
-export default styled(HierarchicalMap)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+export default withTheme(styled(HierarchicalMap)`
+  padding-top: 48px;
+`);

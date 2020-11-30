@@ -167,5 +167,5 @@ const FlatsDisplay: React.FC<Props> = ({
 };
 
 export default withTheme(styled(FlatsDisplay)`
-  padding-top: 96px;
+  padding-top: 48px;
 `);
