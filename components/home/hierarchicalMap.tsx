@@ -110,7 +110,6 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
     breadcrumbStates = stateHistory;
   }
   breadcrumbStates = breadcrumbStates.slice(1);
-  breadcrumbStates.reverse();
 
   useEffect(() => {
     setIsMounted(true);
