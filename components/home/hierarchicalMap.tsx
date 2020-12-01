@@ -160,7 +160,7 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
       }
 
       const zone: IZone = zones[elementId];
-      
+
       const paths = svgElement.querySelectorAll('path, polygon');
       for (let i = 0; i < paths.length; i++) {
         const path = paths[i] as SVGPolygonElement | SVGPathElement;
