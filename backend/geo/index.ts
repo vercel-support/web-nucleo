@@ -56,41 +56,64 @@ export const computeMapAreaId = async (
   return null;
 };
 
+const computeSubzones = (
+  flats: IFlat[],
+  geoJsonFiles: GeoJsonFile[],
+  geoJsonFile: GeoJsonFile
+): Record<string, IZone> => {
+  let zonesAux = {};
+
+  for (const feature of geoJsonFile.geoJson.features) {
+    const homeMapImagesPath = `${process.cwd()}/public/images/home_map/`;
+    const url = fs.existsSync(
+      `${homeMapImagesPath}${feature.properties.name}.svg`
+    )
+      ? `/images/home_map/${feature.properties.name}.svg`
+      : null;
+
+    let hasFlats = false;
+    const subGeoJsonFile = geoJsonFiles.find(
+      (f) => f.name === feature.properties.name
+    );
+    if (subGeoJsonFile) {
+      const subzones = computeSubzones(flats, geoJsonFiles, subGeoJsonFile);
+      if (Object.keys(subzones).length > 0) {
+        zonesAux = { ...zonesAux, ...subzones };
+        hasFlats = Object.entries(subzones).some(([k]) => subzones[k].hasFlats);
+      }
+    } else {
+      hasFlats = flats.some(
+        (flat) => flat.mapAreaId === feature.properties.name
+      );
+    }
+
+    const polygonCoordinates = feature.geometry.coordinates[0].map((c) => {
+      return { lat: c[1], lng: c[0] };
+    });
+
+    zonesAux[feature.properties.name] = {
+      url,
+      hasFlats,
+      polygonCoordinates,
+    };
+  }
+
+  return zonesAux;
+};
+
 export const computeZones = async (
   flats: IFlat[]
 ): Promise<Record<string, IZone>> => {
-  const zones: Record<string, IZone> = {};
   const geoJsonFiles = await loadGeoJsonFiles();
-  for (const geoJsonFile of geoJsonFiles) {
-    for (const feature of geoJsonFile.geoJson.features) {
-      const homeMapImagesPath = `${process.cwd()}/public/images/home_map/`;
-      const url = fs.existsSync(
-        `${homeMapImagesPath}${feature.properties.name}.svg`
-      )
-        ? `/images/home_map/${feature.properties.name}.svg`
-        : null;
 
-      const hasFlats = flats.some((flat) => {
-        return booleanPointInPolygon(
-          point([flat.approximateLongitude, flat.approximateLatitude]),
-          feature.geometry
-        );
-      });
-
-      const polygonCoordinates = feature.geometry.coordinates[0].map((c) => {
-        return { lat: c[1], lng: c[0] };
-      });
-
-      zones[feature.properties.name] = {
-        url,
-        hasFlats,
-        polygonCoordinates,
-      };
-    }
-  }
-  zones['0'] = {
-    url: '/images/home_map/0.svg',
-    hasFlats: true,
+  const zones: Record<string, IZone> = {
+    '0': {
+      url: '/images/home_map/0.svg',
+      hasFlats: true,
+    },
   };
-  return zones;
+  return {
+    ...zones,
+    ...computeSubzones(flats, geoJsonFiles, geoJsonFiles[0]),
+  };
 };
