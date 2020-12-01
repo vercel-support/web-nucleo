@@ -74,6 +74,9 @@ const MapContainer = styled.div<{
   & .zone path:hover {
     fill: ${(props) => props.theme.colors.secondary} !important;
   }
+  & .zone polygon:hover {
+    fill: ${(props) => props.theme.colors.secondary} !important;
+  }
 `;
 
 const BreadcrumbComponent = styled(Breadcrumb)`
@@ -157,9 +160,10 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
       }
 
       const zone: IZone = zones[elementId];
-      const paths = svgElement.querySelectorAll('path');
+      
+      const paths = svgElement.querySelectorAll('path, polygon');
       for (let i = 0; i < paths.length; i++) {
-        const path = paths[i];
+        const path = paths[i] as SVGPolygonElement | SVGPathElement;
         if (zone.hasFlats) {
           path.style.fill = '#EF7048';
           path.style.cursor = 'pointer';
