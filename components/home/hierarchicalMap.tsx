@@ -164,24 +164,18 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
       const paths = svgElement.querySelectorAll('path, polygon');
       for (let i = 0; i < paths.length; i++) {
         const path = paths[i] as SVGPolygonElement | SVGPathElement;
-        if (zone.hasFlats) {
-          path.style.fill = '#EF7048';
-          path.style.cursor = 'pointer';
-        } else {
-          path.style.fill = '#EF9981';
-        }
+        path.style.fill = '#EF7048';
+        path.style.cursor = 'pointer';
       }
 
       svgElement.addEventListener('click', () => {
-        if (zone.url && zone.hasFlats) {
+        if (zone.url) {
           setAnimationEnabled(true);
           setTimeout(() => {
             setCurrentMapId(elementId);
           }, (animationDuration * phaseTwoStartPercentage) / 100);
-        } else if (zone.hasFlats) {
-          routeToSearch(elementId);
         } else {
-          console.log('Zone selected has no flats');
+          routeToSearch(elementId);
         }
       });
     }
