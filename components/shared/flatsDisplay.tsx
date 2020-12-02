@@ -23,11 +23,12 @@ const Title = styled.h2`
 `;
 
 const Divider = styled.div`
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-top: 24px;
   margin-bottom: 24px;
   border-top: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
 `;
 
 const Placeholder = styled.div`

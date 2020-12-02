@@ -274,17 +274,18 @@ const FlatCard = ({
                             q: `${flat.zone} (${flat.city})`,
                           },
                         }}
-                        passHref
                       >
-                        <StyledTooltip
-                          title={i18n.t('flatCard.messages.searchInZone', {
-                            zoneFormatted,
-                          })}
-                        >
-                          <StyledTag color={theme.colors.secondary}>
-                            {zoneFormatted}
-                          </StyledTag>
-                        </StyledTooltip>
+                        <a>
+                          <StyledTooltip
+                            title={i18n.t('flatCard.messages.searchInZone', {
+                              zoneFormatted,
+                            })}
+                          >
+                            <StyledTag color={theme.colors.secondary}>
+                              {zoneFormatted}
+                            </StyledTag>
+                          </StyledTooltip>
+                        </a>
                       </Link>
                     </Col>
                     <Col span={10}>

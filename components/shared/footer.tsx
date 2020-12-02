@@ -11,7 +11,7 @@ type Props = {
 };
 
 const DropdownContainer = styled.div`
-  @media ${(props) => props.theme.breakpoints.xlu} {
+  @media ${(props) => props.theme.breakpoints.lgu} {
     display: none;
   }
 `;
@@ -28,7 +28,7 @@ const MenuButtons = styled.div`
 
   color: ${(props) => props.theme.colors.secondary};
 
-  @media ${(props) => props.theme.breakpoints.lgd} {
+  @media ${(props) => props.theme.breakpoints.mdd} {
     display: none;
   }
 `;
@@ -60,17 +60,12 @@ const Footer = ({ className }: Props) => {
   const dropdownMenu = (
     <Menu>
       <Menu.Item key="0">
-        <Link href="/blog" passHref>
-          <StyledLink>{i18n.t('footer.blog')}</StyledLink>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="1">
         <StyledLink>{i18n.t('footer.aviso-legal')}</StyledLink>
       </Menu.Item>
-      <Menu.Item key="2">
+      <Menu.Item key="1">
         <StyledLink>{i18n.t('footer.politica-datos')}</StyledLink>
       </Menu.Item>
-      <Menu.Item key="3">
+      <Menu.Item key="2">
         <Link href="/legal/cookies" passHref>
           <StyledLink>{i18n.t('footer.politica-cookies')}</StyledLink>
         </Link>
@@ -92,9 +87,6 @@ const Footer = ({ className }: Props) => {
       </DropdownContainer>
       <MenuButtons>
         <NucleoLabel>{i18n.t('footer.nucleo-sl')}</NucleoLabel>
-        <Link href="/blog" passHref>
-          <StyledButton type="text">{i18n.t('footer.blog')}</StyledButton>
-        </Link>
         <StyledButton type="text">{i18n.t('footer.aviso-legal')}</StyledButton>
         <StyledButton type="text">
           {i18n.t('footer.politica-datos')}

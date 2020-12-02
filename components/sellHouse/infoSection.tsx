@@ -71,6 +71,7 @@ const Divider = styled.div`
   margin-top: 24px;
   margin-bottom: 24px;
   border-top: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
 `;
 
 const Subtitle = styled.div`

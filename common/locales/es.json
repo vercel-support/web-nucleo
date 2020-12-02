@@ -5,15 +5,17 @@
     "sellHouse": "Vender casa",
     "aboutUs": "Quiénes somos",
     "contact": "Contacto",
-    "language": "Español",
+    "blog": "Noticias",
     "hamburgerLanguage": "Idioma"
   },
   "footer": {
     "nucleo-sl": "© 2020 Núcleo S.L.",
-    "blog": "Noticias",
     "aviso-legal": "Aviso legal",
     "politica-datos": "Protección de datos",
     "politica-cookies": "Política de cookies"
+  },
+  "languageSelector": {
+    "language": "Español"
   },
   "home": {
     "title": "Inmobiliaria en Alicante | Inmobiliaria Núcleo",
@@ -103,7 +105,7 @@
         },
         "fast": {
           "title": "Rapidez",
-          "description": "Contamos con una potente base de datos compartida entre nuestras oficinas y más de 30 asesores trabajando para vender\u00A0su\u00A0vivienda"
+          "description": "Contamos con una potente base de datos compartida entre <a href=\"/contacto?office=SanBlas\">nuestras oficinas</a> y más de 30 asesores trabajando para vender\u00A0su\u00A0vivienda"
         },
         "experience": {
           "title": "Experiencia",

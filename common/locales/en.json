@@ -5,15 +5,17 @@
     "sellHouse": "Sell your house",
     "aboutUs": "About us",
     "contact": "Contact",
-    "language": "English",
+    "blog": "News",
     "hamburgerLanguage": "Language"
   },
   "footer": {
     "nucleo-sl": "© 2020 Núcleo S.L.",
-    "blog": "News",
     "aviso-legal": "Legal warning",
     "politica-datos": "Data protection",
     "politica-cookies": "Cookies policy"
+  },
+  "languageSelector": {
+    "language": "English"
   },
   "home": {
     "title": "Properties in Alicante | Inmobiliaria Núcleo",
@@ -103,7 +105,7 @@
         },
         "fast": {
           "title": "Speed",
-          "description": "We have a powerful database shared between our offices and more than 30 advisers working to sell\u00A0your\u00A0home."
+          "description": "We have a powerful database shared between <a href=\"/contacto?office=SanBlas\">our offices</a> and more than 30 advisers working to sell\u00A0your\u00A0home."
         },
         "experience": {
           "title": "Experience",

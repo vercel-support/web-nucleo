@@ -11,13 +11,14 @@ const Title = styled.h2`
 `;
 
 const Divider = styled.div`
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
   width: 50%;
   @media ${(props) => props.theme.breakpoints.smd} {
     width: 100%;
   }
-  margin-top: 24px;
-  margin-bottom: 24px;
-  border-top: 1px solid #e0e0e0;
 `;
 
 const Property = styled.div`
@@ -86,9 +87,13 @@ const WhySellWithUs = (): JSX.Element => {
             <PropertyTitle>
               {i18n.t('sellHouse.why.properties.professional.title')}
             </PropertyTitle>
-            <PropertyDescription>
-              {i18n.t('sellHouse.why.properties.professional.description')}
-            </PropertyDescription>
+            <PropertyDescription
+              dangerouslySetInnerHTML={{
+                __html: i18n.t(
+                  'sellHouse.why.properties.professional.description'
+                ),
+              }}
+            />
           </Property>
         </Col>
         <Col xs={24} md={8}>
@@ -104,9 +109,11 @@ const WhySellWithUs = (): JSX.Element => {
             <PropertyTitle>
               {i18n.t('sellHouse.why.properties.fast.title')}
             </PropertyTitle>
-            <PropertyDescription>
-              {i18n.t('sellHouse.why.properties.fast.description')}
-            </PropertyDescription>
+            <PropertyDescription
+              dangerouslySetInnerHTML={{
+                __html: i18n.t('sellHouse.why.properties.fast.description'),
+              }}
+            />
           </Property>
         </Col>
         <Col xs={24} md={8}>
@@ -122,9 +129,13 @@ const WhySellWithUs = (): JSX.Element => {
             <PropertyTitle>
               {i18n.t('sellHouse.why.properties.experience.title')}
             </PropertyTitle>
-            <PropertyDescription>
-              {i18n.t('sellHouse.why.properties.experience.description')}
-            </PropertyDescription>
+            <PropertyDescription
+              dangerouslySetInnerHTML={{
+                __html: i18n.t(
+                  'sellHouse.why.properties.experience.description'
+                ),
+              }}
+            />
           </Property>
         </Col>
       </Row>
