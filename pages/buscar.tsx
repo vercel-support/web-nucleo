@@ -63,6 +63,8 @@ const Content = styled.main`
   position: relative;
   flex: auto;
   margin-top: ${(props) => props.theme.headerHeight};
+  min-height: ${(props) =>
+    `calc(100vh - ${props.theme.headerHeight} - ${props.theme.footerHeight})`};
 
   &.no-results {
     #${mapSectionId} {
@@ -79,24 +81,17 @@ const Content = styled.main`
     }
 
     #${resultsInfoSectionId} {
-      height: ${(props) => `calc(
-        100vh - ${props.theme.headerHeight} -
-          ${props.theme.footerHeight} - ${searchBarSectionPaddingTop} -
-          ${searchBarSectionPaddingBottom} - ${searchBarHeight}
-      )`};
       margin: 0;
     }
   }
 
   @media ${(props) => props.theme.breakpoints.mdd} {
     margin-top: 0;
+    min-height: ${(props) => `calc(100vh - ${props.theme.footerHeight})`};
 
     &.no-results {
-      #${resultsInfoSectionId} {
-        height: ${(props) => `calc(
-          100vh - ${props.theme.footerHeight} - ${searchBarSectionPaddingTop} -
-            ${searchBarSectionPaddingBottom} - ${searchBarHeight}
-        )`};
+      #${transparentMddSectionId} {
+        height: 0;
       }
     }
   }
@@ -291,7 +286,10 @@ const BuscarPage = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleScroll = (headerHeight: number, footerHeight: number) => {
+  const handleScroll = () => {
+    const headerHeight = +theme.headerHeight.replace('px', '');
+    const footerHeight = +theme.footerHeight.replace('px', '');
+
     const layoutElement = document.getElementById(layoutId);
     const transparentMddSectionElement = document.getElementById(
       transparentMddSectionId
@@ -381,17 +379,9 @@ const BuscarPage = ({
   }, []);
 
   useEffect(() => {
-    const headerHeight = +theme.headerHeight.replace('px', '');
-    const footerHeight = +theme.footerHeight.replace('px', '');
+    window.addEventListener('scroll', () => handleScroll());
 
-    window.addEventListener('scroll', () =>
-      handleScroll(headerHeight, footerHeight)
-    );
-
-    return () =>
-      window.removeEventListener('scroll', () =>
-        handleScroll(headerHeight, footerHeight)
-      );
+    return () => window.removeEventListener('scroll', () => handleScroll());
   }, []);
 
   useEffect(() => {
@@ -404,6 +394,8 @@ const BuscarPage = ({
     setQ(auxQ);
     setAutoCompleteValue(auxQ);
     searchService.computeResults(router.query);
+
+    setTimeout(() => handleScroll());
   }, [router.query]);
 
   return (
@@ -534,12 +526,7 @@ const BuscarPage = ({
                     type="primary"
                     onClick={() => {
                       searchService.incrementPageSize();
-                      setTimeout(() =>
-                        handleScroll(
-                          +theme.headerHeight.replace('px', ''),
-                          +theme.footerHeight.replace('px', '')
-                        )
-                      );
+                      setTimeout(() => handleScroll());
                     }}
                   >
                     <span>{i18n.t('search.actions.loadMore')}</span>
