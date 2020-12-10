@@ -28,7 +28,7 @@ const Title = styled.h2`
 
 const Divider = styled.div`
   margin-top: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   border-top: 1px solid #e0e0e0;
   background-color: #e0e0e0;
 `;
@@ -45,9 +45,13 @@ const InfoContainer = styled.div`
 const Subtitle = styled.div`
   ${(props) => props.theme.font.p1}
   margin-bottom: 16px;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    display: none;
+  }
 `;
 
 const VisitBlogButton = styled(Button)`
+  width: 100%;
   border-radius: 20px;
 `;
 
@@ -59,20 +63,24 @@ const BlogShowcaseLgu: React.FC<Props> = ({ lastPosts, className }) => {
       <Title>{i18n.t('home.blog-showcase-title')}</Title>
       <Divider />
       <PostCardsContainer>
-        <Row gutter={32}>
+        <Row gutter={[32, 32]}>
           {lastPosts.map((post) => (
-            <Col key={post.id} span={8}>
+            <Col key={post.id} xs={24} lg={8}>
               <PostCard post={post} />
             </Col>
           ))}
         </Row>
         <InfoContainer>
           <Subtitle>{i18n.t('home.blog-showcase-subtitle')}</Subtitle>
-          <Link href="/blog" passHref>
-            <VisitBlogButton type="primary" htmlType="button" size="large">
-              {i18n.t('home.blog-button')}
-            </VisitBlogButton>
-          </Link>
+          <Row justify="center">
+            <Col xs={20} md={10} lg={8} xl={6}>
+              <Link href="/blog" passHref>
+                <VisitBlogButton type="primary" htmlType="button" size="large">
+                  {i18n.t('home.blog-button')}
+                </VisitBlogButton>
+              </Link>
+            </Col>
+          </Row>
         </InfoContainer>
       </PostCardsContainer>
     </div>
@@ -81,7 +89,4 @@ const BlogShowcaseLgu: React.FC<Props> = ({ lastPosts, className }) => {
 
 export default styled(BlogShowcaseLgu)`
   padding: 24px ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    display: none;
-  }
 `;

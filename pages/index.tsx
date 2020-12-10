@@ -15,12 +15,7 @@ import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
 import { getLastPosts } from '../backend/wp';
-import {
-  BlogShowcaseMdd,
-  BlogShowcaseLgu,
-  Hero,
-  NewsletterSection,
-} from '../components/home';
+import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
 import { Header, Footer, FlatsDisplay } from '../components/shared';
 
 interface StaticProps {
@@ -125,8 +120,7 @@ export const Home = ({
             arrows={true}
           />
         </FlatsDisplayContainer>
-        <BlogShowcaseMdd />
-        <BlogShowcaseLgu lastPosts={lastPosts} />
+        <BlogShowcase lastPosts={lastPosts} />
         <NewsletterSection
           onSubscribeButtonClicked={onSubscribeButtonClicked}
         />

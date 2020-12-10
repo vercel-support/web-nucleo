@@ -35,9 +35,6 @@ const Title = styled.div`
   font-weight: 500;
   font-size: 18px;
   line-height: 32px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   margin-bottom: 12px;
   padding: 0 ${horizontalPadding};
   @media ${(props) => props.theme.breakpoints.mdd} {
