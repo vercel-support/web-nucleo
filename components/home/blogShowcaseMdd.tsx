@@ -1,8 +1,13 @@
+import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from 'antd';
 
 import useI18n from '../../common/hooks/useI18n';
+
+type Props = {
+  className?: string;
+};
 
 const Banner = styled.div`
   height: 40vh;
@@ -96,25 +101,31 @@ const Divider = styled.hr`
   border-radius: ${(props) => props.theme.borderRadius};
 `;
 
-const BlogShowcase = (): JSX.Element => {
+const BlogShowcaseLgu: React.FC<Props> = ({ className }) => {
   const i18n = useI18n();
 
   return (
-    <Banner>
-      <Container>
-        <SectionTitle>{i18n.t('home.blog-showcase-title')}</SectionTitle>
-        <Divider />
-        <SectionSubtitle>
-          {i18n.t('home.blog-showcase-subtitle')}
-        </SectionSubtitle>
-        <Link href="/blog" passHref>
-          <Button type="primary" htmlType="button">
-            {i18n.t('home.blog-button')}
-          </Button>
-        </Link>
-      </Container>
-    </Banner>
+    <div className={className}>
+      <Banner>
+        <Container>
+          <SectionTitle>{i18n.t('home.blog-showcase-title')}</SectionTitle>
+          <Divider />
+          <SectionSubtitle>
+            {i18n.t('home.blog-showcase-subtitle')}
+          </SectionSubtitle>
+          <Link href="/blog" passHref>
+            <Button type="primary" htmlType="button">
+              {i18n.t('home.blog-button')}
+            </Button>
+          </Link>
+        </Container>
+      </Banner>
+    </div>
   );
 };
 
-export default BlogShowcase;
+export default styled(BlogShowcaseLgu)`
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    display: none;
+  }
+`;

@@ -2,9 +2,8 @@ import { NextPage, GetStaticProps } from 'next';
 import globby from 'globby';
 
 import Flat from '../backend/salesforce/flat';
+import { SITE_URL } from '../common/consts';
 import { computeSearchOptions } from '../common/hooks/searchService';
-
-const SITE_URL = 'https://www.inmobiliarianucleo.com';
 
 const generateSitemap = async (
   flatsIds: string[],
