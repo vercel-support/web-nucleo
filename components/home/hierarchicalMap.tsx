@@ -241,5 +241,8 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
 };
 
 export default withTheme(styled(HierarchicalMap)`
-  padding-top: 48px;
+  padding-top: 3rem;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding-top: 2rem;
+  }
 `);
