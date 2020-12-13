@@ -28,17 +28,18 @@ const Title = styled.h2`
 
 const Divider = styled.div`
   margin-top: 24px;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
   border-top: 1px solid #e0e0e0;
   background-color: #e0e0e0;
 `;
 
 const PostCardsContainer = styled.div`
-  padding: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
 `;
 
 const InfoContainer = styled.div`
-  margin-top: 24px;
+  margin-top: 32px;
   text-align: center;
 `;
 
@@ -63,7 +64,12 @@ const BlogShowcaseLgu: React.FC<Props> = ({ lastPosts, className }) => {
       <Title>{i18n.t('home.blog-showcase-title')}</Title>
       <Divider />
       <PostCardsContainer>
-        <Row gutter={[32, 32]}>
+        <Row
+          gutter={[
+            { xs: 0, sm: 0, md: 0, lg: 32 },
+            { xs: 32, sm: 32, md: 32, lg: 0 },
+          ]}
+        >
           {lastPosts.map((post) => (
             <Col key={post.id} xs={24} lg={8}>
               <PostCard post={post} />
@@ -88,5 +94,11 @@ const BlogShowcaseLgu: React.FC<Props> = ({ lastPosts, className }) => {
 };
 
 export default styled(BlogShowcaseLgu)`
-  padding: 24px ${(props) => props.theme.grid.getGridColumns(1, 1)};
+  padding-top: 3rem;
+  padding-bottom: 24px;
+  padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding-top: 2rem;
+  }
 `;

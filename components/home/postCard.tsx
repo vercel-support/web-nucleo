@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { RightOutlined } from '@ant-design/icons';
 
 import { IMyPost } from '../../common/model/wp/post.model';
+import useI18n from '../../common/hooks/useI18n';
 
 type Props = {
   post: IMyPost;
@@ -52,18 +54,41 @@ const Excerpt = styled.div`
   }
 `;
 
+const KeepReadingLink = styled.div`
+  margin-top: 16px;
+  padding: 0 ${horizontalPadding};
+  font-size: 14px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    font-size: 12px;
+  }
+`;
+
+const StyledRightOutlined = styled(RightOutlined)`
+  font-size: 10px;
+`;
+
 const FlatCard: React.FC<Props> = ({ post, className }) => {
+  const i18n = useI18n();
+
   return (
     <div className={className}>
-      <StyledAnchor href={post.link}>
-        <Title>{post.titleRendered}</Title>
+      <Title>
+        <StyledAnchor href={post.link}>{post.titleRendered}</StyledAnchor>
+      </Title>
+      <a href={post.link}>
         <Image imageUrl={post.featuredMediaUrl} />
-        <Excerpt
-          dangerouslySetInnerHTML={{
-            __html: post.excerptRendered,
-          }}
-        />
-      </StyledAnchor>
+      </a>
+      <Excerpt
+        dangerouslySetInnerHTML={{
+          __html: post.excerptRendered,
+        }}
+      />
+      <KeepReadingLink>
+        <a href={post.link}>
+          <span>{i18n.t('home.blog-keep-reading')}</span>{' '}
+          <StyledRightOutlined />
+        </a>
+      </KeepReadingLink>
     </div>
   );
 };

@@ -54,7 +54,7 @@ const Arrow = styled.div<{ left?: boolean }>`
 `;
 
 const FlatPage = styled.div`
-  padding-bottom: 72px;
+  padding-bottom: 48px;
   padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   @media ${(props) => props.theme.breakpoints.lgd} {
@@ -168,5 +168,8 @@ const FlatsDisplay: React.FC<Props> = ({
 };
 
 export default withTheme(styled(FlatsDisplay)`
-  padding-top: 96px;
+  padding-top: 3rem;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding-top: 2rem;
+  }
 `);
