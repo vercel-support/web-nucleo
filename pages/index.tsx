@@ -28,9 +28,9 @@ type Props = StaticProps;
 
 const FlatsDisplayContainer = styled.div`
   background-color: ${(props) => props.theme.colors.grey};
-  padding-top: 32px;
+  padding-top: 24px;
   @media ${(props) => props.theme.breakpoints.smd} {
-    padding-top: 8px;
+    padding-top: 0;
   }
 `;
 
