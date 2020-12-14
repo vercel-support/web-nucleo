@@ -1,5 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 import { RightOutlined } from '@ant-design/icons';
+import TextClamp from 'react-string-clamp';
 
 import { IMyPost } from '../../common/model/wp/post.model';
 import useI18n from '../../common/hooks/useI18n';
@@ -18,19 +20,16 @@ const StyledAnchor = styled.a`
   }
 `;
 
+const ImageAnchor = styled.a`
+  flex: 1;
+`;
+
 const Image = styled.div<{ imageUrl: string }>`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url(${(props) => props.imageUrl});
-  height: 28vh;
-  min-height: 200px;
-  max-height: 300px;
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    height: 24vh;
-    min-height: 200px;
-    max-height: 300px;
-  }
+  height: 100%;
 `;
 
 const Title = styled.div`
@@ -75,14 +74,12 @@ const FlatCard: React.FC<Props> = ({ post, className }) => {
       <Title>
         <StyledAnchor href={post.link}>{post.titleRendered}</StyledAnchor>
       </Title>
-      <a href={post.link}>
+      <ImageAnchor href={post.link}>
         <Image imageUrl={post.featuredMediaUrl} />
-      </a>
-      <Excerpt
-        dangerouslySetInnerHTML={{
-          __html: post.excerptRendered,
-        }}
-      />
+      </ImageAnchor>
+      <Excerpt>
+        <TextClamp text={post.excerptRendered} lines={4} element="p" />
+      </Excerpt>
       <KeepReadingLink>
         <a href={post.link}>
           <span>{i18n.t('home.blog-keep-reading')}</span>{' '}
@@ -94,11 +91,13 @@ const FlatCard: React.FC<Props> = ({ post, className }) => {
 };
 
 export default styled(FlatCard)`
+  height: 460px;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => props.theme.borderRadius};
   padding: 20px 0;
-  overflow: hidden;
 `;

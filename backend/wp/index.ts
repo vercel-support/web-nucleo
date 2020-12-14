@@ -15,10 +15,10 @@ export const getLastPosts = async (): Promise<IMyPost[]> => {
     posts.push({
       ...wpPost,
       titleRendered: wpPost.title.rendered,
-      excerptRendered: wpPost.excerpt.rendered.replace(
-        ' [&hellip;]',
-        '&hellip;'
-      ),
+      excerptRendered: wpPost.excerpt.rendered
+        .replace(' [&hellip;]', '...')
+        .replace('<p>', '')
+        .replace('</p>', ''),
       featuredMediaUrl,
     });
   }
