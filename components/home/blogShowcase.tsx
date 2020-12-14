@@ -34,8 +34,7 @@ const Divider = styled.div`
 `;
 
 const PostCardsContainer = styled.div`
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 8px;
 `;
 
 const InfoContainer = styled.div`
@@ -45,7 +44,7 @@ const InfoContainer = styled.div`
 
 const Subtitle = styled.div`
   ${(props) => props.theme.font.p1}
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   @media ${(props) => props.theme.breakpoints.mdd} {
     display: none;
   }
