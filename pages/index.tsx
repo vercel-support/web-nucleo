@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
+import { IMyPost } from '../common/model/wp/post.model';
 import useI18n from '../common/hooks/useI18n';
 import useSearchService, {
   computeSearchOptions,
@@ -13,18 +14,24 @@ import useSearchService, {
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
+import { getLastPosts } from '../backend/wp';
 import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
 import { Header, Footer, FlatsDisplay } from '../components/shared';
 
 interface StaticProps {
   serializedFlats: string;
   serializedSearchOptions: string;
+  lastPosts: IMyPost[];
 }
 
 type Props = StaticProps;
 
 const FlatsDisplayContainer = styled.div`
   background-color: ${(props) => props.theme.colors.grey};
+  padding-top: 24px;
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding-top: 0;
+  }
 `;
 
 const Layout = styled.div`
@@ -46,6 +53,7 @@ const Content = styled.main`
 export const Home = ({
   serializedFlats,
   serializedSearchOptions,
+  lastPosts,
 }: Props): JSX.Element => {
   const router = useRouter();
   const i18n = useI18n();
@@ -116,7 +124,7 @@ export const Home = ({
             arrows={true}
           />
         </FlatsDisplayContainer>
-        <BlogShowcase />
+        <BlogShowcase lastPosts={lastPosts} />
         <NewsletterSection
           onSubscribeButtonClicked={onSubscribeButtonClicked}
         />
@@ -133,10 +141,13 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
   const searchOptions = computeSearchOptions(flats);
 
+  const lastPosts = await getLastPosts();
+
   return {
     props: {
       serializedFlats,
       serializedSearchOptions: JSON.stringify(searchOptions),
+      lastPosts,
     },
   };
 };

@@ -28,8 +28,10 @@
     "imagemin-svgo": "^8.0.0",
     "next": "^9.5.0",
     "react-google-maps": "^9.4.5",
+    "react-string-clamp": "^0.3.1",
     "react-swipeable": "^5.5.1",
-    "sharp": "^0.25.4"
+    "sharp": "^0.25.4",
+    "wpapi": "^1.2.1"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.2.1",
@@ -40,6 +42,7 @@
     "@types/react": "^16.9.38",
     "@types/react-responsive": "^8.0.2",
     "@types/styled-components": "^5.1.0",
+    "@types/wpapi": "^1.1.0",
     "@typescript-eslint/eslint-plugin": "^3.3.0",
     "@typescript-eslint/parser": "^3.3.0",
     "@zeit/next-less": "^1.0.1",

@@ -1,63 +1,18 @@
+import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Button } from 'antd';
+import { Row, Col, Button } from 'antd';
 
+import { IMyPost } from '../../common/model/wp/post.model';
 import useI18n from '../../common/hooks/useI18n';
+import PostCard from './postCard';
 
-const Banner = styled.div`
-  height: 40vh;
-  min-height: 260px;
+type Props = {
+  lastPosts: IMyPost[];
+  className?: string;
+};
 
-  background-image: url(${require('../../public/images/tangram_blog.png')}),
-    url(${require('../../public/images/banner_blog.png')});
-  background-size: 100% 100%, auto 100%;
-  background-position: center center, right center;
-  background-repeat: no-repeat;
-
-  @media ${(props) => props.theme.breakpoints.lg} {
-    height: 260px;
-    min-height: 0;
-  }
-
-  @media ${(props) => props.theme.breakpoints.md} {
-    min-height: 240px;
-  }
-
-  @media ${(props) => props.theme.breakpoints.xs} {
-    height: unset;
-    min-height: 0;
-    background-image: url(${require('../../public/images/banner_blog.png')});
-    background-size: auto 100%;
-    background-position: right center;
-  }
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
-  padding: 14px ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  @media ${(props) => props.theme.breakpoints.xxl} {
-    padding: 14px ${(props) => props.theme.grid.getGridColumns(1, 1)};
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  @media ${(props) => props.theme.breakpoints.xs} {
-    border-radius: ${(props) => props.theme.borderRadius};
-    background-color: #ffffff;
-    opacity: 0.9;
-    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
-    padding: 32px;
-  }
-`;
-
-const SectionTitle = styled.h2`
+const Title = styled.h2`
   max-width: ${(props) => props.theme.grid.getGridColumns(14, 1)};
   @media ${(props) => props.theme.breakpoints.sm} {
     max-width: ${(props) => props.theme.grid.getGridColumns(13, 1)};
@@ -71,50 +26,78 @@ const SectionTitle = styled.h2`
   ${(props) => props.theme.font.h2}
 `;
 
-const SectionSubtitle = styled.h3`
+const Divider = styled.div`
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
+`;
+
+const PostCardsContainer = styled.div`
+  padding: 8px;
+`;
+
+const InfoContainer = styled.div`
+  margin-top: 32px;
+  text-align: center;
+`;
+
+const Subtitle = styled.div`
   ${(props) => props.theme.font.p1}
-  max-width: ${(props) => props.theme.grid.getGridColumns(10, 1)};
-  color: ${(props) => props.theme.colors.secondary};
-  line-height: 125%;
-  margin-bottom: 16px;
-  @media ${(props) => props.theme.breakpoints.sm} {
-    max-width: ${(props) => props.theme.grid.getGridColumns(11, 1)};
-  }
-  @media ${(props) => props.theme.breakpoints.xs} {
-    max-width: inherit;
+  margin-bottom: 24px;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    display: none;
   }
 `;
 
-const Divider = styled.hr`
-  width: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-top: 16px;
-  margin-bottom: 16px;
-  margin-left: var(--gutter);
-  margin-right: 0;
-  border: 1px solid ${(props) => props.theme.colors.primary};
-  background-color: ${(props) => props.theme.colors.primary};
-  border-radius: ${(props) => props.theme.borderRadius};
+const VisitBlogButton = styled(Button)`
+  width: 100%;
+  border-radius: 20px;
 `;
 
-const BlogShowcase = (): JSX.Element => {
+const BlogShowcaseLgu: React.FC<Props> = ({ lastPosts, className }) => {
   const i18n = useI18n();
 
   return (
-    <Banner>
-      <Container>
-        <SectionTitle>{i18n.t('home.blog-showcase-title')}</SectionTitle>
-        <Divider />
-        <SectionSubtitle>
-          {i18n.t('home.blog-showcase-subtitle')}
-        </SectionSubtitle>
-        <Link href="/blog" passHref>
-          <Button type="primary" htmlType="button">
-            {i18n.t('home.blog-button')}
-          </Button>
-        </Link>
-      </Container>
-    </Banner>
+    <div className={className}>
+      <Title>{i18n.t('home.blog-showcase-title')}</Title>
+      <Divider />
+      <PostCardsContainer>
+        <Row
+          gutter={[
+            { xs: 0, sm: 0, md: 0, lg: 32 },
+            { xs: 32, sm: 32, md: 32, lg: 0 },
+          ]}
+        >
+          {lastPosts.map((post) => (
+            <Col key={post.id} xs={24} lg={8}>
+              <PostCard post={post} />
+            </Col>
+          ))}
+        </Row>
+        <InfoContainer>
+          <Subtitle>{i18n.t('home.blog-showcase-subtitle')}</Subtitle>
+          <Row justify="center">
+            <Col xs={20} md={10} lg={8} xl={6}>
+              <Link href="/blog" passHref>
+                <VisitBlogButton type="primary" htmlType="button" size="large">
+                  {i18n.t('home.blog-button')}
+                </VisitBlogButton>
+              </Link>
+            </Col>
+          </Row>
+        </InfoContainer>
+      </PostCardsContainer>
+    </div>
   );
 };
 
-export default BlogShowcase;
+export default styled(BlogShowcaseLgu)`
+  padding-top: 3rem;
+  padding-bottom: 24px;
+  padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  @media ${(props) => props.theme.breakpoints.smd} {
+    padding-top: 2rem;
+  }
+`;
