@@ -81,7 +81,7 @@ const MapContainer = styled.div<{
 
 const BreadcrumbComponent = styled(Breadcrumb)`
   position: absolute;
-  top: 30px;
+  top: -4px;
   left: 40px;
 `;
 
@@ -89,7 +89,7 @@ const BackButton = styled.img`
   position: absolute;
   cursor: pointer;
   top: calc(50% - 9px);
-  left: 40px;
+  left: 2px;
   height: 18px;
   width: 18px;
   color: ${(props) => props.theme.colors.secondary};
@@ -216,7 +216,7 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
                 {breadcrumbStates.map((state) => {
                   return (
                     <Breadcrumb.Item key={state}>
-                      {canonizeSearchQuery(state)}
+                      {` ${canonizeSearchQuery(state)} `}
                     </Breadcrumb.Item>
                   );
                 })}
