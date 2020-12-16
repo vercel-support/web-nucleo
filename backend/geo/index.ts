@@ -20,7 +20,7 @@ const loadGeoJsonFiles = async (): Promise<GeoJsonFile[]> => {
   const basePath = `${process.cwd()}/public`;
   const innerPath = '/geojson/';
   const folder = join(basePath, innerPath);
-  const filenames = fs.readdirSync(folder);
+  const filenames = fs.readdirSync(folder).filter(x => x.endsWith('.json'));
 
   const res = [];
   for (const filename of filenames) {
