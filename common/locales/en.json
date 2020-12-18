@@ -11,8 +11,8 @@
   "footer": {
     "nucleo-sl": "© 2020 Núcleo S.L.",
     "aviso-legal": "Legal warning",
-    "politica-datos": "Data protection",
-    "politica-cookies": "Cookies policy"
+    "privacyPolicy": "Privacy policy",
+    "cookies": "Cookies policy"
   },
   "languageSelector": {
     "language": "English"
@@ -87,6 +87,11 @@
     "actions": {
       "ok": "OK"
     }
+  },
+  "privacyPolicy": {
+    "metaTitle": "Privacy policy | Inmobiliaria Núcleo",
+    "metaDescription": "Privacy policy | Inmobiliaria Núcleo",
+    "title": "Privacy policy"
   },
   "sellHouse": {
     "metaTitle": "Your house for sale in Alicante | Inmobiliaria Núcleo",

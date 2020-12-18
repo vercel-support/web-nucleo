@@ -63,11 +63,13 @@ const Footer = ({ className }: Props) => {
         <StyledLink>{i18n.t('footer.aviso-legal')}</StyledLink>
       </Menu.Item>
       <Menu.Item key="1">
-        <StyledLink>{i18n.t('footer.politica-datos')}</StyledLink>
+        <Link href="/legal/politica-privacidad" passHref>
+          <StyledLink>{i18n.t('footer.privacyPolicy')}</StyledLink>
+        </Link>
       </Menu.Item>
       <Menu.Item key="2">
         <Link href="/legal/cookies" passHref>
-          <StyledLink>{i18n.t('footer.politica-cookies')}</StyledLink>
+          <StyledLink>{i18n.t('footer.cookies')}</StyledLink>
         </Link>
       </Menu.Item>
     </Menu>
@@ -88,13 +90,13 @@ const Footer = ({ className }: Props) => {
       <MenuButtons>
         <NucleoLabel>{i18n.t('footer.nucleo-sl')}</NucleoLabel>
         <StyledButton type="text">{i18n.t('footer.aviso-legal')}</StyledButton>
-        <StyledButton type="text">
-          {i18n.t('footer.politica-datos')}
-        </StyledButton>
-        <Link href="/legal/cookies" passHref>
+        <Link href="/legal/politica-privacidad" passHref>
           <StyledButton type="text">
-            {i18n.t('footer.politica-cookies')}
+            {i18n.t('footer.privacyPolicy')}
           </StyledButton>
+        </Link>
+        <Link href="/legal/cookies" passHref>
+          <StyledButton type="text">{i18n.t('footer.cookies')}</StyledButton>
         </Link>
       </MenuButtons>
     </footer>

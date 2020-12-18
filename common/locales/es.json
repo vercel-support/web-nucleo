@@ -11,8 +11,8 @@
   "footer": {
     "nucleo-sl": "© 2020 Núcleo S.L.",
     "aviso-legal": "Aviso legal",
-    "politica-datos": "Protección de datos",
-    "politica-cookies": "Política de cookies"
+    "privacyPolicy": "Política de privacidad",
+    "cookies": "Política de cookies"
   },
   "languageSelector": {
     "language": "Español"
@@ -87,6 +87,11 @@
     "actions": {
       "ok": "Aceptar"
     }
+  },
+  "privacyPolicy": {
+    "metaTitle": "Política de privacidad | Inmobiliaria Núcleo",
+    "metaDescription": "Política de privacidad | Inmobiliaria Núcleo",
+    "title": "Política de privacidad"
   },
   "sellHouse": {
     "metaTitle": "Vender casa en Alicante | Inmobiliaria Núcleo",
