@@ -9,8 +9,7 @@
     "hamburgerLanguage": "Idioma"
   },
   "footer": {
-    "nucleo-sl": "© 2020 Núcleo S.L.",
-    "aviso-legal": "Aviso legal",
+    "legalWarning": "Aviso legal",
     "privacyPolicy": "Política de privacidad",
     "cookies": "Política de cookies"
   },
@@ -92,6 +91,11 @@
     "metaTitle": "Política de privacidad | Inmobiliaria Núcleo",
     "metaDescription": "Política de privacidad | Inmobiliaria Núcleo",
     "title": "Política de privacidad"
+  },
+  "legalWarning": {
+    "metaTitle": "Aviso legal | Inmobiliaria Núcleo",
+    "metaDescription": "Aviso legal | Inmobiliaria Núcleo",
+    "title": "Aviso legal"
   },
   "sellHouse": {
     "metaTitle": "Vender casa en Alicante | Inmobiliaria Núcleo",

@@ -60,7 +60,9 @@ const Footer = ({ className }: Props) => {
   const dropdownMenu = (
     <Menu>
       <Menu.Item key="0">
-        <StyledLink>{i18n.t('footer.aviso-legal')}</StyledLink>
+        <Link href="/legal/aviso" passHref>
+          <StyledLink>{i18n.t('footer.legalWarning')}</StyledLink>
+        </Link>
       </Menu.Item>
       <Menu.Item key="1">
         <Link href="/legal/politica-privacidad" passHref>
@@ -83,13 +85,17 @@ const Footer = ({ className }: Props) => {
       <DropdownContainer>
         <Dropdown overlay={dropdownMenu} trigger={['click']}>
           <Button type="text" onClick={(e) => e.preventDefault()}>
-            {i18n.t('footer.nucleo-sl')} <DownOutlined />
+            © 2020 Núcleo S.L. <DownOutlined />
           </Button>
         </Dropdown>
       </DropdownContainer>
       <MenuButtons>
-        <NucleoLabel>{i18n.t('footer.nucleo-sl')}</NucleoLabel>
-        <StyledButton type="text">{i18n.t('footer.aviso-legal')}</StyledButton>
+        <NucleoLabel>© 2020 Núcleo S.L.</NucleoLabel>
+        <Link href="/legal/aviso" passHref>
+          <StyledButton type="text">
+            {i18n.t('footer.legalWarning')}
+          </StyledButton>
+        </Link>
         <Link href="/legal/politica-privacidad" passHref>
           <StyledButton type="text">
             {i18n.t('footer.privacyPolicy')}
