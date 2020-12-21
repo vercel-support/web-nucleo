@@ -154,6 +154,7 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
     tippy('svg .zone', {
       content: (reference) => canonizeSearchQuery(reference.id),
       theme: 'dark',
+      touch: ["hold", 300]
     });
     for (const svgElement of svgElements) {
       const elementId = svgElement.id;
