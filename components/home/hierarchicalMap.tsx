@@ -7,6 +7,7 @@ import useI18n from '../../common/hooks/useI18n';
 import { useMediaQuery } from 'react-responsive';
 import { canonizeSearchQuery } from '../../common/helpers/searchQuery.utils';
 import { Breadcrumb } from 'antd';
+import tippy from 'tippy.js';
 
 type Props = {
   zones: Record<string, IZone>;
@@ -76,6 +77,9 @@ const MapContainer = styled.div<{
   }
   & .zone polygon:hover {
     fill: ${(props) => props.theme.colors.secondary} !important;
+  }
+  & .zone {
+    outline: none;
   }
 `;
 
@@ -147,6 +151,10 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
   };
 
   const configureSVGZones = (svgElements: SVGGeometryElement[]) => {
+    tippy('svg .zone', {
+      content: (reference) => canonizeSearchQuery(reference.id),
+      theme: 'dark'
+    });
     for (const svgElement of svgElements) {
       const elementId = svgElement.id;
       if (!(elementId in zones)) {

@@ -142,6 +142,16 @@ const GlobalStyle = createGlobalStyle`
     padding-bottom: 16px;
     padding-top: 16px;
   }
+
+  .tippy-box[data-theme~='dark'] {
+    background-color: #332e31;
+    color: white;
+  }
+
+  .tippy-box {
+    font-family: Montserrat;
+    font-style: normal;
+  }
 `;
 
 class MyApp extends App {
@@ -170,6 +180,8 @@ class MyApp extends App {
 
           <CookiesBanner />
         </I18n>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
       </ThemeProvider>
     );
   }

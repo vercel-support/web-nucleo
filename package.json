@@ -31,7 +31,8 @@
     "react-google-maps": "^9.4.5",
     "react-svgmt": "^1.1.11",
     "react-swipeable": "^5.5.1",
-    "sharp": "^0.25.4"
+    "sharp": "^0.25.4",
+    "tippy.js": "^6.2.7"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.2.1",
