@@ -267,7 +267,7 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
         )}
       </div>
       {zoneUrls.map((zoneUrl) => (
-        <link key={zoneUrl} rel="prefetch" href={zoneUrl} />
+        <link key={zoneUrl} rel="prefetch" href={zoneUrl} as="image" />
       ))}
     </div>
   );
