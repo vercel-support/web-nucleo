@@ -219,7 +219,9 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
     _setCurrentMapId('0');
   }
 
-  const zoneUrls = Object.values(zones).filter(zone => zone.url).map(zone => zone.url);
+  const zoneUrls = Object.values(zones)
+    .filter((zone) => zone.url)
+    .map((zone) => zone.url);
   return (
     <div className={className}>
       <Title>{i18n.t('home.map.title')}</Title>
@@ -264,7 +266,9 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
           <Placeholder />
         )}
       </div>
-      {zoneUrls.map((zoneUrl) => (<link key={zoneUrl} rel="prefetch" href={zoneUrl} />))}
+      {zoneUrls.map((zoneUrl) => (
+        <link key={zoneUrl} rel="prefetch" href={zoneUrl} />
+      ))}
     </div>
   );
 };
