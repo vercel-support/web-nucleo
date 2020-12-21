@@ -71,13 +71,31 @@ const MapContainer = styled.div<{
   & svg {
     animation-name: ${(props) => (props.animationEnabled ? 'example' : 'none')};
     animation-duration: ${(props) => props.animationDuration}ms;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
-  & .zone path:hover {
-    fill: ${(props) => props.theme.colors.secondary} !important;
+
+  @media ${(props) => props.theme.breakpoints.mdu} {
+    & .zone path:hover {
+      fill: ${(props) => props.theme.colors.secondary} !important;
+    }
+    & .zone polygon:hover {
+      fill: ${(props) => props.theme.colors.secondary} !important;
+    }
   }
-  & .zone polygon:hover {
-    fill: ${(props) => props.theme.colors.secondary} !important;
+
+  @media ${(props) => props.theme.breakpoints.smd} {
+    & .zone path:active {
+      fill: ${(props) => props.theme.colors.secondary} !important;
+    }
+    & .zone polygon:active {
+      fill: ${(props) => props.theme.colors.secondary} !important;
+    }
   }
+
   & .zone {
     outline: none;
   }
