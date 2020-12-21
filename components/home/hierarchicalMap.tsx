@@ -153,7 +153,7 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
   const configureSVGZones = (svgElements: SVGGeometryElement[]) => {
     tippy('svg .zone', {
       content: (reference) => canonizeSearchQuery(reference.id),
-      theme: 'dark'
+      theme: 'dark',
     });
     for (const svgElement of svgElements) {
       const elementId = svgElement.id;
