@@ -38,17 +38,25 @@ const Divider = styled.div`
 `;
 
 const Section = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 const TextHeading = styled.h3`
   font-size: 20px;
   line-height: 40px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    font-size: 16px;
+    line-height: 32px;
+  }
 `;
 
 const Text = styled.p`
   font-size: 14px;
-  line-height: 30px;
+  line-height: 28px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    font-size: 12px;
+    line-height: 24px;
+  }
 `;
 
 const UnorderedList = styled.ul`
@@ -59,7 +67,11 @@ const UnorderedList = styled.ul`
 
 const ListItem = styled.li`
   font-size: 14px;
-  line-height: 30px;
+  line-height: 28px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    font-size: 12px;
+    line-height: 24px;
+  }
 `;
 
 const PrivacyPolicyPage = (): JSX.Element => {
@@ -98,7 +110,7 @@ const PrivacyPolicyPage = (): JSX.Element => {
 
       <Content>
         <Row justify={'center'}>
-          <Col xs={22} md={20} lg={16}>
+          <Col xs={20} lg={16}>
             <Title>{i18n.t('privacyPolicy.title')}</Title>
             <Divider />
             <Section>

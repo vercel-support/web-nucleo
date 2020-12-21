@@ -39,7 +39,11 @@ const Divider = styled.div`
 
 const Text = styled.p`
   font-size: 14px;
-  line-height: 30px;
+  line-height: 28px;
+  @media ${(props) => props.theme.breakpoints.xs} {
+    font-size: 12px;
+    line-height: 24px;
+  }
 `;
 
 const CookiesPage = (): JSX.Element => {
@@ -78,7 +82,7 @@ const CookiesPage = (): JSX.Element => {
 
       <Content>
         <Row justify={'center'}>
-          <Col xs={22} md={20} lg={16}>
+          <Col xs={20} lg={16}>
             <Title>{i18n.t('cookies.detail.title')}</Title>
             <Divider />
             <Text>
