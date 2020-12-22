@@ -28,7 +28,7 @@ const Banner = styled.div`
 
   @media ${(props) => props.theme.breakpoints.xs} {
     height: unset;
-    min-height: 0;
+    min-height: 400px;
     background-image: url(${require('../../public/images/banner_newsletter.png')});
     background-size: auto 100%;
     background-position: left center;

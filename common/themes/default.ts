@@ -9,6 +9,17 @@ export const xlMax = 1599;
 const gridColumns = 24;
 
 const theme: DefaultTheme = {
+  animations: {
+    show: `
+      @keyframes show {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      animation: show 500ms ease-out 200ms forwards;
+    `,
+  },
   colors: {
     primary: '#f94f28',
     secondary: '#332e31',

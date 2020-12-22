@@ -1,3 +1,7 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.maxTokenizationLineLength": 100000,
+    "[xml]": {
+        "editor.defaultFormatter": "rogalmic.vscode-xml-complete"
+    }
 }

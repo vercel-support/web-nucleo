@@ -4,6 +4,10 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     borderRadius: string;
 
+    animations: {
+      show: string;
+    };
+
     colors: {
       primary: string;
       secondary: string;

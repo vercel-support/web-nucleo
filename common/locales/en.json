@@ -31,7 +31,10 @@
     "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and\u00A0much\u00A0more!",
     "blog-keep-reading": "Keep reading",
     "blog-button": "Visit our blog",
-    "newsletter-title": "Subscribe to our\u00A0newsletter"
+    "newsletter-title": "Subscribe to our\u00A0newsletter",
+    "map": {
+      "title": "Map search"
+    }
   },
   "flat": {
     "title": "{{type}} in {{address}}",
@@ -175,8 +178,8 @@
     "metaTitle": "Search for properties in Alicante | Inmobiliaria Núcleo",
     "metaDescription": "Search for properties in Alicante through Inmobiliaria Núcleo",
     "title": {
-      "open": "Search results of: \"{{query}}\"",
-      "closed": "Flats in {{query}}"
+      "closed": "Flats in {{query}}",
+      "open": "Search results of: \"{{query}}\""
     },
     "subtitle": {
       "singular": "{{resultsCount}} result",
