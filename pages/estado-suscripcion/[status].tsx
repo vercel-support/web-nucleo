@@ -103,7 +103,7 @@ const FlatDetailPage = ({ status }: Props): JSX.Element => {
   const i18n = useI18n();
 
   useEffect(() => {
-    if (GA_SOCIALMEDIA_TRACKING_ID) {
+    if (GA_SOCIALMEDIA_TRACKING_ID && window && window.gtag) {
       window.gtag('event', 'conversion', {
         send_to: `${GA_SOCIALMEDIA_TRACKING_ID}/XM8fCMOE7uABENTdlJ8C`,
       });
