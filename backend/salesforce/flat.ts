@@ -3,13 +3,18 @@ import {
   Client as GoogleMapsClient,
   LatLngLiteral,
 } from '@googlemaps/google-maps-services-js';
-
 import { IFlat } from '../../common/model/flat.model';
 import { getSalesforceClient } from '.';
 import { computeMapAreaId } from '../geo';
 import { asyncMemoize } from '../helpers';
+import axios from 'axios';
 
-const googleMapsClient = new GoogleMapsClient();
+const axiosInstance = axios.create({ timeout: 100000 });
+axiosInstance.defaults.timeout = 100000;
+const googleMapsClient = new GoogleMapsClient({
+  // @ts-ignore
+  axiosInstance: axiosInstance,
+});
 
 function isNullOrUndefined(value: any): boolean {
   return value === null || value === undefined;
