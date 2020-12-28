@@ -4,15 +4,22 @@ import Router from 'next/router';
 import { CSSProp, createGlobalStyle, ThemeProvider } from 'styled-components';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
+import Head from 'next/head';
+import { GA_TRACKING_ID, GA_SOCIALMEDIA_TRACKING_ID } from '../libs/gtag';
 
 import I18n from '../libs/i18n';
 import * as gtag from '../libs/gtag';
 import defaultTheme from '../common/themes/default';
-import { CookiesBanner } from '../components/shared';
-
+import cookiesData from '../common/consts/cookiesData';
 declare module 'react' {
   interface HTMLAttributes<T> extends DOMAttributes<T> {
     css?: CSSProp;
+  }
+}
+
+declare global {
+  interface Window {
+    initCookieConsent: any;
   }
 }
 
@@ -142,11 +149,32 @@ const GlobalStyle = createGlobalStyle`
     padding-bottom: 16px;
     padding-top: 16px;
   }
+
+  .tippy-box[data-theme~='dark'] {
+    background-color: #332e31;
+    color: white;
+  }
+
+  .tippy-box {
+    font-family: Montserrat;
+    font-style: normal;
+  }
 `;
 
 class MyApp extends App {
   componentDidMount() {
     Router.events.on('routeChangeComplete', this.handleRouteChange);
+    if (process.browser) {
+      if (GA_TRACKING_ID) {
+        window[`ga-disable-${GA_TRACKING_ID}`] = true;
+      }
+      if (GA_SOCIALMEDIA_TRACKING_ID) {
+        window[`ga-disable-${GA_SOCIALMEDIA_TRACKING_ID}`] = true;
+      }
+
+      const CookieConsent = window.initCookieConsent();
+      CookieConsent.run(cookiesData);
+    }
   }
 
   componentWillUnmount() {
@@ -163,13 +191,15 @@ class MyApp extends App {
 
     return (
       <ThemeProvider theme={defaultTheme}>
+        <Head>
+          <script src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent/dist/cookieconsent.js" />
+        </Head>
         <I18n>
           <GlobalStyle />
-
           <Component {...pageProps} />
-
-          <CookiesBanner />
         </I18n>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
       </ThemeProvider>
     );
   }

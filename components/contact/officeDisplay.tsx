@@ -36,7 +36,7 @@ const OfficeDisplay = ({
 }: Props): JSX.Element => {
   const selectedOffice = offices[selectedOfficeIndex];
   return (
-    <div className={className}>
+    <div key={selectedOfficeIndex} className={className}>
       <OfficeMap
         offices={offices}
         selectedOfficeIndex={selectedOfficeIndex}
@@ -61,4 +61,7 @@ export default styled(OfficeDisplay)`
     flex-direction: column;
     align-items: stretch;
   }
+
+  ${(props) => props.theme.animations.show}
+  opacity: 0;
 `;

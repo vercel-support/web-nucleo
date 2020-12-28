@@ -65,7 +65,7 @@ const ContactPage = ({ offices, serializedFlats }: Props): JSX.Element => {
   const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
-  const flats = deserializeMultiple(serializedFlats, IFlat);
+  const flats = deserializeMultiple<IFlat>(serializedFlats);
   const officesSectionRef = useRef(null);
   const [selectedOfficeIndex, setSelectedOffice] = useState(2);
   const onSendButtonClicked = (contact: IContact) => {

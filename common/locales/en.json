@@ -9,10 +9,9 @@
     "hamburgerLanguage": "Language"
   },
   "footer": {
-    "nucleo-sl": "© 2020 Núcleo S.L.",
-    "aviso-legal": "Legal warning",
-    "politica-datos": "Data protection",
-    "politica-cookies": "Cookies policy"
+    "legalWarning": "Legal warning",
+    "privacyPolicy": "Privacy policy",
+    "cookies": "Cookies policy"
   },
   "languageSelector": {
     "language": "English"
@@ -32,7 +31,10 @@
     "blog-showcase-subtitle": "Be the first to read about the latest news, the best corners in Alicante and\u00A0much\u00A0more!",
     "blog-keep-reading": "Keep reading",
     "blog-button": "Visit our blog",
-    "newsletter-title": "Subscribe to our\u00A0newsletter"
+    "newsletter-title": "Subscribe to our\u00A0newsletter",
+    "map": {
+      "title": "Map search"
+    }
   },
   "flat": {
     "title": "{{type}} in {{address}}",
@@ -87,6 +89,16 @@
     "actions": {
       "ok": "OK"
     }
+  },
+  "privacyPolicy": {
+    "metaTitle": "Privacy policy | Inmobiliaria Núcleo",
+    "metaDescription": "Privacy policy | Inmobiliaria Núcleo",
+    "title": "Privacy policy"
+  },
+  "legalWarning": {
+    "metaTitle": "Legal warning | Inmobiliaria Núcleo",
+    "metaDescription": "Legal warning | Inmobiliaria Núcleo",
+    "title": "Legal warning"
   },
   "sellHouse": {
     "metaTitle": "Your house for sale in Alicante | Inmobiliaria Núcleo",
@@ -166,8 +178,8 @@
     "metaTitle": "Search for properties in Alicante | Inmobiliaria Núcleo",
     "metaDescription": "Search for properties in Alicante through Inmobiliaria Núcleo",
     "title": {
-      "open": "Search results of: \"{{query}}\"",
-      "closed": "Flats in {{query}}"
+      "closed": "Flats in {{query}}",
+      "open": "Search results of: \"{{query}}\""
     },
     "subtitle": {
       "singular": "{{resultsCount}} result",

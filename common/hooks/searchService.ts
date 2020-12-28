@@ -4,12 +4,14 @@ import { IFlat } from '../model/flat.model';
 import { ISearchOption } from '../model/searchOption.model';
 import { IFilter } from '../model/filter.model';
 import { SearchOptionType } from '../model/enums/searchOptionType.enum';
+import { SearchType } from '../model/enums/searchType.enum';
 import { FlatOrderBy } from '../model/enums/flatOrderBy.enum';
 import { canonizeFlatType } from '../helpers/flatType.utils';
+import * as searchQueryUtils from '../helpers/searchQuery.utils';
 
 export const computeResults = (
   flats: IFlat[],
-  openSearch: boolean,
+  searchType: number,
   q: string,
   filter?: IFilter
 ): IFlat[] => {
@@ -18,19 +20,21 @@ export const computeResults = (
   const auxQ = q.trim().toLowerCase();
   if (auxQ) {
     results = flats.filter((flat) => {
-      if (openSearch) {
+      if (searchType === SearchType.CLOSED) {
+        const city = searchQueryUtils.extractCityFromQuery(auxQ);
+        const zone = searchQueryUtils.extractZoneFromQuery(auxQ);
+        return (
+          flat.city.toLowerCase() === city &&
+          (!zone || flat.zone.toLowerCase() === zone)
+        );
+      } else if (searchType === SearchType.OPEN) {
         return (
           flat.city.toLowerCase().includes(auxQ) ||
           flat.zone.toLowerCase().includes(auxQ) ||
           flat.address.toLowerCase().includes(auxQ)
         );
-      } else {
-        const city = extractCityFromQuery(auxQ);
-        const zone = extractZoneFromQuery(auxQ);
-        return (
-          flat.city.toLowerCase() === city &&
-          (!zone || flat.zone.toLowerCase() === zone)
-        );
+      } else if (searchType === SearchType.MAP_AREA) {
+        return flat.mapAreaId === q;
       }
     });
   }
@@ -135,28 +139,6 @@ export const computeSearchOptions = (flats: IFlat[]): ISearchOption[] => {
   return [...citiesOptions, ...zonesOptions];
 };
 
-const extractCityFromQuery = (q: string): string => {
-  let city = q;
-  if (q.charAt(q.length - 1) === ')') {
-    const parenthesisIndex = q.lastIndexOf('(');
-    if (parenthesisIndex >= 0) {
-      city = q.substring(parenthesisIndex + 1, q.length - 1);
-    }
-  }
-  return city;
-};
-
-const extractZoneFromQuery = (q: string): string => {
-  let zone = '';
-  if (q.charAt(q.length - 1) === ')') {
-    const parenthesisIndex = q.lastIndexOf('(');
-    if (parenthesisIndex >= 0) {
-      zone = q.substring(0, parenthesisIndex - 1);
-    }
-  }
-  return zone;
-};
-
 interface ISearchService {
   init(
     flats: IFlat[],
@@ -164,11 +146,11 @@ interface ISearchService {
     setCurrentResults?: Dispatch<SetStateAction<IFlat[]>>
   ): void;
   setResults(results: IFlat[]): void;
-  setOpenSearch(openSearch: boolean): void;
+  setSearchType(searchType: number): void;
   getSearchOptions(q: string): ISearchOption[];
   computeResults(query: NodeJS.Dict<string | string[]>): void;
   getResultsCount(): number;
-  isOpenSearch(): boolean;
+  getSearchType(): number;
   getPageSize(): number;
   incrementPageSize(): void;
   getOrderBy(): string;
@@ -179,7 +161,7 @@ interface ISearchService {
 class SearchService implements ISearchService {
   private flats: IFlat[] = [];
   private results: IFlat[] = [];
-  private openSearch = false;
+  private searchType = SearchType.CLOSED;
   private searchOptions: ISearchOption[] = [];
   private setCurrentResults: Dispatch<SetStateAction<IFlat[]>>;
 
@@ -210,14 +192,14 @@ class SearchService implements ISearchService {
     this.updateResults();
   }
 
-  setOpenSearch(openSearch: boolean): void {
-    this.openSearch = openSearch;
+  setSearchType(searchType: number): void {
+    this.searchType = searchType;
   }
 
   getSearchOptions(q: string): ISearchOption[] {
     const auxQ = q.trim().toLowerCase();
-    const city = extractCityFromQuery(auxQ);
-    const zone = extractZoneFromQuery(auxQ);
+    const city = searchQueryUtils.extractCityFromQuery(auxQ);
+    const zone = searchQueryUtils.extractZoneFromQuery(auxQ);
 
     return this.searchOptions.filter(
       (searchOption) =>
@@ -228,10 +210,10 @@ class SearchService implements ISearchService {
 
   computeResults(query: NodeJS.Dict<string | string[]>): void {
     const q = query.q as string;
-    this.computeOpenSearch(q);
+    this.computeSearchType(q);
     const results = computeResults(
       this.flats,
-      this.openSearch,
+      this.searchType,
       q,
       this.computeFilter(query)
     );
@@ -242,8 +224,8 @@ class SearchService implements ISearchService {
     return this.results.length;
   }
 
-  isOpenSearch(): boolean {
-    return this.openSearch;
+  getSearchType(): number {
+    return this.searchType;
   }
 
   getPageSize(): number {
@@ -303,10 +285,16 @@ class SearchService implements ISearchService {
     }
   }
 
-  private computeOpenSearch(q: string) {
-    this.openSearch = this.searchOptions.every(
-      (searchOption) => searchOption.text !== q
-    );
+  private computeSearchType(q: string) {
+    if (searchQueryUtils.isMapAreaQuery(q)) {
+      this.searchType = SearchType.MAP_AREA;
+    } else if (
+      this.searchOptions.some((searchOption) => searchOption.text === q)
+    ) {
+      this.searchType = SearchType.CLOSED;
+    } else {
+      this.searchType = SearchType.OPEN;
+    }
   }
 
   private computeFilter(query: NodeJS.Dict<string | string[]>): IFilter {

@@ -1,4 +1,4 @@
-import Flat from './salesforce/flat';
+import { IFlat } from '../common/model/flat.model';
 
 function euclideanDistance(x1, y1, x2, y2) {
   const xdiff = Math.pow(x1 - x2, 2);
@@ -7,10 +7,10 @@ function euclideanDistance(x1, y1, x2, y2) {
 }
 
 export const getNearFlats = (
-  flats: Flat[],
+  flats: IFlat[],
   currentFlatIndex: number,
   nRecommendations: number
-): Flat[] => {
+): IFlat[] => {
   const flatsWithoutCurrent = [...flats];
   flatsWithoutCurrent.splice(currentFlatIndex, 1);
 

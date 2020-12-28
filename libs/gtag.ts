@@ -11,9 +11,11 @@ type GoogleAnalyticsEvent = {
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: string): void => {
-  window.gtag('config', GA_TRACKING_ID, {
-    page_path: url,
-  });
+  if (window && window.gtag) {
+    window.gtag('config', GA_TRACKING_ID, {
+      page_path: url,
+    });
+  }
 };
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
@@ -23,9 +25,11 @@ export const event = ({
   label,
   value,
 }: GoogleAnalyticsEvent): void => {
-  window.gtag('event', action, {
-    event_category: category,
-    event_label: label,
-    value: value,
-  });
+  if (window && window.gtag) {
+    window.gtag('event', action, {
+      event_category: category,
+      event_label: label,
+      value: value,
+    });
+  }
 };

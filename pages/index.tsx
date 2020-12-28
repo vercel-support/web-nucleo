@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
 import { IMyPost } from '../common/model/wp/post.model';
+import { IZone } from '../common/model/zone.model';
 import useI18n from '../common/hooks/useI18n';
 import useSearchService, {
   computeSearchOptions,
@@ -15,23 +16,33 @@ import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
 import Flat from '../backend/salesforce/flat';
 import { getLastPosts } from '../backend/wp';
-import { BlogShowcase, Hero, NewsletterSection } from '../components/home';
+import { computeZones } from '../backend/geo';
+import {
+  BlogShowcase,
+  Hero,
+  NewsletterSection,
+  HierarchicalMap,
+} from '../components/home';
 import { Header, Footer, FlatsDisplay } from '../components/shared';
 
 interface StaticProps {
   serializedFlats: string;
   serializedSearchOptions: string;
   lastPosts: IMyPost[];
+  zones: Record<string, IZone>;
 }
 
 type Props = StaticProps;
 
-const FlatsDisplayContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.grey};
+const HierarchicalMapContainer = styled.div`
   padding-top: 24px;
   @media ${(props) => props.theme.breakpoints.smd} {
     padding-top: 0;
   }
+`;
+
+const FlatsDisplayContainer = styled.div`
+  background-color: ${(props) => props.theme.colors.grey};
 `;
 
 const Layout = styled.div`
@@ -54,12 +65,13 @@ export const Home = ({
   serializedFlats,
   serializedSearchOptions,
   lastPosts,
+  zones,
 }: Props): JSX.Element => {
   const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
 
-  const flats = deserializeMultiple(serializedFlats, IFlat);
+  const flats = deserializeMultiple<IFlat>(serializedFlats);
 
   const onSubscribeButtonClicked = (email: string) => {
     const contact: IContact = { EMAIL: email };
@@ -117,6 +129,9 @@ export const Home = ({
           onAutoCompleteValueChange={setAutoCompleteValue}
           onSearch={onSearch}
         />
+        <HierarchicalMapContainer>
+          <HierarchicalMap zones={zones} />
+        </HierarchicalMapContainer>
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={flats}
@@ -142,12 +157,14 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const searchOptions = computeSearchOptions(flats);
 
   const lastPosts = await getLastPosts();
+  const zones = await computeZones(flats);
 
   return {
     props: {
       serializedFlats,
       serializedSearchOptions: JSON.stringify(searchOptions),
       lastPosts,
+      zones,
     },
   };
 };

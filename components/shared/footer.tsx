@@ -60,14 +60,18 @@ const Footer = ({ className }: Props) => {
   const dropdownMenu = (
     <Menu>
       <Menu.Item key="0">
-        <StyledLink>{i18n.t('footer.aviso-legal')}</StyledLink>
+        <Link href="/legal/aviso" passHref>
+          <StyledLink>{i18n.t('footer.legalWarning')}</StyledLink>
+        </Link>
       </Menu.Item>
       <Menu.Item key="1">
-        <StyledLink>{i18n.t('footer.politica-datos')}</StyledLink>
+        <Link href="/legal/politica-privacidad" passHref>
+          <StyledLink>{i18n.t('footer.privacyPolicy')}</StyledLink>
+        </Link>
       </Menu.Item>
       <Menu.Item key="2">
         <Link href="/legal/cookies" passHref>
-          <StyledLink>{i18n.t('footer.politica-cookies')}</StyledLink>
+          <StyledLink>{i18n.t('footer.cookies')}</StyledLink>
         </Link>
       </Menu.Item>
     </Menu>
@@ -81,20 +85,24 @@ const Footer = ({ className }: Props) => {
       <DropdownContainer>
         <Dropdown overlay={dropdownMenu} trigger={['click']}>
           <Button type="text" onClick={(e) => e.preventDefault()}>
-            {i18n.t('footer.nucleo-sl')} <DownOutlined />
+            © 2020 Núcleo S.L. <DownOutlined />
           </Button>
         </Dropdown>
       </DropdownContainer>
       <MenuButtons>
-        <NucleoLabel>{i18n.t('footer.nucleo-sl')}</NucleoLabel>
-        <StyledButton type="text">{i18n.t('footer.aviso-legal')}</StyledButton>
-        <StyledButton type="text">
-          {i18n.t('footer.politica-datos')}
-        </StyledButton>
-        <Link href="/legal/cookies" passHref>
+        <NucleoLabel>© 2020 Núcleo S.L.</NucleoLabel>
+        <Link href="/legal/aviso" passHref>
           <StyledButton type="text">
-            {i18n.t('footer.politica-cookies')}
+            {i18n.t('footer.legalWarning')}
           </StyledButton>
+        </Link>
+        <Link href="/legal/politica-privacidad" passHref>
+          <StyledButton type="text">
+            {i18n.t('footer.privacyPolicy')}
+          </StyledButton>
+        </Link>
+        <Link href="/legal/cookies" passHref>
+          <StyledButton type="text">{i18n.t('footer.cookies')}</StyledButton>
         </Link>
       </MenuButtons>
     </footer>

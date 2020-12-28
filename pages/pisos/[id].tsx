@@ -87,11 +87,10 @@ const FlatDetailPage = ({ flat, recommendedFlats }: Props): JSX.Element => {
   const mailchimpService = useMailchimpService();
   const [isGalleryVisible, setIsGalleryVisible] = useState(false);
 
-  const deserializedRecommendedFlats = deserializeMultiple(
-    recommendedFlats,
-    IFlat
+  const deserializedRecommendedFlats = deserializeMultiple<IFlat>(
+    recommendedFlats
   );
-  const deserializedFlat = deserializeSingle(flat, IFlat);
+  const deserializedFlat = deserializeSingle<IFlat>(flat);
 
   const onBuyButtonClicked = (contact: IContact) => {
     mailchimpService.subscribe(contact, router, i18n);
