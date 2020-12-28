@@ -34,12 +34,15 @@ interface StaticProps {
 
 type Props = StaticProps;
 
-const FlatsDisplayContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.grey};
+const HierarchicalMapContainer = styled.div`
   padding-top: 24px;
   @media ${(props) => props.theme.breakpoints.smd} {
     padding-top: 0;
   }
+`;
+
+const FlatsDisplayContainer = styled.div`
+  background-color: ${(props) => props.theme.colors.grey};
 `;
 
 const Layout = styled.div`
@@ -126,7 +129,9 @@ export const Home = ({
           onAutoCompleteValueChange={setAutoCompleteValue}
           onSearch={onSearch}
         />
-        <HierarchicalMap zones={zones} />
+        <HierarchicalMapContainer>
+          <HierarchicalMap zones={zones} />
+        </HierarchicalMapContainer>
         <FlatsDisplayContainer>
           <FlatsDisplay
             flats={flats}
