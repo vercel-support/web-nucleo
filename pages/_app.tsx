@@ -18,7 +18,9 @@ declare module 'react' {
 }
 
 declare global {
-  interface Window { initCookieConsent: any; }
+  interface Window {
+    initCookieConsent: any;
+  }
 }
 
 Sentry.init({
@@ -169,7 +171,7 @@ class MyApp extends App {
       if (GA_SOCIALMEDIA_TRACKING_ID) {
         window[`ga-disable-${GA_SOCIALMEDIA_TRACKING_ID}`] = true;
       }
-  
+
       const CookieConsent = window.initCookieConsent();
       CookieConsent.run(cookiesData);
     }

@@ -38,32 +38,38 @@ export default {
     // print accepted cookie settings
     if (process.browser) {
       const ANALYTICS_ID = process.env.NEXT_PUBLIC_ANALYTICS_ID;
-      const ANALYTICS_ID_SOCIALMEDIA = process.env.NEXT_PUBLIC_ANALYTICS_ID_SOCIALMEDIA;
+      const ANALYTICS_ID_SOCIALMEDIA =
+        process.env.NEXT_PUBLIC_ANALYTICS_ID_SOCIALMEDIA;
 
       if (ANALYTICS_ID) {
-        window[`ga-disable-${GA_TRACKING_ID}`] = true;
+        window[`ga-disable-${ANALYTICS_ID}`] = true;
       }
       if (ANALYTICS_ID_SOCIALMEDIA) {
-        window[`ga-disable-${GA_SOCIALMEDIA_TRACKING_ID}`] = true;
+        window[`ga-disable-${ANALYTICS_ID_SOCIALMEDIA}`] = true;
       }
-  
-      if (cookies.status == 'accepted' && cookies.level.includes('analytical_cookies')) {
+
+      if (
+        cookies.status == 'accepted' &&
+        cookies.level.includes('analytical_cookies')
+      ) {
         if (ANALYTICS_ID || ANALYTICS_ID_SOCIALMEDIA) {
           window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
+          function gtag() {
+            window.dataLayer.push(arguments);
+          }
           gtag('js', new Date());
-        }
-        if (ANALYTICS_ID) {
-          window[`ga-disable-${GA_TRACKING_ID}`] = false;
-          gtag('config', GA_TRACKING_ID, {
-            page_path: window.location.pathname,
-          });
-        }
-        if (ANALYTICS_ID_SOCIALMEDIA) {
-          window[`ga-disable-${GA_SOCIALMEDIA_TRACKING_ID}`] = false;
-          gtag('config', GA_SOCIALMEDIA_TRACKING_ID, {
-            page_path: window.location.pathname,
-          });
+          if (ANALYTICS_ID) {
+            window[`ga-disable-${ANALYTICS_ID}`] = false;
+            gtag('config', ANALYTICS_ID, {
+              page_path: window.location.pathname,
+            });
+          }
+          if (ANALYTICS_ID_SOCIALMEDIA) {
+            window[`ga-disable-${ANALYTICS_ID_SOCIALMEDIA}`] = false;
+            gtag('config', ANALYTICS_ID_SOCIALMEDIA, {
+              page_path: window.location.pathname,
+            });
+          }
         }
       }
     }
@@ -112,7 +118,8 @@ export default {
           },
           {
             ccb_title: 'More information',
-            ccb_description: 'For any queries in relation to the policy on cookies and your choices, please go to <a target="_blank" rel="noopener noreferrer" href="https://www.inmobiliarianucleo.com/legal/cookies">https://www.inmobiliarianucleo.com/legal/cookies</a>.',
+            ccb_description:
+              'For any queries in relation to the policy on cookies and your choices, please go to <a target="_blank" rel="noopener noreferrer" href="https://www.inmobiliarianucleo.com/legal/cookies">https://www.inmobiliarianucleo.com/legal/cookies</a>.',
           },
         ],
       },
@@ -148,7 +155,7 @@ export default {
           {
             ccb_title: 'Cookies analíticas',
             ccb_description:
-              'Utilizamos estas cookies para obtener información estadística de nuestra página web - se utilizan para medir el rendimiento de la página y mejorarla.' ,
+              'Utilizamos estas cookies para obtener información estadística de nuestra página web - se utilizan para medir el rendimiento de la página y mejorarla.',
             ccb_switch: {
               value: 'analytical_cookies',
               enabled: true,
@@ -157,7 +164,8 @@ export default {
           },
           {
             ccb_title: 'Más información',
-            ccb_description: 'Para cualquier duda en relación a la política de cookies, por favor vaya a <a target="_blank" rel="noopener noreferrer" href="https://www.inmobiliarianucleo.com/legal/cookies">https://www.inmobiliarianucleo.com/legal/cookies</a>.',
+            ccb_description:
+              'Para cualquier duda en relación a la política de cookies, por favor vaya a <a target="_blank" rel="noopener noreferrer" href="https://www.inmobiliarianucleo.com/legal/cookies">https://www.inmobiliarianucleo.com/legal/cookies</a>.',
           },
         ],
       },
