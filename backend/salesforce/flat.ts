@@ -223,6 +223,8 @@ export default class Flat {
 
   @retry({
     retries: 10,
+    minTimeout: 60000,
+    maxTimeout: 120000,
     onRetry: (error, attempt) => {
       console.log(
         `Retry getCoordinatesFromAddress (${attempt}) on error`,
