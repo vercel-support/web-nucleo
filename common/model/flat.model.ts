@@ -25,5 +25,5 @@ export interface IFlat {
   yearConstruction?: number;
   yearReform?: number;
 
-  mapAreaId?: string;
+  mapAreaIds?: string[];
 }
