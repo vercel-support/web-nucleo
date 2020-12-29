@@ -81,10 +81,6 @@ export default {
     {
       lang: 'en',
       modal: {
-        cc_title: 'Seleccione sus preferencias de cookies',
-        cc_more_text: 'Personalizar cookies',
-        cc_accept_text: 'Aceptar cookies',
-
         cc_title: 'Select your cookie preferences',
         cc_more_text: 'Customize cookies',
         cc_accept_text: 'Accept cookies',
