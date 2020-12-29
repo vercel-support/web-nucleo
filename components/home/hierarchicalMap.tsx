@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { IZone } from '../../common/model/zone.model';
 import { SvgLoader, SvgProxy } from 'react-svgmt';
 import { useRouter } from 'next/router';
-import useI18n from '../../common/hooks/useI18n';
 import { useMediaQuery } from 'react-responsive';
 import { canonizeSearchQuery } from '../../common/helpers/searchQuery.utils';
 import { Breadcrumb } from 'antd';
@@ -14,21 +13,6 @@ type Props = {
   className?: string;
   theme: DefaultTheme;
 };
-
-const Title = styled.h2`
-  ${(props) => props.theme.font.h2}
-  color: ${(props) => props.theme.colors.secondary};
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-`;
-
-const Divider = styled.div`
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-top: 24px;
-  margin-bottom: 24px;
-  border-top: 1px solid #e0e0e0;
-`;
 
 const Placeholder = styled.div`
   height: 600px;
@@ -124,7 +108,6 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
   const phaseTwoStartPercentage = 35;
   const animationDuration = 500;
   const router = useRouter();
-  const i18n = useI18n();
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -224,8 +207,6 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
     .map((zone) => zone.url);
   return (
     <div className={className}>
-      <Title>{i18n.t('home.map.title')}</Title>
-      <Divider />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         {isMounted ? (
           <MapContainer
@@ -274,8 +255,5 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
 };
 
 export default withTheme(styled(HierarchicalMap)`
-  padding-top: 3rem;
-  @media ${(props) => props.theme.breakpoints.smd} {
-    padding-top: 2rem;
-  }
+  flex: 2;
 `);

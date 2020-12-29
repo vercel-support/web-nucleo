@@ -34,6 +34,10 @@
     "newsletter-title": "Suscríbase a nuestra newsletter",
     "map": {
       "title": "Búsqueda por mapa"
+    },
+    "suggestions": {
+      "title": "Nuestras sugerencias",
+      "buttonText": "Ver aquí >"
     }
   },
   "flat": {
