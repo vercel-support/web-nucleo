@@ -41,4 +41,8 @@ export default styled(PlaceSuggestions)`
   display: flex;
   flex: 1;
   flex-direction: column;
+
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    display: none;
+  }
 `;

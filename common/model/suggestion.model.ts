@@ -1,5 +1,5 @@
 export interface ISuggestion {
-  pictureUrl: string;
+  picturePath: string;
   title: string;
   query: string;
 }
