@@ -155,9 +155,10 @@ export default class Flat {
 
     const { lat: approximateLatitude, lng: approximateLongitude } = coords;
 
-    const mapAreaIds =
-      (await computeMapAreaIds(approximateLongitude, approximateLatitude)) ||
-      [];
+    const mapAreaIds = await computeMapAreaIds(
+      approximateLongitude,
+      approximateLatitude
+    );
 
     zone = capitalize(zone);
     city = capitalize(city);
@@ -185,9 +186,9 @@ export default class Flat {
       hasBasement,
       approximateLatitude,
       approximateLongitude,
+      mapAreaIds,
       yearConstruction,
       yearReform,
-      mapAreaIds,
     });
   }
 
@@ -201,13 +202,10 @@ export default class Flat {
       const mockFlats: IFlat[] = await Promise.all(
         mockFlatsRaw.map(async (flatJson: Record<string, any>) => {
           const mockFlat = Flat.fromDict(flatJson);
-          const mapAreaIds = await computeMapAreaIds(
+          mockFlat.mapAreaIds = await computeMapAreaIds(
             mockFlat.approximateLongitude,
             mockFlat.approximateLatitude
           );
-          if (mapAreaIds) {
-            mockFlat.mapAreaIds = mapAreaIds;
-          }
           return mockFlat;
         })
       );
