@@ -5,7 +5,7 @@ import {
 } from '@googlemaps/google-maps-services-js';
 import { IFlat } from '../../common/model/flat.model';
 import { getSalesforceClient } from '.';
-import { computeMapAreaId } from '../geo';
+import { computeMapAreaIds } from '../geo';
 import { asyncMemoize } from '../helpers';
 import axios from 'axios';
 
@@ -155,9 +155,10 @@ export default class Flat {
 
     const { lat: approximateLatitude, lng: approximateLongitude } = coords;
 
-    const mapAreaId =
-      (await computeMapAreaId(approximateLongitude, approximateLatitude)) ||
-      undefined;
+    const mapAreaIds = await computeMapAreaIds(
+      approximateLongitude,
+      approximateLatitude
+    );
 
     zone = capitalize(zone);
     city = capitalize(city);
@@ -185,9 +186,9 @@ export default class Flat {
       hasBasement,
       approximateLatitude,
       approximateLongitude,
+      mapAreaIds,
       yearConstruction,
       yearReform,
-      mapAreaId,
     });
   }
 
@@ -201,13 +202,10 @@ export default class Flat {
       const mockFlats: IFlat[] = await Promise.all(
         mockFlatsRaw.map(async (flatJson: Record<string, any>) => {
           const mockFlat = Flat.fromDict(flatJson);
-          const mapAreaId = await computeMapAreaId(
+          mockFlat.mapAreaIds = await computeMapAreaIds(
             mockFlat.approximateLongitude,
             mockFlat.approximateLatitude
           );
-          if (mapAreaId) {
-            mockFlat.mapAreaId = mapAreaId;
-          }
           return mockFlat;
         })
       );

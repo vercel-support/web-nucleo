@@ -34,7 +34,7 @@ export const computeResults = (
           flat.address.toLowerCase().includes(auxQ)
         );
       } else if (searchType === SearchType.MAP_AREA) {
-        return flat.mapAreaId === q;
+        return flat.mapAreaIds.includes(q);
       }
     });
   }

@@ -21,9 +21,8 @@ export interface IFlat {
 
   approximateLongitude: number;
   approximateLatitude: number;
+  mapAreaIds: string[];
 
   yearConstruction?: number;
   yearReform?: number;
-
-  mapAreaId?: string;
 }

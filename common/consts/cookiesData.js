@@ -81,9 +81,9 @@ export default {
     {
       lang: 'en',
       modal: {
-        cc_title: 'Accept cookies on this browser?',
-        cc_more_text: 'Learn more',
-        cc_accept_text: 'Accept all',
+        cc_title: 'Select your cookie preferences',
+        cc_more_text: 'Customize cookies',
+        cc_accept_text: 'Accept cookies',
         cc_description:
           'This website uses essential cookies necessary for its functioning and analytical cookies that help improving your browsing experience.',
       },
@@ -127,9 +127,9 @@ export default {
     {
       lang: 'es',
       modal: {
-        cc_title: '¿Aceptar cookies en este navegador?',
-        cc_more_text: 'Saber más',
-        cc_accept_text: 'Aceptar todas',
+        cc_title: 'Seleccione sus preferencias de cookies',
+        cc_more_text: 'Personalizar cookies',
+        cc_accept_text: 'Aceptar cookies',
         cc_description:
           'Esta página web utiliza cookies necesarias para su funcionamiento, además de cookies analíticas que ayudan a mejorar su experiencia navegando.',
       },

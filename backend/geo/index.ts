@@ -37,23 +37,22 @@ const loadGeoJsonFiles = async (): Promise<GeoJsonFile[]> => {
   return res;
 };
 
-export const computeMapAreaId = async (
+export const computeMapAreaIds = async (
   longitude: number,
   latitude: number
-): Promise<string> => {
+): Promise<string[]> => {
   const geoJsonFiles = await loadGeoJsonFiles();
+  const mapAreaIds: string[] = [];
   for (const geoJsonFile of geoJsonFiles) {
     for (const feature of geoJsonFile.geoJson.features) {
       if (
-        geoJsonFiles.findIndex((f) => f.name === feature.properties.name) ===
-          -1 &&
         booleanPointInPolygon(point([longitude, latitude]), feature.geometry)
       ) {
-        return feature.properties.name;
+        mapAreaIds.push(feature.properties.name);
       }
     }
   }
-  return null;
+  return mapAreaIds;
 };
 
 const computeSubzones = (
@@ -82,8 +81,8 @@ const computeSubzones = (
         hasFlats = Object.entries(subzones).some(([k]) => subzones[k].hasFlats);
       }
     } else {
-      hasFlats = flats.some(
-        (flat) => flat.mapAreaId === feature.properties.name
+      hasFlats = flats.some((flat) =>
+        flat.mapAreaIds.includes(feature.properties.name)
       );
     }
 
