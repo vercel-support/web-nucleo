@@ -1,39 +1,16 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Row, Col, Button } from 'antd';
 
 import { IFlat } from '../../common/model/flat.model';
 import useI18n from '../../common/hooks/useI18n';
+import { Title } from './';
 import { ResultsSection } from '../../components/shared';
 
 type Props = {
   flats: IFlat[];
   className?: string;
 };
-
-const Title = styled.h2`
-  ${(props) => props.theme.font.h2}
-  text-align: center;
-  color: ${(props) => props.theme.colors.secondary};
-  font-size: 38px !important;
-  @media ${(props) => props.theme.breakpoints.sm} {
-    font-size: 32px !important;
-  }
-  @media ${(props) => props.theme.breakpoints.xs} {
-    font-size: 26px !important;
-  }
-`;
-
-const Divider = styled.div`
-  border: 1px solid ${(props) => props.theme.colors.primary};
-  background-color: ${(props) => props.theme.colors.primary};
-  border-radius: ${(props) => props.theme.borderRadius};
-  width: 64px;
-  margin-top: 24px;
-  margin-bottom: 50px;
-  margin-left: auto;
-  margin-right: auto;
-`;
 
 const Gradient = styled.div`
   position: absolute;
@@ -59,14 +36,13 @@ const ShowMoreButton = styled(Button)`
   width: 100%;
 `;
 
-const OfficeFlatsSection = ({ flats, className }: Props): JSX.Element => {
+const OfficeFlatsSection: React.FC<Props> = ({ flats, className }) => {
   const [showAllFlats, setShowAllFlats] = useState(false);
   const i18n = useI18n();
   const flatsToShow = showAllFlats ? flats : flats.slice(0, 4);
   return (
     <div className={className}>
-      <Title>{i18n.t('contact.flats.title')}</Title>
-      <Divider />
+      <Title text={i18n.t('officeDetail.messages.flatsTitle')} />
       <ResultsSection
         flats={flatsToShow}
         xlSpan={12}
@@ -90,7 +66,7 @@ const OfficeFlatsSection = ({ flats, className }: Props): JSX.Element => {
                     setShowAllFlats(true);
                   }}
                 >
-                  <span>{i18n.t('contact.flats.showmore')}</span>
+                  <span>{i18n.t('officeDetail.actions.showMoreFlats')}</span>
                 </ShowMoreButton>
               </Col>
             </Row>
@@ -102,9 +78,9 @@ const OfficeFlatsSection = ({ flats, className }: Props): JSX.Element => {
 };
 
 export default styled(OfficeFlatsSection)`
-  margin-top: 64px;
   background-color: ${(props) => props.theme.colors.grey};
-  padding-bottom: 54px;
+  padding-top: 48px;
+  padding-bottom: 56px;
   overflow: hidden;
   position: relative;
 `;

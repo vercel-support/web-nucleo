@@ -168,10 +168,16 @@
     },
     "offices": {
       "title": "Our offices"
+    }
+  },
+  "officeDetail": {
+    "metaTitle": "{{name}} office - Inmobiliaria Núcleo",
+    "metaDescription": "{{name}} office - Inmobiliaria Núcleo",
+    "messages": {
+      "flatsTitle": "Houses offered"
     },
-    "flats": {
-      "title": "Houses offered",
-      "showmore": "Show more"
+    "actions": {
+      "showMoreFlats": "Show more"
     }
   },
   "search": {
@@ -243,6 +249,16 @@
     "flatOrderBy": {
       "price asc": "price ascending",
       "price desc": "price descending"
+    },
+    "officeDetailTab": {
+      "INFORMATION": "Information",
+      "DESCRIPTION": "Description",
+      "TEAM": "Team"
+    },
+    "employeePosition": {
+      "MANAGER": "Manager",
+      "ADVISOR": "Advisor",
+      "ADVISOR_F": "Advisor"
     }
   },
   "messages": {
