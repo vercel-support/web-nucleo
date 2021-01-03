@@ -80,7 +80,6 @@ const Image = styled.div<{ imageUrl: string; forceVerticalMode: boolean }>`
 const InfoContainer = styled.div<{ cardBackgroundColor: string }>`
   padding: 24px;
   background-color: ${(props) => props.cardBackgroundColor};
-
   @media ${(props) => props.theme.breakpoints.smd} {
     padding: 16px;
   }
