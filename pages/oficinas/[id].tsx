@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { IOffice } from '../../common/model/office.model';
@@ -60,8 +61,14 @@ const SelectedTabBodySection = styled.div`
 `;
 
 const OfficeDetailPage: React.FC<Props> = ({ office, serializedFlats }) => {
+  const router = useRouter();
   const i18n = useI18n();
+
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+  useEffect(() => {
+    setSelectedTabIndex(0);
+  }, [router.asPath]);
 
   const informationTabTitle = i18n.t(
     `enums.officeDetailTab.${getKeyByValue(

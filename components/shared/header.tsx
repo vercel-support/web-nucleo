@@ -186,7 +186,7 @@ const Header = ({
           </Link>
         </MdDownHiddenCol>
         <MdDownHiddenCol>
-          <Dropdown overlay={officesMenu} trigger={['click']}>
+          <Dropdown overlay={officesMenu}>
             <Button type="text" onClick={(e) => e.preventDefault()}>
               {i18n.t('header.offices')} <DownOutlined />
             </Button>
