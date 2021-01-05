@@ -1,17 +1,18 @@
-import { IOffice } from '../../common/model/office.model';
+import React from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 type Props = {
-  offices: IOffice[];
-  selectedOfficeIndex: number;
-  setSelectedOffice: (officeIndex: number) => void;
+  tabs: string[];
+  selectedTabIndex: number;
+  setSelectedTabIndex: (index: number) => void;
   className?: string;
   theme: DefaultTheme;
 };
 
 const ButtonsContainer = styled.div`
+  width: 100%;
   display: inline-flex;
   position: relative;
   flex-direction: row;
@@ -22,8 +23,8 @@ const ButtonsContainer = styled.div`
   transition: transform 0.3s ease-out;
 `;
 
-const OfficeButton = styled.p<{ isSelected: boolean }>`
-  width: ${(props) => props.theme.grid.getGridColumns(4, 0)};
+const TabButton = styled.p<{ isSelected: boolean }>`
+  width: 100%;
   min-width: 192px;
 
   text-align: center;
@@ -52,8 +53,8 @@ const GreyLine = styled.div`
 `;
 
 const OrangeLine = styled.div<{
-  nOffices: number;
-  selectedOfficeIndex: number;
+  nTabs: number;
+  selectedTabIndex: number;
 }>`
   top: 0;
   left: 0;
@@ -64,33 +65,30 @@ const OrangeLine = styled.div<{
   border-radius: ${(props) => props.theme.borderRadius};
   transition: left 400ms;
 
-  width: calc(100% / ${(props) => props.nOffices});
+  width: calc(100% / ${(props) => props.nTabs});
   left: calc(
-    calc(100% / ${(props) => props.nOffices}) *
-      ${(props) => props.selectedOfficeIndex}
+    calc(100% / ${(props) => props.nTabs}) *
+      ${(props) => props.selectedTabIndex}
   );
 `;
 
 const MenuDivider = styled(
   ({
-    offices,
-    selectedOfficeIndex,
-    className,
+    tabs,
+    selectedTabIndex,
     showOrangeLine,
+    className,
   }: {
-    offices: IOffice[];
-    selectedOfficeIndex: number;
-    className?: string;
+    tabs: string[];
+    selectedTabIndex: number;
     showOrangeLine: boolean;
+    className?: string;
   }): JSX.Element => {
     return (
       <div className={className}>
         <GreyLine />
         {showOrangeLine ? (
-          <OrangeLine
-            nOffices={offices.length}
-            selectedOfficeIndex={selectedOfficeIndex}
-          />
+          <OrangeLine nTabs={tabs.length} selectedTabIndex={selectedTabIndex} />
         ) : null}
       </div>
     );
@@ -116,13 +114,13 @@ const Gradient = styled.div<{ right?: boolean }>`
   pointer-events: none;
 `;
 
-const OfficeSelector = ({
-  offices,
-  selectedOfficeIndex,
-  setSelectedOffice,
+const TabSelector: React.FC<Props> = ({
+  tabs,
+  selectedTabIndex,
+  setSelectedTabIndex,
   className,
   theme,
-}: Props): JSX.Element => {
+}) => {
   const [containerRef, setContainerRef] = useState(undefined);
   const parentRef = useRef<HTMLDivElement>();
   const buttonRef = useRef<HTMLDivElement>();
@@ -130,10 +128,10 @@ const OfficeSelector = ({
   const isLgDown = useMediaQuery({ query: theme.breakpoints.lgd });
 
   useEffect(() => {
-    handleOfficeClick(selectedOfficeIndex);
+    handleTabClick(selectedTabIndex);
   });
 
-  const handleOfficeClick = (index) => {
+  const handleTabClick = (index: number) => {
     if (isLgDown && buttonRef && containerRef && process.browser && window) {
       const buttonWidth = buttonRef.current.getBoundingClientRect().width;
       const parentStyle = window.getComputedStyle(parentRef.current);
@@ -157,30 +155,30 @@ const OfficeSelector = ({
         }}
         style={{ transform: `translateX(${offsetPost}px)` }}
       >
-        {offices.map((office, index) => {
+        {tabs.map((tab, index) => {
           let isSelected = false;
           let btnRef = null;
-          if (index == selectedOfficeIndex) {
+          if (index == selectedTabIndex) {
             isSelected = true;
             btnRef = buttonRef;
           }
           return (
-            <OfficeButton
-              key={office.id}
+            <TabButton
+              key={tab}
               isSelected={isSelected}
               onClick={() => {
-                setSelectedOffice(index);
-                handleOfficeClick(index);
+                setSelectedTabIndex(index);
+                handleTabClick(index);
               }}
               ref={btnRef}
             >
-              {office.shortName}
-            </OfficeButton>
+              {tab}
+            </TabButton>
           );
         })}
         <MenuDivider
-          offices={offices}
-          selectedOfficeIndex={selectedOfficeIndex}
+          tabs={tabs}
+          selectedTabIndex={selectedTabIndex}
           showOrangeLine={!isLgDown}
         />
       </ButtonsContainer>
@@ -190,9 +188,10 @@ const OfficeSelector = ({
   );
 };
 
-export default withTheme(styled(OfficeSelector)`
+export default withTheme(styled(TabSelector)`
   padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-bottom: 20px;
+  padding-bottom: 20px;
+  overflow: hidden;
   position: relative;
 `);

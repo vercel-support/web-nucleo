@@ -1,6 +1,7 @@
+import { IEmployee } from './employee.model';
+
 export interface IOffice {
   id: string;
-  shortName: string;
   name: string;
   address: string;
   postalCode: string;
@@ -11,4 +12,6 @@ export interface IOffice {
   lat: number;
   long: number;
   mapUrl: string;
+  description: string;
+  employees: IEmployee[];
 }

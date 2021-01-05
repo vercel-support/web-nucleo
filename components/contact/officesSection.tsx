@@ -1,14 +1,16 @@
-import styled from 'styled-components';
-import OfficeSelector from './officeSelector';
-import OfficeDisplay from './officeDisplay';
+import React from 'react';
+import styled, { withTheme, DefaultTheme } from 'styled-components';
+import { Row, Col } from 'antd';
+import { useMediaQuery } from 'react-responsive';
+
 import { IOffice } from '../../common/model/office.model';
 import useI18n from '../../common/hooks/useI18n';
+import { OfficeCard } from './';
 
 type Props = {
   offices: IOffice[];
   className?: string;
-  selectedOfficeIndex: number;
-  setSelectedOffice: (index: number) => void;
+  theme: DefaultTheme;
 };
 
 const Title = styled.h2`
@@ -35,52 +37,53 @@ const Divider = styled.div`
   margin-right: auto;
 `;
 
-const OfficeDetailsContainer = styled.div`
-  text-align: center;
-  ${(props) => props.theme.font.p1}
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+const OfficesRowContainer = styled.div`
+  padding-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  padding-top: 32px;
+  padding-bottom: 32px;
 `;
 
-const ContactFormSection = ({
-  offices,
-  className,
-  selectedOfficeIndex,
-  setSelectedOffice,
-}: Props): JSX.Element => {
+const StyledRow = styled(Row)`
+  margin-bottom: 0 !important;
+`;
+
+const OfficesSection: React.FC<Props> = ({ offices, className, theme }) => {
   const i18n = useI18n();
-  const selectedOffice = offices[selectedOfficeIndex];
+  const isXlu = useMediaQuery({ query: theme.breakpoints.xlu });
+
+  const colsPerRow = isXlu ? 3 : 2;
+  const firstRowsSpan = 24 / colsPerRow;
+  const colsInLastRow = offices.length % colsPerRow;
+  const lastRowIndex = offices.length - colsInLastRow;
+  const lastRowSpan = 24 / colsInLastRow;
+
   return (
     <div className={className}>
       <Title>{i18n.t('contact.offices.title')}</Title>
       <Divider />
-      <OfficeSelector
-        offices={offices}
-        selectedOfficeIndex={selectedOfficeIndex}
-        setSelectedOffice={setSelectedOffice}
-      />
-      <OfficeDisplay
-        offices={offices}
-        selectedOfficeIndex={selectedOfficeIndex}
-        setSelectedOffice={setSelectedOffice}
-      />
-      <OfficeDetailsContainer>
-        <span style={{ fontWeight: 500 }}>{selectedOffice.name}: </span>
-        <a href={selectedOffice.mapUrl}>
-          <span>{selectedOffice.address}</span>
-          <span> {selectedOffice.postalCode} </span>
-          <span>{selectedOffice.city} </span>
-        </a>
-        <span>{selectedOffice.phone}</span>
-      </OfficeDetailsContainer>
+      <OfficesRowContainer>
+        <StyledRow gutter={[32, 32]}>
+          {offices.slice(0, lastRowIndex).map((office) => (
+            <Col key={office.id} xs={24} md={firstRowsSpan}>
+              <OfficeCard office={office} />
+            </Col>
+          ))}
+        </StyledRow>
+        <StyledRow gutter={[32, 32]}>
+          {offices.slice(lastRowIndex).map((office) => (
+            <Col key={office.id} xs={24} md={lastRowSpan}>
+              <OfficeCard office={office} />
+            </Col>
+          ))}
+        </StyledRow>
+      </OfficesRowContainer>
     </div>
   );
 };
 
-export default styled(ContactFormSection)`
+export default withTheme(styled(OfficesSection)`
   margin-top: 64px;
   background-color: white;
   padding-top: 56px;
-  padding-bottom: 48px;
-  overflow: hidden;
-`;
+`);

@@ -1,3 +1,10 @@
+export const getKeyByValue = (
+  enumeration: Record<string, string | number>,
+  value: string | number
+): string => {
+  return Object.keys(enumeration).find((key) => enumeration[key] === value);
+};
+
 export const enumToArray = (
   enumeration: Record<string, string | number>,
   typeofValue: string,

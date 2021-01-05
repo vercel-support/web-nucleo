@@ -5,6 +5,7 @@
     "sellHouse": "Vender casa",
     "aboutUs": "Quiénes somos",
     "contact": "Contacto",
+    "offices": "Oficinas",
     "blog": "Noticias",
     "hamburgerLanguage": "Idioma"
   },
@@ -162,10 +163,16 @@
     },
     "offices": {
       "title": "Nuestras oficinas"
+    }
+  },
+  "officeDetail": {
+    "metaTitle": "Oficina {{name}} - Inmobiliaria Núcleo",
+    "metaDescription": "Oficina {{name}} - Inmobiliaria Núcleo",
+    "messages": {
+      "flatsTitle": "Viviendas gestionadas"
     },
-    "flats": {
-      "title": "Viviendas gestionadas",
-      "showmore": "Mostrar más"
+    "actions": {
+      "showMoreFlats": "Mostrar más"
     }
   },
   "search": {
@@ -237,6 +244,16 @@
     "flatOrderBy": {
       "price asc": "precio ascendente",
       "price desc": "precio descendente"
+    },
+    "officeDetailTab": {
+      "INFORMATION": "Información",
+      "DESCRIPTION": "Descripción",
+      "TEAM": "Equipo"
+    },
+    "employeePosition": {
+      "MANAGER": "Gerente",
+      "ADVISOR": "Asesor",
+      "ADVISOR_F": "Asesora"
     }
   },
   "messages": {

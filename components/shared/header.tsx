@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Row, Col, Button, Dropdown, Menu } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { DownOutlined, MenuOutlined } from '@ant-design/icons';
 
 import useI18n from '../../common/hooks/useI18n';
+import { getOffices } from '../../backend/offices';
 
 type Props = {
   alwaysShown?: boolean;
@@ -91,36 +92,50 @@ const Header = ({
 }: Props): JSX.Element => {
   const i18n = useI18n();
 
+  const offices = getOffices();
+
+  const officesItems = offices.map((office) => (
+    <Menu.Item key={office.id}>
+      <Link href={`/oficinas/${office.id}`}>
+        <a>{office.name}</a>
+      </Link>
+    </Menu.Item>
+  ));
+
   const hamburgerMenu = (
     <Menu>
-      <Menu.Item key="1">
+      <Menu.Item>
         <Link href="/vender-casa">
           <a>{i18n.t('header.sellHouse')}</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="2">
+      <Menu.Item>
         <Link href="/nucleo">
           <a>{i18n.t('header.aboutUs')}</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="3">
+      <Menu.Item>
         <Link href="/contacto">
           <a>{i18n.t('header.contact')}</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="4">
+      <Menu.SubMenu
+        title={i18n.t('header.offices')}
+        popupClassName="hamburger-menu"
+      >
+        {officesItems}
+      </Menu.SubMenu>
+      <Menu.Item>
         <Link href="/blog">
           <a>{i18n.t('header.blog')}</a>
         </Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.SubMenu
-        key="sub1"
         title={i18n.t('header.hamburgerLanguage')}
         popupClassName="hamburger-menu"
       >
         <Menu.Item
-          key="4"
           onClick={() => {
             i18n.locale('es');
           }}
@@ -128,7 +143,6 @@ const Header = ({
           <StyledLink active={i18n.activeLocale === 'es'}>Español</StyledLink>
         </Menu.Item>
         <Menu.Item
-          key="5"
           onClick={() => {
             i18n.locale('en');
           }}
@@ -138,6 +152,8 @@ const Header = ({
       </Menu.SubMenu>
     </Menu>
   );
+
+  const officesMenu = <Menu>{officesItems}</Menu>;
 
   return (
     <HeaderComp alwaysShown={!!alwaysShown} dropShadow={!!dropShadow}>
@@ -168,6 +184,13 @@ const Header = ({
           <Link href="/contacto" passHref>
             <Button type="text">{i18n.t('header.contact')}</Button>
           </Link>
+        </MdDownHiddenCol>
+        <MdDownHiddenCol>
+          <Dropdown overlay={officesMenu}>
+            <Button type="text" onClick={(e) => e.preventDefault()}>
+              {i18n.t('header.offices')} <DownOutlined />
+            </Button>
+          </Dropdown>
         </MdDownHiddenCol>
         <MdDownHiddenCol>
           <Link href="/blog" passHref>
