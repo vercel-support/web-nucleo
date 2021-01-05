@@ -78,6 +78,9 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  strong {
+    font-weight: 600;
+  }
 
   :root {
     @media ${(props) => props.theme.breakpoints.xs} {

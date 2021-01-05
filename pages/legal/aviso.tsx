@@ -122,17 +122,17 @@ const AvisoPage = (): JSX.Element => {
                 y todas las URLs, subdominios y directorios incluidos bajo el
                 mismo, así como los servicios o contenidos que a través de este
                 sitio se puedan obtener, están sujetos a los términos recogidos
-                y detallados en este Aviso legal, sin perjuicio de que el acceso
+                y detallados en este Aviso Legal, sin perjuicio de que el acceso
                 a alguno de dichos servicios o contenidos pueda precisar de la
                 aceptación de unas condiciones generales, particulares o
                 adicionales.
               </Text>
               <Text>
                 Por consiguiente, si las consideraciones detalladas en este
-                Aviso legal no son de su conformidad, rogamos que no haga uso de
+                Aviso Legal no son de su conformidad, rogamos que no haga uso de
                 este Sitio Web, ya que cualquier utilización que haga de él o de
                 los contenidos en él incluidos, implicará la aceptación de los
-                términos legales recogidos en el texto de este Aviso legal.
+                términos legales recogidos en el texto de este Aviso Legal.
               </Text>
               <Text>
                 Núcleo se reserva el derecho a realizar cambios en el Sitio Web
@@ -228,7 +228,7 @@ const AvisoPage = (): JSX.Element => {
               <Text>
                 Núcleo ha creado el Sitio Web para la promoción de sus
                 servicios, pero no puede controlar la utilización del mismo de
-                forma distinta a la prevista en el presente Aviso legal; por lo
+                forma distinta a la prevista en el presente Aviso Legal; por lo
                 tanto, el acceso y uso correcto de la información contenida en
                 el Sitio Web son responsabilidad de quien realiza estas
                 acciones, no siendo responsable Núcleo por el uso incorrecto,
@@ -254,7 +254,7 @@ const AvisoPage = (): JSX.Element => {
               <TextHeading>Ley aplicable y jurisdicción</TextHeading>
               <Text>
                 La Ley aplicable en caso de disputa o conflicto de
-                interpretación de los términos que conforman este Aviso legal,
+                interpretación de los términos que conforman este Aviso Legal,
                 así como cualquier cuestión relacionada con los servicios de la
                 presente web, será la española.
               </Text>
