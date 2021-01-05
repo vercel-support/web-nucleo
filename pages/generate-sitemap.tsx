@@ -1,13 +1,15 @@
 import { NextPage, GetStaticProps } from 'next';
 import globby from 'globby';
 
-import Flat from '../backend/salesforce/flat';
 import { SITE_URL } from '../common/consts';
 import { computeSearchOptions } from '../common/hooks/searchService';
+import Flat from '../backend/salesforce/flat';
+import { getOffices } from '../backend/offices';
 
 const generateSitemap = async (
   flatsIds: string[],
-  searchOptionsText: string[]
+  searchOptionsText: string[],
+  officesIds: string[]
 ) => {
   const pages = await globby([
     'pages/**/*.tsx',
@@ -15,6 +17,7 @@ const generateSitemap = async (
     '!pages/_document.tsx',
     '!pages/generate-sitemap.tsx',
     '!pages/buscar.tsx',
+    '!pages/oficinas/**',
     '!pages/pisos/**',
     '!pages/estado-suscripcion/**',
   ]);
@@ -48,6 +51,14 @@ const generateSitemap = async (
   `;
     })
     .join('')}
+  ${officesIds
+    .map((officeId) => {
+      return `<url>
+    <loc>${`${SITE_URL}/oficinas/${officeId}`}</loc>
+  </url>
+  `;
+    })
+    .join('')}
 </urlset>`;
 };
 
@@ -60,7 +71,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const searchOptions = computeSearchOptions(flats);
   const sitemap = await generateSitemap(
     flats.map((flat) => flat.id),
-    searchOptions.map((option) => option.text)
+    searchOptions.map((option) => option.text),
+    getOffices().map((office) => office.id)
   );
 
   const fs = require('fs');
