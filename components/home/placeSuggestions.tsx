@@ -10,6 +10,9 @@ type Props = {
 
 const Title = styled.h3`
   ${(props) => props.theme.font.p1}
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    ${(props) => props.theme.font.h2}
+  }
   margin-bottom: 12px;
 `;
 
@@ -19,6 +22,9 @@ const CardsContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    align-items: center;
+  }
 `;
 
 const PlaceSuggestions = ({ suggestions, className }: Props): JSX.Element => {
@@ -41,8 +47,4 @@ export default styled(PlaceSuggestions)`
   display: flex;
   flex: 1;
   flex-direction: column;
-
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    display: none;
-  }
 `;

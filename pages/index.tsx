@@ -51,6 +51,10 @@ const HierarchicalMapInnerContainer = styled.div`
   align-items: stretch;
   margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
   margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.h2`
@@ -66,6 +70,9 @@ const Divider = styled.div`
   margin-top: 24px;
   margin-bottom: 24px;
   border-top: 1px solid #e0e0e0;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-bottom: 0;
+  }
 `;
 
 const FlatsDisplayContainer = styled.div`

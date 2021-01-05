@@ -23,6 +23,13 @@ const MapContainer = styled.div<{
   phaseTwoStartPercentage: number;
   animationDuration: number;
 }>`
+  // @media ${(props) => props.theme.breakpoints.lgu} {
+  //   -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+  //   -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+  //   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+  //   border-radius: ${(props) => props.theme.borderRadius};
+  // }
+
   position: relative;
   display: inline-block;
   @media ${(props) => props.theme.breakpoints.smd} {
@@ -83,15 +90,22 @@ const MapContainer = styled.div<{
   & .zone {
     outline: none;
   }
+
+  & > svg {
+    -webkit-filter: drop-shadow(0px 6px 14px rgba(0,0,0,0.16));
+    filter: drop-shadow(0px 6px 14px rgba(0,0,0,0.16));
+  }
 `;
 
 const BreadcrumbComponent = styled(Breadcrumb)`
+  z-index: 199;
   position: absolute;
   top: -4px;
   left: 40px;
 `;
 
 const BackButton = styled.img`
+  z-index: 199;
   position: absolute;
   cursor: pointer;
   top: calc(50% - 9px);
@@ -207,7 +221,7 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
     .map((zone) => zone.url);
   return (
     <div className={className}>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
         {isMounted ? (
           <MapContainer
             animationEnabled={animationEnabled}
