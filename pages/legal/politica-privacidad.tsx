@@ -143,7 +143,7 @@ const PrivacyPolicyPage = (): JSX.Element => {
                 Únicamente tratamos los datos que el usuario libremente nos
                 facilita. En el caso de que el usuario facilite datos de
                 terceros, garantiza haberle informado previamente de lo
-                establecido en la presente Política de privacidad, respondiendo
+                establecido en la presente Política de Privacidad, respondiendo
                 personalmente frente a Núcleo de cualquier daño o perjuicio,
                 directo o indirecto, que pudiera derivarse del incumplimiento de
                 tal obligación.

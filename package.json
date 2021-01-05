@@ -2,6 +2,9 @@
   "name": "web-nucleo",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "dev": "next dev -p 3005",
     "dev-real": "USE_REAL_DATA=true next dev -p 3005",

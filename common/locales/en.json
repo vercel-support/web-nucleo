@@ -9,9 +9,9 @@
     "hamburgerLanguage": "Language"
   },
   "footer": {
-    "legalWarning": "Legal warning",
-    "privacyPolicy": "Privacy policy",
-    "cookies": "Cookies policy"
+    "legalWarning": "Legal Warning",
+    "privacyPolicy": "Privacy Policy",
+    "cookies": "Cookies Policy"
   },
   "languageSelector": {
     "language": "English"
@@ -84,25 +84,19 @@
     "validateRequired": "Please, fill in this field"
   },
   "cookies": {
-    "text": "This site uses profiling cookies to track users. If you continue browsing, we consider you\u00A0accept\u00A0it.",
-    "detail": {
-      "metaTitle": "Cookies policy | Inmobiliaria Núcleo",
-      "metaDescription": "Cookies policy | Inmobiliaria Núcleo",
-      "title": "Cookies policy"
-    },
-    "actions": {
-      "ok": "OK"
-    }
+    "metaTitle": "Cookies Policy | Inmobiliaria Núcleo",
+    "metaDescription": "Cookies Policy | Inmobiliaria Núcleo",
+    "title": "Cookies Policy"
   },
   "privacyPolicy": {
-    "metaTitle": "Privacy policy | Inmobiliaria Núcleo",
-    "metaDescription": "Privacy policy | Inmobiliaria Núcleo",
-    "title": "Privacy policy"
+    "metaTitle": "Privacy Policy | Inmobiliaria Núcleo",
+    "metaDescription": "Privacy Policy | Inmobiliaria Núcleo",
+    "title": "Privacy Policy"
   },
   "legalWarning": {
-    "metaTitle": "Legal warning | Inmobiliaria Núcleo",
-    "metaDescription": "Legal warning | Inmobiliaria Núcleo",
-    "title": "Legal warning"
+    "metaTitle": "Legal Warning | Inmobiliaria Núcleo",
+    "metaDescription": "Legal Warning | Inmobiliaria Núcleo",
+    "title": "Legal Warning"
   },
   "sellHouse": {
     "metaTitle": "Your house for sale in Alicante | Inmobiliaria Núcleo",

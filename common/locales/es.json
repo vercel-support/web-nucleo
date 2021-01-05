@@ -9,9 +9,9 @@
     "hamburgerLanguage": "Idioma"
   },
   "footer": {
-    "legalWarning": "Aviso legal",
-    "privacyPolicy": "Política de privacidad",
-    "cookies": "Política de cookies"
+    "legalWarning": "Aviso Legal",
+    "privacyPolicy": "Política de Privacidad",
+    "cookies": "Política de Cookies"
   },
   "languageSelector": {
     "language": "Español"
@@ -84,25 +84,19 @@
     "validateRequired": "Por favor, rellene este campo"
   },
   "cookies": {
-    "text": "Utilizamos cookies propias y de terceros para evaluar el uso que se hace de la web y la actividad general de la misma. Si usted continúa navegando, consideramos que\u00A0acepta\u00A0su\u00A0uso.",
-    "detail": {
-      "metaTitle": "Política de cookies | Inmobiliaria Núcleo",
-      "metaDescription": "Política de cookies | Inmobiliaria Núcleo",
-      "title": "Política de cookies"
-    },
-    "actions": {
-      "ok": "Aceptar"
-    }
+    "metaTitle": "Política de Cookies | Inmobiliaria Núcleo",
+    "metaDescription": "Política de Cookies | Inmobiliaria Núcleo",
+    "title": "Política de Cookies"
   },
   "privacyPolicy": {
-    "metaTitle": "Política de privacidad | Inmobiliaria Núcleo",
-    "metaDescription": "Política de privacidad | Inmobiliaria Núcleo",
-    "title": "Política de privacidad"
+    "metaTitle": "Política de Privacidad | Inmobiliaria Núcleo",
+    "metaDescription": "Política de Privacidad | Inmobiliaria Núcleo",
+    "title": "Política de Privacidad"
   },
   "legalWarning": {
-    "metaTitle": "Aviso legal | Inmobiliaria Núcleo",
-    "metaDescription": "Aviso legal | Inmobiliaria Núcleo",
-    "title": "Aviso legal"
+    "metaTitle": "Aviso Legal | Inmobiliaria Núcleo",
+    "metaDescription": "Aviso Legal | Inmobiliaria Núcleo",
+    "title": "Aviso Legal"
   },
   "sellHouse": {
     "metaTitle": "Vender casa en Alicante | Inmobiliaria Núcleo",
