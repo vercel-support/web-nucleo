@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { IZone } from '../../common/model/zone.model';
 import { SvgLoader, SvgProxy } from 'react-svgmt';
 import { useRouter } from 'next/router';
-import useI18n from '../../common/hooks/useI18n';
 import { useMediaQuery } from 'react-responsive';
 import { canonizeSearchQuery } from '../../common/helpers/searchQuery.utils';
 import { Breadcrumb } from 'antd';
@@ -15,21 +14,6 @@ type Props = {
   theme: DefaultTheme;
 };
 
-const Title = styled.h2`
-  ${(props) => props.theme.font.h2}
-  color: ${(props) => props.theme.colors.secondary};
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-`;
-
-const Divider = styled.div`
-  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
-  margin-top: 24px;
-  margin-bottom: 24px;
-  border-top: 1px solid #e0e0e0;
-`;
-
 const Placeholder = styled.div`
   height: 600px;
 `;
@@ -39,6 +23,18 @@ const MapContainer = styled.div<{
   phaseTwoStartPercentage: number;
   animationDuration: number;
 }>`
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-bottom: 24px;
+    margin-top: 24px;
+  }
+
+  // @media ${(props) => props.theme.breakpoints.lgu} {
+  //   -webkit-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+  //   -moz-box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+  //   box-shadow: 0px 6px 21px -4px rgba(0, 0, 0, 0.25);
+  //   border-radius: ${(props) => props.theme.borderRadius};
+  // }
+
   position: relative;
   display: inline-block;
   @media ${(props) => props.theme.breakpoints.smd} {
@@ -99,15 +95,22 @@ const MapContainer = styled.div<{
   & .zone {
     outline: none;
   }
+
+  & > svg {
+    -webkit-filter: drop-shadow(0px 6px 14px rgba(0,0,0,0.16));
+    filter: drop-shadow(0px 6px 14px rgba(0,0,0,0.16));
+  }
 `;
 
 const BreadcrumbComponent = styled(Breadcrumb)`
+  z-index: 199;
   position: absolute;
   top: -4px;
   left: 40px;
 `;
 
 const BackButton = styled.img`
+  z-index: 199;
   position: absolute;
   cursor: pointer;
   top: calc(50% - 9px);
@@ -124,7 +127,6 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
   const phaseTwoStartPercentage = 35;
   const animationDuration = 500;
   const router = useRouter();
-  const i18n = useI18n();
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -224,8 +226,6 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
     .map((zone) => zone.url);
   return (
     <div className={className}>
-      <Title>{i18n.t('home.map.title')}</Title>
-      <Divider />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         {isMounted ? (
           <MapContainer
@@ -274,8 +274,5 @@ const HierarchicalMap = ({ zones, className, theme }: Props): JSX.Element => {
 };
 
 export default withTheme(styled(HierarchicalMap)`
-  padding-top: 3rem;
-  @media ${(props) => props.theme.breakpoints.smd} {
-    padding-top: 2rem;
-  }
+  flex: 2;
 `);

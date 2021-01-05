@@ -1,0 +1,17 @@
+[
+    {
+        "picturePath": "/images/home_recom_alicante.jpg",
+        "title": "Alicante",
+        "query": "2_Alicante"
+    },
+    {
+        "picturePath": "/images/home_recom_santjoan.jpg",
+        "title": "San Juan",
+        "query": "2_San_Juan"
+    },
+    {
+        "picturePath": "/images/home_recom_torrevieja.jpg",
+        "title": "Torrevieja",
+        "query": "2_Torrevieja"
+    }
+]

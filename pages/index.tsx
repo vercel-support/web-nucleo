@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
+import { ISuggestion } from '../common/model/suggestion.model';
 import { IMyPost } from '../common/model/wp/post.model';
 import { IZone } from '../common/model/zone.model';
 import useI18n from '../common/hooks/useI18n';
@@ -22,6 +23,7 @@ import {
   Hero,
   NewsletterSection,
   HierarchicalMap,
+  PlaceSuggestions,
 } from '../components/home';
 import { Header, Footer, FlatsDisplay } from '../components/shared';
 
@@ -30,14 +32,46 @@ interface StaticProps {
   serializedSearchOptions: string;
   lastPosts: IMyPost[];
   zones: Record<string, IZone>;
+  suggestions: ISuggestion[];
 }
 
 type Props = StaticProps;
 
 const HierarchicalMapContainer = styled.div`
-  padding-top: 24px;
+  padding-top: 3rem;
   @media ${(props) => props.theme.breakpoints.smd} {
-    padding-top: 0;
+    padding-top: 2rem;
+  }
+  padding-bottom: 32px;
+`;
+
+const HierarchicalMapInnerContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    flex-direction: column;
+  }
+`;
+
+const Title = styled.h2`
+  ${(props) => props.theme.font.h2}
+  color: ${(props) => props.theme.colors.secondary};
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+`;
+
+const Divider = styled.div`
+  margin-left: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-right: ${(props) => props.theme.grid.getGridColumns(2, 1)};
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid #e0e0e0;
+  @media ${(props) => props.theme.breakpoints.mdd} {
+    margin-bottom: 0;
   }
 `;
 
@@ -66,6 +100,7 @@ export const Home = ({
   serializedSearchOptions,
   lastPosts,
   zones,
+  suggestions,
 }: Props): JSX.Element => {
   const router = useRouter();
   const i18n = useI18n();
@@ -130,7 +165,12 @@ export const Home = ({
           onSearch={onSearch}
         />
         <HierarchicalMapContainer>
-          <HierarchicalMap zones={zones} />
+          <Title>{i18n.t('home.map.title')}</Title>
+          <Divider />
+          <HierarchicalMapInnerContainer>
+            <HierarchicalMap zones={zones} />
+            <PlaceSuggestions suggestions={suggestions} />
+          </HierarchicalMapInnerContainer>
         </HierarchicalMapContainer>
         <FlatsDisplayContainer>
           <FlatsDisplay
@@ -153,6 +193,7 @@ export const Home = ({
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const flats = await Flat.getFlats();
   const serializedFlats = Flat.serialize(flats);
+  const suggestions = require('../public/fixtures/suggestions.json') as ISuggestion[];
 
   const searchOptions = computeSearchOptions(flats);
 
@@ -165,6 +206,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
       serializedSearchOptions: JSON.stringify(searchOptions),
       lastPosts,
       zones,
+      suggestions,
     },
   };
 };
