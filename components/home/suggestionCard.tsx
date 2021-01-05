@@ -38,7 +38,8 @@ const Container = styled.div<{
   min-height: 120px;
   width: 100%;
   cursor: pointer;
-  background-image: linear-gradient(#00000043, #00000043), url(${(props) => props.picturePath});
+  background-image: linear-gradient(#00000043, #00000043),
+    url(${(props) => props.picturePath});
   background-size: 100% auto;
   background-position: center 80%;
   background-repeat: no-repeat;
