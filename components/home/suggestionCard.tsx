@@ -35,7 +35,7 @@ const Container = styled.div<{
   flex: 1;
   margin-top: 12px;
   margin-bottom: 12px;
-  min-height: 150px;
+  min-height: 120px;
   width: 100%;
   cursor: pointer;
   background-image: linear-gradient(#00000043, #00000043), url(${(props) => props.picturePath});
@@ -44,6 +44,7 @@ const Container = styled.div<{
   background-repeat: no-repeat;
 
   @media ${(props) => props.theme.breakpoints.lgu} {
+    // max-width: 400px;
     &:last-child {
       margin-bottom: 0;
     }

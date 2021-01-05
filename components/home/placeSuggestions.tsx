@@ -9,9 +9,11 @@ type Props = {
 };
 
 const Title = styled.h3`
-  ${(props) => props.theme.font.p1}
-  @media ${(props) => props.theme.breakpoints.mdd} {
-    ${(props) => props.theme.font.h2}
+  ${(props) => props.theme.font.h2}
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    ${(props) => props.theme.font.p1}
+    margin-top: 70px;
+    margin-left: 7px;
   }
   margin-bottom: 12px;
 `;
@@ -24,6 +26,9 @@ const CardsContainer = styled.div`
   align-items: stretch;
   @media ${(props) => props.theme.breakpoints.mdd} {
     align-items: center;
+  }
+  @media ${(props) => props.theme.breakpoints.lgu} {
+    margin-bottom: 80px;
   }
 `;
 
