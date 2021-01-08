@@ -1,5 +1,6 @@
 import { createContext, useContext, Dispatch, SetStateAction } from 'react';
 
+import { LAST_SEARCHS_KEY } from '../consts';
 import { IFlat } from '../model/flat.model';
 import { ISearchOption } from '../model/searchOption.model';
 import { IFilter } from '../model/filter.model';
@@ -139,6 +140,76 @@ export const computeSearchOptions = (flats: IFlat[]): ISearchOption[] => {
   return [...citiesOptions, ...zonesOptions];
 };
 
+export const computeSearchType = (
+  q: string,
+  searchOptions: ISearchOption[]
+): number => {
+  if (searchQueryUtils.isMapAreaQuery(q)) {
+    return SearchType.MAP_AREA;
+  } else if (searchOptions.some((searchOption) => searchOption.text === q)) {
+    return SearchType.CLOSED;
+  } else {
+    return SearchType.OPEN;
+  }
+};
+
+export const computeFilter = (
+  query: NodeJS.Dict<string | string[]>
+): IFilter => {
+  const filter: IFilter = {};
+  if (query.types) {
+    filter.types = Array.isArray(query.types) ? query.types : [query.types];
+  }
+  if (query.priceMin) {
+    filter.priceMin = +(query.priceMin as string);
+  }
+  if (query.priceMax) {
+    filter.priceMax = +(query.priceMax as string);
+  }
+  if (query.sqrtMetersMin) {
+    filter.sqrtMetersMin = +(query.sqrtMetersMin as string);
+  }
+  if (query.sqrtMetersMax) {
+    filter.sqrtMetersMax = +(query.sqrtMetersMax as string);
+  }
+  if (query.rooms) {
+    filter.rooms = Array.isArray(query.rooms)
+      ? query.rooms.map((r) => +r)
+      : [+query.rooms];
+  }
+  if (query.roomsMin) {
+    filter.roomsMin = +(query.roomsMin as string);
+  }
+  if (query.bathrooms) {
+    filter.bathrooms = Array.isArray(query.bathrooms)
+      ? query.bathrooms.map((r) => +r)
+      : [+query.bathrooms];
+  }
+  if (query.bathroomsMin) {
+    filter.bathroomsMin = +(query.bathroomsMin as string);
+  }
+  if (query.characteristics) {
+    filter.characteristics = Array.isArray(query.characteristics)
+      ? query.characteristics
+      : [query.characteristics];
+  }
+  return filter;
+};
+
+export const getLastSearchs = (): Array<NodeJS.Dict<string | string[]>> => {
+  const lastSearchsAsString =
+    typeof window === 'undefined'
+      ? undefined
+      : localStorage.getItem(LAST_SEARCHS_KEY);
+  let lastSearchs: Array<NodeJS.Dict<string | string[]>> = lastSearchsAsString
+    ? JSON.parse(lastSearchsAsString)
+    : [];
+  if (!Array.isArray(lastSearchs)) {
+    lastSearchs = [];
+  }
+  return lastSearchs;
+};
+
 interface ISearchService {
   init(
     flats: IFlat[],
@@ -210,14 +281,25 @@ class SearchService implements ISearchService {
 
   computeResults(query: NodeJS.Dict<string | string[]>): void {
     const q = query.q as string;
-    this.computeSearchType(q);
+    this.searchType = computeSearchType(q, this.searchOptions);
     const results = computeResults(
       this.flats,
       this.searchType,
       q,
-      this.computeFilter(query)
+      computeFilter(query)
     );
     this.setResults(results);
+
+    if (results.length) {
+      let lastSearchs = getLastSearchs();
+      const lastSearchWithEqualQIndex = lastSearchs.findIndex((s) => s.q === q);
+      if (lastSearchWithEqualQIndex >= 0) {
+        lastSearchs[lastSearchWithEqualQIndex] = query;
+      } else {
+        lastSearchs = [query, ...lastSearchs.slice(0, 2)];
+      }
+      localStorage.setItem(LAST_SEARCHS_KEY, JSON.stringify(lastSearchs));
+    }
   }
 
   getResultsCount(): number {
@@ -283,59 +365,6 @@ class SearchService implements ISearchService {
       );
       this.setCurrentResults(sortedResults.slice(0, this.pageSize));
     }
-  }
-
-  private computeSearchType(q: string) {
-    if (searchQueryUtils.isMapAreaQuery(q)) {
-      this.searchType = SearchType.MAP_AREA;
-    } else if (
-      this.searchOptions.some((searchOption) => searchOption.text === q)
-    ) {
-      this.searchType = SearchType.CLOSED;
-    } else {
-      this.searchType = SearchType.OPEN;
-    }
-  }
-
-  private computeFilter(query: NodeJS.Dict<string | string[]>): IFilter {
-    const filter: IFilter = {};
-    if (query.types) {
-      filter.types = Array.isArray(query.types) ? query.types : [query.types];
-    }
-    if (query.priceMin) {
-      filter.priceMin = +(query.priceMin as string);
-    }
-    if (query.priceMax) {
-      filter.priceMax = +(query.priceMax as string);
-    }
-    if (query.sqrtMetersMin) {
-      filter.sqrtMetersMin = +(query.sqrtMetersMin as string);
-    }
-    if (query.sqrtMetersMax) {
-      filter.sqrtMetersMax = +(query.sqrtMetersMax as string);
-    }
-    if (query.rooms) {
-      filter.rooms = Array.isArray(query.rooms)
-        ? query.rooms.map((r) => +r)
-        : [+query.rooms];
-    }
-    if (query.roomsMin) {
-      filter.roomsMin = +(query.roomsMin as string);
-    }
-    if (query.bathrooms) {
-      filter.bathrooms = Array.isArray(query.bathrooms)
-        ? query.bathrooms.map((r) => +r)
-        : [+query.bathrooms];
-    }
-    if (query.bathroomsMin) {
-      filter.bathroomsMin = +(query.bathroomsMin as string);
-    }
-    if (query.characteristics) {
-      filter.characteristics = Array.isArray(query.characteristics)
-        ? query.characteristics
-        : [query.characteristics];
-    }
-    return filter;
   }
 
   private computePageSizeDependingOnResultsCount(

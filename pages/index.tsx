@@ -11,10 +11,15 @@ import { IMyPost } from '../common/model/wp/post.model';
 import { IZone } from '../common/model/zone.model';
 import useI18n from '../common/hooks/useI18n';
 import useSearchService, {
+  computeResults,
   computeSearchOptions,
+  computeSearchType,
+  computeFilter,
+  getLastSearchs,
 } from '../common/hooks/searchService';
 import useMailchimpService from '../common/hooks/mailchimpService';
 import { deserializeMultiple } from '../common/helpers/serialization';
+import { shuffle } from '../common/helpers/array.utils';
 import Flat from '../backend/salesforce/flat';
 import { getLastPosts } from '../backend/wp';
 import { computeZones } from '../backend/geo';
@@ -105,20 +110,37 @@ export const Home = ({
   const router = useRouter();
   const i18n = useI18n();
   const mailchimpService = useMailchimpService();
-
-  const flats = deserializeMultiple<IFlat>(serializedFlats);
-
-  const onSubscribeButtonClicked = (email: string) => {
-    const contact: IContact = { EMAIL: email };
-    mailchimpService.subscribe(contact, router, i18n);
-  };
-
   const searchService = useSearchService();
+
   const [autoCompleteValue, setAutoCompleteValue] = useState('');
 
-  useEffect(() => {
-    searchService.init([], JSON.parse(serializedSearchOptions));
-  }, []);
+  const flats = deserializeMultiple<IFlat>(serializedFlats);
+  const searchOptions = JSON.parse(serializedSearchOptions);
+  let recommendedFlats: IFlat[] = [];
+  const lastSearchs = getLastSearchs();
+  for (const search of lastSearchs) {
+    const q = search.q as string;
+    const searchType = computeSearchType(q, searchOptions);
+    const results = computeResults(
+      flats,
+      searchType,
+      q,
+      computeFilter(search)
+    ).slice(0, 4);
+    recommendedFlats.push(
+      ...results.filter(
+        (flat) => !recommendedFlats.some((f) => flat.id === f.id)
+      )
+    );
+  }
+  recommendedFlats = shuffle(recommendedFlats);
+  recommendedFlats.push(
+    ...shuffle(
+      flats
+        .filter((flat) => !recommendedFlats.some((f) => flat.id === f.id))
+        .slice(0, 24 - recommendedFlats.length)
+    )
+  );
 
   const onSearch = (q: string) => {
     router.push({
@@ -126,6 +148,15 @@ export const Home = ({
       query: { q },
     });
   };
+
+  const onSubscribeButtonClicked = (email: string) => {
+    const contact: IContact = { EMAIL: email };
+    mailchimpService.subscribe(contact, router, i18n);
+  };
+
+  useEffect(() => {
+    searchService.init([], searchOptions);
+  }, []);
 
   return (
     <Layout>
@@ -174,7 +205,7 @@ export const Home = ({
         </HierarchicalMapContainer>
         <FlatsDisplayContainer>
           <FlatsDisplay
-            flats={flats}
+            flats={recommendedFlats}
             title={i18n.t('home.section-flats-title')}
             arrows={true}
           />
