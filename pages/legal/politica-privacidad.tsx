@@ -235,11 +235,11 @@ const PrivacyPolicyPage = (): JSX.Element => {
               </UnorderedList>
               <Text>
                 Los derechos indicados se podrán ejercitar a través de la
-                dirección de correo electrónico
-                torrevieja@inmobiliarianucleo.com indicando el derecho que
-                quiere ejercer o bien dirigiéndose por escrito a NUCLEO
-                FRANCHISING, S.L. (dirección C/ Pérez Medina nº 23 local de
-                Alicante). En ambos casos deberá identificarse debidamente.
+                dirección de correo electrónico legal@inmobiliarianucleo.com
+                indicando el derecho que quiere ejercer o bien dirigiéndose por
+                escrito a NUCLEO FRANCHISING, S.L. (dirección C/ Pérez Medina nº
+                23 local, Alicante). En ambos casos deberá identificarse
+                debidamente.
               </Text>
               <Text>
                 Por último, le indicamos que tiene derecho a interponer una

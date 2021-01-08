@@ -170,8 +170,8 @@
     }
   },
   "officeDetail": {
-    "metaTitle": "Oficina {{name}} - Inmobiliaria Núcleo",
-    "metaDescription": "Oficina {{name}} - Inmobiliaria Núcleo",
+    "metaTitle": "Oficina inmobiliaria {{name}} - Inmobiliaria Núcleo",
+    "metaDescription": "Oficina inmobiliaria {{name}}. Compra-Venta de viviendas en {{name}}, Alicante. Encuentre inmuebles al mejor precio en Inmobiliaria Núcleo",
     "messages": {
       "flatsTitle": "Viviendas gestionadas"
     },

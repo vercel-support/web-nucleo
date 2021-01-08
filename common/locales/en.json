@@ -170,10 +170,10 @@
     }
   },
   "officeDetail": {
-    "metaTitle": "{{name}} office - Inmobiliaria Núcleo",
-    "metaDescription": "{{name}} office - Inmobiliaria Núcleo",
+    "metaTitle": "{{name}} real estate office | Inmobiliaria Núcleo",
+    "metaDescription": "{{name}} real estate office. Find houses for sale in {{name}}, Alicante, Spain. Flats, Apartments, Chalets. | Inmobiliaria Núcleo",
     "messages": {
-      "flatsTitle": "Houses offered"
+      "flatsTitle": "Houses managed"
     },
     "actions": {
       "showMoreFlats": "Show more"

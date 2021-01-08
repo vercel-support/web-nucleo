@@ -162,7 +162,7 @@ const CookiesPage = (): JSX.Element => {
               </Text>
               <Text>
                 Con el fin de facilitar su navegación por el Sitio Web, 2020
-                NÚCLEO, S.L. con domicilio social en Calle Pérez Medina nº 23
+                NÚCLEO, S.L. con domicilio social en C/ Pérez Medina nº 23
                 local, con CIF B01780717, le comunica que utiliza Cookies u
                 otros archivos de funcionalidad similar (en adelante, las
                 “Cookies”).
