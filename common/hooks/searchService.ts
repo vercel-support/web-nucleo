@@ -1,6 +1,6 @@
 import { createContext, useContext, Dispatch, SetStateAction } from 'react';
 
-import { LAST_SEARCHS_KEY } from '../consts';
+import { LAST_SEARCHS_KEY, LAST_SEARCHS_MAX_LENGTH } from '../consts';
 import { IFlat } from '../model/flat.model';
 import { ISearchOption } from '../model/searchOption.model';
 import { IFilter } from '../model/filter.model';
@@ -296,7 +296,7 @@ class SearchService implements ISearchService {
       if (lastSearchWithEqualQIndex >= 0) {
         lastSearchs[lastSearchWithEqualQIndex] = query;
       } else {
-        lastSearchs = [query, ...lastSearchs.slice(0, 2)];
+        lastSearchs = [query, ...lastSearchs.slice(0, LAST_SEARCHS_MAX_LENGTH)];
       }
       localStorage.setItem(LAST_SEARCHS_KEY, JSON.stringify(lastSearchs));
     }

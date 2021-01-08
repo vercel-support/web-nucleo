@@ -4,6 +4,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import {
+  RECOMMENDED_FLATS_MAX_LENGTH,
+  RECOMMENDED_FLATS_PER_SEARCH,
+} from '../common/consts';
 import { IContact } from '../common/model/mailchimp/contact.model';
 import { IFlat } from '../common/model/flat.model';
 import { ISuggestion } from '../common/model/suggestion.model';
@@ -143,7 +147,7 @@ export const Home = ({
         searchType,
         q,
         computeFilter(search)
-      ).slice(0, 4);
+      ).slice(0, RECOMMENDED_FLATS_PER_SEARCH);
       auxRecommendedFlats.push(
         ...results.filter(
           (flat) => !auxRecommendedFlats.some((f) => flat.id === f.id)
@@ -151,12 +155,11 @@ export const Home = ({
       );
     }
     auxRecommendedFlats = shuffle(auxRecommendedFlats);
-    console.log('hola');
     auxRecommendedFlats.push(
       ...shuffle(
         flats
           .filter((flat) => !auxRecommendedFlats.some((f) => flat.id === f.id))
-          .slice(0, 24 - auxRecommendedFlats.length)
+          .slice(0, RECOMMENDED_FLATS_MAX_LENGTH - auxRecommendedFlats.length)
       )
     );
     setRecommendedFlats(auxRecommendedFlats);
