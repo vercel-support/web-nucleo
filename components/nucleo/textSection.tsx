@@ -48,6 +48,7 @@ const TextSection = ({
       </Heading>
       <Divider right={!!right} />
       <TextContent
+        key={Math.random()}
         right={!!right}
         dangerouslySetInnerHTML={{ __html: content }}
       />

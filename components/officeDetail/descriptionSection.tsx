@@ -16,6 +16,7 @@ const DescriptionSection: React.FC<Props> = ({ office, className }) => {
   return (
     <div className={className}>
       <Text
+        key={Math.random()}
         dangerouslySetInnerHTML={{
           __html: office.description,
         }}

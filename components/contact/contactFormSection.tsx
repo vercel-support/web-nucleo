@@ -91,6 +91,7 @@ const ContactFormSection = ({ onSendButtonClicked }: Props): JSX.Element => {
             <Title>{i18n.t('contact.form.title')}</Title>
             <Divider />
             <Subtitle
+              key={Math.random()}
               dangerouslySetInnerHTML={{
                 __html: i18n.t('contact.form.subtitle'),
               }}

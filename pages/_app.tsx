@@ -196,13 +196,13 @@ class MyApp extends App {
       <ThemeProvider theme={defaultTheme}>
         <Head>
           <script src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent/dist/cookieconsent.js" />
+          <script src="https://unpkg.com/@popperjs/core@2"></script>
+          <script src="https://unpkg.com/tippy.js@6"></script>
         </Head>
         <I18n>
           <GlobalStyle />
           <Component {...pageProps} />
         </I18n>
-        <script src="https://unpkg.com/@popperjs/core@2"></script>
-        <script src="https://unpkg.com/tippy.js@6"></script>
       </ThemeProvider>
     );
   }

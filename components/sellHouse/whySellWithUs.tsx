@@ -88,6 +88,7 @@ const WhySellWithUs = (): JSX.Element => {
               {i18n.t('sellHouse.why.properties.professional.title')}
             </PropertyTitle>
             <PropertyDescription
+              key={Math.random()}
               dangerouslySetInnerHTML={{
                 __html: i18n.t(
                   'sellHouse.why.properties.professional.description'
@@ -110,6 +111,7 @@ const WhySellWithUs = (): JSX.Element => {
               {i18n.t('sellHouse.why.properties.fast.title')}
             </PropertyTitle>
             <PropertyDescription
+              key={Math.random()}
               dangerouslySetInnerHTML={{
                 __html: i18n.t('sellHouse.why.properties.fast.description'),
               }}
@@ -130,6 +132,7 @@ const WhySellWithUs = (): JSX.Element => {
               {i18n.t('sellHouse.why.properties.experience.title')}
             </PropertyTitle>
             <PropertyDescription
+              key={Math.random()}
               dangerouslySetInnerHTML={{
                 __html: i18n.t(
                   'sellHouse.why.properties.experience.description'

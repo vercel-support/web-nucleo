@@ -266,6 +266,7 @@ const Hero = ({
         </TitleParagraph>
         <Divider />
         <Subtitle
+          key={Math.random()}
           dangerouslySetInnerHTML={{
             __html: i18n.t('home.hero-subtitle'),
           }}

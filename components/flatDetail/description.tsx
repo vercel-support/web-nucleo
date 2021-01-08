@@ -49,7 +49,10 @@ const Description = ({ flat }: Props): JSX.Element => {
       <Title>{i18n.t('flat.description')}</Title>
       <Divider />
       <Location>{`${flat.zone}, ${flat.city}, ${flat.county}`}</Location>
-      <Info dangerouslySetInnerHTML={{ __html: computeDescription() }} />
+      <Info
+        key={Math.random()}
+        dangerouslySetInnerHTML={{ __html: computeDescription() }}
+      />
     </Fragment>
   );
 };

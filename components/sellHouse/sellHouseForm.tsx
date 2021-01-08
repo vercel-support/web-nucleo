@@ -91,6 +91,7 @@ const SellHouseForm = ({ onSendButtonClicked }: Props): JSX.Element => {
             <Title>{i18n.t('sellHouse.form.title')}</Title>
             <Divider />
             <Subtitle
+              key={Math.random()}
               dangerouslySetInnerHTML={{
                 __html: i18n.t('sellHouse.form.subtitle'),
               }}

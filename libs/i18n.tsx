@@ -9,10 +9,8 @@ import EN from '../common/locales/en.json';
 const i18n = rosetta();
 
 export const defaultLanguage = 'es';
-export const defaultDict = ES;
-export const languages = ['es', 'en'];
-export const dicts = { es: ES, en: EN };
-export const contentLanguageMap = { es: 'es-ES', en: 'en-GB' };
+const defaultDict = ES;
+const dicts = { es: ES, en: EN };
 
 export type I18nContextType = {
   activeLocale: string;
@@ -40,11 +38,20 @@ const I18n: FunctionComponent = ({ children }) => {
   const [, setTick] = useState(0);
   const firstRender = useRef(true);
 
+  const setLocale = (lang: string, table: unknown): void => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('lang', lang);
+    }
+    i18n.locale(lang);
+    i18n.set(lang, table);
+    // force rerender
+    setTick((tick) => tick + 1);
+  };
+
   // for initial SSR render
   if (firstRender.current === true) {
     firstRender.current = false;
-    i18n.locale(activeLocale);
-    i18n.set(activeLocale, activeDict);
+    setLocale(activeLocale, activeDict);
   }
 
   useEffect(() => {
@@ -52,13 +59,10 @@ const I18n: FunctionComponent = ({ children }) => {
     if (activeLocale !== activeLocaleFromLocalStorage) {
       const dict = dicts[activeLocaleFromLocalStorage];
       if (dict) {
-        i18n.locale(activeLocaleFromLocalStorage);
-        i18n.set(activeLocaleFromLocalStorage, dict);
-        // force rerender
-        setTick((tick) => tick + 1);
+        setLocale(activeLocaleFromLocalStorage, dict);
       }
     }
-  });
+  }, []);
 
   const i18nWrapper = {
     activeLocale,
@@ -71,10 +75,7 @@ const I18n: FunctionComponent = ({ children }) => {
       const dict = dicts[l];
       if (dict) {
         localStorage.setItem(rosettaLocaleKey, l);
-        i18n.locale(l);
-        i18n.set(l, dict);
-        // force rerender
-        setTick((tick) => tick + 1);
+        setLocale(l, dict);
       }
     },
   };

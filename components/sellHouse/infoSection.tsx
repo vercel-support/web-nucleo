@@ -139,6 +139,7 @@ const InfoSection: React.FC<Props> = ({
             <Title>{title}</Title>
             <Divider />
             <Subtitle
+              key={Math.random()}
               dangerouslySetInnerHTML={{
                 __html: subtitle,
               }}
@@ -146,6 +147,7 @@ const InfoSection: React.FC<Props> = ({
             {isMounted && (
               <Fragment>
                 <Description
+                  key={Math.random()}
                   id={new Date() + ''}
                   dangerouslySetInnerHTML={{
                     __html: description1,
@@ -155,6 +157,7 @@ const InfoSection: React.FC<Props> = ({
                 />
                 <br />
                 <Description
+                  key={Math.random()}
                   id={new Date() + ''}
                   dangerouslySetInnerHTML={{
                     __html: description2,
@@ -164,6 +167,7 @@ const InfoSection: React.FC<Props> = ({
                 />
                 <br />
                 <Description
+                  key={Math.random()}
                   id={new Date() + ''}
                   dangerouslySetInnerHTML={{
                     __html: description3,
