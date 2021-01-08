@@ -113,34 +113,10 @@ export const Home = ({
   const searchService = useSearchService();
 
   const [autoCompleteValue, setAutoCompleteValue] = useState('');
+  const [recommendedFlats, setRecommendedFlats] = useState([] as IFlat[]);
 
   const flats = deserializeMultiple<IFlat>(serializedFlats);
   const searchOptions = JSON.parse(serializedSearchOptions);
-  let recommendedFlats: IFlat[] = [];
-  const lastSearchs = getLastSearchs();
-  for (const search of lastSearchs) {
-    const q = search.q as string;
-    const searchType = computeSearchType(q, searchOptions);
-    const results = computeResults(
-      flats,
-      searchType,
-      q,
-      computeFilter(search)
-    ).slice(0, 4);
-    recommendedFlats.push(
-      ...results.filter(
-        (flat) => !recommendedFlats.some((f) => flat.id === f.id)
-      )
-    );
-  }
-  recommendedFlats = shuffle(recommendedFlats);
-  recommendedFlats.push(
-    ...shuffle(
-      flats
-        .filter((flat) => !recommendedFlats.some((f) => flat.id === f.id))
-        .slice(0, 24 - recommendedFlats.length)
-    )
-  );
 
   const onSearch = (q: string) => {
     router.push({
@@ -156,6 +132,34 @@ export const Home = ({
 
   useEffect(() => {
     searchService.init([], searchOptions);
+
+    let auxRecommendedFlats: IFlat[] = [];
+    const lastSearchs = getLastSearchs();
+    for (const search of lastSearchs) {
+      const q = search.q as string;
+      const searchType = computeSearchType(q, searchOptions);
+      const results = computeResults(
+        flats,
+        searchType,
+        q,
+        computeFilter(search)
+      ).slice(0, 4);
+      auxRecommendedFlats.push(
+        ...results.filter(
+          (flat) => !auxRecommendedFlats.some((f) => flat.id === f.id)
+        )
+      );
+    }
+    auxRecommendedFlats = shuffle(auxRecommendedFlats);
+    console.log('hola');
+    auxRecommendedFlats.push(
+      ...shuffle(
+        flats
+          .filter((flat) => !auxRecommendedFlats.some((f) => flat.id === f.id))
+          .slice(0, 24 - auxRecommendedFlats.length)
+      )
+    );
+    setRecommendedFlats(auxRecommendedFlats);
   }, []);
 
   return (
