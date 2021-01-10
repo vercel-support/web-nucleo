@@ -31,6 +31,7 @@
     "globby": "^11.0.1",
     "imagemin-svgo": "^8.0.0",
     "next": "^9.5.0",
+    "nodemailer": "^6.4.17",
     "react-google-maps": "^9.4.5",
     "react-places-autocomplete": "^7.3.0",
     "react-string-clamp": "^0.3.1",
