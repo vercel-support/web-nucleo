@@ -1,8 +1,13 @@
-import { FunctionComponent, useEffect } from 'react';
-import { createContext, useState, useRef } from 'react';
+import {
+  FunctionComponent,
+  createContext,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 import rosetta from 'rosetta';
-// import rosetta from 'rosetta/debug';
 
+import { ROSSETA_LOCALE_KEY } from '../common/consts';
 import ES from '../common/locales/es.json';
 import EN from '../common/locales/en.json';
 
@@ -24,12 +29,10 @@ export type I18nContextType = {
 
 export const I18nContext = createContext<I18nContextType>(null);
 
-const rosettaLocaleKey = 'rosettaLocale';
-
 const getActiveLocaleFromLocalStorage = (): string => {
   return typeof window === 'undefined'
     ? defaultLanguage
-    : localStorage.getItem(rosettaLocaleKey) || defaultLanguage;
+    : localStorage.getItem(ROSSETA_LOCALE_KEY) || defaultLanguage;
 };
 
 const I18n: FunctionComponent = ({ children }) => {
@@ -74,7 +77,7 @@ const I18n: FunctionComponent = ({ children }) => {
     locale: (l: string) => {
       const dict = dicts[l];
       if (dict) {
-        localStorage.setItem(rosettaLocaleKey, l);
+        localStorage.setItem(ROSSETA_LOCALE_KEY, l);
         setLocale(l, dict);
       }
     },
