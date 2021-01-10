@@ -198,6 +198,7 @@ class MyApp extends App {
           <script src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent/dist/cookieconsent.js" />
           <script src="https://unpkg.com/@popperjs/core@2"></script>
           <script src="https://unpkg.com/tippy.js@6"></script>
+          <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=geometry,drawing,places`}></script> 
         </Head>
         <I18n>
           <GlobalStyle />
