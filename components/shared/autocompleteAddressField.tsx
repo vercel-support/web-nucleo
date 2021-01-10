@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import PlacesAutocomplete, { getLatLng, geocodeByAddress } from 'react-places-autocomplete';
+import PlacesAutocomplete, {
+  getLatLng,
+  geocodeByAddress,
+} from 'react-places-autocomplete';
 import { Col, Form, Input, AutoComplete } from 'antd';
 import useI18n from '../../common/hooks/useI18n';
 import styled from 'styled-components';
@@ -13,11 +16,11 @@ const AutocompleteAddressField = (): JSX.Element => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const i18n = useI18n();
 
-  if (selectedAddress) {  
+  if (selectedAddress) {
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));  
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => console.log('Success', latLng))
+      .catch((error) => console.error('Error', error));
   }
 
   return (
@@ -32,8 +35,8 @@ const AutocompleteAddressField = (): JSX.Element => {
       }}
       searchOptions={{
         componentRestrictions: {
-          country: 'es'
-        }
+          country: 'es',
+        },
       }}
     >
       {({ getInputProps, suggestions }) => {

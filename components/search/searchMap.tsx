@@ -1,10 +1,4 @@
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-  Polygon,
-} from 'react-google-maps';
+import { withGoogleMap, GoogleMap, Marker, Polygon } from 'react-google-maps';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 
