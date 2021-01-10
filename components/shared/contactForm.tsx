@@ -103,7 +103,7 @@ const ContactForm = ({
           </InputContainer>
         </Col>
         {showAddress && process.browser ? (
-          <AutocompleteAddressField form={form} />
+          <AutocompleteAddressField />
         ) : null}
         {showSubject ? (
           <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>

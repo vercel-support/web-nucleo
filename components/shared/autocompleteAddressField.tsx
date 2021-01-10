@@ -1,33 +1,24 @@
 import React, { useState } from 'react';
-import PlacesAutocomplete from 'react-places-autocomplete';
-import { Col, Form, Input, Dropdown, Menu } from 'antd';
+import PlacesAutocomplete, { getLatLng, geocodeByAddress } from 'react-places-autocomplete';
+import { Col, Form, Input, AutoComplete } from 'antd';
 import useI18n from '../../common/hooks/useI18n';
 import styled from 'styled-components';
-import { FormInstance } from 'antd/lib/form/Form';
 
 const InputContainer = styled.div`
   color: ${(props) => props.theme.colors.secondary};
 `;
 
-type Props = {
-  form: FormInstance;
-}
-
-// TODO fix allowing selection with arrow down/up
-// TODO add loading indicator??
-// TODO fix overflow when text is too long
-// TODO start tracking lat/long when storing result (store suggestgion object instead of just address text)
-// TODO limitar reultados de españa / alicante
-const AutocompleteAddressField = ({ form }: Props): JSX.Element => {
+const AutocompleteAddressField = (): JSX.Element => {
   const [address, setAddress] = useState('');
-  const [selectedSuggestion, setSelectedSuggestion] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const i18n = useI18n();
 
-  form.setFieldsValue({
-    address: address
-  });
-
-  console.log(selectedSuggestion);
+  if (selectedAddress) {  
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => console.log('Success', latLng))
+      .catch(error => console.error('Error', error));  
+  }
 
   return (
     <PlacesAutocomplete
@@ -35,38 +26,38 @@ const AutocompleteAddressField = ({ form }: Props): JSX.Element => {
       onChange={(value) => {
         setAddress(value);
       }}
-      onSelect={(value, _, suggestion) => {
+      onSelect={(value) => {
         setAddress(value);
-        setSelectedSuggestion(suggestion);
+        setSelectedAddress(value);
+      }}
+      searchOptions={{
+        componentRestrictions: {
+          country: 'es'
+        }
       }}
     >
-      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
-        const resultsItems = suggestions.map((suggestion) => (
-          <Menu.Item
-            key={suggestion.placeId}
-            {...getSuggestionItemProps(suggestion)}
-          >
-            {suggestion.description}
-          </Menu.Item>
-        ));
-        const resultsMenu = resultsItems && resultsItems.length > 0 ? <Menu>{resultsItems}</Menu> : <div></div>;
+      {({ getInputProps, suggestions }) => {
+        const results = suggestions.map((suggestion) => {
+          return {
+            label: suggestion.description,
+            value: suggestion.description,
+          };
+        });
         return (
-          <div>
-            <Dropdown overlay={resultsMenu}>
-              <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-                <InputContainer>
-                  <Form.Item
-                    labelCol={{ span: 24 }}
-                    name="address"
-                    label={i18n.t('contactForm.address')}
-                    rules={[{ required: true }]}
-                  >
-                    <Input {...getInputProps()} />
-                  </Form.Item>
-                </InputContainer>
-              </Col>
-            </Dropdown>
-          </div>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+            <InputContainer>
+              <Form.Item
+                labelCol={{ span: 24 }}
+                name="address"
+                label={i18n.t('contactForm.address')}
+                rules={[{ required: true }]}
+              >
+                <AutoComplete options={results}>
+                  <Input {...getInputProps()} />
+                </AutoComplete>
+              </Form.Item>
+            </InputContainer>
+          </Col>
         );
       }}
     </PlacesAutocomplete>
