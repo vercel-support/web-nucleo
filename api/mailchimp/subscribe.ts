@@ -4,6 +4,15 @@ import md5 from 'blueimp-md5';
 
 import { IContact } from '../../common/model/mailchimp/contact.model';
 import { MailchimpStatus } from '../../common/model/mailchimp/enums/mailchimpStatus.enum';
+import {
+  Client as GoogleMapsClient,
+  GeocodeResult,
+} from '@googlemaps/google-maps-services-js';
+import { euclideanDistance } from '../../common/helpers';
+import { getOffices } from '../../backend/offices';
+import { sendEmail } from '../../backend/email';
+
+const googleMapsClient = new GoogleMapsClient();
 
 type RequestBodyType = {
   contact: IContact;
@@ -11,6 +20,18 @@ type RequestBodyType = {
 
 export type ResponseType = {
   status: string;
+};
+
+const getLatLongFromAddress = async (
+  address: string
+): Promise<GeocodeResult> => {
+  const result = await googleMapsClient.geocode({
+    params: {
+      key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+      address: address,
+    },
+  });
+  return result.data.results[0];
 };
 
 const handler = async (
@@ -27,6 +48,53 @@ const handler = async (
 
   if (!EMAIL) {
     return res.status(400).json({ status: MailchimpStatus.ERROR });
+  }
+
+  if (HADDRESS) {
+    try {
+      const geoCodeResult = await getLatLongFromAddress(HADDRESS);
+
+      const lat = geoCodeResult.geometry.location.lat;
+      const long = geoCodeResult.geometry.location.lng;
+      const fullAddress = geoCodeResult.formatted_address;
+
+      if (
+        !fullAddress.includes('Alicante') &&
+        !fullAddress.includes('Alacant')
+      ) {
+        throw Error(
+          'Skipping closest office email, as the address introduced is not in Alicante.'
+        );
+      }
+      const offices = getOffices();
+
+      let closestDistance = 999999;
+      let closestOffice = null;
+      for (const office of offices) {
+        const officeLat = office.lat;
+        const officeLong = office.long;
+
+        const euclDistance = euclideanDistance(
+          officeLat,
+          officeLong,
+          lat,
+          long
+        );
+        if (euclDistance < closestDistance) {
+          closestDistance = euclDistance;
+          closestOffice = office;
+        }
+      }
+
+      await sendEmail(
+        closestOffice.email,
+        'Nuevo contacto a través de la web - interés en vender piso',
+        `Un nuevo usuario ha mostrado interés en vender su piso a través de inmobiliarianucleo.com. \n\n\nEmail: ${EMAIL}\nNombre y apellidos: ${FNAME}, ${LNAME}\nTeléfono: ${PHONE}\nDirección: ${HADDRESS}\nMensaje: ${SUBJECT}`
+      );
+    } catch (error) {
+      console.error('Error trying to send email to closest office');
+      console.error(error);
+    }
   }
 
   try {

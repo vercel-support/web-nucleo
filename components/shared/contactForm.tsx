@@ -4,6 +4,7 @@ import { FormInstance } from 'antd/lib/form/Form';
 
 import { IContact } from '../../common/model/mailchimp/contact.model';
 import useI18n from '../../common/hooks/useI18n';
+import AutocompleteAddressField from './autocompleteAddressField';
 
 type Props = {
   form: FormInstance;
@@ -101,20 +102,7 @@ const ContactForm = ({
             </Form.Item>
           </InputContainer>
         </Col>
-        {showAddress ? (
-          <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-            <InputContainer>
-              <Form.Item
-                labelCol={{ span: 24 }}
-                name="address"
-                label={i18n.t('contactForm.address')}
-                rules={[{ required: true }]}
-              >
-                <Input />
-              </Form.Item>
-            </InputContainer>
-          </Col>
-        ) : null}
+        {showAddress && process.browser ? <AutocompleteAddressField /> : null}
         {showSubject ? (
           <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
             <InputContainer>

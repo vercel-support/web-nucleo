@@ -10,6 +10,7 @@ const offices: IOffice[] = [
     country: 'España',
     phone: '(+34) 965 999 554',
     imageUrl: 'florida_portazgo/office_outside.jpeg',
+    email: 'florida@inmobiliarianucleo.com',
     lat: 38.3462567,
     long: -0.5103588,
     mapUrl:
@@ -26,6 +27,7 @@ const offices: IOffice[] = [
     country: 'España',
     phone: '(+34) 865 604 769',
     imageUrl: 'benalua/office_outside.jpeg',
+    email: 'benalua@inmobiliarianucleo.com',
     lat: 38.3412706,
     long: -0.5010799,
     mapUrl:
@@ -68,6 +70,7 @@ const offices: IOffice[] = [
     country: 'España',
     phone: '(+34) 966 236 012',
     imageUrl: 'san_blas/office_outside.jpeg',
+    email: 'sanblas@inmobiliarianucleo.com',
     lat: 38.346534,
     long: -0.5001649,
     mapUrl:
@@ -85,6 +88,7 @@ const offices: IOffice[] = [
     country: 'España',
     phone: '(+34) 865 885 752',
     imageUrl: 'sant_joan_dalacant/office_outside.jpeg',
+    email: 'santjoan@inmobiliarianucleo.com',
     lat: 38.3982973,
     long: -0.4358574,
     mapUrl:
@@ -102,6 +106,7 @@ const offices: IOffice[] = [
     country: 'España',
     phone: '(+34) 601 408 940',
     imageUrl: 'torrevieja_playa_del_cura/office_outside.jpeg',
+    email: 'torrevieja@inmobiliarianucleo.com',
     lat: 37.9803418,
     long: -0.6842526,
     mapUrl:

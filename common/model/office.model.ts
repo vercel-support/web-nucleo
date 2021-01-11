@@ -4,6 +4,7 @@ export interface IOffice {
   id: string;
   name: string;
   address: string;
+  email: string;
   postalCode: string;
   city: string;
   country: string;
